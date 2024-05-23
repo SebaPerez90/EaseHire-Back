@@ -188,6 +188,33 @@ Un marketplace que conecta a profesionales independientes (freelancers) con clie
 - **Pagos**: Stripe o PayPal.
 - **Deployment**: Docker, Kubernetes, CI/CD con GitHub Actions o GitLab CI/CD, y servicios en la nube como AWS, Google Cloud o Azure.
 
+**Flujo de la Aplicación:**
+
+1. **Registro e Inicio de Sesión**
+    - Los usuarios pueden registrarse como profesionales o clientes.
+    - Uso de JWT para mantener la sesión activa y segura.
+2. **Creación y Publicación de Proyectos**
+    - Los clientes pueden publicar proyectos detallando las necesidades y requisitos.
+    - Los profesionales pueden buscar y postularse a proyectos.
+3. **Perfil de Usuario**
+    - Perfiles detallados para profesionales, incluyendo portafolio, reseñas y calificaciones.
+    - Perfiles de clientes con historial de proyectos y valoraciones de profesionales.
+4. **Búsqueda y Filtro de Proyectos/Profesionales**
+    - Funcionalidad de búsqueda avanzada con filtros por categoría, precio, ubicación, etc.
+5. **Sistema de Mensajería**
+    - Chat en tiempo real entre clientes y profesionales para discutir detalles del proyecto.
+6. **Gestión de Proyectos**
+    - Tablero de control para que los clientes gestionen sus proyectos y profesionales sus postulaciones y trabajos en curso.
+7. **Pagos y Facturación**
+    - Integración con Stripe o PayPal para pagos seguros.
+    - Generación de facturas y recibos.
+8. **Notificaciones**
+    - Notificaciones en tiempo real sobre nuevas postulaciones, mensajes, pagos, y actualizaciones del proyecto.
+9. **Roles y Permisos**
+    - Diferentes vistas y funcionalidades según el rol del usuario (administrador, cliente, profesional).
+10. **Suscripciones y Funcionalidades Premium**
+    - Opciones de suscripción para acceso a funcionalidades avanzadas como destacados en búsquedas, acceso anticipado a proyectos, etc.
+
 **Pasos para el Desarrollo**:
 
 1. **Planificación y Diseño**:
@@ -224,6 +251,10 @@ Un marketplace que conecta a profesionales independientes (freelancers) con clie
 Este marketplace no solo facilita la conexión entre profesionales y clientes, sino que también proporciona un entorno seguro y confiable para la contratación y el pago de servicios. La posibilidad de suscripciones para acceso a funcionalidades premium agrega un flujo de ingresos recurrente, beneficiando tanto a los usuarios como a la plataforma misma.
 
 Este proyecto cumple con todas las características requeridas y ofrece una solución valiosa en el mercado actual, donde la demanda de servicios profesionales en línea sigue creciendo.
+
+https://www.upwork.com/
+https://www.fiverr.com/
+https://www.freelancer.com/
 
 ### Aplicación de Venta de Pasajes de Buses y Aviones
 
