@@ -4,7 +4,9 @@ Ideas PF
 
 **Descripción**:
 Una plataforma de ecommerce dedicada a la venta de suplementos deportivos, como proteínas, vitaminas, aminoácidos y otros productos relacionados con la nutrición deportiva. La plataforma permitirá a los usuarios registrarse, navegar por los productos, realizar compras, recibir notificaciones sobre ofertas y gestionar sus perfiles.
-
+Ademas se podran ver combos y descuentos, se les dara al usuario la posibilidad de una dieta y rutina de entrenamiento para avanzados, intermedios y principiantes.
+//quiero implemetar en el front tegnologias : auth0(autenticacion de google), redux,next.js tailwind.css,typescrypt, en el deploy utilizar vercel o algun otro que en el momento llegemos a un conjutn de acuerdos.
+los usuario tendran contro de sus compras futuras y pasadas. ademas el admin va ser el encargado de gestionar el "ingreso de nueva mercaderia y modificar el estock de cada producto.", en cuanto a las rutina y dietas, tambien podra crear y modificar las dietas, ademas crear un chat bot, que diga: cosas simples como preguntas al usuario de (cuales son tus objetivos : nutricion, suplementacion, entrenamientos, nutricion y entrnamientos, o suplementacion y entrenamientos o el combo completo)ect
 **Características Detalladas**:
 
 1. **Autenticación**:
