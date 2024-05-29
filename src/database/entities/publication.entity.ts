@@ -9,8 +9,8 @@ import { User } from './user.entity';
 
 @Entity({ name: 'publications' })
 export class Publicaction {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   title: string;
