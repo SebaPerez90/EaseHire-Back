@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity({ name: 'notifications' })
@@ -18,6 +12,6 @@ export class Notification {
   @Column({ type: 'varchar', length: 10 })
   time: string;
 
-  // @ManyToOne(() => User, (user) => user.notifications)
-  // user: User;
+  @OneToMany(() => User, (user) => user.notifications)
+  user: User;
 }

@@ -19,16 +19,16 @@ export class Profesion {
   category: string;
 
   @Column({ array: true, nullable: true })
-  education?: string;
+  education: string;
 
-  // @OneToMany(() => Experience, (experience) => experience.profesion)
-  // experiences: Experience[];
+  @OneToMany(() => Experience, (experience) => experience.profesion)
+  experiences: Experience[];
 
   @ManyToOne(() => User, (user) => user.profesions)
   @JoinColumn({ name: 'user_ID' })
   user: User;
 
-  // @OneToMany(() => Feedback, (feedback) => feedback.profesion)
-  // @JoinColumn({ name: 'profesion_ID' })
-  // feedbacks: Feedback[];
+  @OneToMany(() => Feedback, (feedback) => feedback.profesion)
+  @JoinColumn({ name: 'profesion_ID' })
+  feedbacks: Feedback[];
 }
