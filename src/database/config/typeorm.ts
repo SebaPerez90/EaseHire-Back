@@ -8,13 +8,12 @@ const config = {
   database: process.env.DB_NAME,
   // host: 'postgresdb',
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  port: process.env.DB_PORT as unknown as number,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  entities: [__dirname + '/../*/.entity{.ts,.js}'],
+  entities: ['dist/**/*.entity{.ts,.js}'],
   migrations: ['dist/migrations/*{.ts,.js}'],
   autoLoadEntities: true,
-  //   logging: ['error'],
   logging: true,
   synchronize: true,
   dropSchema: true,
@@ -23,3 +22,4 @@ const config = {
 export default registerAs('typeorm', () => config);
 
 export const connectionSource = new DataSource(config as DataSourceOptions);
+
