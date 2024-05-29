@@ -19,7 +19,7 @@ export class Publicaction {
   imgUrl: string;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
-  date: string;
+  date: Date;
 
   @ManyToOne(() => User, (user) => user.publicactions)
   user: User;
