@@ -6,7 +6,7 @@ import { Publicaction } from 'src/database/entities/publication.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([Publicaction])],
+  imports: [TypeOrmModule.forFeature([Publicaction])],
   controllers: [PublicationController],
   providers: [PublicationService, PublicationsRepository],
 })

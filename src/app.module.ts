@@ -18,11 +18,12 @@ import typeorm from './database/config/typeorm';
       inject: [ConfigService],
       useFactory: (config: ConfigService) => config.get('typeorm'),
     }),
-    
+
     UsersModule,
     ProfesionsModule,
-    PublicationModule],
-    
+    PublicationModule,
+  ],
+
   controllers: [AppController],
   providers: [AppService, UsersModule],
 })

@@ -11,4 +11,3 @@ export class Credential {
   @Column({ type: 'varchar', length: 50, unique: true })
   password: string;
 }
-

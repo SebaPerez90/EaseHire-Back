@@ -10,7 +10,7 @@ export class UserRepository {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
-  
+
   async removeUsers(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
@@ -25,7 +25,7 @@ export class UserRepository {
   async findOne(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
-    return user
+    return user;
   }
   async createUsers(createUserDto) {
     const user = await this.usersRepository.save(createUserDto);

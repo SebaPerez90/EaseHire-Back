@@ -5,9 +5,7 @@ import { PublicationsRepository } from './publication.repository';
 
 @Injectable()
 export class PublicationService {
-  constructor(
-    private readonly publicationRepository: PublicationsRepository,
-  ) {}
+  constructor(private readonly publicationRepository: PublicationsRepository) {}
   create(createPublicationDto: CreatePublicationDto) {
     return this.publicationRepository.create(createPublicationDto);
   }

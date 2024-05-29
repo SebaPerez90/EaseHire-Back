@@ -25,8 +25,9 @@ export class PublicationsRepository {
     return await this.publicationsRepository.find();
   }
   async findOne(id: string) {
-    const publications= await this.publicationsRepository.findOneBy({ id });
-    if(!publications) throw new NotFoundException(`Not found publication ${id}`)
+    const publications = await this.publicationsRepository.findOneBy({ id });
+    if (!publications)
+      throw new NotFoundException(`Not found publication ${id}`);
   }
   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
