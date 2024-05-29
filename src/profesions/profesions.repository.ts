@@ -13,7 +13,7 @@ export class ProfesionsRepository {
   async create(createProfesionDto: CreateProfesionDto) {
     return await this.profesionsRepository.save(createProfesionDto);
   }
-  async findall() {
+  async findAll() {
     const profesions = await this.profesionsRepository.find();
 
     return profesions;
@@ -28,13 +28,8 @@ export class ProfesionsRepository {
     const updateProfesions = await this.profesionsRepository.findOneBy({ id });
     return updateProfesions;
   }
-  async findallprofesions(category: string) {
+  async findAllProfesions(category: string) {
     const profesions = await this.profesionsRepository.findOneBy({ category });
-    return profesions;
-  }
-
-  async findAll() {
-    const profesions = await this.profesionsRepository.find({});
     return profesions;
   }
 }

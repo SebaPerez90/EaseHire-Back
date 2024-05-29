@@ -3,8 +3,8 @@ import { CreateProfesionDto } from './create-profesion.dto';
 
 export class UpdateProfesionDto extends PartialType(CreateProfesionDto) {
   id: number;
-  category?: string;
+  category?: string[];
   rate?: number;
-  education?: string;
-  experience?: string;
+  education?: string[];
+  experience?: string[];
 }

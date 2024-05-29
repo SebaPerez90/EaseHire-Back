@@ -1,6 +1,6 @@
 export class CreateProfesionDto {
-  category: string;
+  category: string[];
   rate: number;
-  education?: string;
-  experience?: string;
+  education?: string[];
+  experience?: string[];
 }

@@ -21,7 +21,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsNumber()
   @Length(6, 20)
-  dni?: string;
+  dni?: number;
 
   @IsNotEmpty()
   @IsString()
@@ -37,5 +37,5 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsBoolean()
-  availability: string;
+  availability: boolean;
 }

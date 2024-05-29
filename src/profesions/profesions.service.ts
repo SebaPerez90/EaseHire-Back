@@ -15,7 +15,7 @@ export class ProfesionsService {
   }
 
   findAllProfesions(category: string) {
-    return this.profesionsRepository.findallprofesions(category);
+    return this.profesionsRepository.findAllProfesions(category);
   }
 
   update(id: number, updateProfesionDto: UpdateProfesionDto) {
