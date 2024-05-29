@@ -34,8 +34,8 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   birthdate: string;
 
-  @Column({ nullable: true, default: false })
-  availability: boolean;
+  @Column({ default: false })
+  availableToWork: boolean;
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
