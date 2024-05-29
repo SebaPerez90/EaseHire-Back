@@ -27,7 +27,7 @@ export class PublicationController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.publicationService.findOne(+id);
+    return this.publicationService.findOne(id);
   }
 
   @Patch(':id')
@@ -35,11 +35,11 @@ export class PublicationController {
     @Param('id') id: string,
     @Body() updatePublicationDto: UpdatePublicationDto,
   ) {
-    return this.publicationService.update(+id, updatePublicationDto);
+    return this.publicationService.update(id, updatePublicationDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.publicationService.remove(+id);
+    return this.publicationService.remove(id);
   }
 }

@@ -12,6 +12,6 @@ export class Feedback {
   @Column({ type: 'varchar', length: 300, nullable: true })
   description: string;
 
-  @ManyToOne(() => Profesion, (profesion) => profesion.feedbacks)
-  profesion: Profesion;
+  // @ManyToOne(() => Profesion, (profesion) => profesion.feedbacks)
+  // profesion: Profesion;
 }

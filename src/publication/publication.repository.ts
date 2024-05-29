@@ -2,6 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
+import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
 
 export class PublicationsRepository {
   constructor(
@@ -22,13 +23,13 @@ export class PublicationsRepository {
   async findAll() {
     return await this.publicationsRepository.find();
   }
-  async findOne(id: number) {
+  async findOne(id: string) {
     return await this.publicationsRepository.findOneBy({ id });
   }
-  async update(id: number, updatePublication: CreatePublicationDto) {
+  async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
   }
-  async remove(id: number) {
+  async remove(id: string) {
     return await this.publicationsRepository.delete(id);
   }
 }

@@ -6,17 +6,11 @@ import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 
 @Injectable()
-export class UserRepositoty {
+export class UserRepository {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
-  async findallprofession(profesions: string) {
-    const usersProfesional = await this.usersRepository.find({
-      // where: { profesions },
-    });
-
-    return usersProfesional;
-  }
+  
   async removeUsers(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     // user.available = false;

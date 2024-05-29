@@ -4,7 +4,7 @@ import { IsNotEmpty } from 'class-validator';
 
 export class UpdatePublicationDto extends PartialType(CreatePublicationDto) {
   @IsNotEmpty()
-  id: number;
+  id: string;
 
   title?: string;
 

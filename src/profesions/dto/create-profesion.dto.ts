@@ -1,6 +1,8 @@
+import { Experience } from "src/database/entities/experience.entity";
+
 export class CreateProfesionDto {
-  category: string[];
+  category: string;
   rate: number;
-  education?: string[];
-  experience?: string[];
+  education?: string;
+  experience?: Experience[];
 }

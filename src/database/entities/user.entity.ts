@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Publicaction } from './publication.entity';
-import { Notification } from './notification.entitu';
 import { Profesion } from './profesion.entity';
 import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
@@ -38,16 +37,16 @@ export class User {
   @Column({ default: false })
   availableToWork: boolean;
 
-  @OneToOne(() => Credential)
-  @JoinColumn({ name: 'credentials_ID' })
-  credential: Credential;
+  // @OneToOne(() => Credential)
+  // @JoinColumn({ name: 'credentials_ID' })
+  // credential: Credential;
 
   @OneToMany(() => Publicaction, (publicaction) => publicaction.user)
   publicactions: Publicaction[];
 
-  @OneToMany(() => Notification, (notification) => notification.usuario)
-  @JoinColumn({ name: 'notification_ID' })
-  notifications: Notification[];
+  // @OneToMany(() => Notification, (notification) => notification.user)
+  // @JoinColumn({ name: 'notification_ID' })
+  // notifications: Notification[];
 
   @OneToMany(() => Profesion, (profesion) => profesion.user)
   profesions: Profesion[];

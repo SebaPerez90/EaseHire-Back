@@ -29,7 +29,7 @@ export class Experience {
   @Column({ type: 'varchar', length: 20, nullable: false })
   date: string;
 
-  @ManyToOne(() => Profesion, (profesion) => profesion.experiences)
-  @JoinColumn({ name: 'profesion_ID' })
-  profesion: Profesion;
+  // @ManyToOne(() => Profesion, (profesion) => profesion.experiences)
+  // @JoinColumn({ name: 'profesion_ID' })
+  // profesion: Profesion;
 }

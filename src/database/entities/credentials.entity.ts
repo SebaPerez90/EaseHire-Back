@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
 
 @Entity({ name: 'credentials' })
 export class Credential {
@@ -10,4 +11,6 @@ export class Credential {
 
   @Column({ type: 'varchar', length: 50, unique: true })
   password: string;
+
+  
 }

@@ -32,14 +32,14 @@ export class ProfesionsController {
 
   @Patch(':id')
   update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() updateProfesionDto: UpdateProfesionDto,
   ) {
     return this.profesionsService.update(id, updateProfesionDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: number) {
+  remove(@Param('id') id: string) {
     return this.profesionsService.remove(id);
   }
 }

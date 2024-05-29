@@ -18,11 +18,11 @@ export class ProfesionsService {
     return this.profesionsRepository.findAllProfesions(category);
   }
 
-  update(id: number, updateProfesionDto: UpdateProfesionDto) {
+  update(id: string, updateProfesionDto: UpdateProfesionDto) {
     return this.profesionsRepository.update(id, updateProfesionDto);
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.profesionsRepository.remove(id);
   }
 }

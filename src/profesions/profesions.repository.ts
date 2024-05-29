@@ -18,12 +18,12 @@ export class ProfesionsRepository {
 
     return profesions;
   }
-  async remove(id: number) {
+  async remove(id: string) {
     const profesions = await this.profesionsRepository.delete({ id });
 
     return profesions;
   }
-  async update(id: number, UpdateUserDto: UpdateProfesionDto) {
+  async update(id: string, UpdateUserDto: UpdateProfesionDto) {
     await this.profesionsRepository.update(id, UpdateUserDto);
     const updateProfesions = await this.profesionsRepository.findOneBy({ id });
     return updateProfesions;
