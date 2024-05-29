@@ -8,19 +8,17 @@ import {
 } from 'typeorm';
 import { Experience } from './experience.entity';
 import { User } from './user.entity';
+import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'profesions' })
 export class Profesion {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ array: true })
   category: string;
 
-  @Column({ type: 'float' })
-  rate: number;
-
-  @Column({ array: true })
+  @Column({ array: true, nullable: true })
   education: string;
 
   @OneToMany(() => Experience, (experience) => experience.profesion)
@@ -29,4 +27,8 @@ export class Profesion {
   @ManyToOne(() => User, (user) => user.profesions)
   @JoinColumn({ name: 'user_ID' })
   user: User;
+
+  @OneToMany(() => Feedback, (feedback) => feedback.profesion)
+  @JoinColumn({ name: 'profesion_ID' })
+  feedbacks: Feedback[];
 }

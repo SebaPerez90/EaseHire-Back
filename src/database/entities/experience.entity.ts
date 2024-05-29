@@ -9,8 +9,8 @@ import { Profesion } from './profesion.entity';
 
 @Entity({ name: 'experiences' })
 export class Experience {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     type: 'text',
