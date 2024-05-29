@@ -3,6 +3,7 @@ import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
+import { NotFoundException } from '@nestjs/common';
 
 export class PublicationsRepository {
   constructor(
@@ -24,7 +25,8 @@ export class PublicationsRepository {
     return await this.publicationsRepository.find();
   }
   async findOne(id: string) {
-    return await this.publicationsRepository.findOneBy({ id });
+    const publications= await this.publicationsRepository.findOneBy({ id });
+    if(!publications) throw new NotFoundException(`Not found publication ${id}`)
   }
   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
