@@ -7,8 +7,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Publicaction } from './publication.entity';
-import { Notification } from './notification.entitu';
 import { Profesion } from './profesion.entity';
+import { Credential } from './credentials.entity';
+import { Notification } from './notification.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -33,7 +34,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   birthdate: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, default: false })
   availability: boolean;
 
   @OneToOne(() => Credential)
@@ -41,10 +42,9 @@ export class User {
   credential: Credential;
 
   @OneToMany(() => Publicaction, (publicaction) => publicaction.user)
-  @JoinColumn({ name: 'publication_ID' })
   publicactions: Publicaction[];
 
-  @OneToMany(() => Notification, (notification) => notification.user)
+  @OneToMany(() => Notification, (notification) => notification.usuario)
   @JoinColumn({ name: 'notification_ID' })
   notifications: Notification[];
 

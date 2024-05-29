@@ -1,7 +1,13 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
-@Entity({ name: 'publicactions' })
+@Entity({ name: 'publications' })
 export class Publicaction {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,5 +28,6 @@ export class Publicaction {
   date: string;
 
   @ManyToOne(() => User, (user) => user.publicactions)
+  @JoinColumn({ name: 'user_ID' })
   user: User;
 }

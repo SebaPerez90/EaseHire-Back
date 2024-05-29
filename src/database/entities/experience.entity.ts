@@ -1,4 +1,10 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Profesion } from './profesion.entity';
 
 @Entity({ name: 'experiences' })
@@ -24,5 +30,6 @@ export class Experience {
   date: string;
 
   @ManyToOne(() => Profesion, (profesion) => profesion.experiences)
+  @JoinColumn({ name: 'profesion_ID' })
   profesion: Profesion;
 }
