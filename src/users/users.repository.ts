@@ -3,23 +3,23 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { User } from 'src/database/entities/user.entity';
 
 @Injectable()
 export class UserReposiroty {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
-  async findallprofession(profession: string) {
+  async findallprofession(profesions: string) {
     const usersProfesional = await this.usersRepository.find({
-      where: { profession },
+      // where: { profesions },
     });
 
     return usersProfesional;
   }
   async removeUsers(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
-    user.available = false;
+    // user.available = false;
     return user;
   }
   async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
@@ -36,7 +36,7 @@ export class UserReposiroty {
   }
   async findAll() {
     const users = await this.usersRepository.find({
-      where: { available: true },
+      // where: { available: true },
     });
     return users;
   }
