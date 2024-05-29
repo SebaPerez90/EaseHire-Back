@@ -1,10 +1,16 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 
-@Entity({ name: 'publicactions' })
+@Entity({ name: 'publications' })
 export class Publicaction {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
   title: string;
@@ -22,5 +28,6 @@ export class Publicaction {
   date: Date;
 
   @ManyToOne(() => User, (user) => user.publicactions)
+  @JoinColumn({ name: 'user_ID' })
   user: User;
 }
