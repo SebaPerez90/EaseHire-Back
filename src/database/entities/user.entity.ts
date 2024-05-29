@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Publicaction } from './publication.entity';
+import { Notification } from './notification.entitu';
 import { Profesion } from './profesion.entity';
 import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';

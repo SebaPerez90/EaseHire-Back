@@ -1,16 +1,10 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 
 @Entity({ name: 'notifications' })
 export class Notification {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'varchar', length: 200, nullable: false })
   title: string;
@@ -18,7 +12,6 @@ export class Notification {
   @Column({ type: 'varchar', length: 10 })
   time: string;
 
-  @ManyToOne(() => User, (user) => user.notifications)
-  @JoinColumn({ name: 'user_ID' })
-  usuario: User;
+  @OneToMany(() => User, (user) => user.notifications)
+  user: User;
 }
