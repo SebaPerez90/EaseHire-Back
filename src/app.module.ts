@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ProfesionsModule } from './profesions/profesions.module';
-import { PublicationModule } from './publicayion/publication.module';
 import { PublicationModule } from './publication/publication.module';
 
 @Module({
