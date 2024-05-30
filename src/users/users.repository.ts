@@ -1,15 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-// import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../utils/mock-users.json';
+import { AuthRepository } from 'src/auth/auth.repository';
 
 @Injectable()
 export class UserRepository {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
+    private authRepository: AuthRepository,
   ) {}
 
   async removeUsers(id: string) {
@@ -46,6 +47,7 @@ export class UserRepository {
       user.country = element.country;
       user.city = element.city;
       user.birthdate = element.birthdate;
+      user.credential = await this.authRepository.simulateAuthFlow(element);
 
       await this.usersRepository
         .createQueryBuilder()

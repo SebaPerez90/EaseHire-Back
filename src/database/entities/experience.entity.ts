@@ -3,9 +3,11 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Profesion } from './profesion.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'experiences' })
 export class Experience {
@@ -21,15 +23,25 @@ export class Experience {
   imgUrl: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
+  company: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: false })
   title: string;
 
-  @Column({ type: 'varchar', length: 200, nullable: true })
+  @Column({ type: 'varchar', length: 200, nullable: false })
   description: string;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
-  date: string;
+  startDate: string;
+
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  endDate: string;
 
   @ManyToOne(() => Profesion, (profesion) => profesion.experiences)
   @JoinColumn({ name: 'profesion_ID' })
   profesion: Profesion;
+
+  @OneToOne(() => User, (user) => user)
+  @JoinColumn({ name: 'user_ID' })
+  client: User;
 }
