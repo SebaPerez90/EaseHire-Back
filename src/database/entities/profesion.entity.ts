@@ -9,17 +9,15 @@ import {
 import { Experience } from './experience.entity';
 import { User } from './user.entity';
 import { Feedback } from './feedback.entity';
+import { Education } from './education.entity';
 
 @Entity({ name: 'profesions' })
 export class Profesion {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ array: true })
+  @Column({ type: 'varchar' })
   category: string;
-
-  @Column({ array: true, nullable: true })
-  education: string;
 
   @OneToMany(() => Experience, (experience) => experience.profesion)
   experiences: Experience[];
@@ -31,4 +29,7 @@ export class Profesion {
   @OneToMany(() => Feedback, (feedback) => feedback.profesion)
   @JoinColumn({ name: 'profesion_ID' })
   feedbacks: Feedback[];
+
+  @OneToMany(() => Education, (education) => education.profesion)
+  educations: Education[];
 }
