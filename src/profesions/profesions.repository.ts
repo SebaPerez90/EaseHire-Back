@@ -3,6 +3,7 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { Repository } from 'typeorm';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
+import { BadRequestException } from '@nestjs/common';
 
 export class ProfesionsRepository {
   constructor(
@@ -24,7 +25,7 @@ export class ProfesionsRepository {
     await this.profesionsRepository.update(id, UpdateUserDto);
     const updateProfesions = await this.profesionsRepository.findOneBy({ id });
     return updateProfesions;
-  } */
+  } 
 
 
   async findProfesions(category: string, page: number, limit: number) {

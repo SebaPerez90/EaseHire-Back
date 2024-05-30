@@ -11,12 +11,8 @@ export class UsersService {
     return this.usersRepository.findUsers(category, city, page, limit);
   }
 
-/*   create(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto) {
     return this.usersRepository.createUsers(createUserDto);
-  }
-
-  findAll() {
-    return this.usersRepository.findAll();
   }
 
   findOne(id: string) {
@@ -29,5 +25,5 @@ export class UsersService {
 
   remove(id: string) {
     return this.usersRepository.removeUsers(id);
-  } */
+  }
 } 
