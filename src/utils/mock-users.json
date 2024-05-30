@@ -6,7 +6,7 @@
     "country": "Argentina",
     "city": "Buenos Aires",
     "birthdate": "1990-01-01",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "juan.perez@example.com",
     "password": "Asd_*1234"
   },
@@ -28,7 +28,7 @@
     "country": "Chile",
     "city": "Santiago",
     "birthdate": "1978-11-20",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "carlos.lopez@example.com",
     "password": "Asd_*1234"
   },
@@ -50,7 +50,7 @@
     "country": "Paraguay",
     "city": "Asuncion",
     "birthdate": "1980-04-22",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "pedro.fernandez@example.com",
     "password": "Asd_*1234"
   },
@@ -72,7 +72,7 @@
     "country": "Brasil",
     "city": "Rio de Janeiro",
     "birthdate": "1975-09-12",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "jorge.gonzalez@example.com",
     "password": "Asd_*1234"
   },
@@ -94,7 +94,7 @@
     "country": "Uruguay",
     "city": "Punta del Este",
     "birthdate": "1983-06-17",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "roberto.torres@example.com",
     "password": "Asd_*1234"
   },
@@ -116,7 +116,7 @@
     "country": "Argentina",
     "city": "Mendoza",
     "birthdate": "1987-03-14",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "martin.mendez@example.com",
     "password": "Asd_*1234"
   },
@@ -138,7 +138,7 @@
     "country": "Chile",
     "city": "Concepcion",
     "birthdate": "1982-11-01",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "ricardo.romero@example.com",
     "password": "Asd_*1234"
   },
@@ -160,7 +160,7 @@
     "country": "Paraguay",
     "city": "Ciudad del Este",
     "birthdate": "1989-07-07",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "diego.sosa@example.com",
     "password": "Asd_*1234"
   },
@@ -182,7 +182,7 @@
     "country": "Brasil",
     "city": "Fortaleza",
     "birthdate": "1981-10-19",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "francisco.rojas@example.com",
     "password": "Asd_*1234"
   },
@@ -204,7 +204,7 @@
     "country": "Uruguay",
     "city": "Canelones",
     "birthdate": "1994-03-21",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "hernan.aguirre@example.com",
     "password": "Asd_*1234"
   },
@@ -226,7 +226,7 @@
     "country": "Argentina",
     "city": "Santa Fe",
     "birthdate": "1990-06-03",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "matias.vega@example.com",
     "password": "Asd_*1234"
   },
@@ -248,7 +248,7 @@
     "country": "Chile",
     "city": "Iquique",
     "birthdate": "1984-11-22",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "luis.molina@example.com",
     "password": "Asd_*1234"
   },
@@ -270,7 +270,7 @@
     "country": "Paraguay",
     "city": "San Lorenzo",
     "birthdate": "1983-12-07",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "fernando.moran@example.com",
     "password": "Asd_*1234"
   },
@@ -292,7 +292,7 @@
     "country": "Brasil",
     "city": "Porto Alegre",
     "birthdate": "1988-10-25",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "gustavo.acosta@example.com",
     "password": "Asd_*1234"
   },
@@ -314,7 +314,7 @@
     "country": "Uruguay",
     "city": "Maldonado",
     "birthdate": "1986-01-29",
-    "availableToWork": true,
+    "availableToWork": false,
     "email": "mauricio.alvarez@example.com",
     "password": "Asd_*1234"
   },

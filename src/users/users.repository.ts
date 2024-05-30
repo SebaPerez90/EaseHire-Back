@@ -47,7 +47,7 @@ export class UserRepository {
       user.country = element.country;
       user.city = element.city;
       user.birthdate = element.birthdate;
-      await this.authRepository.simulateAuthFlow(element);
+      user.credential = await this.authRepository.simulateAuthFlow(element);
 
       await this.usersRepository
         .createQueryBuilder()
