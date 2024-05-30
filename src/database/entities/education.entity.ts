@@ -19,7 +19,11 @@ export class Education {
   @Column({ type: 'varchar', length: 50 })
   educationalEntity: string;
 
-  @Column({ type: 'enum', enum: EducationState })
+  @Column({
+    type: 'enum',
+    enum: EducationState,
+    default: EducationState.FINISHED,
+  })
   studiesState: EducationState[];
 
   @Column({ type: 'varchar', length: 50 })
