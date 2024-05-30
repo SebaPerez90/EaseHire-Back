@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
@@ -15,22 +18,22 @@ import { UpdateProfesionDto } from './dto/update-profesion.dto';
 export class ProfesionsController {
   constructor(private readonly profesionsService: ProfesionsService) {}
 
-  @Post()
+/*   @Post()
   create(@Body() createProfesionDto: CreateProfesionDto) {
     return this.profesionsService.create(createProfesionDto);
   }
-
+ */
   @Get()
-  findAll() {
-    return this.profesionsService.findAll();
+  findProfesions( 
+    @Query('category') category: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
+  ) {
+    
+    return this.profesionsService.findProfesions(category, page, limit);
   }
 
-  @Get(':category')
-  findAllProfesions(@Param('category') category: string) {
-    return this.profesionsService.findAllProfesions(category);
-  }
-
-  @Patch(':id')
+/*   @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateProfesionDto: UpdateProfesionDto,
@@ -41,5 +44,5 @@ export class ProfesionsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.profesionsService.remove(id);
-  }
+  } */
 }

@@ -15,7 +15,7 @@ export class Profesion {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ array: true })
+  @Column()
   category: string;
 
   @Column({ array: true, nullable: true })

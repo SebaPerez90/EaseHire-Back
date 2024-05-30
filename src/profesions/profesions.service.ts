@@ -6,23 +6,19 @@ import { ProfesionsRepository } from './profesions.repository';
 @Injectable()
 export class ProfesionsService {
   constructor(private readonly profesionsRepository: ProfesionsRepository) {}
-  create(createProfesionDto: CreateProfesionDto) {
+/*   create(createProfesionDto: CreateProfesionDto) {
     return this.profesionsRepository.create(createProfesionDto);
+  } */
+
+  findProfesions(category: string, page: number, limit: number) {
+    return this.profesionsRepository.findProfesions(category, page, limit);
   }
 
-  findAll() {
-    return this.profesionsRepository.findAll;
-  }
-
-  findAllProfesions(category: string) {
-    return this.profesionsRepository.findAllProfesions(category);
-  }
-
-  update(id: string, updateProfesionDto: UpdateProfesionDto) {
+/*   update(id: string, updateProfesionDto: UpdateProfesionDto) {
     return this.profesionsRepository.update(id, updateProfesionDto);
   }
 
   remove(id: string) {
     return this.profesionsRepository.remove(id);
-  }
+  } */
 }
