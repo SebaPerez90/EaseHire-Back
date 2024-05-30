@@ -38,16 +38,24 @@ export class UserRepository {
   async findUsers( category: string, city: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
 
-    const publicationsFind = await this.usersRepository.find({
-      /*    where: { category: category }, */
-        take: limit,
-        skip: skip,
-        relations: { profesions : true },
+    const where: any = {};
+    if (category && city) {
+      where.professions = { category: category };
+      where.city = city;
+    } else if (category) {
+      where.professions = { category: category };
+    } else if (city) {
+      where.city = city;
+    }
+
+    const usersFind = await this.usersRepository.find({
+      relations: { profesions : true },
+      where,
+      take: limit,
+      skip: skip
     })
-
-    if (publicationsFind.length == 0) throw new BadRequestException(`No found publication with category ${category}`);
-
-    return publicationsFind;
+    if (usersFind.length == 0) throw new BadRequestException(`No users found with the provided filters`);
+    return usersFind;
 
   }
 

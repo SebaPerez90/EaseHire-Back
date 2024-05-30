@@ -30,10 +30,10 @@ export class PublicationController {
  */
   @Get()
   findPrublications( 
-    @Query('category') category: string,
-    @Query('city') city: string,
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
+    @Query('category') category?: string,
+    @Query('city') city?: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page?: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number
   ) {
     return this.publicationService.findPrublications(category, city, page, limit);
   }

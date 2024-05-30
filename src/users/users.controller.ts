@@ -21,10 +21,10 @@ export class UsersController {
 
   @Get()
   findUsers( 
-    @Query('category') category: string,
-    @Query('city') city: string,
-    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
+    @Query('category') category?: string,
+    @Query('city') city?: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page?: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number
   ) {
     return this.usersService.findUsers(category, city, page, limit);
   }

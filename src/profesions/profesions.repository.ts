@@ -43,4 +43,6 @@ export class ProfesionsRepository {
   
     return ProfesionsFind;
   }
+
+  async seederProfesions() {}
 }

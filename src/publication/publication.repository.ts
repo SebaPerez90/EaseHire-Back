@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
+import * as moment from 'moment';
 
 export class PublicationsRepository {
   constructor(
@@ -11,33 +12,56 @@ export class PublicationsRepository {
     private publicationsRepository: Repository<Publicaction>,
   ) {}
 
-/*   async create(createPublication: CreatePublicationDto) {
+  async create(createPublication: CreatePublicationDto) {
+    const date = new Date();
+    const formatDate = date.toLocaleDateString();
+    const formatTime = date.toLocaleTimeString();
+
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
       imgUrl: createPublication.imgUrl,
-      date: new Date(),
+      date: formatDate,
+      time: formatTime,
     });
+  
+    const timelapsed = moment(newPublication.date).fromNow();
+    newPublication.timelapse = timelapsed;
+
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
   }
   async findAll() {
     return await this.publicationsRepository.find();
-  } */
+  } 
 
 
   async findPrublications(category: string, city: string, page: number, limit: number) {
 
     const skip = (page - 1) * limit;
 
+    
+    const where: any = {};
+    if (category && city) {
+      where.profesion = { category: category };
+      where.user = { city: city };
+    } else if (category) {
+      where.profesion = { category: category };
+    } else if (city) {
+      where.user = { city: city };
+    }
+    
     const publicationsFind = await this.publicationsRepository.find({
-   /*    where: { category: category }, */
+      relations: {
+        profesion: true,
+        user: true
+      },
+      where,
       take: limit,
       skip: skip,
-      relations: { user: true },
     })
 
-    if (publicationsFind.length == 0) throw new BadRequestException(`No found publication with category ${category}`);
+    if (publicationsFind.length == 0) throw new BadRequestException(`No publications found with the provided filters`);
   
     return publicationsFind;
 
