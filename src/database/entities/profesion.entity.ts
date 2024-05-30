@@ -18,7 +18,7 @@ export class Profesion {
   @Column()
   category: string;
 
-  @Column({ array: true, nullable: true })
+  @Column({nullable: true })
   education: string;
 
   @OneToMany(() => Experience, (experience) => experience.profesion)

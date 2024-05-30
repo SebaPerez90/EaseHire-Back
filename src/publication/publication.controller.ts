@@ -6,6 +6,9 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  DefaultValuePipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
@@ -14,7 +17,7 @@ import { UpdatePublicationDto } from './dto/update-publication.dto';
 @Controller('publication')
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
-
+/* 
   @Post()
   create(@Body() createPublicationDto: CreatePublicationDto) {
     return this.publicationService.create(createPublicationDto);
@@ -24,13 +27,17 @@ export class PublicationController {
   findAll() {
     return this.publicationService.findAll();
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.publicationService.findOne(id);
+ */
+  @Get()
+  findPrublications( 
+    @Query('category') category: string,
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
+  ) {
+    return this.publicationService.findPrublications(category, page, limit);
   }
 
-  @Patch(':id')
+/*   @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updatePublicationDto: UpdatePublicationDto,
@@ -41,5 +48,5 @@ export class PublicationController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.publicationService.remove(id);
-  }
+  } */
 }

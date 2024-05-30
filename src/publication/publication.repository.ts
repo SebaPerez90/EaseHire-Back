@@ -11,7 +11,7 @@ export class PublicationsRepository {
     private publicationsRepository: Repository<Publicaction>,
   ) {}
 
-  async create(createPublication: CreatePublicationDto) {
+/*   async create(createPublication: CreatePublicationDto) {
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -23,16 +23,21 @@ export class PublicationsRepository {
   }
   async findAll() {
     return await this.publicationsRepository.find();
-  }
-  async findOne(id: string) {
+  } */
+
+
+  async findPrublications(id: string, page: number, limit: number) {
     const publications = await this.publicationsRepository.findOneBy({ id });
     if (!publications)
       throw new NotFoundException(`Not found publication ${id}`);
   }
-  async update(id: string, updatePublication: UpdateProfesionDto) {
+
+
+
+/*   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
   }
   async remove(id: string) {
     return await this.publicationsRepository.delete(id);
-  }
+  } */
 }

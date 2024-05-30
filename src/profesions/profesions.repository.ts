@@ -29,6 +29,7 @@ export class ProfesionsRepository {
 
 
   async findProfesions(category: string, page: number, limit: number) {
+
     const skip = (page - 1) * limit;
     const ProfesionsFind = await this.profesionsRepository.find({
       where: { category: category },
@@ -37,8 +38,7 @@ export class ProfesionsRepository {
       relations: { user: true },
     })
     console.log(ProfesionsFind);
-    
-    // Verifica si no hay profesiones encontradas
+
     if (ProfesionsFind.length == 0) throw new BadRequestException(`No found professions with category ${category}`);
   
     return ProfesionsFind;
