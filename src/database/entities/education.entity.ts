@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Profesion } from './profesion.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'educations' })
 export class Education {
@@ -32,7 +32,7 @@ export class Education {
   @Column({ type: 'varchar', length: 50 })
   endDate: string;
 
-  @ManyToOne(() => Profesion, (profesion) => profesion.educations)
-  @JoinColumn({ name: 'profesion_ID' })
-  profesion: Profesion;
+  @ManyToOne(() => User, (user) => user.educations)
+  @JoinColumn({ name: 'user_ID' })
+  user: User;
 }

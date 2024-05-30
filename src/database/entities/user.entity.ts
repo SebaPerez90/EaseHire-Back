@@ -10,6 +10,7 @@ import { Publicaction } from './publication.entity';
 import { Profesion } from './profesion.entity';
 import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
+import { Education } from './education.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -53,4 +54,7 @@ export class User {
 
   @OneToMany(() => Profesion, (profesion) => profesion.user)
   profesions: Profesion[];
+
+  @OneToMany(() => Education, (education) => education.user)
+  educations: Education[];
 }
