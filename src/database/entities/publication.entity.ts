@@ -32,6 +32,12 @@ export class Publicaction {
   @Column({ type: 'varchar', length: 20, nullable: false })
   date: Date;
 
+  @Column({ nullable: true })
+  time: string;
+
+  @Column({ nullable: true })
+  timelapse: string
+  
   @ManyToOne(() => User, (user) => user.publicactions)
   @JoinColumn({ name: 'user_ID' })
   user: User;
