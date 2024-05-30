@@ -34,6 +34,9 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   birthdate: string;
 
+  @Column({ type: 'varchar', length: 150, nullable: true })
+  bio: string;
+
   @Column({ default: false })
   availableToWork: boolean;
 

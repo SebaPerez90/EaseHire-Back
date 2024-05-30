@@ -6,7 +6,12 @@ import { UserRepository } from './users.repository';
 @Injectable()
 export class UsersService implements OnModuleInit {
   constructor(private usersRepository: UserRepository) {}
-  create(createUserDto: CreateUserDto) {
+
+  findUsers(category: string, city: string, page: number, limit: number) {
+    return this.usersRepository.findUsers(category, city, page, limit);
+  }
+
+/*   create(createUserDto: CreateUserDto) {
     return this.usersRepository.createUsers(createUserDto);
   }
 
@@ -25,8 +30,8 @@ export class UsersService implements OnModuleInit {
   remove(id: string) {
     return this.usersRepository.removeUsers(id);
   }
-
+*/
   async onModuleInit() {
     await this.usersRepository.seederUser();
-  }
+  } 
 }

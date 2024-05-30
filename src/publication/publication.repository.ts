@@ -3,7 +3,7 @@ import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
-import { NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 export class PublicationsRepository {
   constructor(
@@ -26,10 +26,21 @@ export class PublicationsRepository {
   } */
 
 
-  async findPrublications(id: string, page: number, limit: number) {
-    const publications = await this.publicationsRepository.findOneBy({ id });
-    if (!publications)
-      throw new NotFoundException(`Not found publication ${id}`);
+  async findPrublications(category: string, city: string, page: number, limit: number) {
+
+    const skip = (page - 1) * limit;
+
+    const publicationsFind = await this.publicationsRepository.find({
+   /*    where: { category: category }, */
+      take: limit,
+      skip: skip,
+      relations: { user: true },
+    })
+
+    if (publicationsFind.length == 0) throw new BadRequestException(`No found publication with category ${category}`);
+  
+    return publicationsFind;
+
   }
 
 

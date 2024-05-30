@@ -14,8 +14,8 @@ export class PublicationService {
     return this.publicationRepository.findAll();
   } */
 
-  findPrublications(id: string, page: number, limit: number) {
-    return this.publicationRepository.findPrublications(id, page, limit);
+  findPrublications(category: string, city: string, page: number, limit: number) {
+    return this.publicationRepository.findPrublications( category, city, page, limit);
   }
 /* 
   update(id: string, updatePublicationDto: UpdatePublicationDto) {
