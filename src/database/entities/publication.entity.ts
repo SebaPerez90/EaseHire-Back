@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { Profesion } from './profesion.entity';
 
 @Entity({ name: 'publications' })
 export class Publicaction {
@@ -17,6 +18,10 @@ export class Publicaction {
 
   @Column({ type: 'varchar', length: 200, nullable: false })
   description: string;
+
+  @ManyToOne(() => Profesion, (profesion) => profesion)
+  @JoinColumn({ name: 'profesion_ID' })
+  profesion: Profesion;
 
   @Column({
     type: 'text',

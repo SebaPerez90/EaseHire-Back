@@ -32,4 +32,6 @@ export class ProfesionsRepository {
     const profesions = await this.profesionsRepository.findOneBy({ category });
     return profesions;
   }
+
+  async seederProfesions() {}
 }

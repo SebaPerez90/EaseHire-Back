@@ -9,7 +9,7 @@ import {
 import { Experience } from './experience.entity';
 import { User } from './user.entity';
 import { Feedback } from './feedback.entity';
-import { Education } from './education.entity';
+import { Publicaction } from './publication.entity';
 
 @Entity({ name: 'profesions' })
 export class Profesion {
@@ -30,6 +30,6 @@ export class Profesion {
   @JoinColumn({ name: 'profesion_ID' })
   feedbacks: Feedback[];
 
-  @OneToMany(() => Education, (education) => education.profesion)
-  educations: Education[];
+  @OneToMany(() => Publicaction, (publicaction) => publicaction.profesion)
+  publicactions: Publicaction[];
 }
