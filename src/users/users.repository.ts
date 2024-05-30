@@ -60,7 +60,7 @@ export class UserRepository {
   }
 
   async seederUser() {
-    data?.map(async (element) => {
+    const promises = data?.map(async (element) => {
       const user = new User();
       user.name = element.name;
       user.lastName = element.lastName;
@@ -81,7 +81,10 @@ export class UserRepository {
         )
         .execute();
     });
+    await Promise.all(promises);
 
-    console.log('users was seeder successfully!');
+    return {
+      message: 'users was seeder successfully!',
+    };
   }
 }

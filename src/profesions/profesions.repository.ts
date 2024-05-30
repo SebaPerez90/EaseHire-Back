@@ -3,14 +3,13 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { Repository } from 'typeorm';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
-import { BadRequestException } from '@nestjs/common';
 
 export class ProfesionsRepository {
   constructor(
     @InjectRepository(Profesion)
     private profesionsRepository: Repository<Profesion>,
   ) {}
-/* 
+
   async create(createProfesionDto: CreateProfesionDto) {
     return await this.profesionsRepository.save(createProfesionDto);
   }
@@ -43,6 +42,4 @@ export class ProfesionsRepository {
   
     return ProfesionsFind;
   }
-
-  async seederProfesions() {}
 }
