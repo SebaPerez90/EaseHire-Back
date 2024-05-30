@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
 
 @Injectable()
-export class UsersService {
-  constructor(private readonly usersRepository: UserRepository) {}
+export class UsersService implements OnModuleInit {
+  constructor(private usersRepository: UserRepository) {}
   create(createUserDto: CreateUserDto) {
     return this.usersRepository.createUsers(createUserDto);
   }
@@ -24,5 +24,9 @@ export class UsersService {
 
   remove(id: string) {
     return this.usersRepository.removeUsers(id);
+  }
+
+  async onModuleInit() {
+    await this.usersRepository.seederUser();
   }
 }

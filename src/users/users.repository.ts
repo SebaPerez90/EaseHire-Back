@@ -1,9 +1,10 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { Injectable, NotFoundException } from '@nestjs/common';
+// import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
+import * as data from '../utils/mock-users.json';
 
 @Injectable()
 export class UserRepository {
@@ -34,5 +35,30 @@ export class UserRepository {
   async findAll() {
     const users = await this.usersRepository.find();
     return users;
+  }
+
+  async seederUser() {
+    data?.map(async (element) => {
+      const user = new User();
+      user.name = element.name;
+      user.lastName = element.lastName;
+      user.dni = element.dni;
+      user.country = element.country;
+      user.city = element.city;
+      user.birthdate = element.birthdate;
+
+      await this.usersRepository
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values(user)
+        .orUpdate(
+          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate'],
+          ['dni'],
+        )
+        .execute();
+    });
+
+    console.log('users was seeder successfully!');
   }
 }

@@ -1,0 +1,272 @@
+[
+  {
+    "name": "Juan",
+    "lastName": "Perez",
+    "dni": 12345678,
+    "country": "Argentina",
+    "city": "Buenos Aires",
+    "birthdate": "1990-01-01",
+    "availableToWork": true
+  },
+  {
+    "name": "Maria",
+    "lastName": "Gomez",
+    "dni": 23456789,
+    "country": "Brasil",
+    "city": "Sao Paulo",
+    "birthdate": "1985-05-15",
+    "availableToWork": false
+  },
+  {
+    "name": "Carlos",
+    "lastName": "Lopez",
+    "dni": 34567890,
+    "country": "Chile",
+    "city": "Santiago",
+    "birthdate": "1978-11-20",
+    "availableToWork": true
+  },
+  {
+    "name": "Ana",
+    "lastName": "Martinez",
+    "dni": 45678901,
+    "country": "Uruguay",
+    "city": "Montevideo",
+    "birthdate": "1992-07-30",
+    "availableToWork": false
+  },
+  {
+    "name": "Pedro",
+    "lastName": "Fernandez",
+    "dni": 56789012,
+    "country": "Paraguay",
+    "city": "Asuncion",
+    "birthdate": "1980-04-22",
+    "availableToWork": true
+  },
+  {
+    "name": "Lucia",
+    "lastName": "Rodriguez",
+    "dni": 67890123,
+    "country": "Argentina",
+    "city": "Rosario",
+    "birthdate": "1995-03-18",
+    "availableToWork": false
+  },
+  {
+    "name": "Jorge",
+    "lastName": "Gonzalez",
+    "dni": 78901234,
+    "country": "Brasil",
+    "city": "Rio de Janeiro",
+    "birthdate": "1975-09-12",
+    "availableToWork": true
+  },
+  {
+    "name": "Sofia",
+    "lastName": "Diaz",
+    "dni": 89012345,
+    "country": "Chile",
+    "city": "Valparaiso",
+    "birthdate": "1988-12-05",
+    "availableToWork": false
+  },
+  {
+    "name": "Roberto",
+    "lastName": "Torres",
+    "dni": 90123456,
+    "country": "Uruguay",
+    "city": "Punta del Este",
+    "birthdate": "1983-06-17",
+    "availableToWork": true
+  },
+  {
+    "name": "Valentina",
+    "lastName": "Silva",
+    "dni": 10234567,
+    "country": "Paraguay",
+    "city": "Encarnacion",
+    "birthdate": "1991-10-24",
+    "availableToWork": false
+  },
+  {
+    "name": "Martin",
+    "lastName": "Mendez",
+    "dni": 11234567,
+    "country": "Argentina",
+    "city": "Mendoza",
+    "birthdate": "1987-03-14",
+    "availableToWork": true
+  },
+  {
+    "name": "Laura",
+    "lastName": "Morales",
+    "dni": 12234567,
+    "country": "Brasil",
+    "city": "Salvador",
+    "birthdate": "1993-08-09",
+    "availableToWork": false
+  },
+  {
+    "name": "Ricardo",
+    "lastName": "Romero",
+    "dni": 13234567,
+    "country": "Chile",
+    "city": "Concepcion",
+    "birthdate": "1982-11-01",
+    "availableToWork": true
+  },
+  {
+    "name": "Natalia",
+    "lastName": "Suarez",
+    "dni": 14234567,
+    "country": "Uruguay",
+    "city": "Colonia del Sacramento",
+    "birthdate": "1976-02-25",
+    "availableToWork": false
+  },
+  {
+    "name": "Diego",
+    "lastName": "Sosa",
+    "dni": 15234567,
+    "country": "Paraguay",
+    "city": "Ciudad del Este",
+    "birthdate": "1989-07-07",
+    "availableToWork": true
+  },
+  {
+    "name": "Isabel",
+    "lastName": "Ramos",
+    "dni": 16234567,
+    "country": "Argentina",
+    "city": "Cordoba",
+    "birthdate": "1996-05-29",
+    "availableToWork": false
+  },
+  {
+    "name": "Francisco",
+    "lastName": "Rojas",
+    "dni": 17234567,
+    "country": "Brasil",
+    "city": "Fortaleza",
+    "birthdate": "1981-10-19",
+    "availableToWork": true
+  },
+  {
+    "name": "Camila",
+    "lastName": "Ortega",
+    "dni": 18234567,
+    "country": "Chile",
+    "city": "Antofagasta",
+    "birthdate": "1979-12-30",
+    "availableToWork": false
+  },
+  {
+    "name": "Hernan",
+    "lastName": "Aguirre",
+    "dni": 19234567,
+    "country": "Uruguay",
+    "city": "Canelones",
+    "birthdate": "1994-03-21",
+    "availableToWork": true
+  },
+  {
+    "name": "Julia",
+    "lastName": "Castro",
+    "dni": 20234567,
+    "country": "Paraguay",
+    "city": "Lambaré",
+    "birthdate": "1997-08-12",
+    "availableToWork": false
+  },
+  {
+    "name": "Matias",
+    "lastName": "Vega",
+    "dni": 21234567,
+    "country": "Argentina",
+    "city": "Santa Fe",
+    "birthdate": "1990-06-03",
+    "availableToWork": true
+  },
+  {
+    "name": "Elena",
+    "lastName": "Paz",
+    "dni": 22234567,
+    "country": "Brasil",
+    "city": "Recife",
+    "birthdate": "1986-09-27",
+    "availableToWork": false
+  },
+  {
+    "name": "Luis",
+    "lastName": "Molina",
+    "dni": 23234567,
+    "country": "Chile",
+    "city": "Iquique",
+    "birthdate": "1984-11-22",
+    "availableToWork": true
+  },
+  {
+    "name": "Gabriela",
+    "lastName": "Herrera",
+    "dni": 24234567,
+    "country": "Uruguay",
+    "city": "Salto",
+    "birthdate": "1977-04-10",
+    "availableToWork": false
+  },
+  {
+    "name": "Fernando",
+    "lastName": "Moran",
+    "dni": 25234567,
+    "country": "Paraguay",
+    "city": "San Lorenzo",
+    "birthdate": "1983-12-07",
+    "availableToWork": true
+  },
+  {
+    "name": "Carolina",
+    "lastName": "Rivera",
+    "dni": 26234567,
+    "country": "Argentina",
+    "city": "Tucuman",
+    "birthdate": "1992-02-14",
+    "availableToWork": false
+  },
+  {
+    "name": "Gustavo",
+    "lastName": "Acosta",
+    "dni": 27234567,
+    "country": "Brasil",
+    "city": "Porto Alegre",
+    "birthdate": "1988-10-25",
+    "availableToWork": true
+  },
+  {
+    "name": "Paula",
+    "lastName": "Bustos",
+    "dni": 28234567,
+    "country": "Chile",
+    "city": "Arica",
+    "birthdate": "1979-05-18",
+    "availableToWork": false
+  },
+  {
+    "name": "Mauricio",
+    "lastName": "Alvarez",
+    "dni": 29234567,
+    "country": "Uruguay",
+    "city": "Maldonado",
+    "birthdate": "1986-01-29",
+    "availableToWork": true
+  },
+  {
+    "name": "Daniela",
+    "lastName": "Campos",
+    "dni": 30234567,
+    "country": "Paraguay",
+    "city": "Luque",
+    "birthdate": "1991-09-11",
+    "availableToWork": false
+  }
+]
