@@ -13,7 +13,9 @@ import {
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('publication')
 @Controller('publication')
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
@@ -24,6 +26,10 @@ export class PublicationController {
   }
 
   @Get()
+  @ApiQuery({ name: 'category', required: false })
+  @ApiQuery({ name: 'city', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
   findPrublications(
     @Query('category') category?: string,
     @Query('city') city?: string,

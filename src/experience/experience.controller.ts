@@ -1,6 +1,8 @@
 import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 import { ExperienceService } from './experience.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('experience')
 @Controller('experience')
 export class ExperienceController {
   constructor(private experienceService: ExperienceService) {}
