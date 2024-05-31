@@ -8,7 +8,7 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { User } from 'src/database/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Feedback, Profesion,User])],
+  imports: [TypeOrmModule.forFeature([Feedback, Profesion, User])],
   controllers: [FeedbackController],
   providers: [FeedbackService, FeedbackRepository],
 })
