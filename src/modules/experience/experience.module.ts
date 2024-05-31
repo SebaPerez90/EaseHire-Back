@@ -4,11 +4,11 @@ import { ExperienceService } from './experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/database/entities/user.entity';
-import { UserRepository } from 'src/users/users.repository';
-import { AuthRepository } from 'src/auth/auth.repository';
+import { UserRepository } from 'src/modules/users/users.repository';
+import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { Profesion } from 'src/database/entities/profesion.entity';
-import { ProfesionsRepository } from 'src/profesions/profesions.repository';
+import { ProfesionsRepository } from 'src/modules/profesions/profesions.repository';
 
 @Module({
   imports: [

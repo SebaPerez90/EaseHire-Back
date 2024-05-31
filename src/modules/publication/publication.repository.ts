@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
+import { UpdateProfesionDto } from 'src/modules/profesions/dto/update-profesion.dto';
 import { BadRequestException } from '@nestjs/common';
 import * as moment from 'moment';
 

@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { ProfesionsModule } from './profesions/profesions.module';
-import { PublicationModule } from './publication/publication.module';
+import { UsersModule } from './modules/users/users.module';
+import { ProfesionsModule } from './modules/profesions/profesions.module';
+import { PublicationModule } from './modules/publication/publication.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
-import { ExperienceModule } from './experience/experience.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ExperienceModule } from './modules/experience/experience.module';
 import typeorm from './database/config/typeorm';
 
 @Module({

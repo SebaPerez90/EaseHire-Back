@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Experience } from 'src/database/entities/experience.entity';
 import { Repository } from 'typeorm';
-import * as data from '../utils/mock-experiences.json';
-import { UserRepository } from 'src/users/users.repository';
-import { ProfesionsRepository } from 'src/profesions/profesions.repository';
+import * as data from '../../utils/mock-experiences.json';
+import { UserRepository } from 'src/modules/users/users.repository';
+import { ProfesionsRepository } from 'src/modules/profesions/profesions.repository';
 
 @Injectable()
 export class ExperienceService {

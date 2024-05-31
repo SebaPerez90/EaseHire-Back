@@ -7,8 +7,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
-import * as data from '../utils/mock-users.json';
-import { AuthRepository } from 'src/auth/auth.repository';
+import * as data from '../../utils/mock-users.json';
+import { AuthRepository } from 'src/modules/auth/auth.repository';
 
 @Injectable()
 export class UserRepository {
