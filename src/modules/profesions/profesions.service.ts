@@ -2,29 +2,28 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import { ProfesionsRepository } from './profesions.repository';
-import { UserRepository } from 'src/users/users.repository';
+import { UserRepository } from 'src/modules/users/users.repository';
+import { ExperienceService } from '../experience/experience.service';
 
 @Injectable()
 export class ProfesionsService implements OnModuleInit {
   constructor(
     private readonly profesionsRepository: ProfesionsRepository,
     private userRepository: UserRepository,
+    private experienceService: ExperienceService,
   ) {}
 
   async onModuleInit() {
     await this.userRepository.seederUser();
     await this.profesionsRepository.seederProfesions();
+    await this.experienceService.seedExperiences();
   }
   create(createProfesionDto: CreateProfesionDto) {
     return this.profesionsRepository.create(createProfesionDto);
   }
 
-  findAll() {
-    return this.profesionsRepository.findAll;
-  }
-
-  findAllProfesions(category: string) {
-    return this.profesionsRepository.findAllProfesions(category);
+  findProfesions(category: string, page: number, limit: number) {
+    return this.profesionsRepository.findProfesions(category, page, limit);
   }
 
   update(id: string, updateProfesionDto: UpdateProfesionDto) {
