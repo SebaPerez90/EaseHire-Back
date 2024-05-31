@@ -13,12 +13,17 @@ import {
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('profesions')
 @Controller('profesions')
 export class ProfesionsController {
   constructor(private readonly profesionsService: ProfesionsService) {}
 
   @Get()
+  @ApiQuery({ name: 'category', required: false })
+  @ApiQuery({ name: 'page', required: false })
+  @ApiQuery({ name: 'limit', required: false })
   findProfesions(
     @Query('category') category: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
