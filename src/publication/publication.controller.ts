@@ -18,27 +18,31 @@ import { UpdatePublicationDto } from './dto/update-publication.dto';
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
 
-  
   @Get()
   findAll() {
     return this.publicationService.findAll();
   }
-  
+
   @Get()
-  findPrublications( 
+  findPrublications(
     @Query('category') category?: string,
     @Query('city') city?: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page?: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit?: number,
   ) {
-    return this.publicationService.findPrublications(category, city, page, limit);
+    return this.publicationService.findPrublications(
+      category,
+      city,
+      page,
+      limit,
+    );
   }
-  
+
   @Post()
   create(@Body() createPublicationDto: CreatePublicationDto) {
     return this.publicationService.create(createPublicationDto);
   }
-  
+
   @Patch(':id')
   update(
     @Param('id') id: string,

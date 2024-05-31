@@ -39,21 +39,22 @@ export class ProfesionsRepository {
     await this.profesionsRepository.update(id, UpdateUserDto);
     const updateProfesions = await this.profesionsRepository.findOneBy({ id });
     return updateProfesions;
-  } 
-
+  }
 
   async findProfesions(category: string, page: number, limit: number) {
-
     const skip = (page - 1) * limit;
     const ProfesionsFind = await this.profesionsRepository.find({
       where: { category: category },
       take: limit,
       skip: skip,
       relations: { user: true },
-    })
+    });
 
-    if (ProfesionsFind.length == 0) throw new BadRequestException(`No found professions with category ${category}`);
-  
+    if (ProfesionsFind.length == 0)
+      throw new BadRequestException(
+        `No found professions with category ${category}`,
+      );
+
     return ProfesionsFind;
   }
 }

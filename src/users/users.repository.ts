@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -42,10 +46,9 @@ export class UserRepository {
     return users;
   }
 
-  async findUsers( category: string, city: string, page: number, limit: number) {
+  async findUsers(category: string, city: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
 
-    
     const where: any = {};
 
     if (category && city) {
@@ -58,13 +61,14 @@ export class UserRepository {
     }
 
     const usersFind = await this.usersRepository.find({
-      relations: { profesions : true },
+      relations: { profesions: true },
       where,
       take: limit,
-      skip: skip
-    })
-    if (usersFind.length == 0) throw new BadRequestException(`No users found with the provided filters`);
-    
+      skip: skip,
+    });
+    if (usersFind.length == 0)
+      throw new BadRequestException(`No users found with the provided filters`);
+
     return usersFind;
   }
 

@@ -19,20 +19,18 @@ export class ProfesionsController {
   constructor(private readonly profesionsService: ProfesionsService) {}
 
   @Get()
-  findProfesions( 
+  findProfesions(
     @Query('category') category: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
+    @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
   ) {
     return this.profesionsService.findProfesions(category, page, limit);
   }
-
 
   @Post()
   create(@Body() createProfesionDto: CreateProfesionDto) {
     return this.profesionsService.create(createProfesionDto);
   }
-
 
   @Patch(':id')
   update(

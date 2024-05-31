@@ -36,8 +36,8 @@ export class Publicaction {
   time: string;
 
   @Column({ nullable: true })
-  timelapse: string
-  
+  timelapse: string;
+
   @ManyToOne(() => User, (user) => user.publicactions)
   @JoinColumn({ name: 'user_ID' })
   user: User;
