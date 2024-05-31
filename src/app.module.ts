@@ -10,7 +10,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ExperienceModule } from './modules/experience/experience.module';
 import { EducationModule } from './modules/education/education.module';
 import typeorm from './database/config/typeorm';
-import { FeedbackModule } from './feedback/feedback.module';
+import { FeedbackModule } from './modules/feedback/feedback.module';
 
 @Module({
   imports: [
