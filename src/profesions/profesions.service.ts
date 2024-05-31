@@ -16,6 +16,7 @@ export class ProfesionsService implements OnModuleInit {
   async onModuleInit() {
     await this.userRepository.seederUser();
     await this.profesionsRepository.seederProfesions();
+    await this.experienceService.seedExperiences();
   }
   create(createProfesionDto: CreateProfesionDto) {
     return this.profesionsRepository.create(createProfesionDto);
