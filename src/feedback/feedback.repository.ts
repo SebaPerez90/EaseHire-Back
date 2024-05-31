@@ -25,13 +25,12 @@ export class FeedbackRepository {
     feedbackcreate.description = description;
     feedbackcreate.profesion = profesion;
     await this.feedbackRepository.save(feedbackcreate);
-    const findprofesion = await this.profesionRepository.findOneBy(
-      feedbackcreate.profesion,
-    );
-    console.log(findprofesion);
-
-    console.log(findprofesion.user);
-
+    
+    
+    const user = await this.userRepository.findOne({ where: { profesions:feedbackcreate.profesion } })
+    
+    console.log(user);
+    
     return feedbackcreate;
   }
   async getAll() {
