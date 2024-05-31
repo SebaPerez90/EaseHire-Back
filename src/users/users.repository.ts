@@ -18,32 +18,41 @@ export class UserRepository {
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
+
   async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
     await this.usersRepository.update(id, UpdateUserDto);
     const updateUser = await this.usersRepository.findOneBy({ id });
     if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
     return updateUser;
   }
+
   async findOne(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
+
   async createUsers(createUserDto) {
     const user = await this.usersRepository.save(createUserDto);
     return user;
   }
 
-  
+  async findAll() {
+    const users = await this.usersRepository.find();
+    return users;
+  }
+
   async findUsers( category: string, city: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
 
+    
     const where: any = {};
+
     if (category && city) {
-      where.professions = { category: category };
+      where.profesions = { category: category };
       where.city = city;
     } else if (category) {
-      where.professions = { category: category };
+      where.profesions = { category: category };
     } else if (city) {
       where.city = city;
     }
@@ -55,8 +64,8 @@ export class UserRepository {
       skip: skip
     })
     if (usersFind.length == 0) throw new BadRequestException(`No users found with the provided filters`);
+    
     return usersFind;
-
   }
 
   async seederUser() {

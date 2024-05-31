@@ -5,8 +5,16 @@ import { ProfesionsRepository } from './profesions.repository';
 import { UserRepository } from 'src/users/users.repository';
 
 @Injectable()
-export class ProfesionsService {
-  constructor(private readonly profesionsRepository: ProfesionsRepository) {}
+export class ProfesionsService implements OnModuleInit {
+  constructor(
+    private readonly profesionsRepository: ProfesionsRepository,
+    private userRepository: UserRepository,
+  ) {}
+
+  async onModuleInit() {
+    await this.userRepository.seederUser();
+    await this.profesionsRepository.seederProfesions();
+  }
   create(createProfesionDto: CreateProfesionDto) {
     return this.profesionsRepository.create(createProfesionDto);
   }
@@ -15,11 +23,11 @@ export class ProfesionsService {
     return this.profesionsRepository.findProfesions(category, page, limit);
   }
 
-/*   update(id: string, updateProfesionDto: UpdateProfesionDto) {
+  update(id: string, updateProfesionDto: UpdateProfesionDto) {
     return this.profesionsRepository.update(id, updateProfesionDto);
   }
 
   remove(id: string) {
     return this.profesionsRepository.remove(id);
-  } */
+  }
 }

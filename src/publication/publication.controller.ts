@@ -17,17 +17,13 @@ import { UpdatePublicationDto } from './dto/update-publication.dto';
 @Controller('publication')
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
-/* 
-  @Post()
-  create(@Body() createPublicationDto: CreatePublicationDto) {
-    return this.publicationService.create(createPublicationDto);
-  }
 
+  
   @Get()
   findAll() {
     return this.publicationService.findAll();
   }
- */
+  
   @Get()
   findPrublications( 
     @Query('category') category?: string,
@@ -37,8 +33,13 @@ export class PublicationController {
   ) {
     return this.publicationService.findPrublications(category, city, page, limit);
   }
-
-/*   @Patch(':id')
+  
+  @Post()
+  create(@Body() createPublicationDto: CreatePublicationDto) {
+    return this.publicationService.create(createPublicationDto);
+  }
+  
+  @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updatePublicationDto: UpdatePublicationDto,
@@ -49,5 +50,5 @@ export class PublicationController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.publicationService.remove(id);
-  } */
+  }
 }

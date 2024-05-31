@@ -16,7 +16,7 @@ export class Profesion {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   category: string;
 
   @OneToMany(() => Experience, (experience) => experience.profesion)

@@ -18,22 +18,23 @@ import { UpdateProfesionDto } from './dto/update-profesion.dto';
 export class ProfesionsController {
   constructor(private readonly profesionsService: ProfesionsService) {}
 
-/*   @Post()
-  create(@Body() createProfesionDto: CreateProfesionDto) {
-    return this.profesionsService.create(createProfesionDto);
-  }
- */
   @Get()
   findProfesions( 
     @Query('category') category: string,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number
   ) {
-    
     return this.profesionsService.findProfesions(category, page, limit);
   }
 
-/*   @Patch(':id')
+
+  @Post()
+  create(@Body() createProfesionDto: CreateProfesionDto) {
+    return this.profesionsService.create(createProfesionDto);
+  }
+
+
+  @Patch(':id')
   update(
     @Param('id') id: string,
     @Body() updateProfesionDto: UpdateProfesionDto,
@@ -44,5 +45,5 @@ export class ProfesionsController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.profesionsService.remove(id);
-  } */
+  }
 }

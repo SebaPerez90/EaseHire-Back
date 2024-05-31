@@ -3,13 +3,27 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { Repository } from 'typeorm';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
+import * as data from '../utils/mock-professions.json';
+import { UserRepository } from 'src/users/users.repository';
 import { BadRequestException } from '@nestjs/common';
 
 export class ProfesionsRepository {
   constructor(
     @InjectRepository(Profesion)
     private profesionsRepository: Repository<Profesion>,
+    private userRepository: UserRepository,
   ) {}
+
+  async seederProfesions() {
+    const users = await this.userRepository.findAll();
+    data?.map(async (element) => {
+      const profession = new Profesion();
+      profession.category = element.category;
+      profession.user = users[Math.round(Math.random() * 30)];
+
+      await this.profesionsRepository.save(profession);
+    });
+  }
 
   async create(createProfesionDto: CreateProfesionDto) {
     return await this.profesionsRepository.save(createProfesionDto);
@@ -37,7 +51,6 @@ export class ProfesionsRepository {
       skip: skip,
       relations: { user: true },
     })
-    console.log(ProfesionsFind);
 
     if (ProfesionsFind.length == 0) throw new BadRequestException(`No found professions with category ${category}`);
   

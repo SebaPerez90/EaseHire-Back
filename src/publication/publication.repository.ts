@@ -31,16 +31,14 @@ export class PublicationsRepository {
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
   }
+
   async findAll() {
     return await this.publicationsRepository.find();
   } 
 
-
   async findPrublications(category: string, city: string, page: number, limit: number) {
-
     const skip = (page - 1) * limit;
 
-    
     const where: any = {};
     if (category && city) {
       where.profesion = { category: category };
@@ -64,15 +62,14 @@ export class PublicationsRepository {
     if (publicationsFind.length == 0) throw new BadRequestException(`No publications found with the provided filters`);
   
     return publicationsFind;
-
   }
 
 
 
-/*   async update(id: string, updatePublication: UpdateProfesionDto) {
+  async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
   }
   async remove(id: string) {
     return await this.publicationsRepository.delete(id);
-  } */
+  }
 }

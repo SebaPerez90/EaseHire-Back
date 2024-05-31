@@ -11,6 +11,10 @@ export class UsersService {
     return this.usersRepository.findUsers(category, city, page, limit);
   }
 
+  findAll() {
+    return this.usersRepository.findAll();
+  }
+
   create(createUserDto: CreateUserDto) {
     return this.usersRepository.createUsers(createUserDto);
   }

@@ -18,7 +18,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-
   @Get()
   findUsers( 
     @Query('category') category?: string,
@@ -28,21 +27,22 @@ export class UsersController {
   ) {
     return this.usersService.findUsers(category, city, page, limit);
   }
-
-
-/*   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
-    return this.usersService.create(createUserDto);
-  }
-
+  
   @Get()
   findAll() {
     return this.usersService.findAll();
   }
 
+
+  
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
+  }
+
+  @Post()
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
 
   @Patch(':id')
@@ -53,5 +53,5 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
-  } */
+  }
 }
