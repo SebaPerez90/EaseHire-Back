@@ -4,6 +4,7 @@ import { Experience } from 'src/database/entities/experience.entity';
 import { Repository } from 'typeorm';
 import * as data from '../utils/mock-experiences.json';
 import { UserRepository } from 'src/users/users.repository';
+import { ProfesionsRepository } from 'src/profesions/profesions.repository';
 
 @Injectable()
 export class ExperienceService {
@@ -11,9 +12,13 @@ export class ExperienceService {
     @InjectRepository(Experience)
     private experienceRepository: Repository<Experience>,
     private userRepository: UserRepository,
+    private profesionRepository: ProfesionsRepository,
   ) {}
 
-  async seedExperiences(client) {
+  async seedExperiences() {
+    const users = await this.userRepository.findAll();
+    const professions = await this.profesionRepository.getAllProfessions();
+
     data?.map(async (element) => {
       const experience = new Experience();
       experience.imgUrl = element.imgUrl;
@@ -22,8 +27,8 @@ export class ExperienceService {
       experience.description = element.description;
       experience.startDate = element.startDate;
       experience.endDate = element.endDate;
-      //   experience.profesion = element.profesion;
-      experience.client = client;
+      experience.profesion = professions[Math.round(Math.random() * 16)];
+      experience.client = users[Math.round(Math.random() * 30)];
 
       await this.experienceRepository
         .createQueryBuilder()
