@@ -19,12 +19,8 @@ export class ProfesionsService implements OnModuleInit {
     return this.profesionsRepository.create(createProfesionDto);
   }
 
-  findAll() {
-    return this.profesionsRepository.findAll;
-  }
-
-  findAllProfesions(category: string) {
-    return this.profesionsRepository.findAllProfesions(category);
+  findProfesions(category: string, page: number, limit: number) {
+    return this.profesionsRepository.findProfesions(category, page, limit);
   }
 
   update(id: string, updateProfesionDto: UpdateProfesionDto) {

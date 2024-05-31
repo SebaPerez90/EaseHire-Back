@@ -6,12 +6,17 @@ import { UserRepository } from './users.repository';
 @Injectable()
 export class UsersService {
   constructor(private usersRepository: UserRepository) {}
-  create(createUserDto: CreateUserDto) {
-    return this.usersRepository.createUsers(createUserDto);
+
+  findUsers(category: string, city: string, page: number, limit: number) {
+    return this.usersRepository.findUsers(category, city, page, limit);
   }
 
   findAll() {
     return this.usersRepository.findAll();
+  }
+
+  create(createUserDto: CreateUserDto) {
+    return this.usersRepository.createUsers(createUserDto);
   }
 
   findOne(id: string) {
@@ -25,4 +30,4 @@ export class UsersService {
   remove(id: string) {
     return this.usersRepository.removeUsers(id);
   }
-}
+} 

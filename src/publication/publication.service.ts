@@ -6,18 +6,19 @@ import { PublicationsRepository } from './publication.repository';
 @Injectable()
 export class PublicationService {
   constructor(private readonly publicationRepository: PublicationsRepository) {}
-  create(createPublicationDto: CreatePublicationDto) {
-    return this.publicationRepository.create(createPublicationDto);
-  }
-
+  
   findAll() {
     return this.publicationRepository.findAll();
   }
-
-  findOne(id: string) {
-    return this.publicationRepository.findOne(id);
+  
+  findPrublications(category: string, city: string, page: number, limit: number) {
+    return this.publicationRepository.findPrublications( category, city, page, limit);
   }
-
+  
+  create(createPublicationDto: CreatePublicationDto) {
+    return this.publicationRepository.create(createPublicationDto);
+  }
+  
   update(id: string, updatePublicationDto: UpdatePublicationDto) {
     return this.publicationRepository.update(id, updatePublicationDto);
   }
