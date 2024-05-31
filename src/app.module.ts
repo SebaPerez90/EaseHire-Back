@@ -8,6 +8,9 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { ExperienceModule } from './modules/experience/experience.module';
+import { PostulationsModule } from './postulations/postulations.module';
+import { EducationModule } from './modules/education/education.module';
+import { FeedbackModule } from './modules/feedback/feedback.module';
 import typeorm from './database/config/typeorm';
 
 @Module({
@@ -26,6 +29,9 @@ import typeorm from './database/config/typeorm';
     PublicationModule,
     AuthModule,
     ExperienceModule,
+    PostulationsModule,
+    EducationModule,
+    FeedbackModule,
   ],
 
   controllers: [AppController],
