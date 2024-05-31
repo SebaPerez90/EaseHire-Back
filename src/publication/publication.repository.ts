@@ -34,6 +34,26 @@ export class PublicationsRepository {
   }
 
   async findAll() {
+    const publications = await this.publicationsRepository.find();
+
+    publications.forEach((publication) => {
+      const { date, time } = publication;
+      const datetime = `${date} ${time}`;
+      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow();
+      
+      const newPublication = new Publicaction();
+      newPublication.id = publication.id;
+      newPublication.title = publication.title;
+      newPublication.description = publication.description;
+      newPublication.profesion = publication.profesion;
+      newPublication.imgUrl = publication.imgUrl;
+      newPublication.date = publication.date;
+      newPublication.time = publication.time;
+      newPublication.timelapse = timelapsed;
+      this.publicationsRepository.save(newPublication);
+      console.log(timelapsed);
+    });
+
     return await this.publicationsRepository.find();
   }
 
