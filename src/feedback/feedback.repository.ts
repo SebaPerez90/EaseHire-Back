@@ -2,15 +2,23 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Repository } from 'typeorm';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
+import { Profesion } from 'src/database/entities/profesion.entity';
 
 export class FeedbackRepository {
   constructor(
     @InjectRepository(Feedback)
     private feedbackRepository: Repository<Feedback>,
+    @InjectRepository(Profesion)
+    private profesionRepository: Repository<Profesion>
   ) {}
   async create(feedback: CreateFeedbackDto) {
-    const feedbackcreate = await this.feedbackRepository.create(feedback);
-    
+    const {rate,description,profesionId} = feedback
+    const profesion = await this.profesionRepository.findOne({ where: { id: profesionId } })
+
+    const feedbackcreate = new Feedback()
+    feedbackcreate.rate = rate;
+    feedbackcreate.description = description;
+    feedbackcreate.profesion = profesion
     await this.feedbackRepository.save(feedbackcreate);
 
     return feedbackcreate;

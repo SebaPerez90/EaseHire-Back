@@ -10,6 +10,6 @@ import { ProfesionsRepository } from 'src/profesions/profesions.repository';
 @Module({
   imports: [TypeOrmModule.forFeature([Feedback, Profesion])],
   controllers: [FeedbackController],
-  providers: [FeedbackService, FeedbackRepository], 
+  providers: [FeedbackService, FeedbackRepository],
 })
 export class FeedbackModule {}
