@@ -1,0 +1,128 @@
+[
+    {
+      "title": "Ingeniería en Sistemas",
+      "educationalEntity": "Universidad Nacional",
+      "studiesState": ["FINISHED"],
+      "startDate": "2015-01-15",
+      "endDate": "2019-12-15"
+    },
+    {
+      "title": "Licenciatura en Administración",
+      "educationalEntity": "Universidad Central",
+      "studiesState": ["INPROGRESS"],
+      "startDate": "2021-03-01",
+      "endDate": "2024-11-30"
+    },
+    {
+      "title": "Diplomado en Marketing",
+      "educationalEntity": "Instituto de Marketing",
+      "studiesState": ["ABANDONED"],
+      "startDate": "2018-06-10",
+      "endDate": "2019-01-20"
+    },
+    {
+      "title": "Maestría en Finanzas",
+      "educationalEntity": "Escuela de Negocios",
+      "studiesState": ["FINISHED"],
+      "startDate": "2016-02-20",
+      "endDate": "2018-06-25"
+    },
+    {
+      "title": "Curso de Data Science",
+      "educationalEntity": "Academia Tech",
+      "studiesState": ["INPROGRESS"],
+      "startDate": "2023-01-10",
+      "endDate": "2023-12-20"
+    },
+    {
+      "title": "Licenciatura en Psicología",
+      "educationalEntity": "Universidad Metropolitana",
+      "studiesState": ["FINISHED"],
+      "startDate": "2012-05-05",
+      "endDate": "2016-11-10"
+    },
+    {
+      "title": "Diplomado en Recursos Humanos",
+      "educationalEntity": "Instituto Profesional",
+      "studiesState": ["FINISHED"],
+      "startDate": "2017-03-15",
+      "endDate": "2018-12-20"
+    },
+    {
+      "title": "Curso de Fotografía",
+      "educationalEntity": "Escuela de Artes",
+      "studiesState": ["ABANDONED"],
+      "startDate": "2020-09-10",
+      "endDate": "2021-02-15"
+    },
+    {
+      "title": "Ingeniería Civil",
+      "educationalEntity": "Politécnico Nacional",
+      "studiesState": ["FINISHED"],
+      "startDate": "2010-01-20",
+      "endDate": "2015-06-30"
+    },
+    {
+      "title": "Curso de Cocina Internacional",
+      "educationalEntity": "Escuela Culinaria",
+      "studiesState": ["INPROGRESS"],
+      "startDate": "2022-05-15",
+      "endDate": "2023-11-10"
+    },
+    {
+      "title": "Maestría en Derecho",
+      "educationalEntity": "Universidad de Derecho",
+      "studiesState": ["FINISHED"],
+      "startDate": "2014-04-10",
+      "endDate": "2016-12-15"
+    },
+    {
+      "title": "Curso de Programación Web",
+      "educationalEntity": "Instituto Tecnológico",
+      "studiesState": ["FINISHED"],
+      "startDate": "2019-03-10",
+      "endDate": "2019-08-25"
+    },
+    {
+      "title": "Licenciatura en Arquitectura",
+      "educationalEntity": "Universidad del Arte",
+      "studiesState": ["FINISHED"],
+      "startDate": "2011-02-15",
+      "endDate": "2015-11-30"
+    },
+    {
+      "title": "Diplomado en Negocios Internacionales",
+      "educationalEntity": "Escuela de Comercio",
+      "studiesState": ["INPROGRESS"],
+      "startDate": "2022-01-20",
+      "endDate": "2023-10-10"
+    },
+    {
+      "title": "Curso de Diseño Gráfico",
+      "educationalEntity": "Academia Creativa",
+      "studiesState": ["ABANDONED"],
+      "startDate": "2021-06-05",
+      "endDate": "2022-03-15"
+    },
+    {
+      "title": "Ingeniería Mecánica",
+      "educationalEntity": "Universidad Técnica",
+      "studiesState": ["FINISHED"],
+      "startDate": "2009-09-15",
+      "endDate": "2014-07-10"
+    },
+    {
+      "title": "Licenciatura en Biología",
+      "educationalEntity": "Universidad de Ciencias",
+      "studiesState": ["FINISHED"],
+      "startDate": "2013-01-20",
+      "endDate": "2017-12-10"
+    },
+    {
+      "title": "Curso de Finanzas Personales",
+      "educationalEntity": "Escuela de Finanzas",
+      "studiesState": ["INPROGRESS"],
+      "startDate": "2023-03-15",
+      "endDate": "2023-11-15"
+    }
+  ]
