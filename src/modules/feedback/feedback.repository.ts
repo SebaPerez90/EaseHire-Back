@@ -30,8 +30,6 @@ export class FeedbackRepository {
       where: { profesions: feedbackcreate.profesion },
     });
 
-    console.log(user);
-
     return feedbackcreate;
   }
   async getAll() {
