@@ -22,19 +22,19 @@ export class Experience {
   })
   imgUrl: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   company: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 30, nullable: false })
   title: string;
 
   @Column({ type: 'varchar', length: 200, nullable: false })
   description: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   startDate: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   endDate: string;
 
   @ManyToOne(() => Profesion, (profesion) => profesion.experiences)
@@ -42,6 +42,6 @@ export class Experience {
   profesion: Profesion;
 
   @OneToOne(() => User, (user) => user)
-  @JoinColumn({ name: 'user_ID' })
+  @JoinColumn({ name: 'client_ID' })
   client: User;
 }

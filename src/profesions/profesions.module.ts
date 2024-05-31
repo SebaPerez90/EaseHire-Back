@@ -8,15 +8,20 @@ import { User } from 'src/database/entities/user.entity';
 import { UserRepository } from 'src/users/users.repository';
 import { AuthRepository } from 'src/auth/auth.repository';
 import { Credential } from 'src/database/entities/credentials.entity';
+import { ExperienceService } from 'src/experience/experience.service';
+import { Experience } from 'src/database/entities/experience.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Profesion, User, Credential])],
+  imports: [
+    TypeOrmModule.forFeature([Profesion, User, Credential, Experience]),
+  ],
   controllers: [ProfesionsController],
   providers: [
     ProfesionsService,
     ProfesionsRepository,
     UserRepository,
     AuthRepository,
+    ExperienceService,
   ],
 })
 export class ProfesionsModule {}

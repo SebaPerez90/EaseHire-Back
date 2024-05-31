@@ -7,6 +7,7 @@ import { PublicationModule } from './publication/publication.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { ExperienceModule } from './experience/experience.module';
 import typeorm from './database/config/typeorm';
 
 @Module({
@@ -24,6 +25,7 @@ import typeorm from './database/config/typeorm';
     ProfesionsModule,
     PublicationModule,
     AuthModule,
+    ExperienceModule,
   ],
 
   controllers: [AppController],
