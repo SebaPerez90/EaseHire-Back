@@ -2,9 +2,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
 import { BadRequestException, NotFoundException } from '@nestjs/common';
 import * as moment from 'moment';
+import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 
 export class PublicationsRepository {
   constructor(
@@ -24,45 +24,19 @@ export class PublicationsRepository {
       date: formatDate,
       time: formatTime,
     });
-
-    const timelapsed = moment(date).fromNow();
+  
+    const timelapsed = moment(newPublication.date).fromNow();
     newPublication.timelapse = timelapsed;
-    console.log(`el tiempo es ${timelapsed}`);
 
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
   }
 
   async findAll() {
-    const publications = await this.publicationsRepository.find();
-
-    publications.forEach((publication) => {
-      const { date, time } = publication;
-      const datetime = `${date} ${time}`;
-      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow();
-      
-      const newPublication = new Publicaction();
-      newPublication.id = publication.id;
-      newPublication.title = publication.title;
-      newPublication.description = publication.description;
-      newPublication.profesion = publication.profesion;
-      newPublication.imgUrl = publication.imgUrl;
-      newPublication.date = publication.date;
-      newPublication.time = publication.time;
-      newPublication.timelapse = timelapsed;
-      this.publicationsRepository.save(newPublication);
-      console.log(timelapsed);
-    });
-
     return await this.publicationsRepository.find();
-  }
+  } 
 
-  async findPrublications(
-    category: string,
-    city: string,
-    page: number,
-    limit: number,
-  ) {
+  async findPrublications(category: string, city: string, page: number, limit: number) {
     const skip = (page - 1) * limit;
 
     const where: any = {};
@@ -74,24 +48,23 @@ export class PublicationsRepository {
     } else if (city) {
       where.user = { city: city };
     }
-
+    
     const publicationsFind = await this.publicationsRepository.find({
       relations: {
         profesion: true,
-        user: true,
+        user: true
       },
       where,
       take: limit,
       skip: skip,
-    });
+    })
 
-    if (publicationsFind.length == 0)
-      throw new BadRequestException(
-        `No publications found with the provided filters`,
-      );
-
+    if (publicationsFind.length == 0) throw new BadRequestException(`No publications found with the provided filters`);
+  
     return publicationsFind;
   }
+
+
 
   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);

@@ -19,10 +19,6 @@ export class Publicaction {
   @Column({ type: 'varchar', length: 200, nullable: false })
   description: string;
 
-  @ManyToOne(() => Profesion, (profesion) => profesion)
-  @JoinColumn({ name: 'profesion_ID' })
-  profesion: Profesion;
-
   @Column({
     type: 'text',
     nullable: true,
@@ -36,8 +32,12 @@ export class Publicaction {
   time: string;
 
   @Column({ nullable: true })
-  timelapse: string
-  
+  timelapse: string;
+
+  @ManyToOne(() => Profesion, (profesion) => profesion)
+  @JoinColumn({ name: 'profesion_ID' })
+  profesion: Profesion;
+
   @ManyToOne(() => User, (user) => user.publicactions)
   @JoinColumn({ name: 'user_ID' })
   user: User;

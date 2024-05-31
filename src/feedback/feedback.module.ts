@@ -5,7 +5,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { FeedbackRepository } from './feedback.repository';
 import { Profesion } from 'src/database/entities/profesion.entity';
-import { ProfesionsRepository } from 'src/profesions/profesions.repository';
 import { User } from 'src/database/entities/user.entity';
 
 @Module({
