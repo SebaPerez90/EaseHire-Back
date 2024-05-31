@@ -47,7 +47,7 @@ export class ProfesionsRepository {
       where: { category: category },
       take: limit,
       skip: skip,
-      relations: { user: true },
+      relations: { user: true, experiences: true },
     });
 
     if (ProfesionsFind.length == 0)
@@ -56,5 +56,9 @@ export class ProfesionsRepository {
       );
 
     return ProfesionsFind;
+  }
+
+  async getAllProfessions() {
+    return await this.profesionsRepository.find();
   }
 }
