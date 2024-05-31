@@ -9,8 +9,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { ExperienceModule } from './modules/experience/experience.module';
 import { EducationModule } from './modules/education/education.module';
-import { FeedbackModule } from './modules/feedback/feedback.module';
 import typeorm from './database/config/typeorm';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
@@ -26,6 +26,7 @@ import typeorm from './database/config/typeorm';
     UsersModule,
     ProfesionsModule,
     PublicationModule,
+    FeedbackModule,
     AuthModule,
     ExperienceModule,
     EducationModule,
