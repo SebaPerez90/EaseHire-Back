@@ -24,9 +24,10 @@ export class PublicationsRepository {
       date: formatDate,
       time: formatTime,
     });
-  
-    const timelapsed = moment(newPublication.date).fromNow();
+
+    const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
+    console.log(`el tiempo es ${timelapsed}`);
 
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
@@ -34,9 +35,14 @@ export class PublicationsRepository {
 
   async findAll() {
     return await this.publicationsRepository.find();
-  } 
+  }
 
-  async findPrublications(category: string, city: string, page: number, limit: number) {
+  async findPrublications(
+    category: string,
+    city: string,
+    page: number,
+    limit: number,
+  ) {
     const skip = (page - 1) * limit;
 
     const where: any = {};
@@ -48,23 +54,24 @@ export class PublicationsRepository {
     } else if (city) {
       where.user = { city: city };
     }
-    
+
     const publicationsFind = await this.publicationsRepository.find({
       relations: {
         profesion: true,
-        user: true
+        user: true,
       },
       where,
       take: limit,
       skip: skip,
-    })
+    });
 
-    if (publicationsFind.length == 0) throw new BadRequestException(`No publications found with the provided filters`);
-  
+    if (publicationsFind.length == 0)
+      throw new BadRequestException(
+        `No publications found with the provided filters`,
+      );
+
     return publicationsFind;
   }
-
-
 
   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
