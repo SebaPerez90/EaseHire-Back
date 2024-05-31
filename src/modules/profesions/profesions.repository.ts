@@ -3,8 +3,8 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { Repository } from 'typeorm';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
-import * as data from '../utils/mock-professions.json';
-import { UserRepository } from 'src/users/users.repository';
+import * as data from '../../utils/mock-professions.json';
+import { UserRepository } from 'src/modules/users/users.repository';
 import { BadRequestException } from '@nestjs/common';
 
 export class ProfesionsRepository {

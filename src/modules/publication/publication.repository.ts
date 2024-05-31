@@ -2,9 +2,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { UpdateProfesionDto } from 'src/profesions/dto/update-profesion.dto';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 import * as moment from 'moment';
+import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 
 export class PublicationsRepository {
   constructor(
@@ -25,7 +25,7 @@ export class PublicationsRepository {
       time: formatTime,
     });
 
-    const timelapsed = moment(newPublication.date).fromNow();
+    const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
 
     const publications = await this.publicationsRepository.save(newPublication);
@@ -33,9 +33,28 @@ export class PublicationsRepository {
   }
 
   async findAll() {
+    const publications = await this.publicationsRepository.find();
+
+    publications.forEach((publication) => {
+      const { date, time } = publication;
+      const datetime = `${date} ${time}`;
+      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow(true);
+
+      const newPublication = new Publicaction();
+      newPublication.id = publication.id;
+      newPublication.title = publication.title;
+      newPublication.description = publication.description;
+      newPublication.profesion = publication.profesion;
+      newPublication.imgUrl = publication.imgUrl;
+      newPublication.date = publication.date;
+      newPublication.time = publication.time;
+      newPublication.timelapse = timelapsed;
+      this.publicationsRepository.save(newPublication);
+      console.log(timelapsed);
+    });
+
     return await this.publicationsRepository.find();
   }
-
   async findPrublications(
     category: string,
     city: string,

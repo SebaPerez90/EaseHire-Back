@@ -2,8 +2,8 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import { ProfesionsRepository } from './profesions.repository';
-import { UserRepository } from 'src/users/users.repository';
-import { ExperienceService } from 'src/experience/experience.service';
+import { UserRepository } from 'src/modules/users/users.repository';
+import { ExperienceService } from '../experience/experience.service';
 
 @Injectable()
 export class ProfesionsService implements OnModuleInit {
