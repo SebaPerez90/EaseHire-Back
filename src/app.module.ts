@@ -8,6 +8,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import typeorm from './database/config/typeorm';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import typeorm from './database/config/typeorm';
     UsersModule,
     ProfesionsModule,
     PublicationModule,
+    FeedbackModule,
     AuthModule,
   ],
 
