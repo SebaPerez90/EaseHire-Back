@@ -1,37 +1,28 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Experience } from 'src/database/entities/experience.entity';
 import * as data from '../../utils/mock-feedbacks.json';
 
 @Injectable()
-export class FeedbackService implements OnModuleInit {
+export class FeedbackService {
   constructor(
     @InjectRepository(Feedback)
     private feedbackRepository: Repository<Feedback>,
-    @InjectRepository(Experience)
-    private experienceRepository: Repository<Experience>,
   ) {}
 
-  async onModuleInit() {
-    await this.seederFeedbacks();
-  }
   async seederFeedbacks() {
-    const experiences = await this.experienceRepository.find();
-    data?.map(async (element, index) => {
+    data?.map(async (element) => {
       const feedback = new Feedback();
       feedback.rate = element.rate;
       feedback.description = element.description;
-      feedback.experience = experiences[index];
 
-      await this.feedbackRepository
-        .createQueryBuilder()
-        .insert()
-        .into(Feedback)
-        .values(feedback)
-        .execute();
+      await this.feedbackRepository.save(feedback);
     });
+  }
+
+  async getAllFeedbacks() {
+    return await this.feedbackRepository.find();
   }
 }
 // constructor(private feedbackRepository: FeedbackRepository) {}
