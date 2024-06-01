@@ -59,6 +59,6 @@ export class ProfesionsRepository {
   }
 
   async getAllProfessions() {
-    return await this.profesionsRepository.find();
+    return await this.profesionsRepository.find({ relations: { user: true } });
   }
 }
