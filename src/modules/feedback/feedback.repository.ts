@@ -4,7 +4,9 @@ import { Repository } from 'typeorm';
 import { CreateFeedbackDto } from './dto/create-feedback.dto';
 import { Profesion } from 'src/database/entities/profesion.entity';
 import { User } from 'src/database/entities/user.entity';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class FeedbackRepository {
   constructor(
     @InjectRepository(Feedback)
