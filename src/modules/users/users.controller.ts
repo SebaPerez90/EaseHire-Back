@@ -36,7 +36,6 @@ export class UsersController {
 
   @Get('test')
   filterNewMembers() {
-    // return this.usersService.findAll();
     return this.usersService.filterNewMembers();
   }
 
