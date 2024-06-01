@@ -34,10 +34,11 @@ export class UsersController {
     return this.usersService.findUsers(category, city, page, limit);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
+  @Get('test')
+  filterNewMembers() {
+    // return this.usersService.findAll();
+    return this.usersService.filterNewMembers();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

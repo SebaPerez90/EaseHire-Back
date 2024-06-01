@@ -44,7 +44,9 @@ export class UserRepository {
   }
 
   async findAll() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      relations: { experiences: true },
+    });
     return users;
   }
 
@@ -74,6 +76,20 @@ export class UserRepository {
     return usersFind;
   }
 
+  async filterNewMembers() {
+    const users = await this.usersRepository.find({
+      relations: { experiences: true },
+    });
+
+    for (let i = 0; i < users.length; i++) {
+      if (!(users[i].experiences.length === 0)) {
+        await this.usersRepository.update(
+          { id: users[i].id },
+          { newMember: false },
+        );
+      }
+    }
+  }
   async seederUser() {
     const promises = data?.map(async (element) => {
       const user = new User();

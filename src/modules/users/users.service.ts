@@ -30,4 +30,8 @@ export class UsersService {
   remove(id: string) {
     return this.usersRepository.removeUsers(id);
   }
+
+  filterNewMembers() {
+    return this.usersRepository.filterNewMembers();
+  }
 }
