@@ -2,15 +2,52 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
-import * as moment from 'moment';
+import { BadRequestException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
+import { UserRepository } from '../users/users.repository';
+import * as moment from 'moment';
+import * as data from '../../utils/mock-publications.json';
+import { ProfesionsRepository } from '../profesions/profesions.repository';
 
-export class PublicationsRepository {
+export class PublicationsRepository implements OnModuleInit {
   constructor(
     @InjectRepository(Publicaction)
     private publicationsRepository: Repository<Publicaction>,
+    private userRepository: UserRepository,
+    private profesionsRepository: ProfesionsRepository,
   ) {}
+
+  onModuleInit() {
+    this.seederPublicactions();
+  }
+  async seederPublicactions() {
+    const users = await this.userRepository.findAll();
+    const professions = await this.profesionsRepository.getAllProfessions();
+
+    data?.map(async (element) => {
+      const date = new Date();
+      const timelapsed = moment(date).fromNow();
+      const newPublication = new Publicaction();
+      const formatDate = date.toLocaleDateString();
+      const formatTime = date.toLocaleTimeString();
+
+      newPublication.title = element.title;
+      newPublication.description = element.description;
+      newPublication.imgUrl = element.imgUrl;
+      newPublication.date = formatDate;
+      newPublication.time = formatTime;
+      newPublication.timelapse = timelapsed;
+      newPublication.profesion = professions[Math.round(Math.random() * 16)];
+      newPublication.user = users[Math.round(Math.random() * 30)];
+
+      await this.publicationsRepository
+        .createQueryBuilder()
+        .insert()
+        .into(Publicaction)
+        .values(newPublication)
+        .execute();
+    });
+  }
 
   async create(createPublication: CreatePublicationDto) {
     const date = new Date();
