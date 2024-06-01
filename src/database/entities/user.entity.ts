@@ -45,6 +45,9 @@ export class User {
   @Column({ type: 'integer', nullable: true, default: 10 })
   professionalRate: number;
 
+  @Column({ type: 'boolean', nullable: true, default: true })
+  newMember: boolean;
+
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
   credential: Credential;
