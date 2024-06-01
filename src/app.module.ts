@@ -8,7 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { ExperienceModule } from './modules/experience/experience.module';
-import { EducationModule } from './modules/education/education.module';
 import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 
@@ -29,7 +28,6 @@ import { FeedbackModule } from './modules/feedback/feedback.module';
     FeedbackModule,
     AuthModule,
     ExperienceModule,
-    EducationModule,
     FeedbackModule,
   ],
 

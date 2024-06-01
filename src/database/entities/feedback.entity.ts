@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Profesion } from './profesion.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'feedbacks' })
 export class Feedback {
@@ -14,4 +15,8 @@ export class Feedback {
 
   @ManyToOne(() => Profesion, (profesion) => profesion.feedbacks)
   profesion: Profesion;
+
+  @ManyToOne(() => User, (user) => user.feedbacks)
+  @JoinColumn({name:'user_id'})
+  user: User;
 }
