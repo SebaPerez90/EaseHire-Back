@@ -2,10 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
+import { ExperienceService } from '../experience/experience.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private usersRepository: UserRepository) {}
+  constructor(
+    private usersRepository: UserRepository,
+    private experieceService: ExperienceService,
+  ) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {
     return this.usersRepository.findUsers(category, city, page, limit);
@@ -33,5 +37,10 @@ export class UsersService {
 
   filterNewMembers() {
     return this.usersRepository.filterNewMembers();
+  }
+
+  async calculateProfesionalRate() {
+    const exps = await this.experieceService.getExperiences();
+    return exps;
   }
 }

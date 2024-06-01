@@ -14,6 +14,7 @@ export class FeedbackRepository {
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
+
   async create(feedback: CreateFeedbackDto) {
     const { rate, description, profesionId } = feedback;
     // const profesion = await this.profesionRepository.findOne({

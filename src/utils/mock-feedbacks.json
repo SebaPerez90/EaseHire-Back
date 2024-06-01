@@ -1,318 +1,214 @@
 [
   {
-    "rate": 9.5,
+    "rate": 9,
     "description": "Muy buen servicio, recomendado. El profesional demostró gran conocimiento y dedicación en todo momento. Resolvió todas mis dudas con paciencia y precisión."
   },
   {
-    "rate": 7.8,
+    "rate": 7,
     "description": "El servicio fue adecuado, pero podría mejorar. Aunque hubo algunos retrasos, el trabajo final cumplió con las expectativas básicas."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Excelente atención y profesionalismo. Superó todas mis expectativas, el trabajo fue impecable y la comunicación fue fluida y efectiva en todo momento."
   },
   {
-    "rate": 8.0,
+    "rate": 8,
     "description": "Buen trabajo, pero hubo algunos inconvenientes menores que se resolvieron rápidamente. En general, una experiencia positiva."
   },
   {
-    "rate": 5.5,
+    "rate": 5,
     "description": "No cumplió con mis expectativas. El servicio fue lento, desorganizado y con múltiples errores. No lo recomendaría."
   },
   {
-    "rate": 9.7,
+    "rate": 9,
     "description": "Muy satisfecho con el servicio recibido. El profesional mostró gran dedicación y habilidades excepcionales. Lo recomiendo ampliamente."
   },
   {
-    "rate": 6.0,
+    "rate": 6,
     "description": "Servicio promedio, nada destacable. Se notaba la falta de experiencia en algunos aspectos, pero cumplió con lo básico."
   },
   {
-    "rate": 8.2,
+    "rate": 8,
     "description": "Buen servicio, pero se demoró un poco más de lo esperado. Sin embargo, el resultado final fue satisfactorio y profesional."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Totalmente satisfecho, gran profesional. No solo cumplió con lo pactado, sino que también añadió valor adicional con su experiencia y consejos."
   },
   {
-    "rate": 7.0,
+    "rate": 7,
     "description": "El servicio fue aceptable, aunque puede mejorar. Hubo algunas fallas menores que no afectaron significativamente el resultado final."
   },
   {
-    "rate": 9.8,
+    "rate": 9,
     "description": "Excelente trabajo, muy recomendable. La dedicación y atención al detalle fueron sobresalientes. Definitivamente trabajaré con él nuevamente."
   },
   {
-    "rate": 4.0,
+    "rate": 4,
     "description": "El servicio no fue lo que esperaba. Hubo constantes retrasos, falta de comunicación y errores que afectaron el resultado final. No lo recomendaría."
   },
   {
-    "rate": 8.0,
+    "rate": 8,
     "description": "Buen servicio, pero con algunos detalles a mejorar. A pesar de los pequeños inconvenientes, el resultado fue satisfactorio."
   },
   {
-    "rate": 9.9,
+    "rate": 9,
     "description": "Muy buen trabajo, superó mis expectativas. La calidad y profesionalismo demostrados fueron excepcionales. Altamente recomendado."
   },
   {
-    "rate": 7.7,
+    "rate": 7,
     "description": "Adecuado, aunque hubo algunos problemas menores que fueron resueltos. En general, una buena experiencia."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Servicio excepcional, lo recomiendo mucho. Su experiencia y habilidades son inigualables, y el resultado final fue perfecto."
   },
   {
-    "rate": 8.4,
+    "rate": 8,
     "description": "Buen servicio y atención al detalle. Aunque hubo pequeños retrasos, el profesional manejó todo con gran habilidad y dedicación."
   },
   {
-    "rate": 5.8,
+    "rate": 5,
     "description": "El servicio fue regular, podría mejorar. Hubo varios errores y una falta de organización notable. No estoy satisfecho."
   },
   {
-    "rate": 8.1,
+    "rate": 8,
     "description": "Servicio bueno en general, aunque tardó un poco. A pesar de esto, el resultado fue de calidad y cumplió con lo esperado."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Excelente profesional, muy recomendable. La atención al cliente y el trabajo realizado fueron de primer nivel. No dudaría en contratarlo de nuevo."
   },
   {
-    "rate": 7.9,
+    "rate": 7,
     "description": "Buen servicio, pero con algunos inconvenientes. El trabajo final fue bueno, aunque hubo algunos contratiempos menores."
   },
   {
-    "rate": 9.6,
+    "rate": 9,
     "description": "Muy buen servicio, profesional y eficiente. El trabajo fue entregado a tiempo y con una calidad superior a la esperada."
   },
   {
-    "rate": 5.7,
+    "rate": 5,
     "description": "No estoy satisfecho con el servicio. Hubo múltiples problemas y la calidad del trabajo dejó mucho que desear. No lo recomendaría."
   },
   {
-    "rate": 8.3,
-    "description": "Buen servicio, cumplió con mis expectativas. A pesar de algunos retrasos, el resultado fue satisfactorio y profesional."
-  },
-  {
-    "rate": 10.0,
-    "description": "Excelente, muy satisfecho con el trabajo. La dedicación y habilidad del profesional fueron evidentes en cada detalle. Lo recomiendo altamente."
-  },
-  {
-    "rate": 6.8,
-    "description": "El servicio fue adecuado, pero podría ser mejor. Hubo algunos problemas que fueron solucionados, pero afectaron la experiencia general."
-  },
-  {
-    "rate": 9.5,
-    "description": "Muy buen servicio, lo recomiendo. El profesional mostró gran conocimiento y habilidad, resolviendo todos los problemas con eficacia."
-  },
-  {
-    "rate": 3.6,
-    "description": "El servicio no fue satisfactorio. Hubo constantes errores, falta de comunicación y un resultado final muy por debajo de lo esperado. No lo recomendaría."
-  },
-  {
-    "rate": 8.0,
-    "description": "Buen trabajo, pero con margen de mejora. Aunque el resultado fue satisfactorio, hubo algunos inconvenientes que retrasaron el proceso."
-  },
-  {
-    "rate": 10.0,
-    "description": "Servicio excepcional, totalmente recomendable. La calidad y profesionalismo demostrados fueron sobresalientes. Sin duda trabajaré con él nuevamente."
-  },
-  {
-    "rate": 6.4,
-    "description": "Adecuado, pero no sobresaliente. Hubo algunos errores y retrasos que afectaron la experiencia general, aunque el resultado final fue aceptable."
-  },
-  {
-    "rate": 9.7,
-    "description": "Muy satisfecho con el servicio recibido. El profesional mostró gran dedicación y habilidades excepcionales. Lo recomiendo ampliamente."
-  },
-  {
-    "rate": 5.5,
-    "description": "El servicio fue regular, no me convenció. Hubo varios errores y una falta de organización notable. No estoy satisfecho."
-  },
-  {
-    "rate": 8.2,
-    "description": "Buen servicio, aunque con algunas demoras. A pesar de esto, el profesional manejó todo con gran habilidad y dedicación."
-  },
-  {
-    "rate": 10.0,
-    "description": "Excelente profesional, muy satisfecho. La atención al cliente y el trabajo realizado fueron de primer nivel. No dudaría en contratarlo de nuevo."
-  },
-  {
-    "rate": 6.0,
-    "description": "El servicio fue aceptable, pero no destacable. Se notaba la falta de experiencia en algunos aspectos, pero cumplió con lo básico."
-  },
-  {
-    "rate": 8.8,
-    "description": "Buen servicio y atención al detalle. Aunque hubo pequeños retrasos, el profesional manejó todo con gran habilidad y dedicación."
-  },
-  {
-    "rate": 3.9,
-    "description": "El servicio fue regular, podría mejorar. Hubo varios errores y una falta de organización notable. No estoy satisfecho."
-  },
-  {
-    "rate": 9.4,
-    "description": "Servicio bueno en general, aunque tardó un poco. A pesar de esto, el resultado fue de calidad y cumplió con lo esperado."
-  },
-  {
-    "rate": 9.6,
-    "description": "El profesional demostró un alto nivel de competencia y dedicación. Estoy muy satisfecho con el resultado final, superó todas mis expectativas."
-  },
-  {
-    "rate": 7.5,
-    "description": "El servicio fue bastante bueno, aunque hubo algunos pequeños inconvenientes que fueron solucionados rápidamente."
-  },
-  {
-    "rate": 10.0,
-    "description": "Increíble atención y calidad en el servicio. Definitivamente uno de los mejores profesionales con los que he trabajado."
-  },
-  {
-    "rate": 8.3,
-    "description": "El trabajo fue bueno, aunque hubo algunos retrasos. En general, quedé satisfecho con el resultado."
-  },
-  {
-    "rate": 4.8,
-    "description": "No estoy para nada satisfecho con el servicio. Hubo múltiples errores y una falta de profesionalismo notable."
-  },
-  {
-    "rate": 9.9,
-    "description": "Excelente profesional. El trabajo fue impecable y la atención fue de primera. Lo recomendaría sin dudarlo."
-  },
-  {
-    "rate": 6.2,
-    "description": "El servicio fue aceptable, aunque se notaba la falta de experiencia en algunos aspectos. Aun así, cumplió con lo básico."
-  },
-  {
-    "rate": 8.7,
-    "description": "Buen servicio, aunque hubo algunas demoras. Sin embargo, el resultado final fue satisfactorio y profesional."
-  },
-  {
-    "rate": 10.0,
-    "description": "Totalmente satisfecho con el servicio. El profesional demostró una gran habilidad y compromiso. Lo recomiendo altamente."
-  },
-  {
-    "rate": 7.1,
+    "rate": 7,
     "description": "El servicio fue bueno, aunque podría mejorar en algunos aspectos. En general, una experiencia positiva."
   },
   {
-    "rate": 9.8,
-    "description": "Trabajo excepcional, muy por encima de lo esperado. El profesional mostró una gran dedicación y atención al detalle."
-  },
-  {
-    "rate": 4.2,
+    "rate": 4,
     "description": "El servicio fue muy por debajo de lo esperado. Hubo constantes errores y una falta de organización notable."
   },
   {
-    "rate": 8.1,
+    "rate": 8,
     "description": "Buen trabajo, aunque hubo algunos problemas menores que fueron resueltos. En general, una buena experiencia."
   },
   {
-    "rate": 9.7,
+    "rate": 9,
     "description": "Muy buen trabajo, superó mis expectativas. La calidad y profesionalismo demostrados fueron excepcionales."
   },
   {
-    "rate": 6.5,
+    "rate": 6,
     "description": "Servicio adecuado, aunque hubo algunos problemas menores. El resultado final fue satisfactorio, pero podría mejorar."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Servicio excepcional. La calidad del trabajo y la atención al cliente fueron inigualables. Lo recomiendo ampliamente."
   },
   {
-    "rate": 8.9,
+    "rate": 8,
     "description": "Buen servicio, con algunas pequeñas demoras. El resultado final fue muy satisfactorio y profesional."
   },
   {
-    "rate": 5.2,
+    "rate": 5,
     "description": "El servicio dejó mucho que desear. Hubo varios errores y la falta de comunicación fue evidente. No lo recomendaría."
   },
   {
-    "rate": 8.4,
+    "rate": 8,
     "description": "Buen servicio, aunque con algunos retrasos. El profesional mostró gran habilidad y dedicación en todo momento."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Excelente profesional. El trabajo fue impecable y la atención fue de primera. Lo recomendaría sin dudarlo."
   },
   {
-    "rate": 7.6,
+    "rate": 7,
     "description": "El servicio fue bastante bueno, aunque hubo algunos pequeños inconvenientes que fueron solucionados rápidamente."
   },
   {
-    "rate": 9.5,
+    "rate": 9,
     "description": "El profesional demostró un alto nivel de competencia y dedicación. Estoy muy satisfecho con el resultado final."
   },
   {
-    "rate": 5.9,
+    "rate": 5,
     "description": "El servicio fue regular. Hubo varios errores y una falta de profesionalismo notable. No estoy satisfecho."
   },
   {
-    "rate": 8.6,
+    "rate": 8,
     "description": "Buen servicio, aunque hubo algunas demoras. Sin embargo, el resultado final fue satisfactorio y profesional."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Increíble atención y calidad en el servicio. Definitivamente uno de los mejores profesionales con los que he trabajado."
   },
   {
-    "rate": 7.3,
+    "rate": 7,
     "description": "El servicio fue bueno, aunque podría mejorar en algunos aspectos. En general, una experiencia positiva."
   },
   {
-    "rate": 9.8,
+    "rate": 9,
     "description": "Trabajo excepcional, muy por encima de lo esperado. El profesional mostró una gran dedicación y atención al detalle."
   },
   {
-    "rate": 4.5,
+    "rate": 4,
     "description": "El servicio fue muy por debajo de lo esperado. Hubo constantes errores y una falta de organización notable."
   },
   {
-    "rate": 8.2,
+    "rate": 8,
     "description": "Buen trabajo, aunque hubo algunos problemas menores que fueron resueltos. En general, una buena experiencia."
   },
   {
-    "rate": 9.6,
+    "rate": 9,
     "description": "Muy buen trabajo, superó mis expectativas. La calidad y profesionalismo demostrados fueron excepcionales."
   },
   {
-    "rate": 6.1,
+    "rate": 6,
     "description": "Servicio adecuado, aunque hubo algunos problemas menores. El resultado final fue satisfactorio, pero podría mejorar."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Servicio excepcional. La calidad del trabajo y la atención al cliente fueron inigualables. Lo recomiendo ampliamente."
   },
   {
-    "rate": 8.8,
+    "rate": 8,
     "description": "Buen servicio, con algunas pequeñas demoras. El resultado final fue muy satisfactorio y profesional."
   },
   {
-    "rate": 5.4,
+    "rate": 5,
     "description": "El servicio dejó mucho que desear. Hubo varios errores y la falta de comunicación fue evidente. No lo recomendaría."
   },
   {
-    "rate": 8.5,
+    "rate": 8,
     "description": "Buen servicio, aunque con algunos retrasos. El profesional mostró gran habilidad y dedicación en todo momento."
   },
   {
-    "rate": 10.0,
+    "rate": 10,
     "description": "Excelente profesional. El trabajo fue impecable y la atención fue de primera. Lo recomendaría sin dudarlo."
   },
   {
-    "rate": 7.4,
+    "rate": 7,
     "description": "El servicio fue bastante bueno, aunque hubo algunos pequeños inconvenientes que fueron solucionados rápidamente."
   },
   {
-    "rate": 9.7,
+    "rate": 9,
     "description": "El profesional demostró un alto nivel de competencia y dedicación. Estoy muy satisfecho con el resultado final."
   },
   {
-    "rate": 5.8,
+    "rate": 5,
     "description": "El servicio fue regular. Hubo varios errores y una falta de profesionalismo notable. No estoy satisfecho."
   },
   {
-    "rate": 8.3,
+    "rate": 8,
     "description": "Buen servicio, aunque hubo algunas demoras. Sin embargo, el resultado final fue satisfactorio y profesional."
   }
 ]

@@ -36,7 +36,8 @@ export class UsersController {
 
   @Get('test')
   filterNewMembers() {
-    return this.usersService.filterNewMembers();
+    // return this.usersService.filterNewMembers();
+    return this.usersService.calculateProfesionalRate();
   }
 
   @Get(':id')

@@ -41,7 +41,7 @@ export class ExperienceService {
 
   async getExperiences() {
     const experiences = await this.experienceRepository.find({
-      relations: ['client'],
+      relations: { client: true, feedback: true },
     });
     return experiences;
   }

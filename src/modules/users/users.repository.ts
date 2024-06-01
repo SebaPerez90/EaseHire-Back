@@ -90,6 +90,7 @@ export class UserRepository {
       }
     }
   }
+
   async seederUser() {
     const promises = data?.map(async (element) => {
       const user = new User();
