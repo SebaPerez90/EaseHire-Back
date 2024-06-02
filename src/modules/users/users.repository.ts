@@ -110,7 +110,6 @@ export class UserRepository {
       );
 
       const average = totalRate / rates.length;
-      // console.log(average);
       users[i].professionalRate = [average];
       await this.usersRepository.save(users[i]);
       console.log(users[i].professionalRate);

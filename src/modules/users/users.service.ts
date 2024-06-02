@@ -13,7 +13,9 @@ export class UsersService {
 
   findUsers(category: string, city: string, page: number, limit: number) {
     this.usersRepository.calculateProfesionalRate();
-    this.usersRepository.averageRate();
+    setTimeout(async () => {
+      await this.usersRepository.averageRate();
+    }, 1000);
 
     return this.usersRepository.findUsers(category, city, page, limit);
   }
