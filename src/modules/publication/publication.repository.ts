@@ -58,6 +58,7 @@ export class PublicationsRepository implements OnModuleInit {
       title: createPublication.title,
       description: createPublication.description,
       imgUrl: createPublication.imgUrl,
+      category: createPublication.category,
       date: formatDate,
       time: formatTime,
     });
@@ -92,6 +93,7 @@ export class PublicationsRepository implements OnModuleInit {
 
     return await this.publicationsRepository.find();
   }
+
   async findPrublications(
     category: string,
     city: string,
@@ -102,17 +104,16 @@ export class PublicationsRepository implements OnModuleInit {
 
     const where: any = {};
     if (category && city) {
-      where.profesion = { category: category };
+      where.category = category;
       where.user = { city: city };
     } else if (category) {
-      where.profesion = { category: category };
+      where.category = category;
     } else if (city) {
       where.user = { city: city };
     }
 
     const publicationsFind = await this.publicationsRepository.find({
       relations: {
-        profesion: true,
         user: true,
       },
       where,
