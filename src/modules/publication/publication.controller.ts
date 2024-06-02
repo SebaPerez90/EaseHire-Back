@@ -19,12 +19,7 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 @Controller('publication')
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
-
-  @Get()
-  findAll() {
-    return this.publicationService.findAll();
-  }
-
+  
   @Get()
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
@@ -43,6 +38,11 @@ export class PublicationController {
       limit,
     );
   }
+  
+    @Get()
+    findAll() {
+      return this.publicationService.findAll();
+    }
 
   @Post()
   create(@Body() createPublicationDto: CreatePublicationDto) {
