@@ -79,6 +79,11 @@ export class UserRepository {
     return usersFind;
   }
 
+  async test() {
+    const users = await this.usersRepository.find();
+    return users.map((item) => item.professionalRate);
+  }
+
   async filterNewMembers() {
     const users = await this.usersRepository.find({
       relations: { experiences: true },
@@ -94,7 +99,22 @@ export class UserRepository {
     }
   }
 
-  private async averageRate() {}
+  async averageRate() {
+    const users = await this.usersRepository.find();
+
+    for (let i = 0; i < users.length; i++) {
+      const rates = users[i].professionalRate;
+
+      const totalRate = rates.reduce(
+        (accumulator, currentRate) => Number(accumulator) + Number(currentRate),
+      );
+
+      const average = totalRate / rates.length;
+      console.log(average);
+      users[i].professionalRate = [average];
+      await this.usersRepository.save(users[i]);
+    }
+  }
 
   async calculateProfesionalRate() {
     const users = await this.usersRepository.find({

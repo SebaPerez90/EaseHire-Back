@@ -13,6 +13,8 @@ export class UsersService {
 
   findUsers(category: string, city: string, page: number, limit: number) {
     this.usersRepository.calculateProfesionalRate();
+    this.usersRepository.averageRate();
+
     return this.usersRepository.findUsers(category, city, page, limit);
   }
 
@@ -36,11 +38,7 @@ export class UsersService {
     return this.usersRepository.removeUsers(id);
   }
 
-  async filterNewMembers() {
-    return await this.usersRepository.filterNewMembers();
-  }
-
-  async calculateProfesionalRate() {
-    return await this.usersRepository.calculateProfesionalRate();
+  async test() {
+    return await this.usersRepository.test();
   }
 }

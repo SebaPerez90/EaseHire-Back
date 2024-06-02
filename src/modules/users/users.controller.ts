@@ -34,11 +34,10 @@ export class UsersController {
     return this.usersService.findUsers(category, city, page, limit);
   }
 
-  // @Get('test')
-  // filterNewMembers() {
-  //   // return this.usersService.filterNewMembers();
-  //   return this.usersService.calculateProfesionalRate();
-  // }
+  @Get('test')
+  async test() {
+    return await this.usersService.test();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
