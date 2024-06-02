@@ -10,10 +10,17 @@ import { AuthRepository } from '../auth/auth.repository';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { Profesion } from 'src/database/entities/profesion.entity';
+import { Experience } from 'src/database/entities/experience.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Publicaction, User, Credential, Profesion]),
+    TypeOrmModule.forFeature([
+      Publicaction,
+      User,
+      Credential,
+      Profesion,
+      Experience,
+    ]),
   ],
   controllers: [PublicationController],
   providers: [

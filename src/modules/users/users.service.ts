@@ -12,6 +12,7 @@ export class UsersService {
   ) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {
+    this.usersRepository.calculateProfesionalRate();
     return this.usersRepository.findUsers(category, city, page, limit);
   }
 
@@ -35,12 +36,11 @@ export class UsersService {
     return this.usersRepository.removeUsers(id);
   }
 
-  filterNewMembers() {
-    return this.usersRepository.filterNewMembers();
+  async filterNewMembers() {
+    return await this.usersRepository.filterNewMembers();
   }
 
   async calculateProfesionalRate() {
-    const exps = await this.experieceService.getExperiences();
-    return exps;
+    return await this.usersRepository.calculateProfesionalRate();
   }
 }

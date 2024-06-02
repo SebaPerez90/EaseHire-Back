@@ -34,11 +34,11 @@ export class UsersController {
     return this.usersService.findUsers(category, city, page, limit);
   }
 
-  @Get('test')
-  filterNewMembers() {
-    // return this.usersService.filterNewMembers();
-    return this.usersService.calculateProfesionalRate();
-  }
+  // @Get('test')
+  // filterNewMembers() {
+  //   // return this.usersService.filterNewMembers();
+  //   return this.usersService.calculateProfesionalRate();
+  // }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -9,10 +9,13 @@ import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
+import { Experience } from 'src/database/entities/experience.entity';
 
 @Injectable()
 export class UserRepository {
   constructor(
+    @InjectRepository(Experience)
+    private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
   ) {}
@@ -87,6 +90,25 @@ export class UserRepository {
           { id: users[i].id },
           { newMember: false },
         );
+      }
+    }
+  }
+
+  private async averageRate() {}
+
+  async calculateProfesionalRate() {
+    const users = await this.usersRepository.find({
+      relations: { experiences: { feedback: true } },
+    });
+
+    for (let i = 0; i < users.length; i++) {
+      for (let j = 0; j < users[i].experiences.length; j++) {
+        const experience = users[i].experiences[j];
+
+        if (experience.feedback) {
+          users[i].professionalRate.push(experience.feedback.rate);
+          await this.usersRepository.save(users[i]);
+        }
       }
     }
   }
