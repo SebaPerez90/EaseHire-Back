@@ -35,8 +35,8 @@ export class UsersController {
   }
 
   @Get('test')
-  async test() {
-    return await this.usersService.test();
+  async averageRate() {
+    return await this.usersService.averageRate();
   }
 
   @Get(':id')

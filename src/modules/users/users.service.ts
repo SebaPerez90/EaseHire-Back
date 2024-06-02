@@ -38,7 +38,7 @@ export class UsersService {
     return this.usersRepository.removeUsers(id);
   }
 
-  async test() {
-    return await this.usersRepository.test();
+  async averageRate() {
+    return await this.usersRepository.averageRate();
   }
 }
