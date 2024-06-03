@@ -11,6 +11,7 @@ import { ExperienceModule } from './modules/experience/experience.module';
 import { EducationModule } from './modules/education/education.module';
 import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { FeedbackModule } from './modules/feedback/feedback.module';
     ExperienceModule,
     EducationModule,
     FeedbackModule,
+    NotificationsModule,
   ],
 
   controllers: [AppController],

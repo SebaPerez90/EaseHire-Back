@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { NotificationType } from 'src/enum/notification.enum';
 
 @Entity({ name: 'notifications' })
 export class Notification {
@@ -15,10 +16,19 @@ export class Notification {
   @Column({ type: 'varchar', length: 200, nullable: false })
   title: string;
 
-  @Column({ type: 'varchar', length: 10 })
+  @Column({ type: 'enum', enum: NotificationType })
+  type: NotificationType;
+
+  @Column({ type: 'varchar', length: 20, nullable: false })
+  date: Date | string;
+
+  @Column({ nullable: true })
   time: string;
 
+  @Column({ nullable: true })
+  timelapse: string;
+
   @ManyToOne(() => User, (user) => user.notifications)
-  @JoinColumn({ name: 'notification_ID' })
+  @JoinColumn({ name: 'user_ID' })
   user: User;
 }
