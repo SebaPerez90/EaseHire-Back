@@ -20,7 +20,6 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
 
-
   @Get()
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
