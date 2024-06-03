@@ -1,4 +1,4 @@
-import { BadGatewayException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
@@ -24,15 +24,12 @@ export class UsersService {
     return this.usersRepository.findAll();
   }
 
-  async create(createUserDto: CreateUserDto) {
-    
-    const user = await this.usersRepository.findOne(createUserDto.dni);
-    if (user) throw new BadGatewayException('User already exists');
-    return await this.usersRepository.createUsers(createUserDto);
+  create(createUserDto: CreateUserDto) {
+    return this.usersRepository.createUsers(createUserDto);
   }
 
-  async findOneid(id: string) {
-    return await this.usersRepository.findOneid(id);
+  findOne(id: string) {
+    return this.usersRepository.findOne(id);
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {

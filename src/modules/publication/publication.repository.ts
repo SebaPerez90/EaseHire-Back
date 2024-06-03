@@ -94,7 +94,6 @@ export class PublicationsRepository implements OnModuleInit {
 
     return await this.publicationsRepository.find();
   }
-
   async findPrublications(
     category: string,
     city: string,

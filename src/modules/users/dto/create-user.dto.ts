@@ -17,8 +17,6 @@ export class CreateUserDto {
   @Length(3, 30)
   lastname?: string;
 
-  /*solo acepta numberos has 19 digitos
-   */
   @IsNotEmpty()
   @IsNumber()
   @Length(6, 20)
@@ -35,10 +33,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   birthdate?: string;
-
-  @IsNotEmpty()
-  @IsString()
-  category: string;
 
   @IsNotEmpty()
   @IsBoolean()
