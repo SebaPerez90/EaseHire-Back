@@ -34,10 +34,10 @@ export class UsersController {
     return this.usersService.findUsers(category, city, page, limit);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.usersService.findAll();
-  // }
+  @Get('test')
+  async averageRate() {
+    return await this.usersService.averageRate();
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {

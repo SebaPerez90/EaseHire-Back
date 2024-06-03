@@ -7,5 +7,9 @@ export class CreatePublicationDto {
   @IsNotEmpty()
   description: string;
 
+  @IsNotEmpty()
+  category: string;
+
+
   imgUrl?: string;
 }

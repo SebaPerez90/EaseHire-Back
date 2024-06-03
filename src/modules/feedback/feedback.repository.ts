@@ -14,21 +14,22 @@ export class FeedbackRepository {
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
+
   async create(feedback: CreateFeedbackDto) {
     const { rate, description, profesionId } = feedback;
-    const profesion = await this.profesionRepository.findOne({
-      where: { id: profesionId },
-    });
+    // const profesion = await this.profesionRepository.findOne({
+    //   where: { id: profesionId },
+    // });
 
     const feedbackcreate = new Feedback();
     feedbackcreate.rate = rate;
     feedbackcreate.description = description;
-    feedbackcreate.profesion = profesion;
+    // feedbackcreate.profesion = profesion;
     await this.feedbackRepository.save(feedbackcreate);
 
-    const user = await this.userRepository.findOne({
-      where: { profesions: feedbackcreate.profesion },
-    });
+    // const user = await this.userRepository.findOne({
+    //   where: { profesions: feedbackcreate.profesion },
+    // });
 
     return feedbackcreate;
   }
