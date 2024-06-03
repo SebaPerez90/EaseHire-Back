@@ -10,6 +10,5 @@ export class CreatePublicationDto {
   @IsNotEmpty()
   category: string;
 
-
   imgUrl?: string;
 }

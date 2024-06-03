@@ -3,13 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
+import { Profesion } from 'src/database/entities/profesion.entity';
+
 
 @Injectable()
 export class UserRepository {
@@ -18,6 +19,8 @@ export class UserRepository {
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
+    @InjectRepository(Profesion)
+    private profesionRepository: Repository<Profesion>,
   ) {}
 
   async removeUsers(id: string) {
@@ -26,22 +29,32 @@ export class UserRepository {
     return user;
   }
 
-  async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
+  async updateUser(id: string, UpdateUserDto: any) {
     await this.usersRepository.update(id, UpdateUserDto);
     const updateUser = await this.usersRepository.findOneBy({ id });
     if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
     return updateUser;
   }
 
-  async findOne(id: string) {
+  async findOne(dni: number) {
+    try {
+      const user = await this.usersRepository.findOne({ where: { dni } });
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+  async findOneid(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
 
   async createUsers(createUserDto) {
     const user = await this.usersRepository.save(createUserDto);
-    console.log(user);
+    const profesion = await this.profesionRepository.save({
+      user: createUserDto.id,
+      category: createUserDto.category,
+    });
 
     return user;
   }

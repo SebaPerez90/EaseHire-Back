@@ -39,6 +39,11 @@ export class PublicationController {
       limit,
     );
   }
+  
+    @Get()
+    findAll() {
+      return this.publicationService.findAll();
+    }
 
   @Post()
   create(@Body() createPublicationDto: CreatePublicationDto) {

@@ -12,6 +12,7 @@ import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
+import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -24,7 +25,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   lastName: string;
 
-  @Column({ type: 'int', unique: true, nullable: false })
+  @Column({ type: 'bigint', unique: true, nullable: false })
   dni: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
@@ -60,6 +61,7 @@ export class User {
   notifications: Notification[];
 
   @OneToMany(() => Profesion, (profesion) => profesion.user)
+  @JoinColumn({ name: 'profesion_ID' })
   profesions: Profesion[];
 
   @OneToMany(() => Education, (education) => education.user)
@@ -67,4 +69,7 @@ export class User {
 
   @OneToMany(() => Experience, (experice) => experice.client)
   experiences: Experience[];
+
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
+  feedbacks: Feedback[];
 }

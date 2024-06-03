@@ -22,6 +22,9 @@ export class Publicaction {
   @Column({ nullable: true })
   category: string;
 
+  @Column({ type: 'varchar', nullable: false })
+  category: string;
+
   @Column({
     type: 'text',
     nullable: true,
