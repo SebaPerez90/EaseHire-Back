@@ -41,7 +41,6 @@ export class UserRepository {
 
   async createUsers(createUserDto) {
     const user = await this.usersRepository.save(createUserDto);
-    console.log(user);
 
     return user;
   }
