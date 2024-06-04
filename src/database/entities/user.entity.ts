@@ -12,7 +12,6 @@ import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
-import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'users' })
 export class User {
