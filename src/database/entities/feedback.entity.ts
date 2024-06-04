@@ -17,4 +17,5 @@ export class Feedback {
 
   @Column({ type: 'varchar', length: 300, nullable: true })
   description: string;
+
 }

@@ -69,7 +69,4 @@ export class User {
 
   @OneToMany(() => Experience, (experice) => experice.client)
   experiences: Experience[];
-
-  @OneToMany(() => Feedback, (feedback) => feedback.user)
-  feedbacks: Feedback[];
 }
