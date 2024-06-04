@@ -18,7 +18,7 @@ export class Publicaction {
 
   @Column({ type: 'varchar', length: 200, nullable: false })
   description: string;
-  
+
   @Column({ type: 'varchar', nullable: false })
   category: string;
 
