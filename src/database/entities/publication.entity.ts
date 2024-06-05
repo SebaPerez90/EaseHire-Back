@@ -16,10 +16,16 @@ export class Publicaction {
   @Column({ type: 'varchar', length: 50, nullable: false })
   title: string;
 
-  @Column({ type: 'varchar', length: 200, nullable: false })
+  @Column({ type: 'varchar', length: 50, nullable: false })
+  location: string;
+
+  @Column({ type: 'boolean', nullable: false })
+  remoteWork: boolean;
+
+  @Column({ type: 'varchar', length: 1500, nullable: false })
   description: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: false })
   category: string;
 
   @Column({

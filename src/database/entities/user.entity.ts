@@ -24,7 +24,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   lastName: string;
 
-  @Column({ type: 'int', unique: true, nullable: false })
+  @Column({ type: 'bigint', unique: true, nullable: false })
   dni: number;
 
   @Column({ type: 'varchar', length: 20, nullable: false })
@@ -36,7 +36,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   birthdate: string;
 
-  @Column({ type: 'varchar', length: 150, nullable: true })
+  @Column({ type: 'varchar', length: 200, nullable: true })
   bio: string;
 
   @Column({ default: false })
@@ -60,6 +60,7 @@ export class User {
   notifications: Notification[];
 
   @OneToMany(() => Profesion, (profesion) => profesion.user)
+  @JoinColumn({ name: 'profesion_ID' })
   profesions: Profesion[];
 
   @OneToMany(() => Education, (education) => education.user)
