@@ -9,11 +9,17 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseInterceptors,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
 } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('publication')
 @Controller('publication')
@@ -40,8 +46,22 @@ export class PublicationController {
   }
 
   @Post()
-  create(@Body() createPublicationDto: CreatePublicationDto) {
-    return this.publicationService.create(createPublicationDto);
+  @UseInterceptors(FileInterceptor('file'))
+  create(@Body() createPublicationDto: CreatePublicationDto, @UploadedFile(
+    new ParseFilePipe({
+      validators: [
+        new MaxFileSizeValidator({
+          maxSize: 200000,
+          message: 'El archivo es demasiado grande',
+        }),
+        new FileTypeValidator({
+          fileType: /(jpg|jpeg|png|svg|webp)/,
+        }),
+      ],
+    }),
+  )
+  file: Express.Multer.File,) {
+    return this.publicationService.create(createPublicationDto, file);
   }
 
   @Patch(':id')

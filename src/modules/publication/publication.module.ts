@@ -11,6 +11,7 @@ import { Credential } from 'src/database/entities/credentials.entity';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { Profesion } from 'src/database/entities/profesion.entity';
 import { Experience } from 'src/database/entities/experience.entity';
+import { cloudinaryConfig } from 'src/database/config/cloudinary';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { Experience } from 'src/database/entities/experience.entity';
     UserRepository,
     AuthRepository,
     ProfesionsRepository,
+    cloudinaryConfig
   ],
 })
 export class PublicationModule {}
