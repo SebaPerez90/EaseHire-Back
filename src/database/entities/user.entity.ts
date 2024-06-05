@@ -37,7 +37,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: true })
   birthdate: string;
 
-  @Column({ type: 'varchar', length: 150, nullable: true })
+  @Column({ type: 'varchar', length: 200, nullable: true })
   bio: string;
 
   @Column({ type: 'varchar', length: 150, nullable: true })
@@ -66,6 +66,7 @@ export class User {
   notifications: Notification[];
 
   @OneToMany(() => Profesion, (profesion) => profesion.user)
+  @JoinColumn({ name: 'profesion_ID' })
   profesions: Profesion[];
 
   @OneToMany(() => Education, (education) => education.user)

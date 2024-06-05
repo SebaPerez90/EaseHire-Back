@@ -10,7 +10,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
-import jwt from 'jsonwebtoken';
 import { v4 as uuidv4 } from 'uuid'
 @Injectable()
 export class AuthService {
@@ -25,9 +24,8 @@ export class AuthService {
   async signIn(credentials) {
     try {
       
-      console.log(`entramos en signIn`);
-      console.log(`los datos que se estan ingresando son : ${{credentials}}`)
-      const { sub, email, given_name
+      
+      const {  email, given_name
         , family_name, picture } = credentials;
       
         let user = await this.userRepository.findOne({ where: { email: email } })
@@ -41,7 +39,7 @@ export class AuthService {
             
           })
           this.userRepository.save(user)
-          console.log(user);
+          
           
         }
         const userid = user.id

@@ -84,7 +84,7 @@ export class UserRepository {
     }
 
     const usersFind = await this.usersRepository.find({
-      relations: { profesions: true, experiences: true },
+      relations: { profesions: true, experiences: true, educations: true },
       where,
       take: limit,
       skip: skip,

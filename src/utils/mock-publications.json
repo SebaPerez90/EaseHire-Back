@@ -3,241 +3,320 @@
     "title": "Noticia 1",
     "description": "Descripción detallada de la noticia 1.",
     "imgUrl": "https://example.com/image1.jpg",
-    "category": "Doctor"
+    "category": "Doctor",
+    "remoteWork": false,
+    "location": "Madrid"
   },
   {
     "title": "Evento 2",
     "description": "Descripción detallada del evento 2.",
     "imgUrl": "https://example.com/image2.jpg",
-    "category": "Ingeniero"
+    "category": "Ingeniero",
+    "remoteWork": false,
+    "location": "Barcelona"
   },
   {
     "title": "Publicación 3",
     "description": "Descripción detallada de la publicación 3.",
     "imgUrl": "https://example.com/image3.jpg",
-    "category": "Profesor"
+    "category": "Profesor",
+    "remoteWork": true,
+    "location": "Valencia"
   },
   {
     "title": "Noticia 4",
     "description": "Descripción detallada de la noticia 4.",
     "imgUrl": "https://example.com/image4.jpg",
-    "category": "Enfermera"
+    "category": "Enfermera",
+    "remoteWork": false,
+    "location": "Sevilla"
   },
   {
     "title": "Evento 5",
     "description": "Descripción detallada del evento 5.",
     "imgUrl": "https://example.com/image5.jpg",
-    "category": "Abogado"
+    "category": "Abogado",
+    "remoteWork": false,
+    "location": "Bilbao"
   },
   {
     "title": "Publicación 6",
     "description": "Descripción detallada de la publicación 6.",
     "imgUrl": "https://example.com/image6.jpg",
-    "category": "Arquitecto"
+    "category": "Arquitecto",
+    "remoteWork": false,
+    "location": "Málaga"
   },
   {
     "title": "Noticia 7",
     "description": "Descripción detallada de la noticia 7.",
     "imgUrl": "https://example.com/image7.jpg",
-    "category": "Contador"
+    "category": "Contador",
+    "remoteWork": true,
+    "location": "Zaragoza"
   },
   {
     "title": "Evento 8",
     "description": "Descripción detallada del evento 8.",
     "imgUrl": "https://example.com/image8.jpg",
-    "category": "Chef"
+    "category": "Chef",
+    "remoteWork": false,
+    "location": "Murcia"
   },
   {
     "title": "Publicación 9",
     "description": "Descripción detallada de la publicación 9.",
     "imgUrl": "https://example.com/image9.jpg",
-    "category": "Dentista"
+    "category": "Dentista",
+    "remoteWork": true,
+    "location": "Palma de Mallorca"
   },
   {
     "title": "Noticia 10",
     "description": "Descripción detallada de la noticia 10.",
     "imgUrl": "https://example.com/image10.jpg",
-    "category": "Farmacéutico"
+    "category": "Farmacéutico",
+    "remoteWork": false,
+    "location": "Las Palmas"
   },
   {
     "title": "Evento 11",
     "description": "Descripción detallada del evento 11.",
     "imgUrl": "https://example.com/image11.jpg",
-    "category": "Periodista"
+    "category": "Periodista",
+    "remoteWork": true,
+    "location": "Alicante"
   },
   {
     "title": "Publicación 12",
     "description": "Descripción detallada de la publicación 12.",
     "imgUrl": "https://example.com/image12.jpg",
-    "category": "Psicólogo"
+    "category": "Psicólogo",
+    "remoteWork": true,
+    "location": "Córdoba"
   },
   {
     "title": "Noticia 13",
     "description": "Descripción detallada de la noticia 13.",
     "imgUrl": "https://example.com/image13.jpg",
-    "category": "Electricista"
+    "category": "Electricista",
+    "remoteWork": false,
+    "location": "Valladolid"
   },
   {
     "title": "Evento 14",
     "description": "Descripción detallada del evento 14.",
     "imgUrl": "https://example.com/image14.jpg",
-    "category": "Fontanero"
+    "category": "Fontanero",
+    "remoteWork": false,
+    "location": "Vigo"
   },
   {
     "title": "Publicación 15",
     "description": "Descripción detallada de la publicación 15.",
     "imgUrl": "https://example.com/image15.jpg",
-    "time": "08:00",
-    "category": "Maestro"
+    "category": "Maestro",
+    "remoteWork": true,
+    "location": "Gijón"
   },
   {
     "title": "Noticia 16",
     "description": "Descripción detallada de la noticia 16.",
     "imgUrl": "https://example.com/image16.jpg",
-    "category": "Mecánico"
+    "category": "Mecánico",
+    "remoteWork": false,
+    "location": "Hospitalet de Llobregat"
   },
   {
     "title": "Evento 17",
     "description": "Descripción detallada del evento 17.",
     "imgUrl": "https://example.com/image17.jpg",
-    "category": "Piloto"
+    "category": "Piloto",
+    "remoteWork": false,
+    "location": "Vitoria"
   },
   {
     "title": "Publicación 18",
     "description": "Descripción detallada de la publicación 18.",
     "imgUrl": "https://example.com/image18.jpg",
-    "category": "Programador"
+    "category": "Programador",
+    "remoteWork": true,
+    "location": "Granada"
   },
   {
     "title": "Noticia 19",
     "description": "Descripción detallada de la noticia 19.",
     "imgUrl": "https://example.com/image19.jpg",
-    "category": "Veterinario"
+    "category": "Veterinario",
+    "remoteWork": false,
+    "location": "Elche"
   },
   {
     "title": "Evento 20",
     "description": "Descripción detallada del evento 20.",
     "imgUrl": "https://example.com/image20.jpg",
-    "category": "Bombero"
+    "category": "Bombero",
+    "remoteWork": false,
+    "location": "Oviedo"
   },
   {
     "title": "Publicación 21",
     "description": "Descripción detallada de la publicación 21.",
     "imgUrl": "https://example.com/image21.jpg",
-    "category": "Policía"
+    "category": "Policía",
+    "remoteWork": false,
+    "location": "Badalona"
   },
   {
     "title": "Noticia 22",
     "description": "Descripción detallada de la noticia 22.",
     "imgUrl": "https://example.com/image22.jpg",
-    "category": "Paramédico"
+    "category": "Paramédico",
+    "remoteWork": false,
+    "location": "Cartagena"
   },
   {
     "title": "Evento 23",
     "description": "Descripción detallada del evento 23.",
     "imgUrl": "https://example.com/image23.jpg",
-    "category": "Fotógrafo"
+    "category": "Fotógrafo",
+    "remoteWork": false,
+    "location": "Terrassa"
   },
   {
     "title": "Publicación 24",
     "description": "Descripción detallada de la publicación 24.",
     "imgUrl": "https://example.com/image24.jpg",
-    "category": "Artista"
+    "category": "Artista",
+    "remoteWork": true,
+    "location": "Jerez de la Frontera"
   },
   {
     "title": "Noticia 25",
     "description": "Descripción detallada de la noticia 25.",
     "imgUrl": "https://example.com/image25.jpg",
-    "category": "Economista"
+    "category": "Economista",
+    "remoteWork": true,
+    "location": "Sabadell"
   },
   {
     "title": "Evento 26",
     "description": "Descripción detallada del evento 26.",
     "imgUrl": "https://example.com/image26.jpg",
-    "category": "Científico"
+    "category": "Científico",
+    "remoteWork": true,
+    "location": "Mostoles"
   },
   {
     "title": "Publicación 27",
     "description": "Descripción detallada de la publicación 27.",
     "imgUrl": "https://example.com/image27.jpg",
-    "category": "Astronauta"
+    "category": "Astronauta",
+    "remoteWork": false,
+    "location": "Santa Cruz de Tenerife"
   },
   {
     "title": "Noticia 28",
     "description": "Descripción detallada de la noticia 28.",
     "imgUrl": "https://example.com/image28.jpg",
-    "category": "Chef"
+    "category": "Chef",
+    "remoteWork": false,
+    "location": "Pamplona"
   },
   {
     "title": "Evento 29",
     "description": "Descripción detallada del evento 29.",
     "imgUrl": "https://example.com/image29.jpg",
-    "category": "Electricista"
+    "category": "Electricista",
+    "remoteWork": true,
+    "location": "Almería"
   },
   {
     "title": "Publicación 30",
     "description": "Descripción detallada de la publicación 30.",
     "imgUrl": "https://example.com/image30.jpg",
-    "category": "Fontanero"
+    "category": "Construccion",
+    "remoteWork": false,
+    "location": "Burgos"
   },
   {
     "title": "Noticia 31",
     "description": "Descripción detallada de la noticia 31.",
     "imgUrl": "https://example.com/image31.jpg",
-    "category": "Ingeniero"
+    "category": "Pintor",
+    "remoteWork": false,
+    "location": "Salamanca"
   },
   {
     "title": "Evento 32",
     "description": "Descripción detallada del evento 32.",
     "imgUrl": "https://example.com/image32.jpg",
-    "category": "Mecánico"
+    "category": "Call Center",
+    "remoteWork": true,
+    "location": "San Sebastián"
   },
   {
     "title": "Publicación 33",
     "description": "Descripción detallada de la publicación 33.",
     "imgUrl": "https://example.com/image33.jpg",
-    "category": "Maestro"
+    "category": "Maestro de Manejo",
+    "remoteWork": false,
+    "location": "Leganés"
   },
   {
     "title": "Noticia 34",
     "description": "Descripción detallada de la noticia 34.",
     "imgUrl": "https://example.com/image34.jpg",
-    "category": "Psicólogo"
+    "category": "Odontologo",
+    "remoteWork": false,
+    "location": "Getafe"
   },
   {
     "title": "Evento 35",
     "description": "Descripción detallada del evento 35.",
     "imgUrl": "https://example.com/image35.jpg",
-    "category": "Abogado"
+    "category": "Mozo",
+    "remoteWork": false,
+    "location": "Albacete"
   },
   {
     "title": "Publicación 36",
     "description": "Descripción detallada de la publicación 36.",
     "imgUrl": "https://example.com/image36.jpg",
-    "category": "Doctor"
+    "category": "Kinesiologo",
+    "remoteWork": false,
+    "location": "Logroño"
   },
   {
     "title": "Noticia 37",
     "description": "Descripción detallada de la noticia 37.",
     "imgUrl": "https://example.com/image37.jpg",
-    "category": "Arquitecto"
+    "category": "Brocker",
+    "remoteWork": true,
+    "location": "Badajoz"
   },
   {
     "title": "Evento 38",
     "description": "Descripción detallada del evento 38.",
     "imgUrl": "https://example.com/image38.jpg",
-    "category": "Enfermera"
+    "category": "Nutricionista",
+    "remoteWork": true,
+    "location": "Santa Coloma de Gramenet"
   },
   {
     "title": "Publicación 39",
     "description": "Descripción detallada de la publicación 39.",
     "imgUrl": "https://example.com/image39.jpg",
-    "category": "Periodista"
+    "category": "Personal Trainer",
+    "remoteWork": true,
+    "location": "Sant Boi de Llobregat"
   },
   {
     "title": "Noticia 40",
     "description": "Descripción detallada de la noticia 40.",
     "imgUrl": "https://example.com/image40.jpg",
-    "category": "Programador"
+    "category": "Niñera",
+    "remoteWork": true,
+    "location": "Castellón"
   }
 ]
