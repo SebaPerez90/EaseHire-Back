@@ -1,10 +1,4 @@
-import {
-  BadRequestException,
-  HttpException,
-  Injectable,
-  NotFoundException,
-  OnModuleInit,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Education } from 'src/database/entities/education.entity';
 import { Repository } from 'typeorm';
