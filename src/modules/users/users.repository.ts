@@ -9,12 +9,20 @@ import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
+import { Experience } from 'src/database/entities/experience.entity';
+import { JwtService } from '@nestjs/jwt';
+import { token } from 'morgan';
+import { create } from 'domain';
 
 @Injectable()
 export class UserRepository {
   constructor(
+    @InjectRepository(Experience)
+    private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
+    private readonly jwtService: JwtService
+    
   ) {}
 
   async removeUsers(id: string) {
@@ -36,15 +44,28 @@ export class UserRepository {
     return user;
   }
 
+  async gettoken(token: string) {
+    const validate = await this.jwtService.verify(token)
+    const user_id = validate.user_id
+    console.log(user_id);
+    
+    
+  }
   async createUsers(createUserDto) {
-    const user = await this.usersRepository.save(createUserDto);
-    console.log(user);
-
-    return user;
+    try {
+      
+      const user = await this.usersRepository.save(createUserDto);
+      
+      return user;
+    } catch (error) {
+      
+    }
   }
 
   async findAll() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      relations: { experiences: true },
+    });
     return users;
   }
 
@@ -63,7 +84,7 @@ export class UserRepository {
     }
 
     const usersFind = await this.usersRepository.find({
-      relations: { profesions: true },
+      relations: { profesions: true, experiences: true },
       where,
       take: limit,
       skip: skip,
@@ -72,6 +93,60 @@ export class UserRepository {
       throw new BadRequestException(`No users found with the provided filters`);
 
     return usersFind;
+  }
+
+  async test() {
+    const users = await this.usersRepository.find();
+    return users.map((item) => item.professionalRate);
+  }
+
+  async filterNewMembers() {
+    const users = await this.usersRepository.find({
+      relations: { experiences: true },
+    });
+
+    for (let i = 0; i < users.length; i++) {
+      if (!(users[i].experiences.length === 0)) {
+        await this.usersRepository.update(
+          { id: users[i].id },
+          { newMember: false },
+        );
+      }
+    }
+  }
+
+  async averageRate() {
+    const users = await this.usersRepository.find();
+
+    for (let i = 0; i < users.length; i++) {
+      const rates = users[i].professionalRate;
+
+      const totalRate = rates.reduce(
+        (accumulator, currentRate) => Number(accumulator) + Number(currentRate),
+      );
+
+      const average = totalRate / rates.length;
+      users[i].professionalRate = [average];
+      await this.usersRepository.save(users[i]);
+      
+    }
+  }
+
+  async calculateProfesionalRate() {
+    const users = await this.usersRepository.find({
+      relations: { experiences: { feedback: true } },
+    });
+
+    for (let i = 0; i < users.length; i++) {
+      for (let j = 0; j < users[i].experiences.length; j++) {
+        const experience = users[i].experiences[j];
+
+        if (experience.feedback) {
+          users[i].professionalRate.push(experience.feedback.rate);
+          await this.usersRepository.save(users[i]);
+        }
+      }
+    }
   }
 
   async seederUser() {

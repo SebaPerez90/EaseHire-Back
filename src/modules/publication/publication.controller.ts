@@ -21,11 +21,6 @@ export class PublicationController {
   constructor(private readonly publicationService: PublicationService) {}
 
   @Get()
-  findAll() {
-    return this.publicationService.findAll();
-  }
-
-  @Get()
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
   @ApiQuery({ name: 'page', required: false })
