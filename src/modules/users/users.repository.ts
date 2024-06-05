@@ -67,7 +67,7 @@ export class UserRepository {
     }
 
     const usersFind = await this.usersRepository.find({
-      relations: { profesions: true, experiences: true },
+      relations: { profesions: true, experiences: true, educations: true },
       where,
       take: limit,
       skip: skip,
@@ -111,7 +111,6 @@ export class UserRepository {
       const average = totalRate / rates.length;
       users[i].professionalRate = [average];
       await this.usersRepository.save(users[i]);
-      console.log(users[i].professionalRate);
     }
   }
 

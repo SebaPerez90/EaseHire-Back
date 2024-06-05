@@ -8,6 +8,8 @@ import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
 import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
+import { UploadApiResponse, v2 } from 'cloudinary';
+import toStream = require('buffer-to-stream');
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -47,6 +49,22 @@ export class PublicationsRepository implements OnModuleInit {
         .into(Publicaction)
         .values(newPublication)
         .execute();
+    });
+  }
+
+  async uploadImage(file: Express.Multer.File): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      const upload = v2.uploader.upload_stream(
+        { resource_type: 'auto' },
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        },
+      );
+      toStream(file.buffer).pipe(upload);
     });
   }
 
