@@ -34,6 +34,8 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.title = element.title;
       newPublication.description = element.description;
       newPublication.category = element.category;
+      newPublication.location = element.location;
+      newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
       newPublication.date = formatDate;
       newPublication.time = formatTime;

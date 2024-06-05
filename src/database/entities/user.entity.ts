@@ -36,7 +36,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   birthdate: string;
 
-  @Column({ type: 'varchar', length: 150, nullable: true })
+  @Column({ type: 'varchar', length: 200, nullable: true })
   bio: string;
 
   @Column({ default: false })

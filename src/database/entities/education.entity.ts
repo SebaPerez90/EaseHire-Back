@@ -19,12 +19,15 @@ export class Education {
   @Column({ type: 'varchar', length: 50 })
   educationalEntity: string;
 
+  @Column({ type: 'varchar', nullable: true, length: 300 })
+  description: string;
+
   @Column({
     type: 'enum',
     enum: EducationState,
     default: EducationState.FINISHED,
   })
-  studiesState: EducationState[];
+  studiesState: EducationState | string;
 
   @Column({ type: 'varchar', length: 50 })
   startDate: string;
