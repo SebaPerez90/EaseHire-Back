@@ -25,8 +25,13 @@ export class PublicationService {
     );
   }
 
-  create(createPublicationDto: CreatePublicationDto) {
-    return this.publicationRepository.create(createPublicationDto);
+  async create(createPublicationDto: CreatePublicationDto, file: Express.Multer.File) {
+    const res = await this.publicationRepository.uploadImage(file);
+    const publication = this.publicationRepository.create({
+      ...createPublicationDto,
+      imgUrl: res.secure_url,
+    })
+    return publication
   }
 
   update(id: string, updatePublicationDto: UpdatePublicationDto) {
