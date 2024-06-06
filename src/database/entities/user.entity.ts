@@ -4,6 +4,7 @@ import {
   JoinColumn,
   OneToMany,
   OneToOne,
+  PrimaryColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Publicaction } from './publication.entity';
@@ -24,20 +25,25 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   lastName: string;
 
-  @Column({ type: 'bigint', unique: true, nullable: false })
+  @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 20, nullable: true })
   country: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: false })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   city: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: false })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   birthdate: string;
 
   @Column({ type: 'varchar', length: 200, nullable: true })
   bio: string;
+
+  @Column({ type: 'varchar', length: 150, nullable: true })
+  email: string;
+  @Column({ type: 'varchar', length: 255,nullable: true})
+  imgPictureUrl: string;
 
   @Column({ default: false })
   availableToWork: boolean;
