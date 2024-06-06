@@ -75,11 +75,15 @@ export class PublicationsRepository implements OnModuleInit {
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
 
+    
+
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
       imgUrl: createPublication.imgUrl,
+      remoteWork: createPublication.remoteWork,
       category: createPublication.category,
+      location: createPublication.location,
       date: formatDate,
       time: formatTime,
     });

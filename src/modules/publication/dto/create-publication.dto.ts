@@ -10,5 +10,11 @@ export class CreatePublicationDto {
   @IsNotEmpty()
   category: string;
 
+  @IsNotEmpty()
+  location: string;
+  
+  @IsNotEmpty()
+  remoteWork: boolean;
+  
   imgUrl?: string;
 }
