@@ -37,14 +37,16 @@ export class PaymentsService {
   }
 
   async getPyaMethods() {
-    const headers = {
-      Authorization: `Bearer ${process.env.MERCADOPAGO_ACCESS_TOKEN}`,
-    };
-    const res = await fetch('https://api.mercadopago.com/v1/payment_methods', {
-      method: 'GET',
-      headers,
-    });
-    const data = await res.json();
-    return data;
+    const response = await fetch(
+      'https://api.mercadopago.com/v1/payment_methods',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+        },
+      },
+    );
+    const data = await response.json();
+    return data.map((element) => element.id);
   }
 }
