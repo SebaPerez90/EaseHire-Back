@@ -23,33 +23,28 @@ export class AuthService {
 
   async signIn(credentials) {
     try {
-      
-      
-      const {  email, given_name,name
-        , family_name, picture,email_verified } = credentials;
-      
-        let user = await this.userRepository.findOne({ where: { email: email } })
-        if (!user) {
-          user = await this.userRepository.create({
-            id: uuidv4(),
-            name: name?name:null,
-            lastName: family_name ? family_name : null,
-            email: email,
-            email_verified: email_verified? email_verified:null,
-            imgPictureUrl: picture ? picture : null
-            
-            
-          })
-          this.userRepository.save(user)
-          
-          
-        }
-        const userid = user.id
+      const { email, given_name, name, family_name, picture, email_verified } =
+        credentials;
 
-        const playload = {userid,email };
-        const token = this.jwtService.sign(playload, { secret: process.env.JWT_SECRET });
-       console.log(token);
-       
+      let user = await this.userRepository.findOne({ where: { email: email } });
+      if (!user) {
+        user = await this.userRepository.create({
+          id: uuidv4(),
+          name: name ? name : null,
+          lastName: family_name ? family_name : null,
+          email: email,
+          email_verified: email_verified ? email_verified : null,
+          imgPictureUrl: picture ? picture : null,
+        });
+        this.userRepository.save(user);
+      }
+      const userid = user.id;
+
+      const playload = { userid, email };
+      const token = this.jwtService.sign(playload, {
+        secret: process.env.JWT_SECRET,
+      });
+
       return {
         message: 'User login',
         token,
