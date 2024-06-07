@@ -10,7 +10,7 @@ export class FeedbackService {
     @InjectRepository(Feedback)
     private feedbackRepository: Repository<Feedback>,
   ) {}
-
+  
   async seederFeedbacks() {
     data?.map(async (element) => {
       const feedback = new Feedback();

@@ -9,11 +9,13 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { userGuard } from '../auth/guards/guards.guard';
 
 @ApiTags('users')
 @Controller('users')
@@ -21,6 +23,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
+  @UseGuards(userGuard)
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
   @ApiQuery({ name: 'page', required: false })
