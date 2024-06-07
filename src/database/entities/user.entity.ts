@@ -22,7 +22,7 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: false })
+  @Column({ type: 'varchar', length: 30, nullable: true })
   lastName: string;
 
   @Column({ type: 'int', unique: true, nullable: true })
@@ -42,6 +42,10 @@ export class User {
 
   @Column({ type: 'varchar', length: 150, nullable: true })
   email: string;
+
+  @Column({ type: 'varchar', length: 150, nullable: true })
+  email_verified: string;
+
   @Column({ type: 'varchar', length: 255,nullable: true})
   imgPictureUrl: string;
 

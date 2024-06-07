@@ -25,17 +25,19 @@ export class AuthService {
     try {
       
       
-      const {  email, given_name
-        , family_name, picture } = credentials;
+      const {  email, given_name,name
+        , family_name, picture,email_verified } = credentials;
       
         let user = await this.userRepository.findOne({ where: { email: email } })
         if (!user) {
           user = await this.userRepository.create({
             id: uuidv4(),
-            name: given_name?given_name:null,
+            name: name?name:null,
             lastName: family_name ? family_name : null,
             email: email,
-            imgPictureUrl: picture ? picture:null
+            email_verified: email_verified? email_verified:null,
+            imgPictureUrl: picture ? picture : null
+            
             
           })
           this.userRepository.save(user)
@@ -46,6 +48,7 @@ export class AuthService {
 
         const playload = {userid,email };
         const token = this.jwtService.sign(playload, { secret: process.env.JWT_SECRET });
+       console.log(token);
        
       return {
         message: 'User login',
