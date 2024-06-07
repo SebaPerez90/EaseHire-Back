@@ -8,8 +8,8 @@ import { User } from 'src/database/entities/user.entity';
 import { JwtService } from '@nestjs/jwt';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Credential,User])],
+  imports: [TypeOrmModule.forFeature([Credential, User])],
   controllers: [AuthController],
-  providers: [AuthService, AuthRepository,JwtService],
+  providers: [AuthService, AuthRepository, JwtService],
 })
 export class AuthModule {}

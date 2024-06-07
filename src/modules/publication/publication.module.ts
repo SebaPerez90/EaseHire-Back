@@ -30,7 +30,7 @@ import { cloudinaryConfig } from 'src/database/config/cloudinary';
     UserRepository,
     AuthRepository,
     ProfesionsRepository,
-    cloudinaryConfig
+    cloudinaryConfig,
   ],
 })
 export class PublicationModule {}
