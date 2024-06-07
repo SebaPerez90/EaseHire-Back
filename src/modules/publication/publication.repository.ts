@@ -36,6 +36,8 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.title = element.title;
       newPublication.description = element.description;
       newPublication.category = element.category;
+      newPublication.location = element.location;
+      newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
       newPublication.date = formatDate;
       newPublication.time = formatTime;
@@ -73,11 +75,15 @@ export class PublicationsRepository implements OnModuleInit {
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
 
+    
+
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
       imgUrl: createPublication.imgUrl,
+      remoteWork: createPublication.remoteWork,
       category: createPublication.category,
+      location: createPublication.location,
       date: formatDate,
       time: formatTime,
     });
