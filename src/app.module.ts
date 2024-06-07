@@ -12,7 +12,6 @@ import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { EducationModule } from './modules/education/education.module';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -34,13 +33,6 @@ import { JwtModule } from '@nestjs/jwt';
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,
-    JwtModule.register({
-      global: true,
-      secret: process.env.JWT_SECRET,
-      signOptions: {
-        expiresIn: '60m',
-      },
-    }),
   ],
 
   controllers: [AppController],

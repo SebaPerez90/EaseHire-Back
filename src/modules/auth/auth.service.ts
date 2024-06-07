@@ -10,7 +10,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class AuthService {
   constructor(
@@ -18,7 +18,7 @@ export class AuthService {
     private credentialRepository: Repository<Credential>,
     private readonly jwtService: JwtService,
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
   ) {}
 
   async signIn(credentials) {
@@ -48,19 +48,16 @@ export class AuthService {
 
         const playload = {userid,email };
         const token = this.jwtService.sign(playload, { secret: process.env.JWT_SECRET });
-       
+       console.log(token);
        
       return {
         message: 'User login',
-        token
-    }
-      
+        token,
+      };
     } catch (error) {
-        
-    console.error('Error en signIn:', error);
-    throw new BadRequestException('failed to login'); 
-  }
-    
+      console.error('Error en signIn:', error);
+      throw new BadRequestException('failed to login');
+    }
   }
   signUp(credential: RegisterDto) {
     try {

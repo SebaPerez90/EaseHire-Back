@@ -50,20 +50,23 @@ export class PublicationController {
 
   @Post()
   @UseInterceptors(FileInterceptor('file'))
-  create(@Body() createPublicationDto: CreatePublicationDto, @UploadedFile(
-    new ParseFilePipe({
-      validators: [
-        new MaxFileSizeValidator({
-          maxSize: 200000,
-          message: 'El archivo es demasiado grande',
-        }),
-        new FileTypeValidator({
-          fileType: /(jpg|jpeg|png|svg|webp)/,
-        }),
-      ],
-    }),
-  )
-  file: Express.Multer.File,) {
+  create(
+    @Body() createPublicationDto: CreatePublicationDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({
+            maxSize: 200000,
+            message: 'El archivo es demasiado grande',
+          }),
+          new FileTypeValidator({
+            fileType: /(jpg|jpeg|png|svg|webp)/,
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  ) {
     return this.publicationService.create(createPublicationDto, file);
   }
 
