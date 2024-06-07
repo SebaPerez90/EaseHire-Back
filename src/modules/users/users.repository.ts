@@ -21,8 +21,7 @@ export class UserRepository {
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
-    private readonly jwtService: JwtService
-    
+    private readonly jwtService: JwtService,
   ) {}
 
   async removeUsers(id: string) {
@@ -45,21 +44,16 @@ export class UserRepository {
   }
 
   async gettoken(token: string) {
-    const validate = await this.jwtService.verify(token)
-    const user_id = validate.user_id
+    const validate = await this.jwtService.verify(token);
+    const user_id = validate.user_id;
     console.log(user_id);
-    
-    
   }
   async createUsers(createUserDto) {
     try {
-      
       const user = await this.usersRepository.save(createUserDto);
-      
+
       return user;
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   async findAll() {
@@ -128,7 +122,6 @@ export class UserRepository {
       const average = totalRate / rates.length;
       users[i].professionalRate = [average];
       await this.usersRepository.save(users[i]);
-      
     }
   }
 
