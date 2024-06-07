@@ -25,13 +25,16 @@ export class PublicationService {
     );
   }
 
-  async create(createPublicationDto: CreatePublicationDto, file: Express.Multer.File) {
+  async create(
+    createPublicationDto: CreatePublicationDto,
+    file: Express.Multer.File,
+  ) {
     const res = await this.publicationRepository.uploadImage(file);
     const publication = this.publicationRepository.create({
       ...createPublicationDto,
       imgUrl: res.secure_url,
-    })
-    return publication
+    });
+    return publication;
   }
 
   update(id: string, updatePublicationDto: UpdatePublicationDto) {

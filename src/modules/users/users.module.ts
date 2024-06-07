@@ -22,7 +22,6 @@ import { JwtService } from '@nestjs/jwt';
       Experience,
       Profesion,
       Feedback,
-      
     ]),
   ],
   controllers: [UsersController],
@@ -34,7 +33,6 @@ import { JwtService } from '@nestjs/jwt';
     ProfesionsRepository,
     FeedbackService,
     JwtService,
-    
   ],
 })
 export class UsersModule {}
