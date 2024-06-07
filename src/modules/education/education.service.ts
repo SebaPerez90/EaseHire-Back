@@ -28,6 +28,7 @@ export class EducationService implements OnModuleInit {
       education.studiesState = element.studiesState;
       education.startDate = element.startDate;
       education.endDate = element.endDate;
+      education.description = element.description;
       education.user = users[Math.round(Math.random() * 30)];
 
       await this.educationsRepository
@@ -46,7 +47,6 @@ export class EducationService implements OnModuleInit {
 
     if (educations.length === 0)
       throw new NotFoundException('the education list is still empty ');
-
     return educations;
   }
 
@@ -55,6 +55,7 @@ export class EducationService implements OnModuleInit {
     education.title = educationData.title;
     education.educationalEntity = educationData.educationalEntity;
     education.studiesState = educationData.studiesState;
+    education.description = educationData.description;
     education.startDate = educationData.startDate;
     education.endDate = educationData.endDate;
 
@@ -75,7 +76,6 @@ export class EducationService implements OnModuleInit {
       educationData,
     );
     await this.educationsRepository.save(updates);
-
     return {
       message: 'the history education has benn modified',
       educationFounded,
@@ -91,7 +91,6 @@ export class EducationService implements OnModuleInit {
       throw new NotFoundException('education is not found or not exists');
 
     await this.educationsRepository.remove(educationFounded);
-
     return {
       message: 'the history education has benn deleted',
       educationFounded,
