@@ -13,6 +13,7 @@ import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
+import { PaymentsModule } from './modules/payments/payments.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { JwtModule } from '@nestjs/jwt';
     FeedbackModule,
     EducationModule,
     AuthModule,
+    PaymentsModule,
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,
