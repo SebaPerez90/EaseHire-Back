@@ -36,7 +36,7 @@ export class PublicationService {
     //   imgUrl: res.secure_url,
     //   user:userid,
     // });
-    return this.publicationRepository.create(createPublicationDto,res,userid)
+    return this.publicationRepository.create(createPublicationDto, res, userid);
   }
 
   update(id: string, updatePublicationDto: UpdatePublicationDto) {

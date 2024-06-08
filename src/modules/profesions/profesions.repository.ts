@@ -29,7 +29,7 @@ export class ProfesionsRepository {
     const newProfession = await this.profesionsRepository.create({
       category: createProfesionDto.category,
       user: userid,
-    })
+    });
     return await this.profesionsRepository.save(newProfession);
   }
 

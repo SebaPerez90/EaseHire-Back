@@ -10,7 +10,6 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   UseGuards,
-  Headers,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';

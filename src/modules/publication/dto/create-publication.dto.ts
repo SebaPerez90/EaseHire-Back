@@ -18,5 +18,5 @@ export class CreatePublicationDto {
 
   imgUrl?: string;
 
-  user:string
+  user: string;
 }

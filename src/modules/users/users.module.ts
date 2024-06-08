@@ -22,7 +22,6 @@ import { JwtService } from '@nestjs/jwt';
       Experience,
       Profesion,
       Feedback,
-      
     ]),
   ],
   controllers: [UsersController],

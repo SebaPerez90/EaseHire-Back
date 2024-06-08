@@ -9,7 +9,7 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
-  Headers
+  Headers,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
@@ -17,14 +17,12 @@ import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 
-
 @ApiTags('profesions')
 @Controller('profesions')
 export class ProfesionsController {
   constructor(
     private readonly profesionsService: ProfesionsService,
-    private jwtService: JwtService
-
+    private jwtService: JwtService,
   ) {}
 
   @Get()
@@ -40,13 +38,11 @@ export class ProfesionsController {
   }
 
   @Post()
-  create(@Body() createProfesionDto: CreateProfesionDto,
-    @Headers() header
-  ) {
-    const secret=process.env.JWT_SECRET
-    const { userid } = this.jwtService.verify(header.authorization, { secret })
-    
-    return this.profesionsService.create(createProfesionDto,userid);
+  create(@Body() createProfesionDto: CreateProfesionDto, @Headers() header) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+
+    return this.profesionsService.create(createProfesionDto, userid);
   }
 
   @Patch(':id')

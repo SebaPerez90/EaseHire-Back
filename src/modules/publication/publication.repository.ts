@@ -70,11 +70,11 @@ export class PublicationsRepository implements OnModuleInit {
     });
   }
 
-  async create(createPublication: CreatePublicationDto,res,userid:any) {
+  async create(createPublication: CreatePublicationDto, res, userid: any) {
     const date = new Date();
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
-    
+
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -82,15 +82,13 @@ export class PublicationsRepository implements OnModuleInit {
       remoteWork: createPublication.remoteWork,
       category: createPublication.category,
       location: createPublication.location,
-      user:userid,
+      user: userid,
       date: formatDate,
       time: formatTime,
-      
-  
     });
-    
+
     console.log(createPublication);
-    
+
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
 

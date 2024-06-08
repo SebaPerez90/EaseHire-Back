@@ -1,10 +1,4 @@
-import {
-  BadGatewayException,
-  BadRequestException,
-  ConflictException,
-  Injectable,
-} from '@nestjs/common';
-import { RegisterDto } from './dto/register.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Credential } from 'src/database/entities/credentials.entity';
@@ -23,8 +17,7 @@ export class AuthService {
 
   async signIn(credentials) {
     try {
-      const { email, given_name, name, family_name, picture, email_verified } =
-        credentials;
+      const { email, name, family_name, picture, email_verified } = credentials;
 
       let user = await this.userRepository.findOne({ where: { email: email } });
       if (!user) {
@@ -54,11 +47,8 @@ export class AuthService {
       throw new BadRequestException('failed to login');
     }
   }
-  signUp(credential: RegisterDto) {
+  signUp() {
     try {
-      const { email } = credential;
-
-      // return this.authRepsoitory.signUp(credential)
     } catch (error) {
       throw new Error(error);
     }
