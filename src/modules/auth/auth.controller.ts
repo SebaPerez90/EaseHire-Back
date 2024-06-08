@@ -13,15 +13,15 @@ import { ApiTags } from '@nestjs/swagger';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  /*
-  Esto es solo para mockear datos. Emula un flow de registro
-  Desconozco el flow que va manejar "Auth0"
-  Esto solo sirve para que el front pueda tener algo para trabajar
-  */
   @Post('signIn')
   async signIn(@Body() credentials: any) {
     return await this.authService.signIn(credentials);
   }
+  /*
+    Esto es solo para mockear datos. Emula un flow de registro
+    Desconozco el flow que va manejar "Auth0"
+    Esto solo sirve para que el front pueda tener algo para trabajar
+    */
   @Post('signup')
   @UsePipes(new ValidationPipe())
   async simulateSignup() {}
