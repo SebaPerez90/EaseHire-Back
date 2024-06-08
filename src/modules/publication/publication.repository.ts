@@ -70,22 +70,27 @@ export class PublicationsRepository implements OnModuleInit {
     });
   }
 
-  async create(createPublication: CreatePublicationDto) {
+  async create(createPublication: CreatePublicationDto,res,userid:any) {
     const date = new Date();
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
-
+    
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
-      imgUrl: createPublication.imgUrl,
+      imgUrl: res.secure_url,
       remoteWork: createPublication.remoteWork,
       category: createPublication.category,
       location: createPublication.location,
+      user:userid,
       date: formatDate,
       time: formatTime,
+      
+  
     });
-
+    
+    console.log(createPublication);
+    
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
 
