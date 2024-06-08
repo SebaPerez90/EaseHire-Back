@@ -15,6 +15,8 @@ import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
 import { PaymentsModule } from './modules/payments/payments.module';
+import { APP_GUARD } from '@nestjs/core';
+import { userGuard } from './modules/auth/guards/guards.guard';
 
 @Module({
   imports: [
@@ -48,7 +50,13 @@ import { PaymentsModule } from './modules/payments/payments.module';
   ],
 
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: userGuard,
+    },
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
