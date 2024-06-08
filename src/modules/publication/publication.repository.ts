@@ -8,6 +8,8 @@ import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
 import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
+import { UploadApiResponse, v2 } from 'cloudinary';
+import toStream = require('buffer-to-stream');
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -34,6 +36,8 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.title = element.title;
       newPublication.description = element.description;
       newPublication.category = element.category;
+      newPublication.location = element.location;
+      newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
       newPublication.date = formatDate;
       newPublication.time = formatTime;
@@ -50,7 +54,23 @@ export class PublicationsRepository implements OnModuleInit {
     });
   }
 
-  async create(createPublication: CreatePublicationDto) {
+  async uploadImage(file: Express.Multer.File): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      const upload = v2.uploader.upload_stream(
+        { resource_type: 'auto' },
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(error);
+          }
+        },
+      );
+      toStream(file.buffer).pipe(upload);
+    });
+  }
+
+  async create(createPublication: CreatePublicationDto, res, userid: any) {
     const date = new Date();
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
@@ -58,11 +78,16 @@ export class PublicationsRepository implements OnModuleInit {
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
-      imgUrl: createPublication.imgUrl,
+      imgUrl: res.secure_url,
+      remoteWork: createPublication.remoteWork,
       category: createPublication.category,
+      location: createPublication.location,
+      user: userid,
       date: formatDate,
       time: formatTime,
     });
+
+    console.log(createPublication);
 
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;

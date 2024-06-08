@@ -25,8 +25,12 @@ export class ProfesionsRepository {
     });
   }
 
-  async create(createProfesionDto: CreateProfesionDto) {
-    return await this.profesionsRepository.save(createProfesionDto);
+  async create(createProfesionDto: CreateProfesionDto, userid) {
+    const newProfession = await this.profesionsRepository.create({
+      category: createProfesionDto.category,
+      user: userid,
+    });
+    return await this.profesionsRepository.save(newProfession);
   }
 
   async remove(id: string) {

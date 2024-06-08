@@ -19,15 +19,13 @@ export class AuthController {
   Desconozco el flow que va manejar "Auth0"
   Esto solo sirve para que el front pueda tener algo para trabajar
   */
- @Post('signIn') 
- async signIn(@Body() credentials: any) {
-   
-   return await this.authService.signIn(credentials);
- }
+  @Post('signIn')
+  async signIn(@Body() credentials: any) {
+    return await this.authService.signIn(credentials);
+  }
   @Post('signup')
   @UsePipes(new ValidationPipe())
   async simulateSignup(@Body() credentials: RegisterDto) {
-    return await this.authService.signUp(credentials);
+    return await this.authService.signUp();
   }
-  
 }

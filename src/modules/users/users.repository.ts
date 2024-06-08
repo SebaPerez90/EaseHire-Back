@@ -11,8 +11,6 @@ import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
 import { JwtService } from '@nestjs/jwt';
-import { token } from 'morgan';
-import { create } from 'domain';
 
 @Injectable()
 export class UserRepository {
@@ -21,8 +19,7 @@ export class UserRepository {
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
-    private readonly jwtService: JwtService
-    
+    private readonly jwtService: JwtService,
   ) {}
 
   async removeUsers(id: string) {
@@ -45,21 +42,16 @@ export class UserRepository {
   }
 
   async gettoken(token: string) {
-    const validate = await this.jwtService.verify(token)
-    const user_id = validate.user_id
+    const validate = await this.jwtService.verify(token);
+    const user_id = validate.user_id;
     console.log(user_id);
-    
-    
   }
   async createUsers(createUserDto) {
     try {
-      
       const user = await this.usersRepository.save(createUserDto);
-      
+
       return user;
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   }
 
   async findAll() {
@@ -84,7 +76,7 @@ export class UserRepository {
     }
 
     const usersFind = await this.usersRepository.find({
-      relations: { profesions: true, experiences: true },
+      relations: { profesions: true, experiences: true, educations: true },
       where,
       take: limit,
       skip: skip,
@@ -128,7 +120,6 @@ export class UserRepository {
       const average = totalRate / rates.length;
       users[i].professionalRate = [average];
       await this.usersRepository.save(users[i]);
-      
     }
   }
 

@@ -1,17 +1,10 @@
-import {
-  BadGatewayException,
-  BadRequestException,
-  ConflictException,
-  Injectable,
-} from '@nestjs/common';
-import { RegisterDto } from './dto/register.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
-import jwt from 'jsonwebtoken';
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class AuthService {
   constructor(
@@ -19,53 +12,43 @@ export class AuthService {
     private credentialRepository: Repository<Credential>,
     private readonly jwtService: JwtService,
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
   ) {}
 
   async signIn(credentials) {
     try {
-      
-      console.log(`entramos en signIn`);
-      console.log(`los datos que se estan ingresando son : ${{credentials}}`)
-      const { sub, email, given_name
-        , family_name, picture } = credentials;
-      
-        let user = await this.userRepository.findOne({ where: { email: email } })
-        if (!user) {
-          user = await this.userRepository.create({
-            id: uuidv4(),
-            name: given_name?given_name:null,
-            lastName: family_name ? family_name : null,
-            email: email,
-            imgPictureUrl: picture ? picture:null
-            
-          })
-          this.userRepository.save(user)
-          console.log(user);
-          
-        }
-        const userid = user.id
+      const { email, name, family_name, picture, email_verified } = credentials;
 
-        const playload = {userid,email };
-        const token = this.jwtService.sign(playload, { secret: process.env.JWT_SECRET });
-       
+      let user = await this.userRepository.findOne({ where: { email: email } });
+      if (!user) {
+        user = await this.userRepository.create({
+          id: uuidv4(),
+          name: name ? name : null,
+          lastName: family_name ? family_name : null,
+          email: email,
+          email_verified: email_verified ? email_verified : null,
+          imgPictureUrl: picture ? picture : null,
+        });
+        this.userRepository.save(user);
+      }
+      const userid = user.id;
+
+      const playload = { userid, email };
+      const token = this.jwtService.sign(playload, {
+        secret: process.env.JWT_SECRET,
+      });
+
       return {
         message: 'User login',
-        token
-    }
-      
+        token,
+      };
     } catch (error) {
-        
-    console.error('Error en signIn:', error);
-    throw new BadRequestException('failed to login'); 
+      console.error('Error en signIn:', error);
+      throw new BadRequestException('failed to login');
+    }
   }
-    
-  }
-  signUp(credential: RegisterDto) {
+  signUp() {
     try {
-      const { email } = credential;
-
-      // return this.authRepsoitory.signUp(credential)
     } catch (error) {
       throw new Error(error);
     }

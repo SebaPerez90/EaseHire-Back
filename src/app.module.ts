@@ -8,10 +8,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './modules/auth/auth.module';
 import { ExperienceModule } from './modules/experience/experience.module';
-import { EducationModule } from './modules/education/education.module';
 import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
+import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
 
 @Module({
@@ -29,9 +29,9 @@ import { JwtModule } from '@nestjs/jwt';
     ProfesionsModule,
     PublicationModule,
     FeedbackModule,
+    EducationModule,
     AuthModule,
     ExperienceModule,
-    EducationModule,
     FeedbackModule,
     NotificationsModule,
     JwtModule.register({
