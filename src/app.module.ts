@@ -14,6 +14,7 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
 import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
+import { PaymentsModule } from './modules/payments/payments.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { MorganMiddleware } from './middlewares/morgan.middleware';
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,
+    PaymentsModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
