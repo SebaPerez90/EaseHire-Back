@@ -72,7 +72,7 @@ export class EducationService implements OnModuleInit {
     if (!educationFounded)
       throw new NotFoundException('education is not found or not exists');
 
-    const updates = await this.educationsRepository.merge(
+    const updates = this.educationsRepository.merge(
       educationFounded,
       educationData,
     );

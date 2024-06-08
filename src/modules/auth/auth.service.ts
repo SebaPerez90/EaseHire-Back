@@ -1,14 +1,12 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Credential } from 'src/database/entities/credentials.entity';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(Credential)
     private readonly jwtService: JwtService,
     @InjectRepository(User)
     private userRepository: Repository<User>,
