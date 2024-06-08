@@ -9,7 +9,6 @@ import { v4 as uuidv4 } from 'uuid';
 export class AuthService {
   constructor(
     @InjectRepository(Credential)
-    private credentialRepository: Repository<Credential>,
     private readonly jwtService: JwtService,
     @InjectRepository(User)
     private userRepository: Repository<User>,
