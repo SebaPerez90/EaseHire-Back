@@ -14,14 +14,15 @@ import {
   ParseFilePipe,
   MaxFileSizeValidator,
   FileTypeValidator,
-  Headers,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PublicationService } from './publication.service';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JwtService } from '@nestjs/jwt';
+import { pipe } from 'rxjs';
 
 @ApiTags('publication')
 @Controller('publication')
