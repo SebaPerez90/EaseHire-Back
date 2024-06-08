@@ -26,6 +26,6 @@ export class AuthController {
   @Post('signup')
   @UsePipes(new ValidationPipe())
   async simulateSignup(@Body() credentials: RegisterDto) {
-    return await this.authService.signUp(credentials);
+    return await this.authService.signUp();
   }
 }
