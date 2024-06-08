@@ -6,7 +6,6 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { RegisterDto } from './dto/register.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('auth')
@@ -25,7 +24,5 @@ export class AuthController {
   */
   @Post('signup')
   @UsePipes(new ValidationPipe())
-  async simulateSignup(@Body() credentials: RegisterDto) {
-    return await this.authService.signUp(credentials);
-  }
+  async simulateSignup() {}
 }

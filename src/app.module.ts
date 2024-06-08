@@ -33,6 +33,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
     FeedbackModule,
     EducationModule,
     AuthModule,
+    PaymentsModule,
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,

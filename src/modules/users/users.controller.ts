@@ -16,11 +16,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { userGuard } from '../auth/guards/guards.guard';
+import { JwtService } from '@nestjs/jwt';
 
 @ApiTags('users')
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   @Get()
   @UseGuards(userGuard)

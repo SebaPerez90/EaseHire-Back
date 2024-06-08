@@ -28,13 +28,15 @@ export class PublicationService {
   async create(
     createPublicationDto: CreatePublicationDto,
     file: Express.Multer.File,
+    userid: any,
   ) {
     const res = await this.publicationRepository.uploadImage(file);
-    const publication = this.publicationRepository.create({
-      ...createPublicationDto,
-      imgUrl: res.secure_url,
-    });
-    return publication;
+    // const publication = await this.publicationRepository.create({
+    //   ...createPublicationDto,
+    //   imgUrl: res.secure_url,
+    //   user:userid,
+    // });
+    return this.publicationRepository.create(createPublicationDto, res, userid);
   }
 
   update(id: string, updatePublicationDto: UpdatePublicationDto) {

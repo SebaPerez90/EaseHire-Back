@@ -17,4 +17,6 @@ export class CreatePublicationDto {
   remoteWork: boolean;
 
   imgUrl?: string;
+
+  user: string;
 }
