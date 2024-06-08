@@ -6,6 +6,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { User } from 'src/database/entities/user.entity';
 import { EducationState } from 'src/enum/education.enum';
 
 export class PostEducationDto {
@@ -38,4 +39,6 @@ export class PostEducationDto {
   @MinLength(9)
   @IsNotEmpty()
   endDate: string;
+
+  user: User;
 }
