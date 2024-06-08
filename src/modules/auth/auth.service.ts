@@ -18,8 +18,7 @@ export class AuthService {
 
   async signIn(credentials) {
     try {
-      const { email, given_name, name, family_name, picture, email_verified } =
-        credentials;
+      const { email, name, family_name, picture, email_verified } = credentials;
 
       let user = await this.userRepository.findOne({ where: { email: email } });
       if (!user) {
@@ -52,6 +51,7 @@ export class AuthService {
   signUp(credential: RegisterDto) {
     try {
       const { email } = credential;
+      console.log(email);
 
       // return this.authRepsoitory.signUp(credential)
     } catch (error) {
