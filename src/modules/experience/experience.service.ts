@@ -69,7 +69,6 @@ export class ExperienceService {
     });
     if (!expFounded)
       throw new NotFoundException(`No found experience con id ${id}`);
-
     return await this.experienceRepository.update(id, experienceData);
   }
 }

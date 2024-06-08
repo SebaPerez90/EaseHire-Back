@@ -40,6 +40,7 @@ export class userGuard implements CanActivate {
     user.exp = new Date(user.exp * 1000);
 
     request.user = user;
+
     return true;
   }
 }

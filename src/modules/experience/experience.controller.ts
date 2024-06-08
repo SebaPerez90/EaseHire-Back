@@ -18,11 +18,11 @@ import { PostExperienceDto } from './dto/post-exp.dto';
 @Controller('experience')
 export class ExperienceController {
   constructor(private experienceService: ExperienceService) {}
+
   @Get()
   async getExperience() {
     return await this.experienceService.getExperiences();
   }
-
   @Post()
   @UsePipes(new ValidationPipe())
   postExperience(@Body() experienceData: PostExperienceDto) {

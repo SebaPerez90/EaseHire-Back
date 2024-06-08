@@ -50,7 +50,7 @@ export class EducationService implements OnModuleInit {
     return educations;
   }
 
-  async postEducation(educationData: PostEducationDto) {
+  async postEducation(educationData: PostEducationDto, req) {
     const education = new Education();
     education.title = educationData.title;
     education.educationalEntity = educationData.educationalEntity;
@@ -58,6 +58,7 @@ export class EducationService implements OnModuleInit {
     education.description = educationData.description;
     education.startDate = educationData.startDate;
     education.endDate = educationData.endDate;
+    education.user = await this.userRepository.findOne(req.user.userid);
 
     await this.educationsRepository.save(education);
     return { message: 'new history education has been added', education };
