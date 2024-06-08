@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
@@ -13,6 +13,7 @@ import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
 import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
+import { MorganMiddleware } from './middlewares/morgan.middleware';
 import { PaymentsModule } from './modules/payments/payments.module';
 
 @Module({
@@ -36,6 +37,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,
+    PaymentsModule,
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET,
@@ -48,4 +50,8 @@ import { PaymentsModule } from './modules/payments/payments.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(MorganMiddleware).forRoutes('*');
+  }
+}
