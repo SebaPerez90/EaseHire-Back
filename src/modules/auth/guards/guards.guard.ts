@@ -5,19 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Request } from 'express';
 import { Observable } from 'rxjs';
-
-function validate(request: Request) {
-  const authHeader = request.headers.authorization;
-
-  const auth = authHeader.split(' ')[1];
-
-  const [email, password] = auth.split(':');
-
-  if (!email || !password) return false;
-  return true;
-}
 
 @Injectable()
 export class userGuard implements CanActivate {
