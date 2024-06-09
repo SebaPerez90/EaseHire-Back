@@ -149,6 +149,8 @@ export class UserRepository {
       user.country = element.country;
       user.city = element.city;
       user.birthdate = element.birthdate;
+      user.bio = element.bio;
+      user.email = element.email;
       user.credential = await this.authRepository.simulateAuthFlow(element);
 
       await this.usersRepository
@@ -157,7 +159,7 @@ export class UserRepository {
         .into(User)
         .values(user)
         .orUpdate(
-          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate'],
+          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate', 'bio', 'email'],
           ['dni'],
         )
         .execute();
