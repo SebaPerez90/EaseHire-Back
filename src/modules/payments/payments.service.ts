@@ -10,7 +10,7 @@ export class PaymentsService {
       // accessToken: process.env.MP_ACCESS_TOKEN,
       accessToken:
         //token de cuenta de prueba
-        'TEST-2645491994986306-060612-bc53c7a7a78b3f301b30310ac4068618-1843561803',
+        'TEST-2645491994986306-060612-bc53c7a7a78b3f301b30310ac4068618-1843561803', 
     });
 
     try {
@@ -35,7 +35,7 @@ export class PaymentsService {
       const preference = new Preference(client);
       const result = await preference.create({ body });
       console.log(result);
-      res.json({ id: result.id });
+      res.json({ url: result.init_point });
     } catch (error) {
       if (error) console.log('algo salio muy muy mal');
     }

@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { BadRequestException, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -137,7 +137,7 @@ export class PublicationsRepository implements OnModuleInit {
       where.user = { city: city };
     }
 
-    const publicationsFind = await this.publicationsRepository.find({
+    const [publicationsFind, count] = await this.publicationsRepository.findAndCount({
       relations: {
         user: true,
       },
@@ -146,12 +146,9 @@ export class PublicationsRepository implements OnModuleInit {
       skip: skip,
     });
 
-    if (publicationsFind.length == 0)
-      throw new BadRequestException(
-        `No publications found with the provided filters`,
-      );
+    if (publicationsFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
 
-    return publicationsFind;
+    return {publicationsFind, count};
   }
 
   async update(id: string, updatePublication: UpdateProfesionDto) {

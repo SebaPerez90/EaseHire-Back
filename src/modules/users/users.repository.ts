@@ -75,16 +75,16 @@ export class UserRepository {
       where.city = city;
     }
 
-    const usersFind = await this.usersRepository.find({
+    const [usersFind, count] = await this.usersRepository.findAndCount({
       relations: { profesions: true, experiences: true, educations: true },
       where,
       take: limit,
       skip: skip,
     });
-    if (usersFind.length == 0)
-      throw new BadRequestException(`No users found with the provided filters`);
 
-    return usersFind;
+    if (usersFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
+    
+    return {usersFind, count}; ;
   }
 
   async test() {
