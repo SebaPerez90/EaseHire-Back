@@ -130,11 +130,11 @@ export class PublicationsRepository implements OnModuleInit {
     const where: any = {};
     if (category && city) {
       where.category = category;
-      where.user = { city: city };
+      where.location = city;
     } else if (category) {
       where.category = category;
     } else if (city) {
-      where.user = { city: city };
+      where.location =  city ;
     }
 
     const [publicationsFind, count] =
