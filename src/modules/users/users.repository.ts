@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -82,9 +78,10 @@ export class UserRepository {
       skip: skip,
     });
 
-    if (usersFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
-    
-    return {usersFind, count}; ;
+    if (usersFind.length === 0)
+      throw new NotFoundException(`No users were found whith those parameters`);
+
+    return { usersFind, count };
   }
 
   async test() {
@@ -159,7 +156,16 @@ export class UserRepository {
         .into(User)
         .values(user)
         .orUpdate(
-          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate', 'bio', 'email'],
+          [
+            'name',
+            'lastName',
+            'dni',
+            'country',
+            'city',
+            'birthdate',
+            'bio',
+            'email',
+          ],
           ['dni'],
         )
         .execute();

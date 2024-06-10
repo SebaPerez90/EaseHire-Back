@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { BadRequestException, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { NotFoundException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -137,18 +137,20 @@ export class PublicationsRepository implements OnModuleInit {
       where.user = { city: city };
     }
 
-    const [publicationsFind, count] = await this.publicationsRepository.findAndCount({
-      relations: {
-        user: true,
-      },
-      where,
-      take: limit,
-      skip: skip,
-    });
+    const [publicationsFind, count] =
+      await this.publicationsRepository.findAndCount({
+        relations: {
+          user: true,
+        },
+        where,
+        take: limit,
+        skip: skip,
+      });
 
-    if (publicationsFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
+    if (publicationsFind.length === 0)
+      throw new NotFoundException(`No users were found whith those parameters`);
 
-    return {publicationsFind, count};
+    return { publicationsFind, count };
   }
 
   async update(id: string, updatePublication: UpdateProfesionDto) {
