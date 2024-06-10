@@ -41,6 +41,11 @@ export class UsersController {
     return this.usersService.findUsers(category, city, page, limit);
   }
 
+  @Get('all')
+  findAll() {
+    return this.usersService.findAll();
+  }
+
   @Get('test')
   async averageRate() {
     return await this.usersService.averageRate();

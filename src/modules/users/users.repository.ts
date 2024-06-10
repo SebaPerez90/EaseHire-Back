@@ -56,7 +56,7 @@ export class UserRepository {
 
   async findAll() {
     const users = await this.usersRepository.find({
-      relations: { experiences: true },
+      relations: { experiences: true, educations: true, profesions: true },
     });
     return users;
   }
