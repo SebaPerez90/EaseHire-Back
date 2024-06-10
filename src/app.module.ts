@@ -16,7 +16,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
 import { PaymentsModule } from './modules/payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
-import { userGuard } from './modules/auth/guards/guards.guard';
+import { RolesGuard } from './guards/roles.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 @Module({
   imports: [
@@ -54,7 +55,11 @@ import { userGuard } from './modules/auth/guards/guards.guard';
     AppService,
     {
       provide: APP_GUARD,
-      useClass: userGuard,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
 })

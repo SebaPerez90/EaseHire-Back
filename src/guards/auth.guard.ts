@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { IS_PUBLIC_KEY } from 'src/decorators/is-public.decorator';
 
 @Injectable()
-export class userGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(
     private readonly jwtService: JwtService,
     private readonly reflector: Reflector,
