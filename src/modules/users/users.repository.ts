@@ -10,6 +10,7 @@ import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserRepository {
@@ -18,6 +19,7 @@ export class UserRepository {
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
+    private readonly jwtService: JwtService,
   ) {}
 
   async removeUsers(id: string) {
@@ -39,15 +41,22 @@ export class UserRepository {
     return user;
   }
 
+  async gettoken(token: string) {
+    const validate = await this.jwtService.verify(token);
+    const user_id = validate.user_id;
+    console.log(user_id);
+  }
   async createUsers(createUserDto) {
-    const user = await this.usersRepository.save(createUserDto);
+    try {
+      const user = await this.usersRepository.save(createUserDto);
 
-    return user;
+      return user;
+    } catch (error) {}
   }
 
   async findAll() {
     const users = await this.usersRepository.find({
-      relations: { experiences: true },
+      relations: { experiences: true, educations: true, profesions: true },
     });
     return users;
   }
@@ -66,16 +75,16 @@ export class UserRepository {
       where.city = city;
     }
 
-    const usersFind = await this.usersRepository.find({
+    const [usersFind, count] = await this.usersRepository.findAndCount({
       relations: { profesions: true, experiences: true, educations: true },
       where,
       take: limit,
       skip: skip,
     });
-    if (usersFind.length == 0)
-      throw new BadRequestException(`No users found with the provided filters`);
 
-    return usersFind;
+    if (usersFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
+    
+    return {usersFind, count}; ;
   }
 
   async test() {
@@ -140,6 +149,8 @@ export class UserRepository {
       user.country = element.country;
       user.city = element.city;
       user.birthdate = element.birthdate;
+      user.bio = element.bio;
+      user.email = element.email;
       user.credential = await this.authRepository.simulateAuthFlow(element);
 
       await this.usersRepository
@@ -148,7 +159,7 @@ export class UserRepository {
         .into(User)
         .values(user)
         .orUpdate(
-          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate'],
+          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate', 'bio', 'email'],
           ['dni'],
         )
         .execute();

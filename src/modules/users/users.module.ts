@@ -12,6 +12,7 @@ import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { Profesion } from 'src/database/entities/profesion.entity';
 import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { Feedback } from 'src/database/entities/feedback.entity';
     ExperienceService,
     ProfesionsRepository,
     FeedbackService,
+    JwtService,
   ],
 })
 export class UsersModule {}

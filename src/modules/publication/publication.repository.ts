@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { BadRequestException, OnModuleInit } from '@nestjs/common';
+import { BadRequestException, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -36,6 +36,8 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.title = element.title;
       newPublication.description = element.description;
       newPublication.category = element.category;
+      newPublication.location = element.location;
+      newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
       newPublication.date = formatDate;
       newPublication.time = formatTime;
@@ -68,7 +70,7 @@ export class PublicationsRepository implements OnModuleInit {
     });
   }
 
-  async create(createPublication: CreatePublicationDto) {
+  async create(createPublication: CreatePublicationDto, res, userid: any) {
     const date = new Date();
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
@@ -76,11 +78,16 @@ export class PublicationsRepository implements OnModuleInit {
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
-      imgUrl: createPublication.imgUrl,
+      imgUrl: res.secure_url,
+      remoteWork: createPublication.remoteWork,
       category: createPublication.category,
+      location: createPublication.location,
+      user: userid,
       date: formatDate,
       time: formatTime,
     });
+
+    console.log(createPublication);
 
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
@@ -130,7 +137,7 @@ export class PublicationsRepository implements OnModuleInit {
       where.user = { city: city };
     }
 
-    const publicationsFind = await this.publicationsRepository.find({
+    const [publicationsFind, count] = await this.publicationsRepository.findAndCount({
       relations: {
         user: true,
       },
@@ -139,12 +146,9 @@ export class PublicationsRepository implements OnModuleInit {
       skip: skip,
     });
 
-    if (publicationsFind.length == 0)
-      throw new BadRequestException(
-        `No publications found with the provided filters`,
-      );
+    if (publicationsFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
 
-    return publicationsFind;
+    return {publicationsFind, count};
   }
 
   async update(id: string, updatePublication: UpdateProfesionDto) {

@@ -1,6 +1,23 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { EducationService } from './education.service';
+import { PostEducationDto } from './dto/post-education.dto';
+import { UpdateEducationDto } from './dto/update-education-dto';
+import { userGuard } from '../auth/guards/guards.guard';
+import { Request } from 'express';
 
 @ApiTags('education')
 @Controller('education')
@@ -8,22 +25,29 @@ export class EducationController {
   constructor(private educationService: EducationService) {}
 
   @Get()
-  async getStudies() {
-    return await this.educationService.getAllEducations();
+  getStudies() {
+    return this.educationService.getAllEducations();
   }
 
   @Post()
-  create() {
-    return 'create a study';
+  @UseGuards(userGuard)
+  @UsePipes(new ValidationPipe())
+  postEducation(@Body() educationData: PostEducationDto, @Req() req: Request) {
+    return this.educationService.postEducation(educationData, req);
   }
 
-  @Patch()
-  update() {
-    return 'update a study';
+  @Patch(':id')
+  @UsePipes(new ValidationPipe())
+  updateEducation(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() educationData: UpdateEducationDto,
+  ) {
+    return this.educationService.updateEducation(educationData, id);
   }
 
-  @Delete()
-  delete() {
-    return 'delete a study';
+  @Delete(':id')
+  @UsePipes(new ValidationPipe())
+  deleteEducation(@Param('id', ParseUUIDPipe) id: string) {
+    return this.educationService.deleteEducation(id);
   }
 }

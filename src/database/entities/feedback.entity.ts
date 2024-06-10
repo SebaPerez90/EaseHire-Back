@@ -1,11 +1,11 @@
 import {
   Column,
   Entity,
-  // JoinColumn,
-  // OneToOne,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-// import { Experience } from './experience.entity';
+import { User } from './user.entity';
 
 @Entity({ name: 'feedbacks' })
 export class Feedback {
@@ -18,4 +18,7 @@ export class Feedback {
   @Column({ type: 'varchar', length: 300, nullable: true })
   description: string;
 
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'user_ID' })
+  user: User;
 }

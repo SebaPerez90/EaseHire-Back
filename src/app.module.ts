@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
@@ -11,6 +11,12 @@ import { ExperienceModule } from './modules/experience/experience.module';
 import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
+import { EducationModule } from './modules/education/education.module';
+import { JwtModule } from '@nestjs/jwt';
+import { MorganMiddleware } from './middlewares/morgan.middleware';
+import { PaymentsModule } from './modules/payments/payments.module';
+import { APP_GUARD } from '@nestjs/core';
+import { userGuard } from './modules/auth/guards/guards.guard';
 
 @Module({
   imports: [
@@ -27,13 +33,33 @@ import { NotificationsModule } from './modules/notifications/notifications.modul
     ProfesionsModule,
     PublicationModule,
     FeedbackModule,
+    EducationModule,
     AuthModule,
+    PaymentsModule,
     ExperienceModule,
     FeedbackModule,
     NotificationsModule,
+    PaymentsModule,
+    JwtModule.register({
+      global: true,
+      secret: process.env.JWT_SECRET,
+      signOptions: {
+        expiresIn: '60m',
+      },
+    }),
   ],
 
   controllers: [AppController],
-  providers: [AppService, UsersModule],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: userGuard,
+    },
+  ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(MorganMiddleware).forRoutes('*');
+  }
+}

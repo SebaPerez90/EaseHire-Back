@@ -9,16 +9,21 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  Headers,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { JwtService } from '@nestjs/jwt';
 
 @ApiTags('profesions')
 @Controller('profesions')
 export class ProfesionsController {
-  constructor(private readonly profesionsService: ProfesionsService) {}
+  constructor(
+    private readonly profesionsService: ProfesionsService,
+    private jwtService: JwtService,
+  ) {}
 
   @Get()
   @ApiQuery({ name: 'category', required: false })
@@ -33,8 +38,11 @@ export class ProfesionsController {
   }
 
   @Post()
-  create(@Body() createProfesionDto: CreateProfesionDto) {
-    return this.profesionsService.create(createProfesionDto);
+  create(@Body() createProfesionDto: CreateProfesionDto, @Headers() header) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+
+    return this.profesionsService.create(createProfesionDto, userid);
   }
 
   @Patch(':id')
