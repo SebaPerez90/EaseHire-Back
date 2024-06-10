@@ -134,7 +134,7 @@ export class PublicationsRepository implements OnModuleInit {
     } else if (category) {
       where.category = category;
     } else if (city) {
-      where.location =  city ;
+      where.location = city;
     }
 
     const [publicationsFind, count] =
