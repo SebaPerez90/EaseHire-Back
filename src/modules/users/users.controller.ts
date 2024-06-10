@@ -9,14 +9,14 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
-  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { userGuard } from '../auth/guards/guards.guard';
 import { JwtService } from '@nestjs/jwt';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from 'src/enum/role.enum';
 
 @ApiTags('users')
 @Controller('users')
@@ -27,7 +27,7 @@ export class UsersController {
   ) {}
 
   @Get()
-  @UseGuards(userGuard)
+  // @Roles(Role.ADMIN)
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
   @ApiQuery({ name: 'page', required: false })
