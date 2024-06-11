@@ -58,8 +58,8 @@ export class User {
   @Column({ type: 'boolean', nullable: true, default: true })
   newMember: boolean;
 
-  @Column({ type: 'enum', enum: Role, default: Role.USER, nullable: true })
-  role: Role;
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  role: Role[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })

@@ -8,7 +8,6 @@ import {
   Patch,
   Post,
   Req,
-  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';

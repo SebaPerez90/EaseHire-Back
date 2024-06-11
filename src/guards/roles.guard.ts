@@ -10,7 +10,7 @@ import { Role } from 'src/enum/role.enum';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-  constructor(private readonly reflector: Reflector) {}
+  constructor(private reflector: Reflector) {}
 
   canActivate(context: ExecutionContext): boolean {
     try {
@@ -19,9 +19,9 @@ export class RolesGuard implements CanActivate {
         [context.getHandler(), context.getClass()],
       );
       if (!requiredRoles) return true;
-      const { user } = context.switchToHttp().getRequest();
+      const { currentUser } = context.switchToHttp().getRequest();
 
-      return requiredRoles.some((roles) => user.role?.includes(roles));
+      return requiredRoles.some((roles) => currentUser.role?.includes(roles));
     } catch (error) {
       if (error)
         throw new UnauthorizedException('you need login with your credentials');
