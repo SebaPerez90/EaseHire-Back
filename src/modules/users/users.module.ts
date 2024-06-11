@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { UserRepository } from './users.repository';
@@ -13,6 +13,7 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { JwtService } from '@nestjs/jwt';
+import { PopulateUserMiddleware } from 'src/middlewares/populateUser.middleware';
 
 @Module({
   imports: [
@@ -35,4 +36,8 @@ import { JwtService } from '@nestjs/jwt';
     JwtService,
   ],
 })
-export class UsersModule {}
+export class UsersModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(PopulateUserMiddleware).forRoutes('*');
+  }
+}
