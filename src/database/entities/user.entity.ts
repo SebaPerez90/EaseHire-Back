@@ -12,6 +12,7 @@ import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
+import { Role } from 'src/enum/role.enum';
 
 @Entity({ name: 'users' })
 export class User {
@@ -56,6 +57,9 @@ export class User {
 
   @Column({ type: 'boolean', nullable: true, default: true })
   newMember: boolean;
+
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  role: Role[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })

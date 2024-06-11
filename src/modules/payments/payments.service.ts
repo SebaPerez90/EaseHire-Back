@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 
 @Injectable()
 export class PaymentsService {
-  async createPaymenttt(req: Request, res: Response) {
+  async createPaymenttt(req: Request) {
     const client = new MercadoPagoConfig({
       //toke cuenta personal
       // accessToken: process.env.MP_ACCESS_TOKEN,
       accessToken:
         //token de cuenta de prueba
-        'TEST-2645491994986306-060612-bc53c7a7a78b3f301b30310ac4068618-1843561803', 
+        'TEST-2645491994986306-060612-bc53c7a7a78b3f301b30310ac4068618-1843561803',
     });
 
     try {
@@ -34,10 +34,10 @@ export class PaymentsService {
 
       const preference = new Preference(client);
       const result = await preference.create({ body });
-      console.log(result);
-      res.json({ url: result.init_point });
+      return { url: result.init_point };
     } catch (error) {
-      if (error) console.log('algo salio muy muy mal');
+      if (error)
+        console.log('something goes wrong in payment proceess. Plis try again');
     }
   }
 

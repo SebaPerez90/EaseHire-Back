@@ -22,6 +22,7 @@ import { UpdatePublicationDto } from './dto/update-publication.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtService } from '@nestjs/jwt';
+import { Public } from 'src/decorators/is-public.decorator';
 
 @ApiTags('publication')
 @Controller('publication')
@@ -32,6 +33,7 @@ export class PublicationController {
   ) {}
 
   @Get()
+  @Public()
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
   @ApiQuery({ name: 'page', required: false })
@@ -48,6 +50,12 @@ export class PublicationController {
       page,
       limit,
     );
+  }
+
+  @Public()
+  @Get('category')
+  findAllCategories() {
+    return this.publicationService.findAllCategories();
   }
 
   @Post()

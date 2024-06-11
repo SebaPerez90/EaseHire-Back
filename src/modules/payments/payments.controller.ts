@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Req, Res } from '@nestjs/common';
+import { Controller, Get, Post, Req } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
-import { Request, Response } from 'express';
+import { Request } from 'express';
 // import { NextFunction, Request, Response } from 'express';
 
 @Controller('payments')
@@ -12,7 +12,7 @@ export class PaymentsController {
     return this.paymentService.getPyaMethods();
   }
   @Post()
-  createPaymenttt(@Req() req: Request, @Res() res: Response) {
-    return this.paymentService.createPaymenttt(req, res);
+  createPaymenttt(@Req() req: Request) {
+    return this.paymentService.createPaymenttt(req);
   }
 }

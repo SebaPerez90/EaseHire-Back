@@ -11,4 +11,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   city?: string;
   birthdate?: string;
   availability?: boolean;
+  bio?: string;
+  imgPictureUrl?: string;
+  availableToWork?: boolean;
+  newMember?: boolean;
+
+
 }

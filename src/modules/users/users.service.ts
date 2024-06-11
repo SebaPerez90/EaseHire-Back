@@ -24,7 +24,8 @@ export class UsersService {
     return this.usersRepository.findAll();
   }
 
-  create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto) {
+    
     return this.usersRepository.createUsers(createUserDto);
   }
 
@@ -32,8 +33,9 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return this.usersRepository.updateUser(id, updateUserDto);
+  async update(id: string, updateUserDto: UpdateUserDto,file: Express.Multer.File) {
+    const res = await this.usersRepository.uploadImageUser(file);
+    return this.usersRepository.updateUser(id, updateUserDto,res);
   }
 
   remove(id: string) {

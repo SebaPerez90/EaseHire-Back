@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { BadRequestException, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { NotFoundException, OnModuleInit, CanActivate } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -10,6 +10,7 @@ import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -128,27 +129,29 @@ export class PublicationsRepository implements OnModuleInit {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (category && city) {
+    if (category && city) {      
       where.category = category;
-      where.user = { city: city };
+      where.location = city;
     } else if (category) {
       where.category = category;
     } else if (city) {
-      where.user = { city: city };
+      where.location = city;
     }
 
-    const [publicationsFind, count] = await this.publicationsRepository.findAndCount({
-      relations: {
-        user: true,
-      },
-      where,
-      take: limit,
-      skip: skip,
-    });
+    const [publicationsFind, count] =
+      await this.publicationsRepository.findAndCount({
+        relations: {
+          user: true,
+        },
+        where,
+        take: limit,
+        skip: skip,
+      });
 
-    if (publicationsFind.length === 0) throw new NotFoundException(`No users were found whith those parameters`);
+    if (publicationsFind.length === 0)
+      throw new NotFoundException(`No users were found whith those parameters`);
 
-    return {publicationsFind, count};
+    return { publicationsFind, count };
   }
 
   async update(id: string, updatePublication: UpdateProfesionDto) {
@@ -156,5 +159,17 @@ export class PublicationsRepository implements OnModuleInit {
   }
   async remove(id: string) {
     return await this.publicationsRepository.delete(id);
+  }
+
+  async findAllCategories() {
+    const publications = await this.publicationsRepository.find();  
+
+    const category =  publications.map(({ category, ...publications}) => category);
+    const categoryReturn = [...new Set(category)]
+
+    const location =  publications.map(({ location, ...publications}) => location); 
+    const locationReturn = [...new Set(location)]
+    
+    return {categoryReturn, locationReturn}
   }
 }
