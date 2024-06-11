@@ -71,7 +71,7 @@ export class UsersController {
   }
 
   @Patch(':id')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('imgPictureUrl'))
   update(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
@@ -89,10 +89,7 @@ export class UsersController {
       }),
     )
     file: Express.Multer.File,
-  )
-  {
-    console.log(`entramos en el controller`);
-
+  ) {
     return this.usersService.update(id, updateUserDto, file);
   }
 
