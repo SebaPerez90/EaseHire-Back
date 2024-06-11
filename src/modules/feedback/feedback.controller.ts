@@ -15,15 +15,31 @@ import { FeedbackService } from './feedback.service';
 import { Request } from 'express';
 import { PostFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from 'src/database/entities/feedback.entity';
+import { Public } from 'src/decorators/is-public.decorator';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from 'src/enum/role.enum';
 
 @Controller('feedback')
 export class FeedbackController {
   constructor(private feedbackService: FeedbackService) {}
 
   @Get()
-  findAll() {
+  // @Roles(Role.USER)
+  @Public()
+  getAllFeedbacks() {
     return this.feedbackService.getAllFeedbacks();
   }
+
+  /*
+   * Filtro de palabras obsenas
+   */
+  // @Get(':id')
+  // // @Roles(Role.USER)
+  // @Public()
+  // getFeedback(@Param('id', ParseUUIDPipe) id: string) {
+  //   return this.feedbackService.getFeedback(id);
+  // }
+
   @Post()
   @UsePipes(new ValidationPipe())
   postFeedback(@Body() feedbackData: PostFeedbackDto, @Req() req: Request) {
@@ -31,7 +47,8 @@ export class FeedbackController {
   }
 
   @Patch(':id')
-  @UsePipes(new ValidationPipe())
+  // @Roles(Role.USER)
+  @Public()
   editFeedback(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() feedbackData: Partial<Feedback>,
@@ -39,12 +56,9 @@ export class FeedbackController {
     return this.feedbackService.editFeedback(feedbackData, id);
   }
 
-  /*
-  Este necesita revisión porque tiene un problema al ser 
-  eliminado por la relacion a la tabla "experiences".
-  pendiente a revisión
-  */
   @Delete(':id')
+  // @Roles(Role.ADMIN)
+  @Public()
   removeFeedback(@Param('id', ParseUUIDPipe) id: string) {
     return this.feedbackService.deleteFeedback(id);
   }

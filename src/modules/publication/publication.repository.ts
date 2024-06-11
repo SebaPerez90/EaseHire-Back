@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { NotFoundException, OnModuleInit, CanActivate } from '@nestjs/common';
+import { NotFoundException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -128,7 +128,8 @@ export class PublicationsRepository implements OnModuleInit {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (category && city) {      where.category = category;
+    if (category && city) {
+      where.category = category;
       where.location = city;
     } else if (category) {
       where.category = category;
@@ -160,7 +161,8 @@ export class PublicationsRepository implements OnModuleInit {
   }
 
   async findAllCategories() {
-    const publications = await this.publicationsRepository.find();  
-    return publications.map(({ category, ...publications}) => category);
+    const publications = await this.publicationsRepository.find();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return publications.map(({ category, ...publications }) => category);
   }
 }

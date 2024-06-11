@@ -25,7 +25,6 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
-    
     return this.usersRepository.createUsers(createUserDto);
   }
 
@@ -33,9 +32,13 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto,file: Express.Multer.File) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    file: Express.Multer.File,
+  ) {
     const res = await this.usersRepository.uploadImageUser(file);
-    return this.usersRepository.updateUser(id, updateUserDto,res);
+    return this.usersRepository.updateUser(id, updateUserDto, res);
   }
 
   remove(id: string) {

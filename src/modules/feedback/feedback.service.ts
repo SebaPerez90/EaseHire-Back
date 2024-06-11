@@ -6,6 +6,7 @@ import * as data from '../../utils/mock-feedbacks.json';
 import { PostFeedbackDto } from './dto/create-feedback.dto';
 import { UserRepository } from '../users/users.repository';
 import { User } from 'src/database/entities/user.entity';
+import * as forbidden_words from '../../utils/forbidden-words.json';
 
 @Injectable()
 export class FeedbackService {
@@ -30,6 +31,17 @@ export class FeedbackService {
 
     if (feedbacks.length === 0)
       throw new NotFoundException('The feedback list is still empty');
+
+    const approvedFeedbacks: Feedback[] = [];
+
+    feedbacks.map(async (element) => {
+      if (element.blocked === true) {
+        const blocked = await this.feedbackRepository.findOneBy({
+          id: element.id,
+        });
+        approvedFeedbacks.push(blocked);
+      }
+    });
     return feedbacks;
   }
 
@@ -64,21 +76,45 @@ export class FeedbackService {
     };
   }
 
-  /*
-  Este necesita revisión porque tiene un problema al ser 
-  eliminado por la relacion a la tabla "experiences".
-  pendiente a revisión
-  */
   async deleteFeedback(id) {
     const feedbackFounded = await this.feedbackRepository.findOneBy({
       id: id,
     });
     if (!feedbackFounded)
       throw new NotFoundException('The feedback was not found or not exists');
-    await this.feedbackRepository.remove(feedbackFounded);
+
+    feedbackFounded.blocked = true;
+    await this.feedbackRepository.save(feedbackFounded);
     return {
-      message: 'Your feedback has benn deleted',
+      message: 'The feedback has been blocked',
       feedbackFounded,
     };
+  }
+
+  /*
+   * Filtro de palabras obsenas
+   */
+  private async getFeedback(id) {
+    const feedbackFounded = await this.feedbackRepository.findOneBy({
+      id: id,
+    });
+    if (!feedbackFounded)
+      throw new NotFoundException('The feedback was not found or not exists');
+
+    const feedback = feedbackFounded.description.split(/\s+/);
+    const words = forbidden_words.forbidden_words;
+    const matches: string[] = [];
+
+    words.map((element) => {
+      for (let i = 0; i < feedback.length; i++) {
+        if (feedback[i] === element) matches.push(feedback[i]);
+      }
+    });
+
+    matches.length > 0
+      ? console.log('Forbidden words found:', matches)
+      : console.log('No forbidden words found');
+
+    return feedbackFounded;
   }
 }

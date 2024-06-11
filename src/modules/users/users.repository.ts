@@ -28,7 +28,7 @@ export class UserRepository {
           if (result) {
             resolve(result);
           } else {
-            reject(new Error (`Error uploading image`));
+            reject(new Error(`Error uploading image`));
           }
         },
       );
@@ -42,8 +42,7 @@ export class UserRepository {
     return user;
   }
 
-  async updateUser(id: string, UpdateUserDto: UpdateUserDto, res)
-  {
+  async updateUser(id: string, UpdateUserDto: UpdateUserDto, res) {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
     }

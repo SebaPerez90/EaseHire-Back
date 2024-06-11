@@ -24,7 +24,7 @@ export class PublicationService {
       limit,
     );
   }
-  
+
   findAllCategories() {
     return this.publicationRepository.findAllCategories();
   }
