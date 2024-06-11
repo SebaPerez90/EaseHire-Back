@@ -28,18 +28,17 @@ export class AuthGuard implements CanActivate {
 
     if (!token) throw new UnauthorizedException('Token was is not sent');
     try {
-      
       const secret = process.env.JWT_SECRET;
       const user = this.jwtService.verify(token, { secret });
-      
+
       if (!user) throw new UnauthorizedException('Error validating token');
       user.exp = new Date(user.exp * 1000);
-      
+
       request.user = user;
-      
+
       return true;
     } catch (error) {
-      throw new UnauthorizedException(`Invalid token`)
+      throw new UnauthorizedException(`Invalid token`);
     }
   }
 }
