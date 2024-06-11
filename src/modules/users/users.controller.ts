@@ -9,6 +9,11 @@ import {
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  UploadedFile,
+  ParseFilePipe,
+  MaxFileSizeValidator,
+  FileTypeValidator,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -16,6 +21,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { Public } from 'src/decorators/is-public.decorator';
+import { FileInterceptor } from '@nestjs/platform-express';
 // import { Roles } from 'src/decorators/role.decorator';
 // import { Role } from 'src/enum/role.enum';
 
@@ -65,8 +71,29 @@ export class UsersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(id, updateUserDto);
+  @UseInterceptors(FileInterceptor('file'))
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new MaxFileSizeValidator({
+            maxSize: 200000,
+            message: 'El archivo es demasiado grande',
+          }),
+          new FileTypeValidator({
+            fileType: /(jpg|jpeg|png|svg|webp)/,
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+  )
+  {
+    console.log(`entramos en el controller`);
+
+    return this.usersService.update(id, updateUserDto, file);
   }
 
   @Delete(':id')

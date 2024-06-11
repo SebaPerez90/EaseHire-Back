@@ -7,6 +7,8 @@ import * as data from '../../utils/mock-users.json';
 import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
 import { JwtService } from '@nestjs/jwt';
+import { UploadApiResponse, v2 } from 'cloudinary';
+import toStream = require('buffer-to-stream');
 
 @Injectable()
 export class UserRepository {
@@ -18,13 +20,33 @@ export class UserRepository {
     private readonly jwtService: JwtService,
   ) {}
 
+  async uploadImageUser(file: Express.Multer.File): Promise<UploadApiResponse> {
+    return new Promise((resolve, reject) => {
+      const upload = v2.uploader.upload_stream(
+        { resource_type: 'auto' },
+        (error, result) => {
+          if (result) {
+            resolve(result);
+          } else {
+            reject(new Error (`Error uploading image`));
+          }
+        },
+      );
+      toStream(file.buffer).pipe(upload);
+    });
+  }
+
   async removeUsers(id: string) {
     const user = await this.usersRepository.findOneBy({ id });
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
 
-  async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
+  async updateUser(id: string, UpdateUserDto: UpdateUserDto, res)
+  {
+    if (res && res.secure_url) {
+      UpdateUserDto.imgPictureUrl = res.secure_url;
+    }
     await this.usersRepository.update(id, UpdateUserDto);
     const updateUser = await this.usersRepository.findOneBy({ id });
     if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
@@ -46,7 +68,7 @@ export class UserRepository {
   }
   async createUsers(createUserDto) {
     try {
-      const user = await this.usersRepository.save(createUserDto);
+      const user = await this.usersRepository.create(createUserDto);
 
       return user;
     } catch (error) {}
