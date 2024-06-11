@@ -24,6 +24,10 @@ export class PublicationService {
       limit,
     );
   }
+  
+  findAllCategories() {
+    return this.publicationRepository.findAllCategories();
+  }
 
   async create(
     createPublicationDto: CreatePublicationDto,

@@ -52,6 +52,12 @@ export class PublicationController {
     );
   }
 
+  @Public()
+  @Get('category')
+  findAllCategories() {
+    return this.publicationService.findAllCategories();
+  }
+
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   create(
