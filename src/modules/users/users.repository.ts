@@ -32,10 +32,10 @@ export class UserRepository {
   }
 
   async findOne(id: string) {
-    const user = await this.usersRepository.findOne({
-      where: { id },
-      relations: { experiences: true, educations: true, profesions: true },
-    });
+  const user = await this.usersRepository.findOne({
+    where:{ id },
+    relations: { experiences: true, educations: true, profesions: true }
+  });
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
@@ -43,7 +43,6 @@ export class UserRepository {
   async gettoken(token: string) {
     const validate = await this.jwtService.verify(token);
     const user_id = validate.user_id;
-    console.log(user_id);
   }
   async createUsers(createUserDto) {
     try {

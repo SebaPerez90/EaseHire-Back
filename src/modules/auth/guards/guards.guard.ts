@@ -24,18 +24,22 @@ export class userGuard implements CanActivate {
     ]);
     if (isPublic) return true;
     const request = context.switchToHttp().getRequest();
-    const token = request.headers.authorization?.split(' ')[0];
+    const token = request.headers.authorization;
 
-    if (!token) throw new UnauthorizedException('No se envio token');
-
-    const secret = process.env.JWT_SECRET;
-    const user = this.jwtService.verify(token, { secret });
-
-    if (!user) throw new UnauthorizedException('Error al validar token');
-    user.exp = new Date(user.exp * 1000);
-
-    request.user = user;
-
-    return true;
+    if (!token) throw new UnauthorizedException('Token was is not sent');
+    try {
+      
+      const secret = process.env.JWT_SECRET;
+      const user = this.jwtService.verify(token, { secret });
+      
+      if (!user) throw new UnauthorizedException('Error validating token');
+      user.exp = new Date(user.exp * 1000);
+      
+      request.user = user;
+      
+      return true;
+    } catch (error) {
+      throw new UnauthorizedException(`Invalid token`)
+    }
   }
 }
