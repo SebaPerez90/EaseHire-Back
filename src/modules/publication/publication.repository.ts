@@ -10,6 +10,7 @@ import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -128,7 +129,8 @@ export class PublicationsRepository implements OnModuleInit {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (category && city) {      where.category = category;
+    if (category && city) {      
+      where.category = category;
       where.location = city;
     } else if (category) {
       where.category = category;
@@ -161,6 +163,13 @@ export class PublicationsRepository implements OnModuleInit {
 
   async findAllCategories() {
     const publications = await this.publicationsRepository.find();  
-    return publications.map(({ category, ...publications}) => category);
+
+    const category =  publications.map(({ category, ...publications}) => category);
+    const categoryReturn = [...new Set(category)]
+
+    const location =  publications.map(({ location, ...publications}) => location); 
+    const locationReturn = [...new Set(location)]
+    
+    return {categoryReturn, locationReturn}
   }
 }
