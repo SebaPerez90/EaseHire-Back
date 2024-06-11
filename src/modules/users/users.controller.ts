@@ -27,7 +27,6 @@ export class UsersController {
   ) {}
 
   @Get()
-  @Roles(Role.ADMIN)
   @ApiQuery({ name: 'category', required: false })
   @ApiQuery({ name: 'city', required: false })
   @ApiQuery({ name: 'page', required: false })
