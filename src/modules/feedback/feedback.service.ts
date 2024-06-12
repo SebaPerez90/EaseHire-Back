@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -52,6 +56,13 @@ export class FeedbackService {
     feedback.description = feedbackData.description;
     feedback.user = user;
 
+    const response = await this.check(feedbackData);
+
+    if (response) {
+      feedback.isOfensive = true;
+      await this.feedbackRepository.save(feedback);
+      throw new BadRequestException(response);
+    }
     await this.feedbackRepository.save(feedback);
     return { message: 'You feebacks has been send successfully' };
   }
@@ -92,29 +103,28 @@ export class FeedbackService {
   }
 
   /*
-   * Filtro de palabras obsenas
+   * Filtro de palabras obsenas: en caso de usar
+   * algunas del json "fobidden-words.json".
+   * Automaticamente la publicacion setea como agresiva.
+   * la podes editar antes de que sea bloqueada por un
+   * ADMIN
    */
-  private async getFeedback(id) {
-    const feedbackFounded = await this.feedbackRepository.findOneBy({
-      id: id,
-    });
-    if (!feedbackFounded)
-      throw new NotFoundException('The feedback was not found or not exists');
-
-    const feedback = feedbackFounded.description.split(/\s+/);
+  private async check(data) {
+    const feedback = data.description.split(/\s+/);
     const words = forbidden_words.forbidden_words;
     const matches: string[] = [];
 
     words.map((element) => {
       for (let i = 0; i < feedback.length; i++) {
-        if (feedback[i] === element) matches.push(feedback[i]);
+        if (feedback[i] === element) {
+          matches.push(feedback[i]);
+        }
       }
     });
-
-    matches.length > 0
-      ? console.log('Forbidden words found:', matches)
-      : console.log('No forbidden words found');
-
-    return feedbackFounded;
+    return {
+      message:
+        'Please check your comment! Remember that the applications policies do not allow words that promote violence or abuse',
+      matches,
+    };
   }
 }

@@ -30,16 +30,6 @@ export class FeedbackController {
     return this.feedbackService.getAllFeedbacks();
   }
 
-  /*
-   * Filtro de palabras obsenas
-   */
-  // @Get(':id')
-  // // @Roles(Role.USER)
-  // @Public()
-  // getFeedback(@Param('id', ParseUUIDPipe) id: string) {
-  //   return this.feedbackService.getFeedback(id);
-  // }
-
   @Post()
   @UsePipes(new ValidationPipe())
   postFeedback(@Body() feedbackData: PostFeedbackDto, @Req() req: Request) {
@@ -59,7 +49,7 @@ export class FeedbackController {
   @Delete(':id')
   // @Roles(Role.ADMIN)
   @Public()
-  removeFeedback(@Param('id', ParseUUIDPipe) id: string) {
-    return this.feedbackService.deleteFeedback(id);
+  removeFeedback() {
+    return this.feedbackService.deleteFeedback()
   }
 }
