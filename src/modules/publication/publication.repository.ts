@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { NotFoundException, OnModuleInit, CanActivate, BadRequestException } from '@nestjs/common';
+import { NotFoundException, OnModuleInit } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -10,7 +10,6 @@ import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
-import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -19,17 +18,18 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
   ) {}
-  
+
   async findAllId(userid: any) {
     console.log(`estamos en repository y el id es ${userid}`);
-    
+
     try {
-      const userpublicationsId = await this.publicationsRepository.find({ where: { user: { id: userid } } });
+      const userpublicationsId = await this.publicationsRepository.find({
+        where: { user: { id: userid } },
+      });
       // if(!userpublicationsId)throw new BadRequestException(`not found user`)
       // console.log(userpublicationsId);
       return userpublicationsId;
     } catch (error) {
-    
       console.error(error);
       throw error;
     }
@@ -90,7 +90,6 @@ export class PublicationsRepository implements OnModuleInit {
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
 
-    
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -144,7 +143,7 @@ export class PublicationsRepository implements OnModuleInit {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (category && city) {      
+    if (category && city) {
       where.category = category;
       where.location = city;
     } else if (category) {
@@ -177,14 +176,8 @@ export class PublicationsRepository implements OnModuleInit {
   }
 
   async findAllCategories() {
-    const publications = await this.publicationsRepository.find();  
-
-    const category =  publications.map(({ category, ...publications}) => category);
-    const categoryReturn = [...new Set(category)]
-
-    const location =  publications.map(({ location, ...publications}) => location); 
-    const locationReturn = [...new Set(location)]
-    
-    return {categoryReturn, locationReturn}
+    const publications = await this.publicationsRepository.find();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    return publications.map(({ category, ...publications }) => category);
   }
 }

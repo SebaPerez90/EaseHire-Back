@@ -6,7 +6,7 @@ import { PublicationsRepository } from './publication.repository';
 @Injectable()
 export class PublicationService {
   constructor(private readonly publicationRepository: PublicationsRepository) {}
-  
+
   findAll() {
     return this.publicationRepository.findAll();
   }
@@ -27,7 +27,7 @@ export class PublicationService {
       limit,
     );
   }
-  
+
   findAllCategories() {
     return this.publicationRepository.findAllCategories();
   }
