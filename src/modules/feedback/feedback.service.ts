@@ -56,7 +56,7 @@ export class FeedbackService {
     feedback.description = feedbackData.description;
     feedback.user = user;
 
-    const response = await this.check(feedbackData);
+    const response = await this.checkDescriptionEntries(feedbackData);
 
     if (response) {
       feedback.isOfensive = true;
@@ -87,18 +87,21 @@ export class FeedbackService {
     };
   }
 
-  async deleteFeedback(id) {
-    const feedbackFounded = await this.feedbackRepository.findOneBy({
-      id: id,
-    });
-    if (!feedbackFounded)
-      throw new NotFoundException('The feedback was not found or not exists');
+  async deleteFeedback() {
+    const feedbacks: Feedback[] = await this.feedbackRepository.find();
+    const feedsBlocked: Feedback[] = [];
 
-    feedbackFounded.blocked = true;
-    await this.feedbackRepository.save(feedbackFounded);
+    for (let i = 0; i < feedbacks.length; i++) {
+      if (feedbacks[i].isOfensive === true) {
+        feedbacks[i].blocked = true;
+        await this.feedbackRepository.save(feedbacks[i]);
+        feedsBlocked.push(feedbacks[i]);
+      }
+    }
+
     return {
-      message: 'The feedback has been blocked',
-      feedbackFounded,
+      message: 'This is the list of posts that were blocked',
+      feedsBlocked,
     };
   }
 
@@ -109,7 +112,7 @@ export class FeedbackService {
    * la podes editar antes de que sea bloqueada por un
    * ADMIN
    */
-  private async check(data) {
+  private async checkDescriptionEntries(data) {
     const feedback = data.description.split(/\s+/);
     const words = forbidden_words.forbidden_words;
     const matches: string[] = [];

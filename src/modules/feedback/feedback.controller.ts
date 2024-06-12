@@ -15,7 +15,7 @@ import { FeedbackService } from './feedback.service';
 import { Request } from 'express';
 import { PostFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from 'src/database/entities/feedback.entity';
-import { Public } from 'src/decorators/is-public.decorator';
+// import { Public } from 'src/decorators/is-public.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enum/role.enum';
 
@@ -24,8 +24,7 @@ export class FeedbackController {
   constructor(private feedbackService: FeedbackService) {}
 
   @Get()
-  // @Roles(Role.USER)
-  @Public()
+  @Roles(Role.USER)
   getAllFeedbacks() {
     return this.feedbackService.getAllFeedbacks();
   }
@@ -37,8 +36,7 @@ export class FeedbackController {
   }
 
   @Patch(':id')
-  // @Roles(Role.USER)
-  @Public()
+  @Roles(Role.USER)
   editFeedback(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() feedbackData: Partial<Feedback>,
@@ -46,10 +44,9 @@ export class FeedbackController {
     return this.feedbackService.editFeedback(feedbackData, id);
   }
 
-  @Delete(':id')
-  // @Roles(Role.ADMIN)
-  @Public()
+  @Delete()
+  @Roles(Role.ADMIN)
   removeFeedback() {
-    return this.feedbackService.deleteFeedback()
+    return this.feedbackService.deleteFeedback();
   }
 }
