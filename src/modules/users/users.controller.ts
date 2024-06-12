@@ -14,6 +14,7 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
   UseInterceptors,
+  Headers
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -58,10 +59,12 @@ export class UsersController {
     return await this.usersService.averageRate();
   }
 
-  @Get(':id')
+  @Get('me')
   @Public()
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(id);
+  findOne(@Headers() header) {
+    const secret = process.env.JWT_SECRET 
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.usersService.findOne(userid);
   }
 
   @Post()

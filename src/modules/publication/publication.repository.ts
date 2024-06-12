@@ -2,7 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { CreatePublicationDto } from './dto/create-publication.dto';
-import { NotFoundException, OnModuleInit, CanActivate } from '@nestjs/common';
+import { NotFoundException, OnModuleInit, CanActivate, BadRequestException } from '@nestjs/common';
 import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
 import { UserRepository } from '../users/users.repository';
 import * as moment from 'moment';
@@ -18,7 +18,21 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
   ) {}
-
+  
+  async findAllId(userid: any) {
+    console.log(`estamos en repository y el id es ${userid}`);
+    
+    try {
+      const userpublicationsId = await this.publicationsRepository.find({ where: { user: { id: userid } } });
+      // if(!userpublicationsId)throw new BadRequestException(`not found user`)
+      // console.log(userpublicationsId);
+      return userpublicationsId;
+    } catch (error) {
+    
+      console.error(error);
+      throw error;
+    }
+  }
   onModuleInit() {
     this.seederPublicactions();
   }
@@ -75,6 +89,7 @@ export class PublicationsRepository implements OnModuleInit {
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
 
+    
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,

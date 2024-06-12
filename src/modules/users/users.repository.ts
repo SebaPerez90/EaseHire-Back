@@ -54,6 +54,7 @@ export class UserRepository {
   }
 
   async findOne(id: string) {
+    
     const user = await this.usersRepository.findOne({
       where: { id },
       relations: { experiences: true, educations: true, profesions: true },

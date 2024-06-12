@@ -6,9 +6,12 @@ import { PublicationsRepository } from './publication.repository';
 @Injectable()
 export class PublicationService {
   constructor(private readonly publicationRepository: PublicationsRepository) {}
-
+  
   findAll() {
     return this.publicationRepository.findAll();
+  }
+  findAllId(userid: any) {
+    throw this.publicationRepository.findAllId(userid);
   }
 
   findPrublications(
