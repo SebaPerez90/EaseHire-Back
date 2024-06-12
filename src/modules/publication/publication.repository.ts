@@ -19,6 +19,21 @@ export class PublicationsRepository implements OnModuleInit {
     private profesionsRepository: ProfesionsRepository,
   ) {}
 
+  async findAllId(userid: any) {
+    console.log(`estamos en repository y el id es ${userid}`);
+
+    try {
+      const userpublicationsId = await this.publicationsRepository.find({
+        where: { user: { id: userid } },
+      });
+      // if(!userpublicationsId)throw new BadRequestException(`not found user`)
+      // console.log(userpublicationsId);
+      return userpublicationsId;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
   onModuleInit() {
     this.seederPublicactions();
   }

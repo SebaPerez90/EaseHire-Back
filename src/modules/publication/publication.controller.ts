@@ -51,6 +51,14 @@ export class PublicationController {
       limit,
     );
   }
+  @Get('all')
+  findAllId(@Headers() header, id: string) {
+    console.log(`entramos en controeller publication`);
+
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.publicationService.findAllId(userid);
+  }
 
   @Public()
   @Get('category')
@@ -79,6 +87,8 @@ export class PublicationController {
     file: Express.Multer.File,
   ) {
     const secret = process.env.JWT_SECRET;
+    console.log(`el token es :${header.authorization}`);
+
     const { userid } = this.jwtService.verify(header.authorization, { secret });
 
     return this.publicationService.create(createPublicationDto, file, userid);
