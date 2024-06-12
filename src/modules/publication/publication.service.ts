@@ -24,11 +24,14 @@ export class PublicationService {
       limit,
     );
   }
-  
+
   findAllCategories() {
     return this.publicationRepository.findAllCategories();
   }
 
+  findAllPublications() {
+    return this.publicationRepository.findAllPublications();
+  }
   async create(
     createPublicationDto: CreatePublicationDto,
     file: Express.Multer.File,

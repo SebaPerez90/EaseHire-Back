@@ -2,13 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
-import { ExperienceService } from '../experience/experience.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private usersRepository: UserRepository,
-    private experieceService: ExperienceService,
   ) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {
@@ -25,7 +23,6 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
-    
     return this.usersRepository.createUsers(createUserDto);
   }
 
@@ -33,9 +30,13 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto,file: Express.Multer.File) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    file: Express.Multer.File,
+  ) {
     const res = await this.usersRepository.uploadImageUser(file);
-    return this.usersRepository.updateUser(id, updateUserDto,res);
+    return this.usersRepository.updateUser(id, updateUserDto, res);
   }
 
   remove(id: string) {

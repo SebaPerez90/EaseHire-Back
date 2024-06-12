@@ -1,23 +1,22 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { Publicaction } from 'src/database/entities/publication.entity';
-import { Repository } from 'typeorm';
-import { CreatePublicationDto } from './dto/create-publication.dto';
-import { NotFoundException, OnModuleInit, CanActivate } from '@nestjs/common';
-import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
-import { UserRepository } from '../users/users.repository';
-import * as moment from 'moment';
-import * as data from '../../utils/mock-publications.json';
-import { ProfesionsRepository } from '../profesions/profesions.repository';
-import { UploadApiResponse, v2 } from 'cloudinary';
-import toStream = require('buffer-to-stream');
-import { EMPTY_SUBSCRIPTION } from 'rxjs/internal/Subscription';
+import { InjectRepository } from "@nestjs/typeorm";
+import { Publicaction } from "src/database/entities/publication.entity";
+import { Repository } from "typeorm";
+import { CreatePublicationDto } from "./dto/create-publication.dto";
+import { NotFoundException, OnModuleInit } from "@nestjs/common";
+import { UpdateProfesionDto } from "../profesions/dto/update-profesion.dto";
+import { UserRepository } from "../users/users.repository";
+import * as moment from "moment";
+import * as data from "../../utils/mock-publications.json";
+import { ProfesionsRepository } from "../profesions/profesions.repository";
+import { UploadApiResponse, v2 } from "cloudinary";
+import toStream = require("buffer-to-stream");
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
     @InjectRepository(Publicaction)
     private publicationsRepository: Repository<Publicaction>,
     private userRepository: UserRepository,
-    private profesionsRepository: ProfesionsRepository,
+    private profesionsRepository: ProfesionsRepository
   ) {}
 
   onModuleInit() {
@@ -58,14 +57,14 @@ export class PublicationsRepository implements OnModuleInit {
   async uploadImage(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
       const upload = v2.uploader.upload_stream(
-        { resource_type: 'auto' },
+        { resource_type: "auto" },
         (error, result) => {
           if (result) {
             resolve(result);
           } else {
             reject(error);
           }
-        },
+        }
       );
       toStream(file.buffer).pipe(upload);
     });
@@ -103,7 +102,7 @@ export class PublicationsRepository implements OnModuleInit {
     publications.forEach((publication) => {
       const { date, time } = publication;
       const datetime = `${date} ${time}`;
-      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow(true);
+      const timelapsed = moment(datetime, "DD/MM/YYYY HH:mm:ss").fromNow(true);
 
       const newPublication = new Publicaction();
       newPublication.id = publication.id;
@@ -124,12 +123,12 @@ export class PublicationsRepository implements OnModuleInit {
     category: string,
     city: string,
     page: number,
-    limit: number,
+    limit: number
   ) {
     const skip = (page - 1) * limit;
 
     const where: any = {};
-    if (category && city) {      
+    if (category && city) {
       where.category = category;
       where.location = city;
     } else if (category) {
@@ -154,6 +153,14 @@ export class PublicationsRepository implements OnModuleInit {
     return { publicationsFind, count };
   }
 
+  async findAllPublications() {
+    const [publicationsFind, count] =
+      await this.publicationsRepository.findAndCount({
+        relations: { user: true },
+      });
+    return { publicationsFind, count };
+  }
+
   async update(id: string, updatePublication: UpdateProfesionDto) {
     return await this.publicationsRepository.update(id, updatePublication);
   }
@@ -162,14 +169,18 @@ export class PublicationsRepository implements OnModuleInit {
   }
 
   async findAllCategories() {
-    const publications = await this.publicationsRepository.find();  
+    const publications = await this.publicationsRepository.find();
 
-    const category =  publications.map(({ category, ...publications}) => category);
-    const categoryReturn = [...new Set(category)]
+    const category = publications.map(
+      ({ category, ...publications }) => category
+    );
+    const categoryReturn = [...new Set(category)];
 
-    const location =  publications.map(({ location, ...publications}) => location); 
-    const locationReturn = [...new Set(location)]
-    
-    return {categoryReturn, locationReturn}
+    const location = publications.map(
+      ({ location, ...publications }) => location
+    );
+    const locationReturn = [...new Set(location)];
+
+    return { categoryReturn, locationReturn };
   }
 }
