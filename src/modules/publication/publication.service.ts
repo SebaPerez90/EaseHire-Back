@@ -32,6 +32,9 @@ export class PublicationService {
     return this.publicationRepository.findAllCategories();
   }
 
+  findAllPublications() {
+    return this.publicationRepository.findAllPublications();
+  }
   async create(
     createPublicationDto: CreatePublicationDto,
     file: Express.Multer.File,
