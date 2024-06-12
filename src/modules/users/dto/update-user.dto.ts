@@ -15,6 +15,4 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   imgPictureUrl?: string;
   availableToWork?: boolean;
   newMember?: boolean;
-
-
 }

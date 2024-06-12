@@ -54,7 +54,7 @@ export class PublicationController {
   @Get('all')
   findAllId(@Headers() header, id: string) {
     console.log(`entramos en controeller publication`);
-    
+
     const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.publicationService.findAllId(userid);
@@ -88,7 +88,7 @@ export class PublicationController {
   ) {
     const secret = process.env.JWT_SECRET;
     console.log(`el token es :${header.authorization}`);
-    
+
     const { userid } = this.jwtService.verify(header.authorization, { secret });
 
     return this.publicationService.create(createPublicationDto, file, userid);
