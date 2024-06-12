@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { CreatePublicationDto } from './dto/create-publication.dto';
-import { UpdatePublicationDto } from './dto/update-publication.dto';
-import { PublicationsRepository } from './publication.repository';
+import { Injectable } from "@nestjs/common";
+import { CreatePublicationDto } from "./dto/create-publication.dto";
+import { UpdatePublicationDto } from "./dto/update-publication.dto";
+import { PublicationsRepository } from "./publication.repository";
 
 @Injectable()
 export class PublicationService {
@@ -18,13 +18,13 @@ export class PublicationService {
     category: string,
     city: string,
     page: number,
-    limit: number,
+    limit: number
   ) {
     return this.publicationRepository.findPrublications(
       category,
       city,
       page,
-      limit,
+      limit
     );
   }
 
@@ -35,10 +35,15 @@ export class PublicationService {
   findAllPublications() {
     return this.publicationRepository.findAllPublications();
   }
+
+  findOnePublication(id: string) {
+    return this.publicationRepository.findOnePublication(id);
+  }
+
   async create(
     createPublicationDto: CreatePublicationDto,
     file: Express.Multer.File,
-    userid: any,
+    userid: any
   ) {
     const res = await this.publicationRepository.uploadImage(file);
     // const publication = await this.publicationRepository.create({

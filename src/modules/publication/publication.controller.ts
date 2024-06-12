@@ -72,6 +72,12 @@ export class PublicationController {
     return this.publicationService.findAllPublications();
   }
 
+  @Public()
+  @Get(":id")
+  findOnePublication(@Param("id") id: string) {
+    return this.publicationService.findOnePublication(id);
+  }
+
   @Post()
   @UseInterceptors(FileInterceptor("file"))
   create(
