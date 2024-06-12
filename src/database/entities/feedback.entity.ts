@@ -18,6 +18,12 @@ export class Feedback {
   @Column({ type: 'varchar', length: 300, nullable: true })
   description: string;
 
+  @Column({ type: 'boolean', nullable: true, default: false })
+  isOfensive: boolean;
+
+  @Column({ type: 'boolean', nullable: true, default: false })
+  blocked: boolean;
+
   @OneToOne(() => User)
   @JoinColumn({ name: 'user_ID' })
   user: User;

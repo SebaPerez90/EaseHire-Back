@@ -10,6 +10,9 @@ export class PublicationService {
   findAll() {
     return this.publicationRepository.findAll();
   }
+  findAllId(userid: any) {
+    throw this.publicationRepository.findAllId(userid);
+  }
 
   findPrublications(
     category: string,

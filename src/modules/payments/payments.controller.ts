@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Req } from "@nestjs/common";
-import { PaymentsService } from "./payments.service";
-import { Request } from "express";
-import { Public } from "src/decorators/is-public.decorator";
+import { Controller, Get, Post, Req } from '@nestjs/common';
+import { PaymentsService } from './payments.service';
+import { Request } from 'express';
+import { Public } from 'src/decorators/is-public.decorator';
 // import { NextFunction, Request, Response } from 'express';
 
-@Controller("payments")
+@Controller('payments')
 export class PaymentsController {
   constructor(private paymentService: PaymentsService) {}
 
-  @Get("methods")
+  @Get('methods')
   getPyaMethods() {
     return this.paymentService.getPyaMethods();
   }
@@ -17,7 +17,7 @@ export class PaymentsController {
   createPaymenttt(@Req() req: Request) {
     return this.paymentService.createPaymenttt(req);
   }
-  @Post("webhook")
+  @Post('webhook')
   @Public()
   webhook(@Req() req: Request) {
     return this.paymentService.webhook(req);

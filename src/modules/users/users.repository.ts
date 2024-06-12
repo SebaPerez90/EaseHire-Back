@@ -1,14 +1,14 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { UpdateUserDto } from "./dto/update-user.dto";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { User } from "src/database/entities/user.entity";
-import * as data from "../../utils/mock-users.json";
-import { AuthRepository } from "src/modules/auth/auth.repository";
-import { Experience } from "src/database/entities/experience.entity";
-import { JwtService } from "@nestjs/jwt";
-import { UploadApiResponse, v2 } from "cloudinary";
-import toStream = require("buffer-to-stream");
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from 'src/database/entities/user.entity';
+import * as data from '../../utils/mock-users.json';
+import { AuthRepository } from 'src/modules/auth/auth.repository';
+import { Experience } from 'src/database/entities/experience.entity';
+import { JwtService } from '@nestjs/jwt';
+import { UploadApiResponse, v2 } from 'cloudinary';
+import toStream = require('buffer-to-stream');
 
 @Injectable()
 export class UserRepository {
@@ -17,20 +17,20 @@ export class UserRepository {
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
     private authRepository: AuthRepository,
-    private readonly jwtService: JwtService
+    private readonly jwtService: JwtService,
   ) {}
 
   async uploadImageUser(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
       const upload = v2.uploader.upload_stream(
-        { resource_type: "auto" },
+        { resource_type: 'auto' },
         (error, result) => {
           if (result) {
             resolve(result);
           } else {
             reject(new Error(`Error uploading image`));
           }
-        }
+        },
       );
       toStream(file.buffer).pipe(upload);
     });
@@ -121,7 +121,7 @@ export class UserRepository {
       if (!(users[i].experiences.length === 0)) {
         await this.usersRepository.update(
           { id: users[i].id },
-          { newMember: false }
+          { newMember: false },
         );
       }
     }
@@ -134,7 +134,7 @@ export class UserRepository {
       const rates = users[i].professionalRate;
 
       const totalRate = rates.reduce(
-        (accumulator, currentRate) => Number(accumulator) + Number(currentRate)
+        (accumulator, currentRate) => Number(accumulator) + Number(currentRate),
       );
 
       const average = totalRate / rates.length;
@@ -180,23 +180,23 @@ export class UserRepository {
         .values(user)
         .orUpdate(
           [
-            "name",
-            "lastName",
-            "dni",
-            "country",
-            "city",
-            "birthdate",
-            "bio",
-            "email",
+            'name',
+            'lastName',
+            'dni',
+            'country',
+            'city',
+            'birthdate',
+            'bio',
+            'email',
           ],
-          ["dni"]
+          ['dni'],
         )
         .execute();
     });
     await Promise.all(promises);
 
     return {
-      message: "users was seeder successfully!",
+      message: 'users was seeder successfully!',
     };
   }
 }

@@ -5,9 +5,7 @@ import { UserRepository } from './users.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private usersRepository: UserRepository,
-  ) {}
+  constructor(private usersRepository: UserRepository) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {
     this.usersRepository.calculateProfesionalRate();
