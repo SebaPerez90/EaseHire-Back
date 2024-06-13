@@ -100,6 +100,8 @@ export class UsersController {
     )
     file: Express.Multer.File,
   ) {
+    console.log(updateUserDto);
+    
     return this.usersService.update(id, updateUserDto, file);
   }
 
