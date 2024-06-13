@@ -70,8 +70,6 @@ export class UsersController {
   @Get(':id')
   @Public()
   findOneID(@Param('id') id: string) {
-    const secret = process.env.JWT_SECRET;
-
     return this.usersService.findOne(id);
   }
 
@@ -87,11 +85,8 @@ export class UsersController {
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @UploadedFile()file?: Express.Multer.File,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-
-    console.log(updateUserDto);
-
     return this.usersService.update(id, updateUserDto, file);
   }
 

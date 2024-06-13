@@ -37,10 +37,9 @@ export class UsersService {
     updateUserDto: UpdateUserDto,
     file?: Express.Multer.File,
   ) {
-    let res = null
+    let res = null;
     if (file) {
-      
-       res = await this.usersRepository.uploadImageUser(file);
+      res = await this.usersRepository.uploadImageUser(file);
     }
     return this.usersRepository.updateUser(id, updateUserDto, res);
   }
