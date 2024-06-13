@@ -35,9 +35,13 @@ export class UsersService {
   async update(
     id: string,
     updateUserDto: UpdateUserDto,
-    file: Express.Multer.File,
+    file?: Express.Multer.File,
   ) {
-    const res = await this.usersRepository.uploadImageUser(file);
+    let res = null
+    if (file) {
+      
+       res = await this.usersRepository.uploadImageUser(file);
+    }
     return this.usersRepository.updateUser(id, updateUserDto, res);
   }
 

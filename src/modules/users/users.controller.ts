@@ -87,21 +87,9 @@ export class UsersController {
   update(
     @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({
-            maxSize: 200000,
-            message: 'El archivo es demasiado grande',
-          }),
-          new FileTypeValidator({
-            fileType: /(jpg|jpeg|png|svg|webp)/,
-          }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile()file?: Express.Multer.File,
   ) {
+
     console.log(updateUserDto);
 
     return this.usersService.update(id, updateUserDto, file);
