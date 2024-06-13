@@ -32,6 +32,14 @@ export class PublicationService {
     return this.publicationRepository.findAllCategories();
   }
 
+  findAllPublications() {
+    return this.publicationRepository.findAllPublications();
+  }
+
+  findOnePublication(id: string) {
+    return this.publicationRepository.findOnePublication(id);
+  }
+
   async create(
     createPublicationDto: CreatePublicationDto,
     file: Express.Multer.File,

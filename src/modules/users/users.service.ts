@@ -3,17 +3,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
 import { ExperienceService } from '../experience/experience.service';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from 'src/database/entities/user.entity';
-import { Repository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
   constructor(
     private usersRepository: UserRepository,
     private experieceService: ExperienceService,
-    @InjectRepository(User)
-    private usersRepo: Repository<User>,
   ) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {

@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Req } from '@nestjs/common';
 import { PaymentsService } from './payments.service';
 import { Request } from 'express';
+import { Public } from 'src/decorators/is-public.decorator';
 // import { NextFunction, Request, Response } from 'express';
 
 @Controller('payments')
@@ -12,7 +13,13 @@ export class PaymentsController {
     return this.paymentService.getPyaMethods();
   }
   @Post()
+  @Public()
   createPaymenttt(@Req() req: Request) {
     return this.paymentService.createPaymenttt(req);
+  }
+  @Post('webhook')
+  @Public()
+  webhook(@Req() req: Request) {
+    return this.paymentService.webhook(req);
   }
 }

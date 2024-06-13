@@ -16,7 +16,6 @@ import {
   UseInterceptors,
   Headers,
   ParseUUIDPipe,
-  BadRequestException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -68,6 +67,13 @@ export class UsersController {
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.usersService.findOne(userid);
   }
+  @Get(':id')
+  @Public()
+  findOneID(@Param('id') id: string) {
+    const secret = process.env.JWT_SECRET;
+
+    return this.usersService.findOne(id);
+  }
 
   @Post()
   @Public()
@@ -96,7 +102,7 @@ export class UsersController {
     )
     file: Express.Multer.File,
   ) {
-    if (!file) throw new BadRequestException('es requerido');
+    console.log(updateUserDto);
 
     return this.usersService.update(id, updateUserDto, file);
   }

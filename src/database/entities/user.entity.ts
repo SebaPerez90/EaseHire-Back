@@ -27,6 +27,8 @@ export class User {
 
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
+  @Column({ type: 'int', nullable: true })
+  dni2: number;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   country: string;
@@ -50,7 +52,7 @@ export class User {
   imgPictureUrl: string;
 
   @Column({ default: false })
-  availableToWork: boolean;
+  availableToWork: string;
 
   @Column({ type: 'simple-array', nullable: true, default: 10 })
   professionalRate: number[];
