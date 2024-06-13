@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -46,10 +50,24 @@ export class UserRepository {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
     }
-    await this.usersRepository.update(id, UpdateUserDto);
-    const updateUser = await this.usersRepository.findOneBy({ id });
-    if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
-    return updateUser;
+    // await this.usersRepository.update(id, UpdateUserDto);
+    // const updateUser = await this.usersRepository.findOneBy({ id });
+    // if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
+    // return updateUser;
+    const userFounded = await this.usersRepository.findOneBy({ id: id });
+    if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
+
+    const user = await this.usersRepository.find();
+    for (let i = 0; i < user.length; i++) {
+      const dni = user[i].dni;
+      if (UpdateUserDto.dni === dni)
+        throw new BadRequestException(
+          'Plis check dni entry. The "dni" must be unique',
+        );
+    }
+    const updates = this.usersRepository.merge(userFounded, UpdateUserDto);
+    await this.usersRepository.save(updates);
+    return userFounded;
   }
 
   async findOne(id: string) {
