@@ -2,14 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserRepository } from './users.repository';
-import { ExperienceService } from '../experience/experience.service';
 
 @Injectable()
 export class UsersService {
-  constructor(
-    private usersRepository: UserRepository,
-    private experieceService: ExperienceService,
-  ) {}
+  constructor(private usersRepository: UserRepository) {}
 
   findUsers(category: string, city: string, page: number, limit: number) {
     this.usersRepository.calculateProfesionalRate();

@@ -62,15 +62,15 @@ export class UsersController {
   @Get('me')
   @Public()
   findOne(@Headers() header) {
-    const secret = process.env.JWT_SECRET 
+    const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.usersService.findOne(userid);
   }
   @Get(':id')
   @Public()
-  findOneID(@Param('id') id:string) {
-    const secret = process.env.JWT_SECRET 
-    
+  findOneID(@Param('id') id: string) {
+    const secret = process.env.JWT_SECRET;
+
     return this.usersService.findOne(id);
   }
 
