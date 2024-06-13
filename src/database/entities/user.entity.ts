@@ -27,7 +27,7 @@ export class User {
 
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
-  @Column({ type: 'int',  nullable: true })
+  @Column({ type: 'int', nullable: true })
   dni2: number;
 
   @Column({ type: 'varchar', length: 20, nullable: true })

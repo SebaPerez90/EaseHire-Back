@@ -16,6 +16,8 @@ import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from 'src/enum/role.enum';
 
 @ApiTags('profesions')
 @Controller('profesions')
@@ -38,6 +40,7 @@ export class ProfesionsController {
   }
 
   @Post()
+  @Roles(Role.ADMIN)
   create(@Body() createProfesionDto: CreateProfesionDto, @Headers() header) {
     const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });
@@ -46,6 +49,7 @@ export class ProfesionsController {
   }
 
   @Patch(':id')
+  @Roles(Role.ADMIN)
   update(
     @Param('id') id: string,
     @Body() updateProfesionDto: UpdateProfesionDto,
@@ -54,6 +58,7 @@ export class ProfesionsController {
   }
 
   @Delete(':id')
+  @Roles(Role.ADMIN)
   remove(@Param('id') id: string) {
     return this.profesionsService.remove(id);
   }

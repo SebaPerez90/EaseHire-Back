@@ -15,6 +15,7 @@ import {
   FileTypeValidator,
   UseInterceptors,
   Headers,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -81,9 +82,10 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @Public()
   @UseInterceptors(FileInterceptor('imgPictureUrl'))
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
     @UploadedFile(
       new ParseFilePipe({
@@ -101,7 +103,7 @@ export class UsersController {
     file: Express.Multer.File,
   ) {
     console.log(updateUserDto);
-    
+
     return this.usersService.update(id, updateUserDto, file);
   }
 

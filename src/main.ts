@@ -16,7 +16,7 @@ async function bootstrap() {
   });
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Professional Labor Service')
+    .setTitle('EaseHire')
     .setDescription('Proyecto Final "Soy Henry"')
     .setVersion('1.0')
     .addBearerAuth()
