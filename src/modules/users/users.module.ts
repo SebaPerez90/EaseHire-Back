@@ -14,6 +14,7 @@ import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { JwtService } from '@nestjs/jwt';
 import { PopulateUserMiddleware } from 'src/middlewares/populateUser.middleware';
+import { StatisticsModule } from '../statistics/statistics.module';
 
 @Module({
   imports: [
@@ -33,6 +34,7 @@ import { PopulateUserMiddleware } from 'src/middlewares/populateUser.middleware'
     ExperienceService,
     ProfesionsRepository,
     FeedbackService,
+    StatisticsModule,
     JwtService,
   ],
 })

@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   OneToMany,
@@ -59,6 +60,9 @@ export class User {
 
   @Column({ type: 'boolean', nullable: true, default: true })
   newMember: boolean;
+
+  @CreateDateColumn({ type: 'date' })
+  datecreateUser: Date;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];

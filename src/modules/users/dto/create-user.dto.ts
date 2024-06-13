@@ -37,4 +37,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsBoolean()
   availability: boolean;
+
+  
 }
