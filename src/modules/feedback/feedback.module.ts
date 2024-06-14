@@ -8,9 +8,9 @@ import { User } from 'src/database/entities/user.entity';
 import { ExperienceService } from '../experience/experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
 import { Credential } from 'src/database/entities/credentials.entity';
-import { AuthRepository } from '../auth/auth.repository';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { Profesion } from 'src/database/entities/profesion.entity';
+import { AuthService } from '../auth/auth.service';
 
 @Module({
   imports: [
@@ -27,7 +27,7 @@ import { Profesion } from 'src/database/entities/profesion.entity';
     FeedbackService,
     UserRepository,
     ExperienceService,
-    AuthRepository,
+    AuthService,
     ProfesionsRepository,
   ],
 })

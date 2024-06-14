@@ -4,7 +4,6 @@ import { UsersController } from './users.controller';
 import { UserRepository } from './users.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/database/entities/user.entity';
-import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { ExperienceService } from '../experience/experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
@@ -14,6 +13,7 @@ import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { JwtService } from '@nestjs/jwt';
 import { PopulateUserMiddleware } from 'src/middlewares/populateUser.middleware';
+import { AuthService } from '../auth/auth.service';
 
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { PopulateUserMiddleware } from 'src/middlewares/populateUser.middleware'
   providers: [
     UsersService,
     UserRepository,
-    AuthRepository,
+    AuthService,
     ExperienceService,
     ProfesionsRepository,
     FeedbackService,
