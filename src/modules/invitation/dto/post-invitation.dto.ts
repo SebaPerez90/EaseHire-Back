@@ -40,4 +40,6 @@ export class PostInvitationDto {
   startDate: string;
 
   invitationOwner: User;
+
+  employee: User;
 }

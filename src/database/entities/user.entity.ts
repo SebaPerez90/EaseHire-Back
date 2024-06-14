@@ -75,9 +75,9 @@ export class User {
   @JoinColumn({ name: 'work_history_ID' })
   work_history: Work_History[];
 
-  @ManyToMany(() => Invitation, (invitation) => invitation)
-  @JoinColumn({ name: 'invitations_ID' })
-  invitations: Invitation[];
+  // @ManyToMany(() => Invitation, (invitation) => invitation)
+  // @JoinColumn({ name: 'invitations_ID' })
+  // invitations: Invitation[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })

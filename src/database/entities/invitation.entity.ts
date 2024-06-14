@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -39,9 +41,9 @@ export class Invitation {
   })
   jobState: JobState;
 
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'invitation_owner_ID' })
-  invitationOwner: User;
+  @ManyToMany(() => User)
+  @JoinTable({ joinColumn: { name: 'invitation_owner_ID' } })
+  invitationOwner: User[];
 
   @OneToOne(() => User)
   @JoinColumn({ name: 'employee_ID' })

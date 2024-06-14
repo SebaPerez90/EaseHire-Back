@@ -13,6 +13,8 @@ export class WorkHistoryService {
   ) {}
 
   async getAllWorkHistory() {
-    return await this.invitationService.getAllInvitations();
+    const invitations = await this.invitationService.getAllInvitations();
+
+    return invitations.map((element) => element.jobState);
   }
 }

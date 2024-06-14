@@ -27,12 +27,14 @@ export class InvitationController {
     return this.invitationService.aceptOfferJob(id, req);
   }
 
-  @Post()
+  @Post(':id')
   postInvitation(
-    @Body() invitationData: PostInvitationDto,
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body()
+    invitationData: PostInvitationDto,
     @Req() req: Request,
   ) {
-    return this.invitationService.postInvitation(invitationData, req);
+    return this.invitationService.postInvitation(id, invitationData, req);
   }
 
   @Patch(':id')

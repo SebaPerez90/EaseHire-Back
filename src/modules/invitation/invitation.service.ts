@@ -5,31 +5,36 @@ import { Repository } from 'typeorm';
 import { PostInvitationDto } from './dto/post-invitation.dto';
 import { UpdateInvitationDto } from './dto/patch-invitation.dto';
 import { JobState } from 'src/enum/job-state.enum';
+import { User } from 'src/database/entities/user.entity';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class InvitationService {
   constructor(
     @InjectRepository(Invitation)
     private invitationRepository: Repository<Invitation>,
+    private userService: UsersService,
   ) {}
 
   async getAllInvitations() {
-    const invitatios = await this.invitationRepository.find({
-      relations: { invitationOwner: true, employee: true },
+    return await this.invitationRepository.find({
+      relations: { employee: true, invitationOwner: true },
     });
-    if (invitatios.length === 0)
-      throw new NotFoundException('there are no invitations made yet');
-    return invitatios;
   }
-  async postInvitation(invitationData: PostInvitationDto, req) {
+  async postInvitation(id: string, invitationData: PostInvitationDto, req) {
+    const arrUsers: User[] = [];
     const invitation = new Invitation();
+    const user = await this.userService.findOne(id);
+    arrUsers.push(req.currentUser);
     invitation.jobDescription = invitationData.jobDescription;
     invitation.payPerHour = invitationData.payPerHour;
     invitation.issue = invitationData.issue;
     invitation.location = invitationData.location;
     invitation.isRemote = invitationData.isRemote;
     invitation.startDate = invitationData.startDate;
-    invitation.invitationOwner = req.currentUser;
+    invitation.invitationOwner = arrUsers;
+    invitation.employee = user;
+
     await this.invitationRepository.save(invitation);
     return { message: 'The new invitation has been created', invitation };
   }
