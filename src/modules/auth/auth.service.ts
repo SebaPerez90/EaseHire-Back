@@ -39,7 +39,8 @@ export class AuthService {
       const token = this.jwtService.sign(playload, {
         secret: process.env.JWT_SECRET,
       });
-
+      console.log(token);
+      
       return {
         message: 'User login',
         token,
