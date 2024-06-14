@@ -18,8 +18,8 @@ export class Profesion {
   @Column({ type: 'varchar' })
   category: string;
 
-  @Column({ type: 'varchar' })
-  
+  @Column({ type: 'varchar', nullable:true})
+  available: string;
 
   @OneToMany(() => Experience, (experience) => experience.profesion)
   experiences: Experience[];
