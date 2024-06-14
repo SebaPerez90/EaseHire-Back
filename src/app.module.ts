@@ -18,6 +18,7 @@ import { PaymentsModule } from './modules/payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { AuthGuard } from './guards/auth.guard';
         expiresIn: '6000m',
       },
     }),
+    ChatModule,
   ],
 
   controllers: [AppController],
