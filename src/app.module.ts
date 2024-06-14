@@ -19,6 +19,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatModule } from './chat/chat.module';
+import { InvitationModule } from './modules/invitation/invitation.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ChatModule } from './chat/chat.module';
       },
     }),
     ChatModule,
+    InvitationModule,
   ],
 
   controllers: [AppController],

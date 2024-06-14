@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -13,6 +14,7 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
+import { Invitation } from './invitation.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -27,6 +29,7 @@ export class User {
 
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
+
   @Column({ type: 'int', nullable: true })
   dni2: number;
 
@@ -62,6 +65,10 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
+
+  @ManyToMany(() => Invitation, (invitation) => invitation)
+  @JoinColumn({ name: 'invitations_ID' })
+  invitations: Invitation[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
