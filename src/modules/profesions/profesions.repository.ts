@@ -13,18 +13,18 @@ export class ProfesionsRepository {
     private profesionsRepository: Repository<Profesion>,
     private userRepository: UserRepository,
   ) {}
-
+  
   async seederProfesions() {
     const users = await this.userRepository.findAll();
     data?.map(async (element) => {
       const profession = new Profesion();
       profession.category = element.category;
       profession.user = users[Math.round(Math.random() * 30)];
-
+      
       await this.profesionsRepository.save(profession);
     });
   }
-
+  
   async create(createProfesionDto: CreateProfesionDto, userid) {
     const newProfession = await this.profesionsRepository.create({
       category: createProfesionDto.category,
@@ -32,7 +32,15 @@ export class ProfesionsRepository {
     });
     return await this.profesionsRepository.save(newProfession);
   }
+  async findMe(userid: any) {
+    const user = await this.profesionsRepository.find({
+      where: { user: { id: userid } },
+    });
+    if (!user) throw new NotFoundException(`User ${userid} not found`);
+    return user
 
+  }
+  
   async remove(id: string) {
     const result = await this.profesionsRepository.delete({ id });
     if (result.affected === 0) {

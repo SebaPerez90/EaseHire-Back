@@ -23,6 +23,9 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JwtService } from '@nestjs/jwt';
 import { Public } from 'src/decorators/is-public.decorator';
+import { Role } from 'src/enum/role.enum';
+import { Roles } from 'src/decorators/role.decorator';
+import { createCategoryDto } from './dto/create-category.dto';
 
 @ApiTags('publication')
 @Controller('publication')
@@ -75,26 +78,33 @@ export class PublicationController {
   findOnePublication(@Param('id') id: string) {
     return this.publicationService.findOnePublication(id);
   }
-
+  @Post('category')
+  // @Roles(Role.ADMIN)
+  async createCategory(@Body() category: createCategoryDto) {
+    console.log(`estamos en controller post publication `);
+    console.dir(category)
+    
+    return await this.publicationService.createCategory(category);
+  }
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   create(
     @Body() createPublicationDto: CreatePublicationDto,
     @Headers() header,
     @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({
-            maxSize: 200000,
-            message: 'El archivo es demasiado grande',
-          }),
-          new FileTypeValidator({
-            fileType: /(jpg|jpeg|png|svg|webp)/,
-          }),
-        ],
-      }),
+      // new ParseFilePipe({
+      //   validators: [
+      //     new MaxFileSizeValidator({
+      //       maxSize: 200000,
+      //       message: 'El archivo es demasiado grande',
+      //     }),
+      //     new FileTypeValidator({
+      //       fileType: /(jpg|jpeg|png|svg|webp)/,
+      //     }),
+      //   ],
+      // }),
     )
-    file: Express.Multer.File,
+    file?: Express.Multer.File,
   ) {
     const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });

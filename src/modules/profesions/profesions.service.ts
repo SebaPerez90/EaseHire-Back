@@ -14,13 +14,16 @@ export class ProfesionsService implements OnModuleInit {
     private experienceService: ExperienceService,
     private feedbackService: FeedbackService,
   ) {}
-
+  
   async onModuleInit() {
     await this.userRepository.seederUser();
     await this.feedbackService.seederFeedbacks();
     await this.profesionsRepository.seederProfesions();
     await this.experienceService.seedExperiences();
     await this.userRepository.filterNewMembers();
+  }
+  async findMe(userid: any) {
+    return await this.profesionsRepository.findMe(userid);
   }
   create(createProfesionDto: CreateProfesionDto, userid: string) {
     return this.profesionsRepository.create(createProfesionDto, userid);

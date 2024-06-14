@@ -1,20 +1,20 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class CreatePublicationDto {
-  @IsNotEmpty()
-  title: string;
 
-  @IsNotEmpty()
-  description: string;
+  title?: string;
+
+
+  description?: string;
 
   @IsNotEmpty()
   category: string;
 
-  @IsNotEmpty()
-  location: string;
 
-  @IsNotEmpty()
-  remoteWork: boolean;
+  location?: string;
+
+
+  remoteWork?: boolean;
 
   file?: string;
 

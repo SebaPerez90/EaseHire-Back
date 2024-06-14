@@ -14,6 +14,7 @@ import * as data from '../../utils/mock-publications.json';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import { createCategoryDto } from './dto/create-category.dto';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -22,7 +23,16 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
   ) {}
-
+  
+  async createCategory(categoryId:createCategoryDto) {
+    console.log(categoryId);
+    
+    const newcategory=await this.publicationsRepository.create({
+      
+    });
+    const category =await this.publicationsRepository.save(newcategory);
+    return category
+  }
   async findAllId(userid: any) {
     try {
       const userpublicationsId = await this.publicationsRepository.find({
@@ -88,13 +98,16 @@ export class PublicationsRepository implements OnModuleInit {
   }
 
   async create(createPublication: CreatePublicationDto, res, userid: any) {
+    if (res) {
+      res= res.secure_url;
+    }
     const date = new Date();
     const formatDate = date.toLocaleDateString();
     const formatTime = date.toLocaleTimeString();
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
-      imgUrl: res.secure_url,
+      imgUrl: res,
       remoteWork: createPublication.remoteWork,
       category: createPublication.category,
       location: createPublication.location,

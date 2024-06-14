@@ -13,7 +13,7 @@ export class Publicaction {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({ type: 'varchar', length: 50, nullable: true })
   title: string;
 
   @Column({ type: 'varchar', length: 50, nullable: true })

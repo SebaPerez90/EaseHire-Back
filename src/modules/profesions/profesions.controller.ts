@@ -39,7 +39,12 @@ export class ProfesionsController {
   ) {
     return this.profesionsService.findProfesions(category, page, limit);
   }
-
+  @Get('me')
+  async findMe(@Headers() header) {
+    const secret = process.env.JWT_SECRET
+    const { userid } = this.jwtService.verify(header.authorization, { secret })
+    return await this.profesionsService.findMe(userid)
+  }
   @Post()
   @Roles(Role.ADMIN)
   create(@Body() createProfesionDto: CreateProfesionDto, @Headers() header) {
