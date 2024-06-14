@@ -45,7 +45,7 @@ export class Invitation {
   @JoinTable({ name: 'invitationID__employeeID' })
   invitationOwner: User[];
 
-  @OneToOne(() => User)
-  @JoinColumn({ name: 'employee_ID' })
-  employee: User;
+  @ManyToMany(() => User)
+  @JoinTable({ name: 'employee_ID_invitationID' })
+  employee: User[];
 }

@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  ManyToMany,
+  // ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -15,7 +15,7 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
-import { Invitation } from './invitation.entity';
+// import { Invitation } from './invitation.entity';
 import { Work_History } from './workhistorial.entity';
 
 @Entity({ name: 'users' })

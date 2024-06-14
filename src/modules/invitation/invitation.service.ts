@@ -6,14 +6,14 @@ import { PostInvitationDto } from './dto/post-invitation.dto';
 import { UpdateInvitationDto } from './dto/patch-invitation.dto';
 import { JobState } from 'src/enum/job-state.enum';
 import { User } from 'src/database/entities/user.entity';
-import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class InvitationService {
   constructor(
     @InjectRepository(Invitation)
     private invitationRepository: Repository<Invitation>,
-    private userService: UsersService,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async getAllInvitations() {
@@ -21,19 +21,39 @@ export class InvitationService {
       relations: { employee: true, invitationOwner: true },
     });
   }
+
+  async getOffers(id: string) {
+    // const offers: Invitation[] = await this.invitationRepository.find();
+    // const filteredOffers: Invitation[] = [];
+    // const user = await this.userRepository.findOneBy({ id: id });
+    // for (let i = 0; i < offers.length; i++) {
+    //   if (offers[i].employee.id === user.id) {
+    //     filteredOffers.push(offers[i]);
+    //   }
+    // }
+  }
+
   async postInvitation(id: string, invitationData: PostInvitationDto, req) {
-    const arrUsers: User[] = [];
+    const ownersArr: User[] = [];
+    const employeesArr: User[] = [];
     const invitation = new Invitation();
-    const user = await this.userService.findOne(id);
-    arrUsers.push(req.currentUser);
+    const user = await this.userRepository.findOneBy({ id: id });
+    if (!user)
+      throw new NotFoundException(
+        `User not found or not exist. Plis check the ID :${id}`,
+      );
+
+    ownersArr.push(req.currentUser);
+    employeesArr.push(user);
+
     invitation.jobDescription = invitationData.jobDescription;
     invitation.payPerHour = invitationData.payPerHour;
     invitation.issue = invitationData.issue;
     invitation.location = invitationData.location;
     invitation.isRemote = invitationData.isRemote;
     invitation.startDate = invitationData.startDate;
-    invitation.invitationOwner = arrUsers;
-    invitation.employee = user;
+    invitation.invitationOwner = ownersArr;
+    invitation.employee = employeesArr;
 
     await this.invitationRepository.save(invitation);
     return { message: 'The new invitation has been created', invitation };
