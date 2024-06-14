@@ -1,23 +1,22 @@
 import { Injectable } from "@nestjs/common";
 import { Request } from "express";
-import { MercadoPagoConfig, Payment, Preference } from "mercadopago";
+import { payment, preference } from "./config/mpConfig";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Publicaction } from "src/database/entities/publication.entity";
+import { Repository } from "typeorm";
 
 @Injectable()
 export class PaymentsService {
+  constructor(
+    @InjectRepository(Publicaction)
+    readonly publicactionRepository: Repository<Publicaction>
+  ) {}
   async createPaymenttt(req: Request) {
-    const client = new MercadoPagoConfig({
-      //toke cuenta personal
-      accessToken: process.env.MP_ACCESS_TOKEN,
-      /*       accessToken:
-        //token de cuenta de prueba
-        'TEST-2645491994986306-060612-bc53c7a7a78b3f301b30310ac4068618-1843561803', */
-    });
-
     try {
       const body = {
         items: [
           {
-            id: "1",
+            id: req.body.id,
             title: req.body.title,
             quantity: Number(req.body.quantity),
             unit_price: Number(req.body.unit_price),
@@ -35,9 +34,7 @@ export class PaymentsService {
         auto_return: "approved",
       };
 
-      const preference = new Preference(client);
       const result = await preference.create({ body });
-      console.log(result);
       return { url: result.init_point };
     } catch (error) {
       if (error)
@@ -60,16 +57,38 @@ export class PaymentsService {
   }
 
   async webhook(req) {
-    const client = new MercadoPagoConfig({
-      accessToken: process.env.MP_ACCESS_TOKEN,
-    });
-    const payment = new Payment(client);
     const paidState = req.body;
 
     if (paidState.type == "payment") {
       const data = await payment.capture({ id: paidState.data.id });
+
       if (data.status === "approved") {
-        console.log(data);
+        const item = data.additional_info.items[0];
+        const publication = await this.publicactionRepository.findOne({
+          where: { id: item.id },
+        });
+        const fecha = data.date_created;
+        console.log(publication);
+
+        const description = item.description;
+
+        console.log(description);
+
+        if (description == "7 días") {
+          const date = new Date();
+          date.setDate(date.getDate() + 7);
+          console.log(date);
+        }
+        if (description == "15 días") {
+          const date = new Date();
+          date.setDate(date.getDate() + 15);
+          console.log(date);
+        }
+        if (description == "30 días") {
+          const date = new Date();
+          date.setDate(date.getDate() + 30);
+          console.log(date);
+        }
       }
     }
   }
