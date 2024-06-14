@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
+import { JobState } from 'src/enum/job-state.enum';
 
 @Entity({ name: 'invitations' })
 export class Invitation {
@@ -24,13 +25,25 @@ export class Invitation {
   @Column({ type: 'varchar', nullable: false, length: 15 })
   location: string;
 
-  @Column({ type: 'boolean', nullable: true })
+  @Column({ type: 'boolean', nullable: true, default: false })
   isRemote: boolean;
 
   @Column({ type: 'varchar', nullable: false, length: 20 })
   startDate: string;
 
+  @Column({
+    type: 'enum',
+    nullable: true,
+    enum: JobState,
+    default: JobState.PENDING,
+  })
+  jobState: JobState;
+
   @OneToOne(() => User)
-  @JoinColumn({ name: 'user_ID' })
+  @JoinColumn({ name: 'invitation_owner_ID' })
   invitationOwner: User;
+
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'employee_ID' })
+  employee: User;
 }

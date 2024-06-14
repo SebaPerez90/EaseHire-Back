@@ -30,7 +30,6 @@ export class PopulateUserMiddleware implements NestMiddleware {
         });
         if (user) {
           req.currentUser = user;
-          console.log(req.currentUser);
         } else {
           throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
         }

@@ -1,33 +1,33 @@
 import {
   IsBoolean,
-  IsNotEmpty,
+  IsEnum,
   IsNumber,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { User } from 'src/database/entities/user.entity';
+import { JobState } from 'src/enum/job-state.enum';
 
-export class PostInvitationDto {
+export class UpdateInvitationDto {
   @IsString()
   @MinLength(200)
   @MaxLength(2000)
-  @IsNotEmpty()
+  @IsOptional()
   jobDescription: string;
 
   @IsNumber()
-  @IsNotEmpty()
+  @IsOptional()
   payPerHour: number;
 
   @IsString()
   @MaxLength(500)
-  @IsNotEmpty()
+  @IsOptional()
   issue: string;
 
   @IsString()
   @MaxLength(15)
-  @IsNotEmpty()
+  @IsOptional()
   location: string;
 
   @IsBoolean()
@@ -36,8 +36,10 @@ export class PostInvitationDto {
 
   @IsString()
   @MaxLength(20)
-  @IsNotEmpty()
+  @IsOptional()
   startDate: string;
 
-  invitationOwner: User;
+  @IsEnum(JobState)
+  @IsOptional()
+  jobState: JobState;
 }
