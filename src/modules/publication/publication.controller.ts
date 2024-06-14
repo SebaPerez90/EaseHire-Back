@@ -102,11 +102,11 @@ export class PublicationController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updatePublicationDto: UpdatePublicationDto,
   ) {
-    return this.publicationService.update(id, updatePublicationDto);
+    return await this.publicationService.update(id, updatePublicationDto);
   }
 
   @Delete(':id')

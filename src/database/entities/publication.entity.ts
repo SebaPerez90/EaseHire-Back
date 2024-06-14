@@ -16,16 +16,16 @@ export class Publicaction {
   @Column({ type: 'varchar', length: 50, nullable: false })
   title: string;
 
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({ type: 'varchar', length: 50, nullable: true })
   location: string;
 
-  @Column({ type: 'boolean', nullable: false })
+  @Column({ type: 'boolean', nullable: true })
   remoteWork: boolean;
 
-  @Column({ type: 'varchar', length: 1500, nullable: false })
+  @Column({ type: 'varchar', length: 1500, nullable: true })
   description: string;
 
-  @Column({ type: 'varchar', nullable: false })
+  @Column({ type: 'varchar', nullable: true })
   category: string;
 
   @Column({
@@ -34,7 +34,7 @@ export class Publicaction {
   })
   imgUrl: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
+  @Column({ type: 'varchar', length: 20, nullable: true })
   date: Date | string;
 
   @Column({ nullable: true })

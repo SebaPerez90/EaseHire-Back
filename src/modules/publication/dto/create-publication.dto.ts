@@ -16,7 +16,7 @@ export class CreatePublicationDto {
   @IsNotEmpty()
   remoteWork: boolean;
 
-  imgUrl?: string;
+  file?: string;
 
   user: string;
 }

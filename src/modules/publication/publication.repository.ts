@@ -175,7 +175,8 @@ export class PublicationsRepository implements OnModuleInit {
   }
 
   async update(id: string, updatePublication: UpdateProfesionDto) {
-    return await this.publicationsRepository.update(id, updatePublication);
+    await this.publicationsRepository.update(id, updatePublication);
+    return this.publicationsRepository.findOneBy({ id: id });
   }
   async remove(id: string) {
     return await this.publicationsRepository.delete(id);

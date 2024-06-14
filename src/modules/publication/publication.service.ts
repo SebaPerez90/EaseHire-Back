@@ -54,8 +54,8 @@ export class PublicationService {
     return this.publicationRepository.create(createPublicationDto, res, userid);
   }
 
-  update(id: string, updatePublicationDto: UpdatePublicationDto) {
-    return this.publicationRepository.update(id, updatePublicationDto);
+  async update(id: string, updatePublicationDto: UpdatePublicationDto) {
+    return await this.publicationRepository.update(id, updatePublicationDto);
   }
 
   remove(id: string) {
