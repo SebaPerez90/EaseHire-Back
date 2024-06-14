@@ -42,7 +42,7 @@ export class Invitation {
   jobState: JobState;
 
   @ManyToMany(() => User)
-  @JoinTable({ joinColumn: { name: 'invitation_owner_ID' } })
+  @JoinTable({ name: 'invitationID__employeeID' })
   invitationOwner: User[];
 
   @OneToOne(() => User)
