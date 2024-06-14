@@ -5,6 +5,9 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { Credential } from 'src/database/entities/credentials.entity';
+import * as moment from 'moment';
+import { Role } from 'src/enum/role.enum';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,7 +18,7 @@ export class AuthService {
     private credentialsRepository: Repository<Credential>,
   ) {}
 
-  async signIn(credentials) {
+  async signIn(credentials, mockDate?: string) {
     try {
       const { email, name, family_name, picture, email_verified } = credentials;
 
@@ -28,12 +31,16 @@ export class AuthService {
           email: email,
           email_verified: email_verified ? email_verified : null,
           imgPictureUrl: picture ? picture : null,
+          datecreateUser: mockDate
+            ? mockDate
+            : moment().format('DD/MM/YYYY HH:mm:ss'),
+          role: [Role.USER],
         });
         this.userRepository.save(user);
       }
       const userid = user.id;
 
-      const playload = { userid, email };
+      const playload = { userid, email, role: user.role };
       const token = this.jwtService.sign(playload, {
         secret: process.env.JWT_SECRET,
       });

@@ -10,8 +10,8 @@ export class PublicationService {
   findAll() {
     return this.publicationRepository.findAll();
   }
-  findAllId(userid: any) {
-    throw this.publicationRepository.findAllId(userid);
+  async findAllId(userid: any) {
+    return await this.publicationRepository.findAllId(userid);
   }
 
   findPrublications(
