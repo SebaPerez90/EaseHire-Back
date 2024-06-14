@@ -1,5 +1,6 @@
 import {
   IsBoolean,
+  IsDate,
   IsNotEmpty,
   IsNumber,
   IsString,
@@ -37,6 +38,10 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsBoolean()
   availability: boolean;
+
+  @IsNotEmpty()
+  @IsDate()
+  datecreateUser?: Date;
 
   
 }

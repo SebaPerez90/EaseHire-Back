@@ -10,6 +10,7 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   Headers,
+  NotFoundException,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
@@ -59,7 +60,14 @@ export class ProfesionsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
-  remove(@Param('id') id: string) {
-    return this.profesionsService.remove(id);
+  async remove(@Param('id') id: string) {
+    try {
+      return await this.profesionsService.remove(id);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new NotFoundException(`Profesion with ID ${id} not found`);
+    }
   }
 }

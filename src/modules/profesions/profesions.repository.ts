@@ -5,7 +5,7 @@ import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import * as data from '../../utils/mock-professions.json';
 import { UserRepository } from 'src/modules/users/users.repository';
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 export class ProfesionsRepository {
   constructor(
@@ -34,9 +34,11 @@ export class ProfesionsRepository {
   }
 
   async remove(id: string) {
-    const profesions = await this.profesionsRepository.delete({ id });
-
-    return profesions;
+    const result = await this.profesionsRepository.delete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Profesion with ID ${id} not found`);
+    }
+    return { message: `Profesion with ID ${id} deleted successfully` };
   }
 
   async update(id: string, UpdateUserDto: UpdateProfesionDto) {

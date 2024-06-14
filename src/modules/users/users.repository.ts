@@ -13,6 +13,7 @@ import { Experience } from 'src/database/entities/experience.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import moment = require('moment');
 
 @Injectable()
 export class UserRepository {
@@ -207,6 +208,7 @@ export class UserRepository {
             'birthdate',
             'bio',
             'email',
+            
           ],
           ['dni'],
         )
