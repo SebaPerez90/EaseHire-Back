@@ -46,7 +46,6 @@ export class InvitationService {
       invitationFounded,
       invitationData,
     );
-
     const invitation = await this.invitationRepository.save(update);
     return {
       message: 'Your job invitation has been modified successfully',

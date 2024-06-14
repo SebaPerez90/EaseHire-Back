@@ -20,6 +20,7 @@ import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatModule } from './chat/chat.module';
 import { InvitationModule } from './modules/invitation/invitation.module';
+import { WorkHistoryModule } from './modules/work_history/work_history.module';
 
 @Module({
   imports: [
@@ -52,6 +53,7 @@ import { InvitationModule } from './modules/invitation/invitation.module';
     }),
     ChatModule,
     InvitationModule,
+    WorkHistoryModule,
   ],
 
   controllers: [AppController],
