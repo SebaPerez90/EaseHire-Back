@@ -15,7 +15,7 @@ export class Invitation {
   @Column({ type: 'varchar', length: 2000, nullable: false })
   jobDescription: string;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'float', nullable: false })
   payPerHour: number;
 
   @Column({ type: 'varchar', length: 500, nullable: false })
@@ -28,7 +28,7 @@ export class Invitation {
   isRemote: boolean;
 
   @Column({ type: 'varchar', nullable: false, length: 20 })
-  jobDate: string;
+  startDate: string;
 
   @OneToOne(() => User)
   @JoinColumn({ name: 'user_ID' })
