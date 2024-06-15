@@ -41,9 +41,9 @@ export class ProfesionsController {
   }
   @Get('me')
   async findMe(@Headers() header) {
-    const secret = process.env.JWT_SECRET
-    const { userid } = this.jwtService.verify(header.authorization, { secret })
-    return await this.profesionsService.findMe(userid)
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return await this.profesionsService.findMe(userid);
   }
   @Post()
   @Roles(Role.ADMIN)

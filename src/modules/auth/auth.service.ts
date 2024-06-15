@@ -4,14 +4,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
 import { v4 as uuidv4 } from 'uuid';
+import { Credential } from 'src/database/entities/credentials.entity';
 import * as moment from 'moment';
 import { Role } from 'src/enum/role.enum';
+
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(Credential)
+    private credentialsRepository: Repository<Credential>,
   ) {}
 
   async signIn(credentials) {
@@ -33,14 +37,13 @@ export class AuthService {
         this.userRepository.save(user);
       }
       const userid = user.id;
-     
-      
-      const playload = { userid, email, role:user.role };
+
+      const playload = { userid, email, role: user.role };
       const token = this.jwtService.sign(playload, {
         secret: process.env.JWT_SECRET,
       });
       console.log(token);
-      
+
       return {
         message: 'User login',
         token,
@@ -50,10 +53,20 @@ export class AuthService {
       throw new BadRequestException('failed to login');
     }
   }
-  signUp() {
-    try {
-    } catch (error) {
-      throw new Error(error);
+
+  async simulateAuthFlow({ email, password }) {
+    const foundAccount = await this.credentialsRepository.findOne({
+      where: { email: email },
+    });
+
+    if (foundAccount) throw new BadRequestException('user already exists');
+
+    if (password && email) {
+      const newCredential = new Credential();
+      newCredential.email = email;
+      newCredential.password = password;
+      await this.credentialsRepository.save(newCredential);
+      return newCredential;
     }
   }
 }

@@ -10,7 +10,7 @@ import {
   Req,
   UsePipes,
   ValidationPipe,
-  Headers
+  Headers,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { EducationService } from './education.service';
@@ -24,9 +24,8 @@ import { JwtService } from '@nestjs/jwt';
 export class EducationController {
   constructor(
     private educationService: EducationService,
-    private jwtService: JwtService
-  ) { }
-  
+    private jwtService: JwtService,
+  ) {}
 
   @Get()
   getStudies() {

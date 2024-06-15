@@ -6,7 +6,7 @@ import { createCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
 export class PublicationService {
-  async createCategory(categoryId:createCategoryDto) {
+  async createCategory(categoryId: createCategoryDto) {
     return await this.publicationRepository.createCategory(categoryId);
   }
   constructor(private readonly publicationRepository: PublicationsRepository) {}
@@ -51,7 +51,6 @@ export class PublicationService {
   ) {
     let res = null;
     if (file) {
-      
       res = await this.publicationRepository.uploadImage(file);
     }
     // const publication = await this.publicationRepository.create({

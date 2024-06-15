@@ -18,6 +18,9 @@ import { PaymentsModule } from './modules/payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { ChatModule } from './chat/chat.module';
+import { InvitationModule } from './modules/invitation/invitation.module';
+import { WorkHistoryModule } from './modules/work_history/work_history.module';
 import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
@@ -49,6 +52,9 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
         expiresIn: '6000m',
       },
     }),
+    ChatModule,
+    InvitationModule,
+    WorkHistoryModule,
     StatisticsModule,
   ],
 

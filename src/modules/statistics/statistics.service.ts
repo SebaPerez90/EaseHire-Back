@@ -11,25 +11,22 @@ export class StatisticsService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) { }
-    
+  ) {}
 
   async founduserweek() {
     try {
-      
-      const lastweek = moment().subtract(7, 'days').toDate()
+      const lastweek = moment().subtract(7, 'days').toDate();
 
-      
-      const users = await this.userRepository.find({ where: { datecreateUser: MoreThan(lastweek) } })
-      const countUser = users.length
+      const users = await this.userRepository.find({
+        where: { datecreateUser: MoreThan(lastweek) },
+      });
+      const countUser = users.length;
 
-      
       console.log(users);
-      
-      return countUser
+
+      return countUser;
     } catch (error) {
-      throw new Error('Failed to retrieve users')
+      throw new Error('Failed to retrieve users');
     }
   }
-  
 }

@@ -82,8 +82,8 @@ export class PublicationController {
   // @Roles(Role.ADMIN)
   async createCategory(@Body() category: createCategoryDto) {
     console.log(`estamos en controller post publication `);
-    console.dir(category)
-    
+    console.dir(category);
+
     return await this.publicationService.createCategory(category);
   }
   @Post()
@@ -91,25 +91,31 @@ export class PublicationController {
   create(
     @Body() createPublicationDto: CreatePublicationDto,
     @Headers() header,
-    @UploadedFile(
-      // new ParseFilePipe({
-      //   validators: [
-      //     new MaxFileSizeValidator({
-      //       maxSize: 200000,
-      //       message: 'El archivo es demasiado grande',
-      //     }),
-      //     new FileTypeValidator({
-      //       fileType: /(jpg|jpeg|png|svg|webp)/,
-      //     }),
-      //   ],
-      // }),
-    )
+    @UploadedFile()
     file?: Express.Multer.File,
   ) {
     const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.publicationService.create(createPublicationDto, file, userid);
   }
+
+  //! SI USAN ESLINT Y PRETTIER COMO DEBERIA SER, ESTO TIRABA ERRORES Y POR ESO
+  //! LO BAJE ACÁ PARA PODER MERGEAR , PERO:
+  //! 1) NO DEBERIA ESTAR COMENTADO
+  //! 2) DEBERIA ESTAR FORMATEADO Y CORREJIDO TODO LOS ERRORES ANTES DE HACER MERGE
+  //! 3) TENGO LOS HUEVOS INCHADOS DE HACER ESTO CADA VEZ QUE TENGO PROBLEMAS PARA MERGEAR
+  //! 4) POR ULTIMO, DESCARGUEN LA EXTENSION DE BETTER COMENTS , ASI LEEN ESTO CADA VEZ Q PASEN POR ACA
+  // new ParseFilePipe({
+  //   validators: [
+  //     new MaxFileSizeValidator({
+  //       maxSize: 200000,
+  //       message: 'El archivo es demasiado grande',
+  //     }),
+  //     new FileTypeValidator({
+  //       fileType: /(jpg|jpeg|png|svg|webp)/,
+  //     }),
+  //   ],
+  // }),
 
   @Patch(':id')
   async update(

@@ -42,6 +42,4 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsDate()
   datecreateUser?: Date;
-
-  
 }

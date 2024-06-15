@@ -1,15 +1,15 @@
-import { Injectable } from "@nestjs/common";
-import { Request } from "express";
-import { payment, preference } from "./config/mpConfig";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Publicaction } from "src/database/entities/publication.entity";
-import { Repository } from "typeorm";
+import { Injectable } from '@nestjs/common';
+import { Request } from 'express';
+import { payment, preference } from './config/mpConfig';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Publicaction } from 'src/database/entities/publication.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PaymentsService {
   constructor(
     @InjectRepository(Publicaction)
-    readonly publicactionRepository: Repository<Publicaction>
+    readonly publicactionRepository: Repository<Publicaction>,
   ) {}
   async createPaymenttt(req: Request) {
     try {
@@ -21,36 +21,36 @@ export class PaymentsService {
             quantity: Number(req.body.quantity),
             unit_price: Number(req.body.unit_price),
             description: req.body.description,
-            currency_id: "ARS",
+            currency_id: 'ARS',
           },
         ],
         back_urls: {
-          success: "https://www.youtube.com/?gl=AR&hl=es-419",
-          pending: "https://www.youtube.com/?gl=AR&hl=es-419",
-          failure: "https://www.youtube.com/?gl=AR&hl=es-419",
+          success: 'https://www.youtube.com/?gl=AR&hl=es-419',
+          pending: 'https://www.youtube.com/?gl=AR&hl=es-419',
+          failure: 'https://www.youtube.com/?gl=AR&hl=es-419',
         },
         notification_url:
-          "https://zbs04g65-3001.brs.devtunnels.ms/payments/webhook",
-        auto_return: "approved",
+          'https://zbs04g65-3001.brs.devtunnels.ms/payments/webhook',
+        auto_return: 'approved',
       };
 
       const result = await preference.create({ body });
-      return { url: result.init_point , item: result.items[0]};
+      return { url: result.init_point, item: result.items[0] };
     } catch (error) {
       if (error)
-        console.log("something goes wrong in payment proceess. Plis try again");
+        console.log('something goes wrong in payment proceess. Plis try again');
     }
   }
 
   async getPyaMethods() {
     const response = await fetch(
-      "https://api.mercadopago.com/v1/payment_methods",
+      'https://api.mercadopago.com/v1/payment_methods',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${process.env.MP_ACCESS_TOKEN}`,
         },
-      }
+      },
     );
     const data = await response.json();
     return data.map((element) => element.id);
@@ -59,10 +59,10 @@ export class PaymentsService {
   async webhook(req) {
     const paidState = req.body;
 
-    if (paidState.type == "payment") {
+    if (paidState.type == 'payment') {
       const data = await payment.capture({ id: paidState.data.id });
 
-      if (data.status === "approved") {
+      if (data.status === 'approved') {
         const item = data.additional_info.items[0];
         const publication = await this.publicactionRepository.findOne({
           where: { id: item.id },
@@ -74,17 +74,17 @@ export class PaymentsService {
 
         console.log(description);
 
-        if (description == "7 días") {
+        if (description == '7 días') {
           const date = new Date();
           date.setDate(date.getDate() + 7);
           console.log(date);
         }
-        if (description == "15 días") {
+        if (description == '15 días') {
           const date = new Date();
           date.setDate(date.getDate() + 15);
           console.log(date);
         }
-        if (description == "30 días") {
+        if (description == '30 días') {
           const date = new Date();
           date.setDate(date.getDate() + 30);
           console.log(date);

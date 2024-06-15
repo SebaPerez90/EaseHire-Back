@@ -23,15 +23,13 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
   ) {}
-  
-  async createCategory(categoryId:createCategoryDto) {
+
+  async createCategory(categoryId: createCategoryDto) {
     console.log(categoryId);
-    
-    const newcategory=await this.publicationsRepository.create({
-      
-    });
-    const category =await this.publicationsRepository.save(newcategory);
-    return category
+
+    const newcategory = await this.publicationsRepository.create({});
+    const category = await this.publicationsRepository.save(newcategory);
+    return category;
   }
   async findAllId(userid: any) {
     try {
@@ -99,7 +97,7 @@ export class PublicationsRepository implements OnModuleInit {
 
   async create(createPublication: CreatePublicationDto, res, userid: any) {
     if (res) {
-      res= res.secure_url;
+      res = res.secure_url;
     }
     const date = new Date();
     const formatDate = date.toLocaleDateString();

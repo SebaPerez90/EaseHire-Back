@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  // ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -14,6 +15,8 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
+// import { Invitation } from './invitation.entity';
+import { Work_History } from './workhistorial.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -28,6 +31,7 @@ export class User {
 
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
+
   @Column({ type: 'int', nullable: true })
   dni2: number;
 
@@ -66,6 +70,14 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
+
+  @OneToMany(() => Work_History, (history) => history.user)
+  @JoinColumn({ name: 'work_history_ID' })
+  work_history: Work_History[];
+
+  // @ManyToMany(() => Invitation, (invitation) => invitation)
+  // @JoinColumn({ name: 'invitations_ID' })
+  // invitations: Invitation[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })

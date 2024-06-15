@@ -8,11 +8,11 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
-import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import { AuthService } from '../auth/auth.service';
 import moment = require('moment');
 
 @Injectable()
@@ -21,7 +21,7 @@ export class UserRepository {
     @InjectRepository(Experience)
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
-    private authRepository: AuthRepository,
+    private authService: AuthService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -51,10 +51,6 @@ export class UserRepository {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
     }
-    // await this.usersRepository.update(id, UpdateUserDto);
-    // const updateUser = await this.usersRepository.findOneBy({ id });
-    // if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
-    // return updateUser;
     const userFounded = await this.usersRepository.findOneBy({ id: id });
     if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
 
@@ -191,7 +187,7 @@ export class UserRepository {
       user.birthdate = element.birthdate;
       user.bio = element.bio;
       user.email = element.email;
-      user.credential = await this.authRepository.simulateAuthFlow(element);
+      user.credential = await this.authService.simulateAuthFlow(element);
 
       await this.usersRepository
         .createQueryBuilder()
@@ -208,7 +204,6 @@ export class UserRepository {
             'birthdate',
             'bio',
             'email',
-            
           ],
           ['dni'],
         )

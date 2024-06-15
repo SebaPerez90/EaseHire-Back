@@ -34,7 +34,6 @@ export class PopulateUserMiddleware implements NestMiddleware {
           throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
         }
       } catch (error) {
-        // console.error('Error decoding JWT token:', error);
         throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
       }
     }
