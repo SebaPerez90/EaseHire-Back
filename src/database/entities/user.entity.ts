@@ -72,7 +72,7 @@ export class User {
   role: Role[];
 
   @OneToMany(() => Work_History, (history) => history.user)
-  @JoinColumn({ name: 'work_history_ID' })
+  @JoinColumn({ name: 'workhistory_ID' })
   work_history: Work_History[];
 
   // @ManyToMany(() => Invitation, (invitation) => invitation)

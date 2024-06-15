@@ -9,7 +9,7 @@ export class Work_History {
   id: string;
 
   @OneToOne(() => Invitation)
-  invitation: Invitation;
+  invitations: Invitation[];
 
   @ManyToOne(() => User, (user) => user.work_history)
   user: User;

@@ -1,14 +1,15 @@
-import { Controller, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Patch, Post, Req } from '@nestjs/common';
 import { WorkHistoryService } from './work_history.service';
 import { Public } from 'src/decorators/is-public.decorator';
+import { Request } from 'express';
 
 @Controller('work-history')
 export class WorkHistoryController {
   constructor(private workHistoryService: WorkHistoryService) {}
   @Get()
   @Public()
-  getAllWorkHistory() {
-    // return this.workHistoryService.getAllWorkHistory();
+  getAllWorkHistory(@Req() req: Request) {
+    return this.workHistoryService.getAllWorkHistory(req);
   }
   @Get('id')
   getWorkHistory() {
@@ -21,7 +22,7 @@ export class WorkHistoryController {
   }
 
   @Patch(':id')
-  updateWorkHistory() {
-    return 'update work history';
+  giveFeedback(@Body() feedback) {
+    return this.workHistoryService.giveFeedback(feedback);
   }
 }
