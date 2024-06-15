@@ -99,7 +99,7 @@ export class InvitationService {
     };
   }
 
-  async aceptOfferJob(id: string, req) {
+  async aceptOfferJob(id: string) {
     const invitationFounded: Invitation =
       await this.invitationRepository.findOneBy({
         id: id,
@@ -107,11 +107,10 @@ export class InvitationService {
     if (!invitationFounded)
       throw new NotFoundException(`The offer job was not found or not exist`);
 
-    invitationFounded.employee = req.currentUser;
     invitationFounded.jobState = JobState.ACCEPTED;
     await this.invitationRepository.save(invitationFounded);
     return {
-      message: 'Your job invitation has been modified successfully',
+      message: 'The offer was acept successfullly',
       invitationFounded,
     };
   }
