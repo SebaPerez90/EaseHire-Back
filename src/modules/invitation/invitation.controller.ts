@@ -13,19 +13,18 @@ import { InvitationService } from './invitation.service';
 import { PostInvitationDto } from './dto/post-invitation.dto';
 import { Request } from 'express';
 import { UpdateInvitationDto } from './dto/patch-invitation.dto';
-import { Public } from 'src/decorators/is-public.decorator';
+// import { Public } from 'src/decorators/is-public.decorator';
 
 @Controller('invitation')
 export class InvitationController {
   constructor(private invitationService: InvitationService) {}
   @Get()
-  getAllInvitations() {
-    return this.invitationService.getAllInvitations();
+  getAllInvitations(@Req() req: Request) {
+    return this.invitationService.getInvitations(req);
   }
-  @Get('offers/:id')
-  @Public()
-  getOffers(@Param('id', ParseUUIDPipe) id: string) {
-    return this.invitationService.getOffers(id);
+  @Get('offers')
+  getOffers(@Req() req: Request) {
+    return this.invitationService.getOffers(req);
   }
 
   @Get(':id')

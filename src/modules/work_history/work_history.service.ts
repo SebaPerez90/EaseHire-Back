@@ -12,9 +12,9 @@ export class WorkHistoryService {
     private invitationService: InvitationService,
   ) {}
 
-  async getAllWorkHistory() {
-    const invitations = await this.invitationService.getAllInvitations();
+  // async getAllWorkHistory() {
+  //   const invitations = await this.invitationService.getAllInvitations();
 
-    return invitations.map((element) => element.jobState);
-  }
+  //   return invitations.map((element) => element.jobState);
+  // }
 }

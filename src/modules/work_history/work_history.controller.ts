@@ -8,7 +8,7 @@ export class WorkHistoryController {
   @Get()
   @Public()
   getAllWorkHistory() {
-    return this.workHistoryService.getAllWorkHistory();
+    // return this.workHistoryService.getAllWorkHistory();
   }
   @Get('id')
   getWorkHistory() {

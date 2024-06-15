@@ -16,21 +16,42 @@ export class InvitationService {
     private userRepository: Repository<User>,
   ) {}
 
-  async getAllInvitations() {
-    return await this.invitationRepository.find({
-      relations: { employee: true, invitationOwner: true },
+  async getInvitations(req) {
+    const invitations = await this.invitationRepository.find({
+      relations: { invitationOwner: true },
     });
+    const user = await this.userRepository.findOneBy({
+      id: req.currentUser.id,
+    });
+    const filteredInvitations: Invitation[] = [];
+
+    for (let i = 0; i < invitations.length; i++) {
+      invitations[i].invitationOwner.map((element) => {
+        if (element.id === user.id) {
+          filteredInvitations.push(invitations[i]);
+        }
+      });
+    }
+    return filteredInvitations;
   }
 
-  async getOffers(id: string) {
-    // const offers: Invitation[] = await this.invitationRepository.find();
-    // const filteredOffers: Invitation[] = [];
-    // const user = await this.userRepository.findOneBy({ id: id });
-    // for (let i = 0; i < offers.length; i++) {
-    //   if (offers[i].employee.id === user.id) {
-    //     filteredOffers.push(offers[i]);
-    //   }
-    // }
+  async getOffers(req) {
+    const offers = await this.invitationRepository.find({
+      relations: { employee: true },
+    });
+    const user = await this.userRepository.findOneBy({
+      id: req.currentUser.id,
+    });
+    const filteredOffers: Invitation[] = [];
+
+    for (let i = 0; i < offers.length; i++) {
+      offers[i].employee.map((element) => {
+        if (element.id === user.id) {
+          filteredOffers.push(offers[i]);
+        }
+      });
+    }
+    return filteredOffers;
   }
 
   async postInvitation(id: string, invitationData: PostInvitationDto, req) {
