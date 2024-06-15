@@ -10,6 +10,7 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   Headers,
+  NotFoundException,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
@@ -38,7 +39,12 @@ export class ProfesionsController {
   ) {
     return this.profesionsService.findProfesions(category, page, limit);
   }
-
+  @Get('me')
+  async findMe(@Headers() header) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return await this.profesionsService.findMe(userid);
+  }
   @Post()
   @Roles(Role.ADMIN)
   create(@Body() createProfesionDto: CreateProfesionDto, @Headers() header) {
@@ -59,7 +65,14 @@ export class ProfesionsController {
 
   @Delete(':id')
   @Roles(Role.ADMIN)
-  remove(@Param('id') id: string) {
-    return this.profesionsService.remove(id);
+  async remove(@Param('id') id: string) {
+    try {
+      return await this.profesionsService.remove(id);
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      throw new NotFoundException(`Profesion with ID ${id} not found`);
+    }
   }
 }

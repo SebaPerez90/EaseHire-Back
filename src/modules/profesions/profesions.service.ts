@@ -22,6 +22,9 @@ export class ProfesionsService implements OnModuleInit {
     await this.experienceService.seedExperiences();
     await this.userRepository.filterNewMembers();
   }
+  async findMe(userid: any) {
+    return await this.profesionsRepository.findMe(userid);
+  }
   create(createProfesionDto: CreateProfesionDto, userid: string) {
     return this.profesionsRepository.create(createProfesionDto, userid);
   }

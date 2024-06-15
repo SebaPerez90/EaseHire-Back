@@ -2,9 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { CreatePublicationDto } from './dto/create-publication.dto';
 import { UpdatePublicationDto } from './dto/update-publication.dto';
 import { PublicationsRepository } from './publication.repository';
+import { createCategoryDto } from './dto/create-category.dto';
 
 @Injectable()
 export class PublicationService {
+  async createCategory(categoryId: createCategoryDto) {
+    return await this.publicationRepository.createCategory(categoryId);
+  }
   constructor(private readonly publicationRepository: PublicationsRepository) {}
 
   findAll() {
@@ -42,10 +46,13 @@ export class PublicationService {
 
   async create(
     createPublicationDto: CreatePublicationDto,
-    file: Express.Multer.File,
-    userid: any,
+    file?: Express.Multer.File,
+    userid?: any,
   ) {
-    const res = await this.publicationRepository.uploadImage(file);
+    let res = null;
+    if (file) {
+      res = await this.publicationRepository.uploadImage(file);
+    }
     // const publication = await this.publicationRepository.create({
     //   ...createPublicationDto,
     //   imgUrl: res.secure_url,
@@ -54,8 +61,8 @@ export class PublicationService {
     return this.publicationRepository.create(createPublicationDto, res, userid);
   }
 
-  update(id: string, updatePublicationDto: UpdatePublicationDto) {
-    return this.publicationRepository.update(id, updatePublicationDto);
+  async update(id: string, updatePublicationDto: UpdatePublicationDto) {
+    return await this.publicationRepository.update(id, updatePublicationDto);
   }
 
   remove(id: string) {

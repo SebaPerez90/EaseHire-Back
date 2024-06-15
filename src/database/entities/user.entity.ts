@@ -53,7 +53,7 @@ export class User {
   @Column({ type: 'varchar', length: 150, nullable: true })
   email_verified: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   imgPictureUrl: string;
 
   @Column({ default: false })

@@ -18,7 +18,7 @@ export class AuthService {
     private credentialsRepository: Repository<Credential>,
   ) {}
 
-  async signIn(credentials, mockDate?: string) {
+  async signIn(credentials) {
     try {
       const { email, name, family_name, picture, email_verified } = credentials;
 
@@ -31,9 +31,7 @@ export class AuthService {
           email: email,
           email_verified: email_verified ? email_verified : null,
           imgPictureUrl: picture ? picture : null,
-          datecreateUser: mockDate
-            ? mockDate
-            : moment().format('DD/MM/YYYY HH:mm:ss'),
+          datecreateUser: moment().format('DD/MM/YYYY HH:mm:ss'),
           role: [Role.USER],
         });
         this.userRepository.save(user);
@@ -44,6 +42,7 @@ export class AuthService {
       const token = this.jwtService.sign(playload, {
         secret: process.env.JWT_SECRET,
       });
+      console.log(token);
 
       return {
         message: 'User login',

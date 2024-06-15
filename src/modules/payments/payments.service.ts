@@ -35,7 +35,7 @@ export class PaymentsService {
       };
 
       const result = await preference.create({ body });
-      return { url: result.init_point };
+      return { url: result.init_point, item: result.items[0] };
     } catch (error) {
       if (error)
         console.log('something goes wrong in payment proceess. Plis try again');

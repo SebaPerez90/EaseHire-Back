@@ -49,6 +49,13 @@ export class EducationService implements OnModuleInit {
       throw new NotFoundException('the education list is still empty ');
     return educations;
   }
+  async findMe(userid: any) {
+    const educations = await this.educationsRepository.find({
+      where: { user: { id: userid } },
+    });
+    if (!educations) throw new NotFoundException(`Not found ${userid}`);
+    return educations;
+  }
 
   async postEducation(educationData: PostEducationDto, req) {
     const education = new Education();
