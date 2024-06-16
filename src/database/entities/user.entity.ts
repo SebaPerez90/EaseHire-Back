@@ -15,8 +15,6 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
-// import { Invitation } from './invitation.entity';
-import { Work_History } from './workhistorial.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -70,14 +68,6 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
-
-  @OneToMany(() => Work_History, (history) => history.user)
-  @JoinColumn({ name: 'workhistory_ID' })
-  work_history: Work_History[];
-
-  // @ManyToMany(() => Invitation, (invitation) => invitation)
-  // @JoinColumn({ name: 'invitations_ID' })
-  // invitations: Invitation[];
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
