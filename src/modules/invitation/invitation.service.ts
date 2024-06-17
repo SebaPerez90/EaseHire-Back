@@ -104,14 +104,22 @@ export class InvitationService {
     };
   }
 
-  async aceptOfferJob(id: string) {
+  async aceptOfferJob(id: string, req) {
+    const user = await this.userRepository.findOneBy({
+      id: req.currentUser.id,
+    });
     const invitationFounded: Invitation =
       await this.invitationRepository.findOneBy({
         id: id,
       });
+
     if (!invitationFounded)
       throw new NotFoundException(`The offer job was not found or not exist`);
 
+    this.notificationService.postNotification(
+      NotificationType.ACEPTED_JOB,
+      user,
+    );
     invitationFounded.jobState = JobState.ACCEPTED;
     await this.invitationRepository.save(invitationFounded);
     return {

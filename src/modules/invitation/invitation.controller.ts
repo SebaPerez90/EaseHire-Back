@@ -26,8 +26,8 @@ export class InvitationController {
   }
 
   @Get(':id')
-  aceptOfferJob(@Param('id', ParseUUIDPipe) id: string) {
-    return this.invitationService.aceptOfferJob(id);
+  aceptOfferJob(@Param('id', ParseUUIDPipe) id: string, @Req() req: Request) {
+    return this.invitationService.aceptOfferJob(id, req);
   }
 
   @Post(':id')
