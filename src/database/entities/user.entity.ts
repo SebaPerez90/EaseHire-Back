@@ -15,6 +15,7 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
+import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -69,6 +70,9 @@ export class User {
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
 
+  @Column({ type: 'int', nullable: true, default: 0 })
+  strikes: number;
+
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
   credential: Credential;
@@ -89,4 +93,7 @@ export class User {
 
   @OneToMany(() => Experience, (experice) => experice.client)
   experiences: Experience[];
+
+  @OneToMany(() => Feedback, (feedback) => feedback)
+  feedbacks: Feedback[];
 }

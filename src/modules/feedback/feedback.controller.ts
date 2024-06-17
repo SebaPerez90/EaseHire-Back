@@ -3,9 +3,6 @@ import {
   Get,
   Post,
   Patch,
-  Delete,
-  UsePipes,
-  ValidationPipe,
   Body,
   Req,
   ParseUUIDPipe,
@@ -15,7 +12,6 @@ import { FeedbackService } from './feedback.service';
 import { Request } from 'express';
 import { PostFeedbackDto } from './dto/create-feedback.dto';
 import { Feedback } from 'src/database/entities/feedback.entity';
-// import { Public } from 'src/decorators/is-public.decorator';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enum/role.enum';
 
@@ -30,7 +26,7 @@ export class FeedbackController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
+  @Roles(Role.USER)
   postFeedback(@Body() feedbackData: PostFeedbackDto, @Req() req: Request) {
     return this.feedbackService.postFeedback(feedbackData, req);
   }
@@ -42,11 +38,5 @@ export class FeedbackController {
     @Body() feedbackData: Partial<Feedback>,
   ) {
     return this.feedbackService.editFeedback(feedbackData, id);
-  }
-
-  @Delete()
-  @Roles(Role.ADMIN)
-  removeFeedback() {
-    return this.feedbackService.deleteFeedback();
   }
 }

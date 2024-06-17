@@ -1,14 +1,9 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as data from '../../utils/mock-feedbacks.json';
 import { PostFeedbackDto } from './dto/create-feedback.dto';
-import { UserRepository } from '../users/users.repository';
 import { User } from 'src/database/entities/user.entity';
 import * as forbidden_words from '../../utils/forbidden-words.json';
 
@@ -17,7 +12,8 @@ export class FeedbackService {
   constructor(
     @InjectRepository(Feedback)
     private feedbackRepository: Repository<Feedback>,
-    private userRepository: UserRepository,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async seederFeedbacks() {
@@ -31,7 +27,9 @@ export class FeedbackService {
   }
 
   async getAllFeedbacks() {
-    const feedbacks = await this.feedbackRepository.find();
+    const feedbacks = await this.feedbackRepository.find({
+      relations: { user: true },
+    });
 
     if (feedbacks.length === 0)
       throw new NotFoundException('The feedback list is still empty');
@@ -50,18 +48,23 @@ export class FeedbackService {
   }
 
   async postFeedback(feedbackData: PostFeedbackDto, req) {
-    const user: User = await this.userRepository.findOne(req.user.id);
+    const user: User = await this.userRepository.findOneBy({
+      id: req.currentUser.id,
+    });
     const feedback = new Feedback();
     feedback.rate = feedbackData.rate;
-    feedback.description = feedbackData.description;
+    feedback.description = feedbackData.description.toLocaleLowerCase();
     feedback.user = user;
 
     const response = await this.checkDescriptionEntries(feedbackData);
 
     if (response) {
       feedback.isOfensive = true;
+      console.log(user);
+      user.strikes += 1;
+      await this.userRepository.save(user);
       await this.feedbackRepository.save(feedback);
-      throw new BadRequestException(response);
+      return response;
     }
     await this.feedbackRepository.save(feedback);
     return { message: 'You feebacks has been send successfully' };
@@ -87,31 +90,6 @@ export class FeedbackService {
     };
   }
 
-  async deleteFeedback() {
-    const feedbacks: Feedback[] = await this.feedbackRepository.find();
-    const feedsBlocked: Feedback[] = [];
-
-    for (let i = 0; i < feedbacks.length; i++) {
-      if (feedbacks[i].isOfensive === true) {
-        feedbacks[i].blocked = true;
-        await this.feedbackRepository.save(feedbacks[i]);
-        feedsBlocked.push(feedbacks[i]);
-      }
-    }
-
-    return {
-      message: 'This is the list of posts that were blocked',
-      feedsBlocked,
-    };
-  }
-
-  /*
-   * Filtro de palabras obsenas: en caso de usar
-   * algunas del json "fobidden-words.json".
-   * Automaticamente la publicacion setea como agresiva.
-   * la podes editar antes de que sea bloqueada por un
-   * ADMIN
-   */
   private async checkDescriptionEntries(data) {
     const feedback = data.description.split(/\s+/);
     const words = forbidden_words.forbidden_words;
@@ -126,7 +104,7 @@ export class FeedbackService {
     });
     return {
       message:
-        'Please check your comment! Remember that the applications policies do not allow words that promote violence or abuse',
+        'Your feedback has been created successfully but remember that the applications policies do not allow words that promote violence or abuse',
       matches,
     };
   }
