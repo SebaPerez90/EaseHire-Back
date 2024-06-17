@@ -1,4 +1,4 @@
 export enum NotificationType {
   FEEDBACK = 'FEEDBACK',
-  SERVICE_REQUEST = 'SERVICE_REQUEST',
+  OFFER_JOB = 'OFFER_JOB',
 }
