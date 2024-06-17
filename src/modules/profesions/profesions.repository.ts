@@ -1,17 +1,19 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { Profesion } from 'src/database/entities/profesion.entity';
-import { Repository } from 'typeorm';
-import { CreateProfesionDto } from './dto/create-profesion.dto';
-import { UpdateProfesionDto } from './dto/update-profesion.dto';
-import * as data from '../../utils/mock-professions.json';
-import { UserRepository } from 'src/modules/users/users.repository';
-import { BadRequestException } from '@nestjs/common';
+import { InjectRepository } from "@nestjs/typeorm";
+import { Profesion } from "src/database/entities/profesion.entity";
+import { Repository } from "typeorm";
+import { CreateProfesionDto } from "./dto/create-profesion.dto";
+import { UpdateProfesionDto } from "./dto/update-profesion.dto";
+import * as data from "../../utils/mock-professions.json";
+import { UserRepository } from "src/modules/users/users.repository";
+import { BadRequestException, NotFoundException, Body } from "@nestjs/common";
+import { User } from "src/database/entities/user.entity";
 
 export class ProfesionsRepository {
   constructor(
     @InjectRepository(Profesion)
     private profesionsRepository: Repository<Profesion>,
     private userRepository: UserRepository,
+    @InjectRepository(User) private userEntity: Repository<User>
   ) {}
 
   async seederProfesions() {
@@ -33,10 +35,20 @@ export class ProfesionsRepository {
     return await this.profesionsRepository.save(newProfession);
   }
 
-  async remove(id: string) {
-    const profesions = await this.profesionsRepository.delete({ id });
+  async findMe(userid: any) {
+    const user = await this.profesionsRepository.find({
+      where: { user: { id: userid } },
+    });
+    if (!user) throw new NotFoundException(`User ${userid} not found`);
+    return user;
+  }
 
-    return profesions;
+  async remove(id: string) {
+    const result = await this.profesionsRepository.delete({ id });
+    if (result.affected === 0) {
+      throw new NotFoundException(`Profesion with ID ${id} not found`);
+    }
+    return { message: `Profesion with ID ${id} deleted successfully` };
   }
 
   async update(id: string, UpdateUserDto: UpdateProfesionDto) {
@@ -56,7 +68,7 @@ export class ProfesionsRepository {
 
     if (ProfesionsFind.length == 0)
       throw new BadRequestException(
-        `No found professions with category ${category}`,
+        `No found professions with category ${category}`
       );
 
     return ProfesionsFind;
@@ -64,5 +76,30 @@ export class ProfesionsRepository {
 
   async getAllProfessions() {
     return await this.profesionsRepository.find({ relations: { user: true } });
+  }
+
+  async meProfesion(id: string, body) {
+    const userFind = await this.userRepository.findOne(id);
+
+    const newProfesion = await this.profesionsRepository.findOneBy({
+      category: body.category,
+    });
+
+    if (!newProfesion) throw new NotFoundException(`Profesion not found`);
+    
+    userFind.profesions.find((element) => {
+      if (element.category === newProfesion.category) {
+        throw new BadRequestException(`Profesion already exist`);
+      }
+    });
+
+
+    let userUpdate = new User();
+    userUpdate = userFind;
+    userUpdate.profesions = [...userFind.profesions, newProfesion];
+
+    const userFinal = await this.userEntity.save(userUpdate);
+
+    return userFinal;
   }
 }

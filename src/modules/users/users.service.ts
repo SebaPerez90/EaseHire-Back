@@ -25,7 +25,6 @@ export class UsersService {
   }
 
   async create(createUserDto: CreateUserDto) {
-    
     return this.usersRepository.createUsers(createUserDto);
   }
 
@@ -33,10 +32,34 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto,file: Express.Multer.File) {
-    const res = await this.usersRepository.uploadImageUser(file);
-    return this.usersRepository.updateUser(id, updateUserDto,res);
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    file?: Express.Multer.File,
+  ) {
+    let res = null;
+    if (file) {
+      res = await this.usersRepository.uploadImageUser(file);
+    }
+    return this.usersRepository.updateUser(id, updateUserDto, res);
   }
+
+  // async test(id, userData) {
+  //   const userFounded = await this.usersRepo.findOneBy({ id: id });
+  //   if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
+
+  //   const user = await this.usersRepo.find();
+  //   for (let i = 0; i < user.length; i++) {
+  //     const dni = user[i].dni;
+  //     if (userData.dni === dni)
+  //       throw new BadRequestException(
+  //         'Plis check dni entry. The "dni" must be unique',
+  //       );
+  //   }
+  //   const updates = this.usersRepo.merge(userFounded, userData);
+  //   await this.usersRepo.save(updates);
+  //   return userFounded;
+  // }
 
   remove(id: string) {
     return this.usersRepository.removeUsers(id);

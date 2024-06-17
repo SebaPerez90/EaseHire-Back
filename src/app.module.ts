@@ -18,6 +18,9 @@ import { PaymentsModule } from './modules/payments/payments.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { ChatModule } from './chat/chat.module';
+import { InvitationModule } from './modules/invitation/invitation.module';
+import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
   imports: [
@@ -45,9 +48,12 @@ import { AuthGuard } from './guards/auth.guard';
       global: true,
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: '60m',
+        expiresIn: '6000m',
       },
     }),
+    ChatModule,
+    InvitationModule,
+    StatisticsModule,
   ],
 
   controllers: [AppController],

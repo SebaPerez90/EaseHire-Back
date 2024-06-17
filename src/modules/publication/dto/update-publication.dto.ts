@@ -3,15 +3,17 @@ import { CreatePublicationDto } from './create-publication.dto';
 import { IsNotEmpty } from 'class-validator';
 
 export class UpdatePublicationDto extends PartialType(CreatePublicationDto) {
-  @IsNotEmpty()
   id: string;
 
   title?: string;
 
+  location?: string;
+
+  remoteWork?: boolean;
+
   description?: string;
 
-  imgUrl?: string;
+  category?: string;
 
-  date?: string;
-  userId?: string;
+  imgUrl?: string;
 }

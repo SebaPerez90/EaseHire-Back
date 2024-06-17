@@ -1,14 +1,19 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-users.json';
-import { AuthRepository } from 'src/modules/auth/auth.repository';
 import { Experience } from 'src/database/entities/experience.entity';
 import { JwtService } from '@nestjs/jwt';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
+import { AuthService } from '../auth/auth.service';
+import moment = require('moment');
 
 @Injectable()
 export class UserRepository {
@@ -16,7 +21,7 @@ export class UserRepository {
     @InjectRepository(Experience)
     private experienceRepository: Repository<Experience>,
     @InjectRepository(User) private usersRepository: Repository<User>,
-    private authRepository: AuthRepository,
+    private authService: AuthService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -28,7 +33,7 @@ export class UserRepository {
           if (result) {
             resolve(result);
           } else {
-            reject(new Error (`Error uploading image`));
+            reject(new Error(`Error uploading image`));
           }
         },
       );
@@ -42,15 +47,24 @@ export class UserRepository {
     return user;
   }
 
-  async updateUser(id: string, UpdateUserDto: UpdateUserDto, res)
-  {
+  async updateUser(id: string, UpdateUserDto: UpdateUserDto, res) {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
     }
-    await this.usersRepository.update(id, UpdateUserDto);
-    const updateUser = await this.usersRepository.findOneBy({ id });
-    if (!updateUser) throw new NotFoundException(`No found user con id ${id}`);
-    return updateUser;
+    const userFounded = await this.usersRepository.findOneBy({ id: id });
+    if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
+
+    const user = await this.usersRepository.find();
+    for (let i = 0; i < user.length; i++) {
+      const dni = user[i].dni;
+      if (UpdateUserDto.dni === dni)
+        throw new BadRequestException(
+          'Plis check dni entry. The "dni" must be unique',
+        );
+    }
+    const updates = this.usersRepository.merge(userFounded, UpdateUserDto);
+    await this.usersRepository.save(updates);
+    return userFounded;
   }
 
   async findOne(id: string) {
@@ -64,6 +78,7 @@ export class UserRepository {
 
   async gettoken(token: string) {
     const validate = await this.jwtService.verify(token);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const user_id = validate.user_id;
   }
   async createUsers(createUserDto) {
@@ -172,7 +187,7 @@ export class UserRepository {
       user.birthdate = element.birthdate;
       user.bio = element.bio;
       user.email = element.email;
-      user.credential = await this.authRepository.simulateAuthFlow(element);
+      user.credential = await this.authService.simulateAuthFlow(element);
 
       await this.usersRepository
         .createQueryBuilder()

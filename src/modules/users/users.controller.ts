@@ -14,6 +14,8 @@ import {
   MaxFileSizeValidator,
   FileTypeValidator,
   UseInterceptors,
+  Headers,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -58,9 +60,16 @@ export class UsersController {
     return await this.usersService.averageRate();
   }
 
+  @Get('me')
+  @Public()
+  findOne(@Headers() header) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.usersService.findOne(userid);
+  }
   @Get(':id')
   @Public()
-  findOne(@Param('id') id: string) {
+  findOneID(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 
@@ -71,24 +80,12 @@ export class UsersController {
   }
 
   @Patch(':id')
+  @Public()
   @UseInterceptors(FileInterceptor('imgPictureUrl'))
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
-    @UploadedFile(
-      new ParseFilePipe({
-        validators: [
-          new MaxFileSizeValidator({
-            maxSize: 200000,
-            message: 'El archivo es demasiado grande',
-          }),
-          new FileTypeValidator({
-            fileType: /(jpg|jpeg|png|svg|webp)/,
-          }),
-        ],
-      }),
-    )
-    file: Express.Multer.File,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     return this.usersService.update(id, updateUserDto, file);
   }

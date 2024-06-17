@@ -1,7 +1,9 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
+  // ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -28,6 +30,9 @@ export class User {
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
 
+  @Column({ type: 'int', nullable: true })
+  dni2: number;
+
   @Column({ type: 'varchar', length: 20, nullable: true })
   country: string;
 
@@ -46,17 +51,20 @@ export class User {
   @Column({ type: 'varchar', length: 150, nullable: true })
   email_verified: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   imgPictureUrl: string;
 
   @Column({ default: false })
-  availableToWork: boolean;
+  availableToWork: string;
 
   @Column({ type: 'simple-array', nullable: true, default: 10 })
   professionalRate: number[];
 
   @Column({ type: 'boolean', nullable: true, default: true })
   newMember: boolean;
+
+  @CreateDateColumn({ type: 'date' })
+  datecreateUser: Date;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
