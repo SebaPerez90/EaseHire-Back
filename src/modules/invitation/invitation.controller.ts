@@ -1,7 +1,6 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   ParseUUIDPipe,
@@ -13,7 +12,6 @@ import { InvitationService } from './invitation.service';
 import { PostInvitationDto } from './dto/post-invitation.dto';
 import { Request } from 'express';
 import { UpdateInvitationDto } from './dto/patch-invitation.dto';
-// import { Public } from 'src/decorators/is-public.decorator';
 
 @Controller('invitation')
 export class InvitationController {
@@ -48,10 +46,5 @@ export class InvitationController {
     @Body() invitationData: UpdateInvitationDto,
   ) {
     return this.invitationService.updateInvitation(id, invitationData);
-  }
-
-  @Delete(':id')
-  deleteInvitation() {
-    return 'Delete Invitation';
   }
 }

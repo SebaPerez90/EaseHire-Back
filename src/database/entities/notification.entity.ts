@@ -10,22 +10,19 @@ import { NotificationType } from 'src/enum/notification.enum';
 
 @Entity({ name: 'notifications' })
 export class Notification {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-  @Column({ type: 'varchar', length: 200, nullable: false })
+  @Column({ type: 'varchar', length: 50 })
   title: string;
 
   @Column({ type: 'enum', enum: NotificationType })
   type: NotificationType;
 
-  @Column({ type: 'varchar', length: 20, nullable: false })
-  date: Date | string;
+  @Column({ type: 'date', nullable: true })
+  date: Date;
 
-  @Column({ nullable: true })
-  time: string;
-
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   timelapse: string;
 
   @ManyToOne(() => User, (user) => user.notifications)
