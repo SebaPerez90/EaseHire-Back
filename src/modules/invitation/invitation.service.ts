@@ -6,6 +6,8 @@ import { PostInvitationDto } from './dto/post-invitation.dto';
 import { UpdateInvitationDto } from './dto/patch-invitation.dto';
 import { JobState } from 'src/enum/job-state.enum';
 import { User } from 'src/database/entities/user.entity';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationType } from 'src/enum/notification.enum';
 
 @Injectable()
 export class InvitationService {
@@ -14,6 +16,7 @@ export class InvitationService {
     private invitationRepository: Repository<Invitation>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    private notificationService: NotificationsService,
   ) {}
 
   async getInvitations(req) {
@@ -76,7 +79,9 @@ export class InvitationService {
     invitation.invitationOwner = ownersArr;
     invitation.employee = employeesArr;
 
+    this.notificationService.postNotification(NotificationType.OFFER_JOB, user);
     await this.invitationRepository.save(invitation);
+
     return { message: 'The new invitation has been created', invitation };
   }
 
@@ -99,7 +104,7 @@ export class InvitationService {
     };
   }
 
-  async aceptOfferJob(id: string, req) {
+  async aceptOfferJob(id: string) {
     const invitationFounded: Invitation =
       await this.invitationRepository.findOneBy({
         id: id,
@@ -107,11 +112,10 @@ export class InvitationService {
     if (!invitationFounded)
       throw new NotFoundException(`The offer job was not found or not exist`);
 
-    invitationFounded.employee = req.currentUser;
     invitationFounded.jobState = JobState.ACCEPTED;
     await this.invitationRepository.save(invitationFounded);
     return {
-      message: 'Your job invitation has been modified successfully',
+      message: 'The offer was acept successfullly',
       invitationFounded,
     };
   }
