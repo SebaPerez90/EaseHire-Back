@@ -20,7 +20,6 @@ import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatModule } from './chat/chat.module';
 import { InvitationModule } from './modules/invitation/invitation.module';
-import { WorkHistoryModule } from './modules/work_history/work_history.module';
 import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
@@ -54,7 +53,6 @@ import { StatisticsModule } from './modules/statistics/statistics.module';
     }),
     ChatModule,
     InvitationModule,
-    WorkHistoryModule,
     StatisticsModule,
   ],
 

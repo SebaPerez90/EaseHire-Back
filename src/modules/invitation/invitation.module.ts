@@ -14,6 +14,8 @@ import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Profesion } from 'src/database/entities/profesion.entity';
 import { ProfesionsRepository } from '../profesions/profesions.repository';
+import { Notification } from 'src/database/entities/notification.entity';
+import { NotificationsService } from '../notifications/notifications.service';
 
 @Module({
   imports: [
@@ -24,6 +26,7 @@ import { ProfesionsRepository } from '../profesions/profesions.repository';
       Experience,
       Feedback,
       Profesion,
+      Notification,
     ]),
   ],
   controllers: [InvitationController],
@@ -35,6 +38,7 @@ import { ProfesionsRepository } from '../profesions/profesions.repository';
     ExperienceService,
     FeedbackService,
     ProfesionsRepository,
+    NotificationsService,
   ],
 })
 export class InvitationModule {}
