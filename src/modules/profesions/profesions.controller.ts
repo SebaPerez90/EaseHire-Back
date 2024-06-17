@@ -50,8 +50,8 @@ export class ProfesionsController {
 
   @Post("me/:id")
   @Public()
-  async meProfesion(@Param("id") id: string, @Body() body: CreateProfesionDto) {
-    return await this.profesionsService.meProfesion(id, body);
+  meProfesion(@Param("id") id: string, @Body() body: CreateProfesionDto) {
+    return this.profesionsService.meProfesion(id, body);
   }
 
   @Post()
