@@ -13,7 +13,7 @@ export class Notification {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 40 })
+  @Column({ type: 'varchar', length: 50 })
   title: string;
 
   @Column({ type: 'enum', enum: NotificationType })
