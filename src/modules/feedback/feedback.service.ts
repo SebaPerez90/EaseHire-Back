@@ -17,10 +17,12 @@ export class FeedbackService {
   ) {}
 
   async seederFeedbacks() {
+    const users = await this.userRepository.find();
     data?.map(async (element) => {
       const feedback = new Feedback();
       feedback.rate = element.rate;
       feedback.description = element.description;
+      feedback.user = users[Math.round(Math.random() * 30)];
 
       await this.feedbackRepository.save(feedback);
     });
@@ -77,13 +79,12 @@ export class FeedbackService {
 
     if (!feebackFounded)
       throw new NotFoundException('The feedback is not found or not exists');
-    const feedbackUpdates = await this.feedbackRepository.merge(
+    const feedbackUpdates = this.feedbackRepository.merge(
       feebackFounded,
       feedbackData,
     );
 
     await this.feedbackRepository.save(feedbackUpdates);
-
     return {
       message: 'Your feeback has been update successfully',
       feebackFounded,

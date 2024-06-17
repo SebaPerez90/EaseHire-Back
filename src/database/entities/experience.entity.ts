@@ -42,6 +42,10 @@ export class Experience {
   @JoinColumn({ name: 'profesion_ID' })
   profesion: Profesion;
 
+  @ManyToOne(() => User, (user) => user.experiences)
+  @JoinColumn({ name: 'user_ID' })
+  user: User;
+
   @ManyToOne(() => User, (user) => user)
   @JoinColumn({ name: 'client_ID' })
   client: User;
