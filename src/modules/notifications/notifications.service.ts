@@ -14,7 +14,9 @@ export class NotificationsService {
   ) {}
 
   async getAllNotifications(req) {
-    const notifications = await this.notificationsRepository.find();
+    const notifications = await this.notificationsRepository.find({
+      relations: { user: true },
+    });
     const filteredNotifications: Notification[] = [];
 
     for (let i = 0; i < notifications.length; i++) {
