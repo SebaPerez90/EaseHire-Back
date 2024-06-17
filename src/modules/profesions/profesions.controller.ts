@@ -42,10 +42,11 @@ export class ProfesionsController {
     return await this.profesionsService.findMe(userid);
   }
 
-  @Post("me/:id")
-  @Public()
-  meProfesion(@Param("id") id: string, @Body() body: CreateProfesionDto) {
-    return this.profesionsService.meProfesion(id, body);
+  @Patch("me")
+  meProfesion(@Headers() header, @Body() body: CreateProfesionDto) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.profesionsService.meProfesion(userid, body);
   }
 
   @Post()

@@ -26,8 +26,8 @@ export class ProfesionsService implements OnModuleInit {
     return await this.profesionsRepository.findMe(userid);
   }
 
-  async meProfesion(id: string, body) {
-    return await this.profesionsRepository.meProfesion(id, body);
+  async meProfesion(userid: string, body) {
+    return await this.profesionsRepository.meProfesion(userid, body);
   }
 
   create(createProfesionDto: CreateProfesionDto, userid: string) {
