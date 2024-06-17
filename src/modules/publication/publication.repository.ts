@@ -15,6 +15,7 @@ import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
 import { createCategoryDto } from './dto/create-category.dto';
+import { User } from 'src/database/entities/user.entity';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -22,6 +23,7 @@ export class PublicationsRepository implements OnModuleInit {
     private publicationsRepository: Repository<Publicaction>,
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
+    @InjectRepository(User) private userEntity: Repository<User>,
   ) {}
 
   async createCategory(categoryId: createCategoryDto) {
@@ -165,6 +167,7 @@ export class PublicationsRepository implements OnModuleInit {
       await this.publicationsRepository.findAndCount({
         relations: {
           user: true,
+          usersList: true,
         },
         where,
         take: limit,
@@ -216,5 +219,21 @@ export class PublicationsRepository implements OnModuleInit {
     const locationReturn = [...new Set(location)];
 
     return { categoryReturn, locationReturn };
+  }
+
+  async listMe( id: string, userid: string) {
+
+    const publication = await this.publicationsRepository.findOne({ where: {id: id }, relations: { user: true, usersList: true } });    
+    if (!publication) throw new NotFoundException(`not found publication`);
+
+
+    const userFind = await this.userEntity.findOne({ where: {id: userid}});
+    if (!userFind) throw new NotFoundException(`not found user`);
+
+    publication.usersList = [...publication.usersList, userFind];
+    const publicationUpdate = await this.publicationsRepository.save(publication);
+
+    return publicationUpdate
+
   }
 }
