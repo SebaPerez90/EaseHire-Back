@@ -1,22 +1,26 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
 } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
-import { CreateStatisticDto } from './dto/create-statistic.dto';
-import { UpdateStatisticDto } from './dto/update-statistic.dto';
+import { Roles } from 'src/decorators/role.decorator';
+import { Role } from 'src/enum/role.enum';
 
 @Controller('statistics')
+@Roles(Role.ADMIN)
 export class StatisticsController {
   constructor(private readonly statisticsService: StatisticsService) {}
 
+  @Get('days')
+  foundUsersByDays() {
+    return this.statisticsService.foundUsersByDays();
+  }
   @Get('week')
-  founduserweek() {
-    return this.statisticsService.founduserweek();
+  foundUserWeek() {
+    return this.statisticsService.foundUserWeek();
+  }
+  @Get('month')
+  foundUsersByMonth() {
+    return this.statisticsService.foundUsersByMonth();
   }
 }
