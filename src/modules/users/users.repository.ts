@@ -83,6 +83,7 @@ export class UserRepository {
 
   async gettoken(token: string) {
     const validate = await this.jwtService.verify(token);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const user_id = validate.user_id;
   }
   async createUsers(createUserDto) {
