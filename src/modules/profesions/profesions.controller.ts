@@ -30,15 +30,9 @@ export class ProfesionsController {
   ) {}
 
   @Get()
-  @ApiQuery({ name: "category", required: false })
-  @ApiQuery({ name: "page", required: false })
-  @ApiQuery({ name: "limit", required: false })
-  findProfesions(
-    @Query("category") category: string,
-    @Query("page", new DefaultValuePipe(1), ParseIntPipe) page: number,
-    @Query("limit", new DefaultValuePipe(10), ParseIntPipe) limit: number
-  ) {
-    return this.profesionsService.findProfesions(category, page, limit);
+  @Public()
+  findProfesions() {
+    return this.profesionsService.findProfesions();
   }
 
   @Get("me")
@@ -48,10 +42,11 @@ export class ProfesionsController {
     return await this.profesionsService.findMe(userid);
   }
 
-  @Post("me/:id")
-  @Public()
-  meProfesion(@Param("id") id: string, @Body() body: CreateProfesionDto) {
-    return this.profesionsService.meProfesion(id, body);
+  @Patch("me")
+  meProfesion(@Headers() header, @Body() body: CreateProfesionDto) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.profesionsService.meProfesion(userid, body);
   }
 
   @Post()

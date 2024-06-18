@@ -117,6 +117,13 @@ export class PublicationController {
   //   ],
   // }),
 
+  @Post('listMe/:id')
+  listMe(@Param('id') id: string, @Headers() header) {
+    const secret = process.env.JWT_SECRET;
+    const { userid } = this.jwtService.verify(header.authorization, { secret });
+    return this.publicationService.listMe(id, userid);
+  }
+
   @Patch(':id')
   async update(
     @Param('id') id: string,

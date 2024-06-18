@@ -26,16 +26,16 @@ export class ProfesionsService implements OnModuleInit {
     return await this.profesionsRepository.findMe(userid);
   }
 
-  async meProfesion(id: string, body) {
-    return await this.profesionsRepository.meProfesion(id, body);
+  async meProfesion(userid: string, body) {
+    return await this.profesionsRepository.meProfesion(userid, body);
   }
 
   create(createProfesionDto: CreateProfesionDto, userid: string) {
     return this.profesionsRepository.create(createProfesionDto, userid);
   }
 
-  findProfesions(category: string, page: number, limit: number) {
-    return this.profesionsRepository.findProfesions(category, page, limit);
+  findProfesions() {
+    return this.profesionsRepository.findProfesions();
   }
 
   update(id: string, updateProfesionDto: UpdateProfesionDto) {

@@ -57,20 +57,8 @@ export class ProfesionsRepository {
     return updateProfesions;
   }
 
-  async findProfesions(category: string, page: number, limit: number) {
-    const skip = (page - 1) * limit;
-    const ProfesionsFind = await this.profesionsRepository.find({
-      where: { category: category },
-      take: limit,
-      skip: skip,
-      relations: { user: true, experiences: true },
-    });
-
-    if (ProfesionsFind.length == 0)
-      throw new BadRequestException(
-        `No found professions with category ${category}`
-      );
-
+  async findProfesions() {
+    const ProfesionsFind = await this.profesionsRepository.find()
     return ProfesionsFind;
   }
 
@@ -78,8 +66,8 @@ export class ProfesionsRepository {
     return await this.profesionsRepository.find({ relations: { user: true } });
   }
 
-  async meProfesion(id: string, body) {
-    const userFind = await this.userRepository.findOne(id);
+  async meProfesion(userid: string, body) {
+    const userFind = await this.userRepository.findOne(userid);
 
     const newProfesion = await this.profesionsRepository.findOneBy({
       category: body.category,
