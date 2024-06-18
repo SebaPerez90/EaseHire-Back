@@ -89,4 +89,24 @@ export class ProfesionsRepository {
 
     return userFinal;
   }
+
+  async removeProfesion(req, categoryName) {
+    const userFind = await this.userEntity.findOne({
+      where: { id: req.currentUser.id },
+      relations: { profesions: true },
+    });
+    const profesionFind = await this.profesionsRepository.findOneBy({
+      category: categoryName,
+    });
+
+    if (!profesionFind) throw new NotFoundException(`Profesion not found`);
+
+    for (let i = 0; i < userFind.profesions.length; i++) {
+      if (userFind.profesions[i].category === profesionFind.category) {
+        userFind.profesions.splice(i, 1);
+      }
+    }
+    const userFinal = await this.userEntity.save(userFind);
+    return userFinal;
+  }
 }
