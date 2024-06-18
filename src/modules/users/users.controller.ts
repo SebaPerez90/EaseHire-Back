@@ -44,7 +44,11 @@ export class UsersController {
   ) {
     return this.usersService.findUsers(category, city, page, limit);
   }
-
+  @Get('blocks')
+  @Public()
+  getAllBlocks() {
+    return this.usersService.getAllBlocks();
+  }
   @Get('all')
   @Public()
   findAll() {
