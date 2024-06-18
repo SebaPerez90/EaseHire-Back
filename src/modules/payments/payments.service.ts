@@ -4,12 +4,15 @@ import { payment, preference } from './config/mpConfig';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
+import { Payment } from 'src/database/entities/payment.entity';
 
 @Injectable()
 export class PaymentsService {
   constructor(
-    @InjectRepository(Publicaction)
-    readonly publicactionRepository: Repository<Publicaction>,
+    @InjectRepository(Publicaction) private publicactionRepository: Repository<Publicaction>,
+
+    @InjectRepository(Payment) private paymentRepository: Repository<Payment>,
+
   ) {}
   async createPaymenttt(req: Request) {
     try {
@@ -25,9 +28,9 @@ export class PaymentsService {
           },
         ],
         back_urls: {
-          success: 'https://www.youtube.com/?gl=AR&hl=es-419',
-          pending: 'https://www.youtube.com/?gl=AR&hl=es-419',
-          failure: 'https://www.youtube.com/?gl=AR&hl=es-419',
+          success: 'https://pf-g5-front.vercel.app/',
+          pending: 'https://pf-g5-front.vercel.app/',
+          failure: 'https://pf-g5-front.vercel.app/',
         },
         notification_url:
           'https://zbs04g65-3001.brs.devtunnels.ms/payments/webhook',
@@ -67,27 +70,25 @@ export class PaymentsService {
         const publication = await this.publicactionRepository.findOne({
           where: { id: item.id },
         });
-        const fecha = data.date_created;
-        console.log(publication);
 
-        const description = item.description;
+        let payment = new Payment();
+        payment.value = data.transaction_details.net_received_amount;
+        payment.description = data.description;
+        payment.datePayment = data.date_approved.split('T')[0];
+        await this.paymentRepository.save(payment);
 
-        console.log(description);
-
-        if (description == '7 días') {
+        
+        if ( item.description == '7 días') {
           const date = new Date();
           date.setDate(date.getDate() + 7);
-          console.log(date);
         }
-        if (description == '15 días') {
+        if ( item.description == '15 días') {
           const date = new Date();
           date.setDate(date.getDate() + 15);
-          console.log(date);
         }
-        if (description == '30 días') {
+        if ( item.description == '30 días') {
           const date = new Date();
           date.setDate(date.getDate() + 30);
-          console.log(date);
         }
       }
     }
