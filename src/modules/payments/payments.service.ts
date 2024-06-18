@@ -1,13 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Request } from 'express';
 import { payment, preference } from './config/mpConfig';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { Payment } from 'src/database/entities/payment.entity';
+import * as data from '../../utils/mock-payments.json'
 
 @Injectable()
-export class PaymentsService {
+export class PaymentsService implements OnModuleInit {
   constructor(
     @InjectRepository(Publicaction)
     private publicactionRepository: Repository<Publicaction>,
@@ -15,8 +16,18 @@ export class PaymentsService {
     @InjectRepository(Payment) private paymentRepository: Repository<Payment>,
   ) {}
 
-  async mockPayment() {
-    
+  onModuleInit() {
+    this.createPayment();
+  }
+
+  async createPayment() {
+    data?.map(async (element) => {
+      const payment = new Payment();
+      payment.value = element.value;
+      payment.description = element.description;
+      payment.datePayment = element.datePayment;
+      await this.paymentRepository.save(payment);
+    })
   }
 
   async createPaymenttt(req: Request) {
@@ -96,10 +107,12 @@ export class PaymentsService {
           date.setDate(date.getDate() + 7);
         }
         if (item.description == '15 días') {
+          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 15);
         }
         if (item.description == '30 días') {
+          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 30);
         }
