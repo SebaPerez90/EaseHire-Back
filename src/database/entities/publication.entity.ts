@@ -34,7 +34,7 @@ export class Publicaction {
   })
   imgUrl: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   date: Date | string;
 
   @Column({ nullable: true })

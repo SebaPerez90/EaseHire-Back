@@ -23,4 +23,17 @@ export class StatisticsController {
   foundUsersByMonth() {
     return this.statisticsService.foundUsersByMonth();
   }
+
+  @Get('publication/days')
+  foundPublicationByDays() {
+    return this.statisticsService.foundPublicationByDays();
+  }
+  @Get('publication/week')
+  foundPublicationWeek() {
+    return this.statisticsService.foundPublicationWeek();
+  }
+  @Get('publication/moth')
+  foundPublicationByMonth() {
+    return this.statisticsService.foundPublicationByMonth();
+  }
 }

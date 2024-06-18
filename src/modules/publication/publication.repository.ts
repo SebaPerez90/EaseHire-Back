@@ -64,7 +64,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.location = element.location;
       newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
-      newPublication.date = formatDate;
+      newPublication.date = new Date(element.date);
       newPublication.time = formatTime;
       newPublication.timelapse = timelapsed;
       newPublication.profesion = professions[Math.round(Math.random() * 16)];
@@ -99,9 +99,9 @@ export class PublicationsRepository implements OnModuleInit {
     if (res) {
       res = res.secure_url;
     }
-    const date = new Date();
-    const formatDate = date.toLocaleDateString();
-    const formatTime = date.toLocaleTimeString();
+    const date = moment();
+    const formatDate = date.format('YYYY-MM-DD');
+    const formatTime = date.format('HH-mm-ss');
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -115,7 +115,8 @@ export class PublicationsRepository implements OnModuleInit {
     });
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
-
+    console.log(newPublication);
+    
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
   }
