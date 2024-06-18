@@ -73,6 +73,9 @@ export class User {
   @Column({ type: 'int', nullable: true, default: 0 })
   strikes: number;
 
+  @Column({ type: 'boolean', default: false, nullable: true })
+  isBlocked: boolean;
+
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
   credential: Credential;

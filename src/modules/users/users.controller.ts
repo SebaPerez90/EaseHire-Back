@@ -10,9 +10,6 @@ import {
   DefaultValuePipe,
   ParseIntPipe,
   UploadedFile,
-  ParseFilePipe,
-  MaxFileSizeValidator,
-  FileTypeValidator,
   UseInterceptors,
   Headers,
   ParseUUIDPipe,
@@ -24,8 +21,6 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { JwtService } from '@nestjs/jwt';
 import { Public } from 'src/decorators/is-public.decorator';
 import { FileInterceptor } from '@nestjs/platform-express';
-// import { Roles } from 'src/decorators/role.decorator';
-// import { Role } from 'src/enum/role.enum';
 
 @ApiTags('users')
 @Controller('users')
@@ -51,13 +46,9 @@ export class UsersController {
   }
 
   @Get('all')
+  @Public()
   findAll() {
     return this.usersService.findAll();
-  }
-
-  @Get('test')
-  async averageRate() {
-    return await this.usersService.averageRate();
   }
 
   @Get('me')
@@ -91,7 +82,8 @@ export class UsersController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(id);
+  @Public()
+  blockUser(@Param('id') id: string) {
+    return this.usersService.blockUser(id);
   }
 }

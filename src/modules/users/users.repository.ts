@@ -13,7 +13,6 @@ import { JwtService } from '@nestjs/jwt';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
 import { AuthService } from '../auth/auth.service';
-import moment = require('moment');
 
 @Injectable()
 export class UserRepository {
@@ -39,12 +38,6 @@ export class UserRepository {
       );
       toStream(file.buffer).pipe(upload);
     });
-  }
-
-  async removeUsers(id: string) {
-    const user = await this.usersRepository.findOneBy({ id });
-    if (!user) throw new NotFoundException(`No found user con id ${id}`);
-    return user;
   }
 
   async updateUser(id: string, UpdateUserDto: UpdateUserDto, res) {
@@ -93,7 +86,25 @@ export class UserRepository {
     const users = await this.usersRepository.find({
       relations: { experiences: true, educations: true, profesions: true },
     });
-    return users;
+
+    const filteredUsers: User[] = [];
+    users.map((element) => {
+      if (element.isBlocked === false) {
+        filteredUsers.push(element);
+      }
+    });
+    return filteredUsers;
+  }
+
+  async blockUser(id) {
+    const userFounded = await this.usersRepository.findOneBy({ id: id });
+
+    if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
+    const updates = this.usersRepository.merge(userFounded, {
+      isBlocked: !userFounded.isBlocked,
+    });
+    await this.usersRepository.save(updates);
+    return userFounded;
   }
 
   async findUsers(category: string, city: string, page: number, limit: number) {
@@ -121,11 +132,6 @@ export class UserRepository {
       throw new NotFoundException(`No users were found whith those parameters`);
 
     return { usersFind, count };
-  }
-
-  async test() {
-    const users = await this.usersRepository.find();
-    return users.map((item) => item.professionalRate);
   }
 
   async filterNewMembers() {
