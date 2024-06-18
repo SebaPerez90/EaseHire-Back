@@ -3,6 +3,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
@@ -34,7 +35,7 @@ export class Publicaction {
   })
   imgUrl: string;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 40, nullable: true })
   date: Date | string;
 
   @Column({ nullable: true })
@@ -50,4 +51,8 @@ export class Publicaction {
   @ManyToOne(() => User, (user) => user.publicactions)
   @JoinColumn({ name: 'user_ID' })
   user: User;
+
+  @OneToMany(() => User, (user) => user.publication)
+  @JoinColumn({ name: 'usersList' })
+  usersList: User[];
 }

@@ -15,6 +15,7 @@ import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
 import { createCategoryDto } from './dto/create-category.dto';
+import { User } from 'src/database/entities/user.entity';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -22,6 +23,7 @@ export class PublicationsRepository implements OnModuleInit {
     private publicationsRepository: Repository<Publicaction>,
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
+    @InjectRepository(User) private userEntity: Repository<User>,
   ) {}
 
   async createCategory(categoryId: createCategoryDto) {
@@ -64,7 +66,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.location = element.location;
       newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
-      newPublication.date = formatDate;
+      newPublication.date = new Date(element.date);
       newPublication.time = formatTime;
       newPublication.timelapse = timelapsed;
       newPublication.profesion = professions[Math.round(Math.random() * 16)];
@@ -99,9 +101,9 @@ export class PublicationsRepository implements OnModuleInit {
     if (res) {
       res = res.secure_url;
     }
-    const date = new Date();
-    const formatDate = date.toLocaleDateString();
-    const formatTime = date.toLocaleTimeString();
+    const date = moment();
+    const formatDate = date.format('YYYY-MM-DD');
+    const formatTime = date.format('HH-mm-ss');
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -115,6 +117,7 @@ export class PublicationsRepository implements OnModuleInit {
     });
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
+    console.log(newPublication);
 
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
@@ -165,6 +168,7 @@ export class PublicationsRepository implements OnModuleInit {
       await this.publicationsRepository.findAndCount({
         relations: {
           user: true,
+          usersList: true,
         },
         where,
         take: limit,
@@ -216,5 +220,22 @@ export class PublicationsRepository implements OnModuleInit {
     const locationReturn = [...new Set(location)];
 
     return { categoryReturn, locationReturn };
+  }
+
+  async listMe(id: string, userid: string) {
+    const publication = await this.publicationsRepository.findOne({
+      where: { id: id },
+      relations: { user: true, usersList: true },
+    });
+    if (!publication) throw new NotFoundException(`not found publication`);
+
+    const userFind = await this.userEntity.findOne({ where: { id: userid } });
+    if (!userFind) throw new NotFoundException(`not found user`);
+
+    publication.usersList = [...publication.usersList, userFind];
+    const publicationUpdate =
+      await this.publicationsRepository.save(publication);
+
+    return publicationUpdate;
   }
 }

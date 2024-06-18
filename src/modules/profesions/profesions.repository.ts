@@ -5,13 +5,15 @@ import { CreateProfesionDto } from './dto/create-profesion.dto';
 import { UpdateProfesionDto } from './dto/update-profesion.dto';
 import * as data from '../../utils/mock-professions.json';
 import { UserRepository } from 'src/modules/users/users.repository';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { BadRequestException, NotFoundException, Body } from '@nestjs/common';
+import { User } from 'src/database/entities/user.entity';
 
 export class ProfesionsRepository {
   constructor(
     @InjectRepository(Profesion)
     private profesionsRepository: Repository<Profesion>,
     private userRepository: UserRepository,
+    @InjectRepository(User) private userEntity: Repository<User>,
   ) {}
 
   async seederProfesions() {
@@ -32,6 +34,7 @@ export class ProfesionsRepository {
     });
     return await this.profesionsRepository.save(newProfession);
   }
+
   async findMe(userid: any) {
     const user = await this.profesionsRepository.find({
       where: { user: { id: userid } },
@@ -54,24 +57,36 @@ export class ProfesionsRepository {
     return updateProfesions;
   }
 
-  async findProfesions(category: string, page: number, limit: number) {
-    const skip = (page - 1) * limit;
-    const ProfesionsFind = await this.profesionsRepository.find({
-      where: { category: category },
-      take: limit,
-      skip: skip,
-      relations: { user: true, experiences: true },
-    });
-
-    if (ProfesionsFind.length == 0)
-      throw new BadRequestException(
-        `No found professions with category ${category}`,
-      );
-
+  async findProfesions() {
+    const ProfesionsFind = await this.profesionsRepository.find();
     return ProfesionsFind;
   }
 
   async getAllProfessions() {
     return await this.profesionsRepository.find({ relations: { user: true } });
+  }
+
+  async meProfesion(userid: string, body) {
+    const userFind = await this.userRepository.findOne(userid);
+
+    const newProfesion = await this.profesionsRepository.findOneBy({
+      category: body.category,
+    });
+
+    if (!newProfesion) throw new NotFoundException(`Profesion not found`);
+
+    userFind.profesions.find((element) => {
+      if (element.category === newProfesion.category) {
+        throw new BadRequestException(`Profesion already exist`);
+      }
+    });
+
+    let userUpdate = new User();
+    userUpdate = userFind;
+    userUpdate.profesions = [...userFind.profesions, newProfesion];
+
+    const userFinal = await this.userEntity.save(userUpdate);
+
+    return userFinal;
   }
 }

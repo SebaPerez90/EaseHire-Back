@@ -193,6 +193,7 @@ export class UserRepository {
       user.birthdate = element.birthdate;
       user.bio = element.bio;
       user.email = element.email;
+      user.datecreateUser = new Date(element.datecreateUser);
       user.credential = await this.authService.simulateAuthFlow(element);
 
       await this.usersRepository

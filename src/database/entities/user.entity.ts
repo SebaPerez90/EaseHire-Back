@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   // ManyToMany,
   OneToMany,
   OneToOne,
@@ -97,6 +98,6 @@ export class User {
   @OneToMany(() => Experience, (experice) => experice.client)
   experiences: Experience[];
 
-  @OneToMany(() => Feedback, (feedback) => feedback)
-  feedbacks: Feedback[];
+  @ManyToOne(() => Publicaction, (Publicaction) => Publicaction.usersList)
+  publication: Publicaction;
 }
