@@ -69,11 +69,12 @@ export class ProfesionsController {
     return this.profesionsService.update(id, updateProfesionDto);
   }
 
-  @Delete('update/:idd')
-  removeProfesion(@Req() req: Request, @Param('idd') profesionID: string) {
-    // removeProfesion() {
+  @Delete('update/:categoryID')
+  removeProfesion(
+    @Req() req: Request,
+    @Param('categoryID') profesionID: string,
+  ) {
     return this.profesionsService.removeProfesion(req, profesionID);
-    // return 'pepe';
   }
   @Delete(':id')
   @Roles(Role.ADMIN)
