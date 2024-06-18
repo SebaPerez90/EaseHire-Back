@@ -59,6 +59,11 @@ export class PaymentsService {
     return data.map((element) => element.id);
   }
 
+  async historiPayments() {
+    const payments = await this.paymentRepository.find();
+    return payments;
+  }
+
   async webhook(req) {
     const paidState = req.body;
 
