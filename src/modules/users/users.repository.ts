@@ -80,6 +80,7 @@ export class UserRepository {
       }
     }
     })
+
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
