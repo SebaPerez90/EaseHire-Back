@@ -12,6 +12,8 @@ import { Profesion } from 'src/database/entities/profesion.entity';
 import { Experience } from 'src/database/entities/experience.entity';
 import { cloudinaryConfig } from 'src/database/config/cloudinary';
 import { AuthService } from '../auth/auth.service';
+import { NotificationsService } from '../notifications/notifications.service';
+import { Notification } from 'src/database/entities/notification.entity';
 
 @Module({
   imports: [
@@ -21,6 +23,7 @@ import { AuthService } from '../auth/auth.service';
       Credential,
       Profesion,
       Experience,
+      Notification,
     ]),
   ],
   controllers: [PublicationController],
@@ -31,6 +34,7 @@ import { AuthService } from '../auth/auth.service';
     AuthService,
     ProfesionsRepository,
     cloudinaryConfig,
+    NotificationsService,
   ],
 })
 export class PublicationModule {}

@@ -16,6 +16,8 @@ import { UploadApiResponse, v2 } from 'cloudinary';
 import toStream = require('buffer-to-stream');
 import { createCategoryDto } from './dto/create-category.dto';
 import { User } from 'src/database/entities/user.entity';
+import { NotificationsService } from '../notifications/notifications.service';
+import { NotificationType } from 'src/enum/notification.enum';
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -24,6 +26,7 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
     @InjectRepository(User) private userEntity: Repository<User>,
+    private notificationService: NotificationsService,
   ) {}
 
   async createCategory(categoryId: createCategoryDto) {
@@ -208,13 +211,11 @@ export class PublicationsRepository implements OnModuleInit {
     const publications = await this.publicationsRepository.find();
 
     const category = publications.map(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ({ category, ...publications }) => category,
     );
     const categoryReturn = [...new Set(category)];
 
     const location = publications.map(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ({ location, ...publications }) => location,
     );
     const locationReturn = [...new Set(location)];
@@ -233,6 +234,7 @@ export class PublicationsRepository implements OnModuleInit {
     if (!userFind) throw new NotFoundException(`not found user`);
 
     publication.usersList = [...publication.usersList, userFind];
+    // this.notificationService.postNotification(NotificationType.SEND_APPLY_REQUEST, user);
     const publicationUpdate =
       await this.publicationsRepository.save(publication);
 
