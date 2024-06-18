@@ -80,12 +80,14 @@ export class UserRepository {
       }
     }
     })
+
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }
 
   async gettoken(token: string) {
     const validate = await this.jwtService.verify(token);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const user_id = validate.user_id;
   }
   async createUsers(createUserDto) {
