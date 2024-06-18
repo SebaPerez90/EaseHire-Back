@@ -90,13 +90,13 @@ export class ProfesionsRepository {
     return userFinal;
   }
 
-  async removeProfesion(req, profesionID) {
+  async removeProfesion(req, categoryName) {
     const userFind = await this.userEntity.findOne({
       where: { id: req.currentUser.id },
       relations: { profesions: true },
     });
     const profesionFind = await this.profesionsRepository.findOneBy({
-      id: profesionID,
+      category: categoryName,
     });
 
     if (!profesionFind) throw new NotFoundException(`Profesion not found`);
