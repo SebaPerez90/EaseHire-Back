@@ -12,11 +12,19 @@ export class PaymentsController {
   getPyaMethods() {
     return this.paymentService.getPyaMethods();
   }
+
+  @Get()
+  @Public()
+  historiPayments() {
+    return this.paymentService.historiPayments();
+  }
+
   @Post()
   @Public()
   createPaymenttt(@Req() req: Request) {
     return this.paymentService.createPaymenttt(req);
   }
+
   @Post('webhook')
   @Public()
   webhook(@Req() req: Request) {

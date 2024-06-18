@@ -44,6 +44,9 @@ export class Publicaction {
   @Column({ nullable: true })
   timelapse: string;
 
+  @Column({ nullable: true, default: false })
+  premium: boolean;
+
   @ManyToOne(() => Profesion, (profesion) => profesion)
   @JoinColumn({ name: 'profesion_ID' })
   profesion: Profesion;
