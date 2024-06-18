@@ -62,6 +62,7 @@ export class UsersController {
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.usersService.findOne(userid);
   }
+
   @Get(':id')
   @Public()
   findOneID(@Param('id') id: string) {

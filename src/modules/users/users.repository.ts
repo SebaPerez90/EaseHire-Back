@@ -75,8 +75,11 @@ export class UserRepository {
         educations: true,
         profesions: true,
         notifications: true,
-      },
-    });
+        publicactions : {
+          usersList:true
+      }
+    }
+    })
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }

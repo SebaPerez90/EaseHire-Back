@@ -14,6 +14,11 @@ export class PaymentsService {
 
     @InjectRepository(Payment) private paymentRepository: Repository<Payment>,
   ) {}
+
+  async mockPayment() {
+    
+  }
+
   async createPaymenttt(req: Request) {
     try {
       const body = {
@@ -72,6 +77,7 @@ export class PaymentsService {
 
       if (data.status === 'approved') {
         const item = data.additional_info.items[0];
+
         const publication = await this.publicactionRepository.findOne({
           where: { id: item.id },
         });
@@ -80,9 +86,12 @@ export class PaymentsService {
         payment.value = data.transaction_details.net_received_amount;
         payment.description = data.description;
         payment.datePayment = data.date_approved.split('T')[0];
+        console.log(payment);
         await this.paymentRepository.save(payment);
 
+
         if (item.description == '7 días') {
+          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 7);
         }
