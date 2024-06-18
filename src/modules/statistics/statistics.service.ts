@@ -234,10 +234,10 @@ export class StatisticsService {
             date: Between(startDate, endDate),
           },
         });
-        const countpublications = publication.length;
+        const countPublications = publication.length;
         publicationByDay.push({
           day,
-          countpublications,
+          countPublications,
         });
       }
       return publicationByDay;
