@@ -40,6 +40,13 @@ export class UserRepository {
     });
   }
 
+  async getAllBlocks() {
+    const users = await this.usersRepository.find({
+      where: { isBlocked: true },
+    });
+    return users;
+  }
+
   async updateUser(id: string, UpdateUserDto: UpdateUserDto, res) {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
@@ -76,7 +83,6 @@ export class UserRepository {
 
   async gettoken(token: string) {
     const validate = await this.jwtService.verify(token);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const user_id = validate.user_id;
   }
   async createUsers(createUserDto) {

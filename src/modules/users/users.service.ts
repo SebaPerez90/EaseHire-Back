@@ -16,6 +16,9 @@ export class UsersService {
     return this.usersRepository.findUsers(category, city, page, limit);
   }
 
+  getAllBlocks() {
+    return this.usersRepository.getAllBlocks();
+  }
   findAll() {
     return this.usersRepository.findAll();
   }
