@@ -54,5 +54,5 @@ export class Publicaction {
 
   @OneToMany(() => User, (user) => user.publication)
   @JoinColumn({ name: 'usersList' })
-  usersList: User[]
+  usersList: User[];
 }

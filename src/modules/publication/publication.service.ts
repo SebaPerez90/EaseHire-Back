@@ -44,8 +44,8 @@ export class PublicationService {
     return this.publicationRepository.findOnePublication(id);
   }
 
-  listMe( id: string, userid: string) {
-    return this.publicationRepository.listMe( id, userid);
+  listMe(id: string, userid: string) {
+    return this.publicationRepository.listMe(id, userid);
   }
 
   async create(

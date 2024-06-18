@@ -118,7 +118,7 @@ export class PublicationsRepository implements OnModuleInit {
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
     console.log(newPublication);
-    
+
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
   }
@@ -222,19 +222,20 @@ export class PublicationsRepository implements OnModuleInit {
     return { categoryReturn, locationReturn };
   }
 
-  async listMe( id: string, userid: string) {
-
-    const publication = await this.publicationsRepository.findOne({ where: {id: id }, relations: { user: true, usersList: true } });    
+  async listMe(id: string, userid: string) {
+    const publication = await this.publicationsRepository.findOne({
+      where: { id: id },
+      relations: { user: true, usersList: true },
+    });
     if (!publication) throw new NotFoundException(`not found publication`);
 
-
-    const userFind = await this.userEntity.findOne({ where: {id: userid}});
+    const userFind = await this.userEntity.findOne({ where: { id: userid } });
     if (!userFind) throw new NotFoundException(`not found user`);
 
     publication.usersList = [...publication.usersList, userFind];
-    const publicationUpdate = await this.publicationsRepository.save(publication);
+    const publicationUpdate =
+      await this.publicationsRepository.save(publication);
 
-    return publicationUpdate
-
+    return publicationUpdate;
   }
 }

@@ -16,6 +16,7 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
+import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -69,6 +70,12 @@ export class User {
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
+
+  @Column({ type: 'int', nullable: true, default: 0 })
+  strikes: number;
+
+  @Column({ type: 'boolean', default: false, nullable: true })
+  isBlocked: boolean;
 
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })

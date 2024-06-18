@@ -1,19 +1,19 @@
-import { InjectRepository } from "@nestjs/typeorm";
-import { Profesion } from "src/database/entities/profesion.entity";
-import { Repository } from "typeorm";
-import { CreateProfesionDto } from "./dto/create-profesion.dto";
-import { UpdateProfesionDto } from "./dto/update-profesion.dto";
-import * as data from "../../utils/mock-professions.json";
-import { UserRepository } from "src/modules/users/users.repository";
-import { BadRequestException, NotFoundException, Body } from "@nestjs/common";
-import { User } from "src/database/entities/user.entity";
+import { InjectRepository } from '@nestjs/typeorm';
+import { Profesion } from 'src/database/entities/profesion.entity';
+import { Repository } from 'typeorm';
+import { CreateProfesionDto } from './dto/create-profesion.dto';
+import { UpdateProfesionDto } from './dto/update-profesion.dto';
+import * as data from '../../utils/mock-professions.json';
+import { UserRepository } from 'src/modules/users/users.repository';
+import { BadRequestException, NotFoundException, Body } from '@nestjs/common';
+import { User } from 'src/database/entities/user.entity';
 
 export class ProfesionsRepository {
   constructor(
     @InjectRepository(Profesion)
     private profesionsRepository: Repository<Profesion>,
     private userRepository: UserRepository,
-    @InjectRepository(User) private userEntity: Repository<User>
+    @InjectRepository(User) private userEntity: Repository<User>,
   ) {}
 
   async seederProfesions() {
@@ -58,7 +58,7 @@ export class ProfesionsRepository {
   }
 
   async findProfesions() {
-    const ProfesionsFind = await this.profesionsRepository.find()
+    const ProfesionsFind = await this.profesionsRepository.find();
     return ProfesionsFind;
   }
 
@@ -74,13 +74,12 @@ export class ProfesionsRepository {
     });
 
     if (!newProfesion) throw new NotFoundException(`Profesion not found`);
-    
+
     userFind.profesions.find((element) => {
       if (element.category === newProfesion.category) {
         throw new BadRequestException(`Profesion already exist`);
       }
     });
-
 
     let userUpdate = new User();
     userUpdate = userFind;

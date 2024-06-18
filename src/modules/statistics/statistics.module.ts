@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User,Publicaction])],
+  imports: [TypeOrmModule.forFeature([User, Publicaction])],
   controllers: [StatisticsController],
   providers: [StatisticsService],
 })

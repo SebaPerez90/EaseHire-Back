@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/database/entities/user.entity';
-import { Between,  Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import * as moment from 'moment';
 import { Publicaction } from 'src/database/entities/publication.entity';
 
@@ -11,9 +11,9 @@ export class StatisticsService {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     @InjectRepository(Publicaction)
-    private publicationRepository: Repository<Publicaction>
+    private publicationRepository: Repository<Publicaction>,
   ) {}
-  
+
   async foundUsersByDays() {
     try {
       const currentDayOfWeek = moment().isoWeekday();
@@ -21,15 +21,15 @@ export class StatisticsService {
       const usersByDay = [];
       for (let day = 1; day <= currentDayOfWeek; day++) {
         const startDate = firstDayOfWeek
-        .clone()
-        .add(day - 1, 'days')
-        .startOf('day')
-        .toDate();
+          .clone()
+          .add(day - 1, 'days')
+          .startOf('day')
+          .toDate();
         const endDate = firstDayOfWeek
-        .clone()
-        .add(day - 1, 'days')
-        .endOf('day')
-        .toDate();
+          .clone()
+          .add(day - 1, 'days')
+          .endOf('day')
+          .toDate();
         const users = await this.userRepository.find({
           where: {
             datecreateUser: Between(startDate, endDate),
@@ -48,8 +48,8 @@ export class StatisticsService {
   }
   async foundUserWeek() {
     try {
-      const currentYear = moment().year(); 
-      const currentMonth = moment().month(); 
+      const currentYear = moment().year();
+      const currentMonth = moment().month();
       const firstDayOfMonth = moment({
         year: currentYear,
         month: currentMonth,
@@ -60,17 +60,17 @@ export class StatisticsService {
       }).endOf('month');
       const usersByWeek = [];
       const totalWeeksInMonth = Math.ceil(lastDayOfMonth.date() / 7);
-      for (let week = 0; week <= totalWeeksInMonth; week++) {    
+      for (let week = 0; week <= totalWeeksInMonth; week++) {
         const startDate = firstDayOfMonth
-        .clone()
-        .add(week, 'weeks')
-        .startOf('week')
-        .toDate();
+          .clone()
+          .add(week, 'weeks')
+          .startOf('week')
+          .toDate();
         const endDate = firstDayOfMonth
-        .clone()
-        .add(week, 'weeks')
-        .endOf('week')
-        .toDate();
+          .clone()
+          .add(week, 'weeks')
+          .endOf('week')
+          .toDate();
         if (startDate < firstDayOfMonth.toDate()) {
           continue;
         }
@@ -82,13 +82,13 @@ export class StatisticsService {
             datecreateUser: Between(startDate, endDate),
           },
         });
-        const countUsers = users.length; 
+        const countUsers = users.length;
         usersByWeek.push({
           week,
           countUsers,
         });
       }
-      return usersByWeek; 
+      return usersByWeek;
     } catch (error) {
       throw new Error(
         `Failed to retrieve users by week in current month: ${error.message}`,
@@ -100,17 +100,17 @@ export class StatisticsService {
       const currentYear = moment().year();
       const currentMonth = moment().month();
       const months = moment.months();
-      
+
       const usersByMonth = [];
-      
+
       for (let month = 0; month <= currentMonth; month++) {
         const startDate = moment({ year: currentYear, month })
-        .startOf('month')
-        .toDate();
+          .startOf('month')
+          .toDate();
         const endDate = moment({ year: currentYear, month })
-        .endOf('month')
-        .toDate();
-        
+          .endOf('month')
+          .toDate();
+
         const users = await this.userRepository.find({
           where: {
             datecreateUser: Between(startDate, endDate),
@@ -118,7 +118,7 @@ export class StatisticsService {
         });
 
         const countUsers = users.length;
-        
+
         usersByMonth.push({
           month: moment({ month }).format('MMM'),
           countUsers,
@@ -131,21 +131,20 @@ export class StatisticsService {
   }
   async foundPublicationByMonth() {
     try {
-      const publications = await this.publicationRepository.find()
-      
-      publications.map((publication) => {
-      })
+      const publications = await this.publicationRepository.find();
+
+      publications.map((publication) => {});
       const currentYear = moment().year();
       const currentMonth = moment().month();
       const PublicationByMoth = [];
       for (let month = 0; month <= currentMonth; month++) {
         const startDate = moment({ year: currentYear, month })
-        .startOf('month')
-        .toDate();
+          .startOf('month')
+          .toDate();
         const endDate = moment({ year: currentYear, month })
-        .endOf('month')
-        .toDate();
-        
+          .endOf('month')
+          .toDate();
+
         const publication = await this.publicationRepository.find({
           where: {
             date: Between(startDate, endDate),
@@ -153,7 +152,7 @@ export class StatisticsService {
         });
 
         const countPublications = publication.length;
-        
+
         PublicationByMoth.push({
           month: moment({ month }).format('MMM'),
           countPublications,
@@ -166,8 +165,8 @@ export class StatisticsService {
   }
   async foundPublicationWeek() {
     try {
-      const currentYear = moment().year(); 
-      const currentMonth = moment().month(); 
+      const currentYear = moment().year();
+      const currentMonth = moment().month();
       const firstDayOfMonth = moment({
         year: currentYear,
         month: currentMonth,
@@ -178,17 +177,17 @@ export class StatisticsService {
       }).endOf('month');
       const publicationByWeek = [];
       const totalWeeksInMonth = Math.ceil(lastDayOfMonth.date() / 7);
-      for (let week = 0; week <= totalWeeksInMonth; week++) {    
+      for (let week = 0; week <= totalWeeksInMonth; week++) {
         const startDate = firstDayOfMonth
-        .clone()
-        .add(week, 'weeks')
-        .startOf('week')
-        .toDate();
+          .clone()
+          .add(week, 'weeks')
+          .startOf('week')
+          .toDate();
         const endDate = firstDayOfMonth
-        .clone()
-        .add(week, 'weeks')
-        .endOf('week')
-        .toDate();
+          .clone()
+          .add(week, 'weeks')
+          .endOf('week')
+          .toDate();
         if (startDate < firstDayOfMonth.toDate()) {
           continue;
         }
@@ -200,13 +199,13 @@ export class StatisticsService {
             date: Between(startDate, endDate),
           },
         });
-        const countPublications = users.length; 
+        const countPublications = users.length;
         publicationByWeek.push({
           week,
           countPublications,
         });
       }
-      return publicationByWeek; 
+      return publicationByWeek;
     } catch (error) {
       throw new Error(
         `Failed to retrieve publication by week in current month: ${error.message}`,
@@ -220,15 +219,15 @@ export class StatisticsService {
       const publicationByDay = [];
       for (let day = 1; day <= currentDayOfWeek; day++) {
         const startDate = firstDayOfWeek
-        .clone()
-        .add(day - 1, 'days')
-        .startOf('day')
-        .toDate();
+          .clone()
+          .add(day - 1, 'days')
+          .startOf('day')
+          .toDate();
         const endDate = firstDayOfWeek
-        .clone()
-        .add(day - 1, 'days')
-        .endOf('day')
-        .toDate();
+          .clone()
+          .add(day - 1, 'days')
+          .endOf('day')
+          .toDate();
         const publication = await this.publicationRepository.find({
           where: {
             date: Between(startDate, endDate),

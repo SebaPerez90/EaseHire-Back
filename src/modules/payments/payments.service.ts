@@ -9,10 +9,10 @@ import { Payment } from 'src/database/entities/payment.entity';
 @Injectable()
 export class PaymentsService {
   constructor(
-    @InjectRepository(Publicaction) private publicactionRepository: Repository<Publicaction>,
+    @InjectRepository(Publicaction)
+    private publicactionRepository: Repository<Publicaction>,
 
     @InjectRepository(Payment) private paymentRepository: Repository<Payment>,
-
   ) {}
   async createPaymenttt(req: Request) {
     try {
@@ -71,22 +71,21 @@ export class PaymentsService {
           where: { id: item.id },
         });
 
-        let payment = new Payment();
+        const payment = new Payment();
         payment.value = data.transaction_details.net_received_amount;
         payment.description = data.description;
         payment.datePayment = data.date_approved.split('T')[0];
         await this.paymentRepository.save(payment);
 
-        
-        if ( item.description == '7 días') {
+        if (item.description == '7 días') {
           const date = new Date();
           date.setDate(date.getDate() + 7);
         }
-        if ( item.description == '15 días') {
+        if (item.description == '15 días') {
           const date = new Date();
           date.setDate(date.getDate() + 15);
         }
-        if ( item.description == '30 días') {
+        if (item.description == '30 días') {
           const date = new Date();
           date.setDate(date.getDate() + 30);
         }

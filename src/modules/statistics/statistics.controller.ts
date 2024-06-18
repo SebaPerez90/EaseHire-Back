@@ -1,7 +1,4 @@
-import {
-  Controller,
-  Get,
-} from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import { StatisticsService } from './statistics.service';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enum/role.enum';
