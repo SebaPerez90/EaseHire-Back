@@ -120,7 +120,7 @@ export class StatisticsService {
         const countUsers = users.length;
         
         usersByMonth.push({
-          month: months[month],
+          month: moment({ month }).format('MMM'),
           countUsers,
         });
       }
@@ -132,18 +132,12 @@ export class StatisticsService {
   async foundPublicationByMonth() {
     try {
       const publications = await this.publicationRepository.find()
-      console.log(`las publication is ${publications}`);
       
       publications.map((publication) => {
-        publication.date = moment(publication.date).format('YYYY-MM-DD')
       })
       const currentYear = moment().year();
       const currentMonth = moment().month();
-      const months = moment.months();
-      console.log(publications);
-      
       const PublicationByMoth = [];
-      
       for (let month = 0; month <= currentMonth; month++) {
         const startDate = moment({ year: currentYear, month })
         .startOf('month')
@@ -158,11 +152,11 @@ export class StatisticsService {
           },
         });
 
-        const countPublication = publication.length;
+        const countPublications = publication.length;
         
         PublicationByMoth.push({
-          month: months[month],
-          countPublication,
+          month: moment({ month }).format('MMM'),
+          countPublications,
         });
       }
       return PublicationByMoth;
@@ -240,10 +234,10 @@ export class StatisticsService {
             date: Between(startDate, endDate),
           },
         });
-        const countpublication = publication.length;
+        const countpublications = publication.length;
         publicationByDay.push({
           day,
-          countpublication,
+          countpublications,
         });
       }
       return publicationByDay;

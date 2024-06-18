@@ -32,7 +32,7 @@ export class StatisticsController {
   foundPublicationWeek() {
     return this.statisticsService.foundPublicationWeek();
   }
-  @Get('publication/moth')
+  @Get('publication/month')
   foundPublicationByMonth() {
     return this.statisticsService.foundPublicationByMonth();
   }
