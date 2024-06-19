@@ -49,7 +49,7 @@ export class PaymentsService implements OnModuleInit {
           failure: 'https://pf-g5-front.vercel.app/',
         },
         notification_url:
-          'https://zbs04g65-3001.brs.devtunnels.ms/payments/webhook',
+          'https://pf-henry-cc4j.onrender.com/payments/webhook',
         auto_return: 'approved',
       };
 
