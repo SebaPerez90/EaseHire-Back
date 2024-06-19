@@ -47,22 +47,18 @@ export class NotificationsService {
   }
   private checkNotificationType(notificationType: NotificationType) {
     switch (notificationType) {
-      case 'FEEDBACK':
-        return 'New Job Offer!';
       case 'OFFER_JOB':
         return 'New Job Offer!';
-      case 'STIKES':
-        return 'Strike for offensive language!';
       case 'ACEPTED_JOB':
-        return 'Offer Acepted!';
-      case 'FINISHED_ACEPTED':
+        return 'Your invitation has been Acepted!';
+      case 'FINISHED':
         return 'Job Finished!';
       case 'VIEWS_PROFILE':
         return 'Profile Viewed!';
       case 'VIEWS_PUBLICATION':
         return 'Publication Viewed!';
-      case 'POSIBLE_BLOCK':
-        return 'Your account can be Blocked!';
+      case 'SEND_APPLY_REQUEST':
+        return 'New Apply Request!';
     }
   }
 }

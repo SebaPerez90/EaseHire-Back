@@ -32,6 +32,10 @@ export class PublicationService {
     );
   }
 
+  findAllPremium() {
+    return this.publicationRepository.findAllPremium();
+  }
+
   findAllCategories() {
     return this.publicationRepository.findAllCategories();
   }
@@ -42,6 +46,10 @@ export class PublicationService {
 
   findOnePublication(id: string) {
     return this.publicationRepository.findOnePublication(id);
+  }
+
+  listMe(id: string, userid: string) {
+    return this.publicationRepository.listMe(id, userid);
   }
 
   async create(

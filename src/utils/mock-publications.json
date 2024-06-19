@@ -5,7 +5,8 @@
     "imgUrl": "https://example.com/image1.jpg",
     "category": "Doctor",
     "remoteWork": false,
-    "location": "Argentina"
+    "location": "Argentina",
+    "date": "2024-01-01"
   },
   {
     "title": "Evento 2",
@@ -13,7 +14,8 @@
     "imgUrl": "https://example.com/image2.jpg",
     "category": "Ingeniero",
     "remoteWork": false,
-    "location": "Brasil"
+    "location": "Brasil",
+    "date": "2024-01-06"
   },
   {
     "title": "Publicación 3",
@@ -21,7 +23,8 @@
     "imgUrl": "https://example.com/image3.jpg",
     "category": "Profesor",
     "remoteWork": true,
-    "location": "Chile"
+    "location": "Chile",
+    "date": "2024-01-11"
   },
   {
     "title": "Noticia 4",
@@ -29,7 +32,8 @@
     "imgUrl": "https://example.com/image4.jpg",
     "category": "Enfermera",
     "remoteWork": false,
-    "location": "Uruguay"
+    "location": "Uruguay",
+    "date": "2024-01-16"
   },
   {
     "title": "Evento 5",
@@ -37,7 +41,8 @@
     "imgUrl": "https://example.com/image5.jpg",
     "category": "Abogado",
     "remoteWork": false,
-    "location": "Paraguay"
+    "location": "Paraguay",
+    "date": "2024-01-21"
   },
   {
     "title": "Publicación 6",
@@ -45,7 +50,8 @@
     "imgUrl": "https://example.com/image6.jpg",
     "category": "Arquitecto",
     "remoteWork": false,
-    "location": "Perú"
+    "location": "Perú",
+    "date": "2024-01-26"
   },
   {
     "title": "Noticia 7",
@@ -53,7 +59,8 @@
     "imgUrl": "https://example.com/image7.jpg",
     "category": "Contador",
     "remoteWork": true,
-    "location": "Colombia"
+    "location": "Colombia",
+    "date": "2024-02-01"
   },
   {
     "title": "Evento 8",
@@ -61,7 +68,8 @@
     "imgUrl": "https://example.com/image8.jpg",
     "category": "Chef",
     "remoteWork": false,
-    "location": "Venezuela"
+    "location": "Venezuela",
+    "date": "2024-02-05"
   },
   {
     "title": "Publicación 9",
@@ -69,7 +77,8 @@
     "imgUrl": "https://example.com/image9.jpg",
     "category": "Dentista",
     "remoteWork": true,
-    "location": "Ecuador"
+    "location": "Ecuador",
+    "date": "2024-02-09"
   },
   {
     "title": "Noticia 10",
@@ -77,7 +86,8 @@
     "imgUrl": "https://example.com/image10.jpg",
     "category": "Farmacéutico",
     "remoteWork": false,
-    "location": "Bolivia"
+    "location": "Bolivia",
+    "date": "2024-02-13"
   },
   {
     "title": "Evento 11",
@@ -85,7 +95,8 @@
     "imgUrl": "https://example.com/image11.jpg",
     "category": "Periodista",
     "remoteWork": true,
-    "location": "México"
+    "location": "México",
+    "date": "2024-02-17"
   },
   {
     "title": "Publicación 12",
@@ -93,7 +104,8 @@
     "imgUrl": "https://example.com/image12.jpg",
     "category": "Psicólogo",
     "remoteWork": true,
-    "location": "Costa Rica"
+    "location": "Costa Rica",
+    "date": "2024-02-21"
   },
   {
     "title": "Noticia 13",
@@ -101,7 +113,8 @@
     "imgUrl": "https://example.com/image13.jpg",
     "category": "Electricista",
     "remoteWork": false,
-    "location": "Panamá"
+    "location": "Panamá",
+    "date": "2024-02-25"
   },
   {
     "title": "Evento 14",
@@ -109,7 +122,8 @@
     "imgUrl": "https://example.com/image14.jpg",
     "category": "Fontanero",
     "remoteWork": false,
-    "location": "Guatemala"
+    "location": "Guatemala",
+    "date": "2024-02-28"
   },
   {
     "title": "Publicación 15",
@@ -117,7 +131,8 @@
     "imgUrl": "https://example.com/image15.jpg",
     "category": "Maestro",
     "remoteWork": true,
-    "location": "Honduras"
+    "location": "Honduras",
+    "date": "2024-03-01"
   },
   {
     "title": "Noticia 16",
@@ -125,7 +140,8 @@
     "imgUrl": "https://example.com/image16.jpg",
     "category": "Mecánico",
     "remoteWork": false,
-    "location": "Nicaragua"
+    "location": "Nicaragua",
+    "date": "2024-03-05"
   },
   {
     "title": "Evento 17",
@@ -133,7 +149,8 @@
     "imgUrl": "https://example.com/image17.jpg",
     "category": "Piloto",
     "remoteWork": false,
-    "location": "El Salvador"
+    "location": "El Salvador",
+    "date": "2024-03-09"
   },
   {
     "title": "Publicación 18",
@@ -141,7 +158,8 @@
     "imgUrl": "https://example.com/image18.jpg",
     "category": "Programador",
     "remoteWork": true,
-    "location": "Puerto Rico"
+    "location": "Puerto Rico",
+    "date": "2024-03-13"
   },
   {
     "title": "Noticia 19",
@@ -149,7 +167,8 @@
     "imgUrl": "https://example.com/image19.jpg",
     "category": "Veterinario",
     "remoteWork": false,
-    "location": "Cuba"
+    "location": "Cuba",
+    "date": "2024-03-17"
   },
   {
     "title": "Evento 20",
@@ -157,7 +176,8 @@
     "imgUrl": "https://example.com/image20.jpg",
     "category": "Bombero",
     "remoteWork": false,
-    "location": "República Dominicana"
+    "location": "República Dominicana",
+    "date": "2024-03-21"
   },
   {
     "title": "Publicación 21",
@@ -165,7 +185,8 @@
     "imgUrl": "https://example.com/image21.jpg",
     "category": "Policía",
     "remoteWork": false,
-    "location": "Haití"
+    "location": "Haití",
+    "date": "2024-03-25"
   },
   {
     "title": "Noticia 22",
@@ -173,7 +194,8 @@
     "imgUrl": "https://example.com/image22.jpg",
     "category": "Paramédico",
     "remoteWork": false,
-    "location": "Jamaica"
+    "location": "Jamaica",
+    "date": "2024-03-29"
   },
   {
     "title": "Evento 23",
@@ -181,7 +203,8 @@
     "imgUrl": "https://example.com/image23.jpg",
     "category": "Fotógrafo",
     "remoteWork": false,
-    "location": "Trinidad y Tobago"
+    "location": "Trinidad y Tobago",
+    "date": "2024-04-01"
   },
   {
     "title": "Publicación 24",
@@ -189,7 +212,8 @@
     "imgUrl": "https://example.com/image24.jpg",
     "category": "Artista",
     "remoteWork": true,
-    "location": "Belice"
+    "location": "Belice",
+    "date": "2024-04-07"
   },
   {
     "title": "Noticia 25",
@@ -197,7 +221,8 @@
     "imgUrl": "https://example.com/image25.jpg",
     "category": "Economista",
     "remoteWork": true,
-    "location": "Guyana"
+    "location": "Guyana",
+    "date": "2024-04-13"
   },
   {
     "title": "Evento 26",
@@ -205,7 +230,8 @@
     "imgUrl": "https://example.com/image26.jpg",
     "category": "Científico",
     "remoteWork": true,
-    "location": "Surinam"
+    "location": "Surinam",
+    "date": "2024-04-19"
   },
   {
     "title": "Publicación 27",
@@ -213,7 +239,8 @@
     "imgUrl": "https://example.com/image27.jpg",
     "category": "Astronauta",
     "remoteWork": false,
-    "location": "Canadá"
+    "location": "Canadá",
+    "date": "2024-04-25"
   },
   {
     "title": "Noticia 28",
@@ -221,7 +248,8 @@
     "imgUrl": "https://example.com/image28.jpg",
     "category": "Chef",
     "remoteWork": false,
-    "location": "Estados Unidos"
+    "location": "Estados Unidos",
+    "date": "2024-05-01"
   },
   {
     "title": "Evento 29",
@@ -229,7 +257,8 @@
     "imgUrl": "https://example.com/image29.jpg",
     "category": "Electricista",
     "remoteWork": true,
-    "location": "Argentina"
+    "location": "Argentina",
+    "date": "2024-05-05"
   },
   {
     "title": "Publicación 30",
@@ -237,7 +266,8 @@
     "imgUrl": "https://example.com/image30.jpg",
     "category": "Construcción",
     "remoteWork": false,
-    "location": "Brasil"
+    "location": "Brasil",
+    "date": "2024-05-09"
   },
   {
     "title": "Noticia 31",
@@ -245,7 +275,8 @@
     "imgUrl": "https://example.com/image31.jpg",
     "category": "Pintor",
     "remoteWork": false,
-    "location": "Chile"
+    "location": "Chile",
+    "date": "2024-05-13"
   },
   {
     "title": "Evento 32",
@@ -253,7 +284,8 @@
     "imgUrl": "https://example.com/image32.jpg",
     "category": "Call Center",
     "remoteWork": true,
-    "location": "Uruguay"
+    "location": "Uruguay",
+    "date": "2024-05-17"
   },
   {
     "title": "Publicación 33",
@@ -261,7 +293,8 @@
     "imgUrl": "https://example.com/image33.jpg",
     "category": "Maestro de Manejo",
     "remoteWork": false,
-    "location": "Paraguay"
+    "location": "Paraguay",
+    "date": "2024-05-21"
   },
   {
     "title": "Noticia 34",
@@ -269,7 +302,8 @@
     "imgUrl": "https://example.com/image34.jpg",
     "category": "Odontólogo",
     "remoteWork": false,
-    "location": "Perú"
+    "location": "Perú",
+    "date": "2024-05-25"
   },
   {
     "title": "Evento 35",
@@ -277,7 +311,8 @@
     "imgUrl": "https://example.com/image35.jpg",
     "category": "Mozo",
     "remoteWork": false,
-    "location": "Colombia"
+    "location": "Colombia",
+    "date": "2024-05-29"
   },
   {
     "title": "Publicación 36",
@@ -285,7 +320,8 @@
     "imgUrl": "https://example.com/image36.jpg",
     "category": "Kinesiólogo",
     "remoteWork": false,
-    "location": "Venezuela"
+    "location": "Venezuela",
+    "date": "2024-06-01"
   },
   {
     "title": "Noticia 37",
@@ -293,7 +329,8 @@
     "imgUrl": "https://example.com/image37.jpg",
     "category": "Broker",
     "remoteWork": true,
-    "location": "Ecuador"
+    "location": "Ecuador",
+    "date": "2024-06-05"
   },
   {
     "title": "Evento 38",
@@ -301,7 +338,8 @@
     "imgUrl": "https://example.com/image38.jpg",
     "category": "Nutricionista",
     "remoteWork": true,
-    "location": "Bolivia"
+    "location": "Bolivia",
+    "date": "2024-06-09"
   },
   {
     "title": "Publicación 39",
@@ -309,7 +347,8 @@
     "imgUrl": "https://example.com/image39.jpg",
     "category": "Personal Trainer",
     "remoteWork": true,
-    "location": "México"
+    "location": "México",
+    "date": "2024-06-13"
   },
   {
     "title": "Noticia 40",
@@ -317,6 +356,7 @@
     "imgUrl": "https://example.com/image40.jpg",
     "category": "Niñera",
     "remoteWork": true,
-    "location": "Costa Rica"
+    "location": "Costa Rica",
+    "date": "2024-06-17"
   }
 ]

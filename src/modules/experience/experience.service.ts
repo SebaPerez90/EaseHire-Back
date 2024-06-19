@@ -34,6 +34,7 @@ export class ExperienceService {
       experience.startDate = element.startDate;
       experience.endDate = element.endDate;
       experience.profesion = professions[Math.round(Math.random() * 16)];
+      experience.user = users[Math.round(Math.random() * 30)];
       experience.client = users[Math.round(Math.random() * 30)];
       experience.feedback = feedbacks[index];
 

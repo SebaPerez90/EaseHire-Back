@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   // ManyToMany,
   OneToMany,
   OneToOne,
@@ -15,6 +16,7 @@ import { Notification } from './notification.entity';
 import { Education } from './education.entity';
 import { Experience } from './experience.entity';
 import { Role } from 'src/enum/role.enum';
+import { Feedback } from './feedback.entity';
 
 @Entity({ name: 'users' })
 export class User {
@@ -69,9 +71,18 @@ export class User {
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];
 
+  @Column({ type: 'int', nullable: true, default: 0 })
+  strikes: number;
+
+  @Column({ type: 'boolean', default: false, nullable: true })
+  isBlocked: boolean;
+
   @OneToOne(() => Credential)
   @JoinColumn({ name: 'credentials_ID' })
   credential: Credential;
+
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
+  feedbacks: Feedback[];
 
   @OneToMany(() => Publicaction, (publicaction) => publicaction.user)
   publicactions: Publicaction[];
@@ -89,4 +100,7 @@ export class User {
 
   @OneToMany(() => Experience, (experice) => experice.client)
   experiences: Experience[];
+
+  @ManyToOne(() => Publicaction, (Publicaction) => Publicaction.usersList)
+  publication: Publicaction;
 }

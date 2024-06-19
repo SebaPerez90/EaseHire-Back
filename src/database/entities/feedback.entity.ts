@@ -2,7 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
@@ -24,7 +24,7 @@ export class Feedback {
   @Column({ type: 'boolean', nullable: true, default: false })
   blocked: boolean;
 
-  @OneToOne(() => User)
+  @ManyToOne(() => User, (user) => user.feedbacks)
   @JoinColumn({ name: 'user_ID' })
   user: User;
 }
