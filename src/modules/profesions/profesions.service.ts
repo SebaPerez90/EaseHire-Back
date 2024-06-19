@@ -30,6 +30,9 @@ export class ProfesionsService implements OnModuleInit {
     return await this.profesionsRepository.meProfesion(userid, body);
   }
 
+  removeProfesion(req, categoryName) {
+    return this.profesionsRepository.removeProfesion(req, categoryName);
+  }
   create(createProfesionDto: CreateProfesionDto, userid: string) {
     return this.profesionsRepository.create(createProfesionDto, userid);
   }

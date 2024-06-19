@@ -40,6 +40,13 @@ export class UserRepository {
     });
   }
 
+  async getAllBlocks() {
+    const users = await this.usersRepository.find({
+      where: { isBlocked: true },
+    });
+    return users;
+  }
+
   async updateUser(id: string, UpdateUserDto: UpdateUserDto, res) {
     if (res && res.secure_url) {
       UpdateUserDto.imgPictureUrl = res.secure_url;
@@ -63,8 +70,17 @@ export class UserRepository {
   async findOne(id: string) {
     const user = await this.usersRepository.findOne({
       where: { id },
-      relations: { experiences: true, educations: true, profesions: true },
-    });
+      relations: {
+        experiences: true,
+        educations: true,
+        profesions: true,
+        notifications: true,
+        publicactions : {
+          usersList:true
+      }
+    }
+    })
+
     if (!user) throw new NotFoundException(`No found user con id ${id}`);
     return user;
   }

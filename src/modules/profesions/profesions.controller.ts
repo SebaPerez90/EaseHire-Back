@@ -11,6 +11,7 @@ import {
   ParseIntPipe,
   Headers,
   NotFoundException,
+  Req,
 } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
 import { CreateProfesionDto } from './dto/create-profesion.dto';
@@ -20,6 +21,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Roles } from 'src/decorators/role.decorator';
 import { Role } from 'src/enum/role.enum';
 import { Public } from 'src/decorators/is-public.decorator';
+import { Request } from 'express';
 
 @ApiTags('profesions')
 @Controller('profesions')
@@ -67,6 +69,13 @@ export class ProfesionsController {
     return this.profesionsService.update(id, updateProfesionDto);
   }
 
+  @Delete('update/:categoryName')
+  removeProfesion(
+    @Req() req: Request,
+    @Param('categoryName') categoryName: string,
+  ) {
+    return this.profesionsService.removeProfesion(req, categoryName);
+  }
   @Delete(':id')
   @Roles(Role.ADMIN)
   async remove(@Param('id') id: string) {

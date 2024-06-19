@@ -81,6 +81,9 @@ export class User {
   @JoinColumn({ name: 'credentials_ID' })
   credential: Credential;
 
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
+  feedbacks: Feedback[];
+
   @OneToMany(() => Publicaction, (publicaction) => publicaction.user)
   publicactions: Publicaction[];
 

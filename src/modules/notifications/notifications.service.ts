@@ -51,7 +51,7 @@ export class NotificationsService {
         return 'New Job Offer!';
       case 'ACEPTED_JOB':
         return 'Your invitation has been Acepted!';
-      case 'FINISHED_ACEPTED':
+      case 'FINISHED':
         return 'Job Finished!';
       case 'VIEWS_PROFILE':
         return 'Profile Viewed!';

@@ -44,7 +44,11 @@ export class UsersController {
   ) {
     return this.usersService.findUsers(category, city, page, limit);
   }
-
+  @Get('blocks')
+  @Public()
+  getAllBlocks() {
+    return this.usersService.getAllBlocks();
+  }
   @Get('all')
   @Public()
   findAll() {
@@ -58,6 +62,7 @@ export class UsersController {
     const { userid } = this.jwtService.verify(header.authorization, { secret });
     return this.usersService.findOne(userid);
   }
+
   @Get(':id')
   @Public()
   findOneID(@Param('id') id: string) {

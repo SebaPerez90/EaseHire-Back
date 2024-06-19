@@ -1,21 +1,24 @@
-import { InjectRepository } from '@nestjs/typeorm';
-import { Publicaction } from 'src/database/entities/publication.entity';
-import { Repository } from 'typeorm';
-import { CreatePublicationDto } from './dto/create-publication.dto';
+import { InjectRepository } from "@nestjs/typeorm";
+import { Publicaction } from "src/database/entities/publication.entity";
+import { Repository } from "typeorm";
+import { CreatePublicationDto } from "./dto/create-publication.dto";
 import {
   BadRequestException,
+  HttpStatus,
   NotFoundException,
   OnModuleInit,
-} from '@nestjs/common';
-import { UpdateProfesionDto } from '../profesions/dto/update-profesion.dto';
-import { UserRepository } from '../users/users.repository';
-import * as moment from 'moment';
-import * as data from '../../utils/mock-publications.json';
-import { ProfesionsRepository } from '../profesions/profesions.repository';
-import { UploadApiResponse, v2 } from 'cloudinary';
-import toStream = require('buffer-to-stream');
-import { createCategoryDto } from './dto/create-category.dto';
-import { User } from 'src/database/entities/user.entity';
+} from "@nestjs/common";
+import { UpdateProfesionDto } from "../profesions/dto/update-profesion.dto";
+import { UserRepository } from "../users/users.repository";
+import * as moment from "moment";
+import * as data from "../../utils/mock-publications.json";
+import { ProfesionsRepository } from "../profesions/profesions.repository";
+import { UploadApiResponse, v2 } from "cloudinary";
+import toStream = require("buffer-to-stream");
+import { createCategoryDto } from "./dto/create-category.dto";
+import { User } from "src/database/entities/user.entity";
+import { NotificationsService } from "../notifications/notifications.service";
+import { NotificationType } from "src/enum/notification.enum";
 
 export class PublicationsRepository implements OnModuleInit {
   constructor(
@@ -24,6 +27,7 @@ export class PublicationsRepository implements OnModuleInit {
     private userRepository: UserRepository,
     private profesionsRepository: ProfesionsRepository,
     @InjectRepository(User) private userEntity: Repository<User>,
+    private notificationService: NotificationsService
   ) {}
 
   async createCategory(categoryId: createCategoryDto) {
@@ -57,7 +61,6 @@ export class PublicationsRepository implements OnModuleInit {
       const date = new Date();
       const timelapsed = moment(date).fromNow();
       const newPublication = new Publicaction();
-      const formatDate = date.toLocaleDateString();
       const formatTime = date.toLocaleTimeString();
 
       newPublication.title = element.title;
@@ -66,7 +69,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.location = element.location;
       newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
-      newPublication.date = new Date(element.date);
+      newPublication.date = element.date;
       newPublication.time = formatTime;
       newPublication.timelapse = timelapsed;
       newPublication.profesion = professions[Math.round(Math.random() * 16)];
@@ -84,14 +87,14 @@ export class PublicationsRepository implements OnModuleInit {
   async uploadImage(file: Express.Multer.File): Promise<UploadApiResponse> {
     return new Promise((resolve, reject) => {
       const upload = v2.uploader.upload_stream(
-        { resource_type: 'auto' },
+        { resource_type: "auto" },
         (error, result) => {
           if (result) {
             resolve(result);
           } else {
             reject(error);
           }
-        },
+        }
       );
       toStream(file.buffer).pipe(upload);
     });
@@ -102,8 +105,8 @@ export class PublicationsRepository implements OnModuleInit {
       res = res.secure_url;
     }
     const date = moment();
-    const formatDate = date.format('YYYY-MM-DD');
-    const formatTime = date.format('HH-mm-ss');
+    const formatDate = date.format("YYYY-MM-DD");
+    const formatTime = date.format("HH-mm-ss");
     const newPublication = await this.publicationsRepository.create({
       title: createPublication.title,
       description: createPublication.description,
@@ -129,7 +132,7 @@ export class PublicationsRepository implements OnModuleInit {
     publications.forEach((publication) => {
       const { date, time } = publication;
       const datetime = `${date} ${time}`;
-      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow(true);
+      const timelapsed = moment(datetime, "DD/MM/YYYY HH:mm:ss").fromNow(true);
 
       const newPublication = new Publicaction();
       newPublication.id = publication.id;
@@ -150,7 +153,7 @@ export class PublicationsRepository implements OnModuleInit {
     category: string,
     city: string,
     page: number,
-    limit: number,
+    limit: number
   ) {
     const skip = (page - 1) * limit;
 
@@ -208,18 +211,22 @@ export class PublicationsRepository implements OnModuleInit {
     const publications = await this.publicationsRepository.find();
 
     const category = publications.map(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ({ category, ...publications }) => category,
+      ({ category, ...publications }) => category
     );
     const categoryReturn = [...new Set(category)];
 
     const location = publications.map(
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ({ location, ...publications }) => location,
+      ({ location, ...publications }) => location
     );
     const locationReturn = [...new Set(location)];
 
     return { categoryReturn, locationReturn };
+  }
+
+  async findAllPremium() {
+    const publications = await this.publicationsRepository.find();
+    const premium = publications.filter(publications => publications.premium === true);
+    return premium
   }
 
   async listMe(id: string, userid: string) {
@@ -232,9 +239,19 @@ export class PublicationsRepository implements OnModuleInit {
     const userFind = await this.userEntity.findOne({ where: { id: userid } });
     if (!userFind) throw new NotFoundException(`not found user`);
 
+    if (publication.usersList.find((user) => user.id === userid))
+      return `Already applied`;
+
     publication.usersList = [...publication.usersList, userFind];
-    const publicationUpdate =
-      await this.publicationsRepository.save(publication);
+
+    this.notificationService.postNotification(
+      NotificationType.SEND_APPLY_REQUEST,
+      publication.user
+    );
+
+    const publicationUpdate = await this.publicationsRepository.save(
+      publication
+    );
 
     return publicationUpdate;
   }

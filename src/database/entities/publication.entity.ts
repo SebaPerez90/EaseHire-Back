@@ -44,6 +44,12 @@ export class Publicaction {
   @Column({ nullable: true })
   timelapse: string;
 
+  @Column({ nullable: true, default: false })
+  premium: boolean;
+
+  @Column({ type: 'varchar', length: 40, nullable: true })
+  endDate: Date | string;
+
   @ManyToOne(() => Profesion, (profesion) => profesion)
   @JoinColumn({ name: 'profesion_ID' })
   profesion: Profesion;

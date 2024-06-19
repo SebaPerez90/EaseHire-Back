@@ -74,6 +74,12 @@ export class PublicationController {
   }
 
   @Public()
+  @Get('premium')
+  findAllPremium() {
+    return this.publicationService.findAllPremium();
+  }
+
+  @Public()
   @Get(':id')
   findOnePublication(@Param('id') id: string) {
     return this.publicationService.findOnePublication(id);
