@@ -19,34 +19,37 @@ export class AuthService {
   ) {}
 
   retunSingIn(user: any) {
-    console.log("estamos en el retun sing in");
-        const userid = user.id;
-        const role = user.role[0];
-        const email = user.email
-  
-        const playload = { userid, email, role: user.role };
-        const token = this.jwtService.sign(playload, {
-          secret: process.env.JWT_SECRET,
-        });
-        return {
-          message: 'User login',
-          token,
-          role
-        };
+    console.log('estamos en el retun sing in');
+    const userid = user.id;
+    const role = user.role[0];
+    const email = user.email;
+
+    const playload = { userid, email, role: user.role };
+    const token = this.jwtService.sign(playload, {
+      secret: process.env.JWT_SECRET,
+    });
+    return {
+      message: 'User login',
+      token,
+      role,
+    };
   }
 
   async signIn(credentials) {
     try {
       const { email, name, family_name, picture, email_verified } = credentials;
-      let user = await this.userRepository.findOne({ where: { email: email }, relations: { credential: true } });
+      let user = await this.userRepository.findOne({
+        where: { email: email },
+        relations: { credential: true },
+      });
 
       if (!user) {
-
-        const passwordTest = "Asd_*1234"
+        const passwordTest = 'Asd_*1234';
         const newCredential = new Credential();
         newCredential.email = email;
         newCredential.password = passwordTest;
-        const credentialTest = await this.credentialsRepository.save(newCredential);
+        const credentialTest =
+          await this.credentialsRepository.save(newCredential);
 
         user = await this.userRepository.create({
           id: uuidv4(),
@@ -57,21 +60,17 @@ export class AuthService {
           imgPictureUrl: picture ? picture : null,
           datecreateUser: moment().format('DD/MM/YYYY HH:mm:ss'),
           role: [Role.USER],
-          credential: credentialTest
+          credential: credentialTest,
         });
         this.userRepository.save(user);
         return this.retunSingIn(user);
-        
       } else if (!credentials.password) {
-
         return this.retunSingIn(user);
-
-      }else{
-
-        if (credentials.password !== user.credential.password) throw new BadRequestException('Credenciales incorrectas')
-          return this.retunSingIn(user);
+      } else {
+        if (credentials.password !== user.credential.password)
+          throw new BadRequestException('Credenciales incorrectas');
+        return this.retunSingIn(user);
       }
-
     } catch (error) {
       console.error('Error en signIn:', error);
       throw new BadRequestException('failed to login');
