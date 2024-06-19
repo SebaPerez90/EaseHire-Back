@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Publicaction } from 'src/database/entities/publication.entity';
 import { Repository } from 'typeorm';
 import { Payment } from 'src/database/entities/payment.entity';
-import * as data from '../../utils/mock-payments.json'
+import * as data from '../../utils/mock-payments.json';
 
 @Injectable()
 export class PaymentsService implements OnModuleInit {
@@ -27,7 +27,7 @@ export class PaymentsService implements OnModuleInit {
       payment.description = element.description;
       payment.datePayment = element.datePayment;
       await this.paymentRepository.save(payment);
-    })
+    });
   }
 
   async createPaymenttt(req: Request) {
@@ -82,7 +82,6 @@ export class PaymentsService implements OnModuleInit {
 
   async webhook(req) {
     const paidState = req.body;
-
     if (paidState.type == 'payment') {
       const data = await payment.capture({ id: paidState.data.id });
 
@@ -97,16 +96,12 @@ export class PaymentsService implements OnModuleInit {
         payment.value = data.transaction_details.net_received_amount;
         payment.description = data.description;
         payment.datePayment = data.date_approved.split('T')[0];
-
         await this.paymentRepository.save(payment);
-
-
         if (item.description == '7 días') {
           publication.premium = true;
           const date = new Date();
-
           date.setDate(date.getDate() + 7);
-          const dateString = date.toISOString().split('T')[0]
+          const dateString = date.toISOString().split('T')[0];
           publication.endDate = dateString;
           await this.publicactionRepository.save(publication);
         }
@@ -114,9 +109,8 @@ export class PaymentsService implements OnModuleInit {
         if (item.description == '15 días') {
           publication.premium = true;
           const date = new Date();
-          
           date.setDate(date.getDate() + 15);
-          const dateString = date.toISOString().split('T')[0]
+          const dateString = date.toISOString().split('T')[0];
           publication.endDate = dateString;
           await this.publicactionRepository.save(publication);
         }
@@ -124,9 +118,8 @@ export class PaymentsService implements OnModuleInit {
         if (item.description == '30 días') {
           publication.premium = true;
           const date = new Date();
-          
           date.setDate(date.getDate() + 30);
-          const dateString = date.toISOString().split('T')[0]
+          const dateString = date.toISOString().split('T')[0];
           publication.endDate = dateString;
           await this.publicactionRepository.save(publication);
         }

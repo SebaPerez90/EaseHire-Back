@@ -33,4 +33,9 @@ export class StatisticsController {
   foundPublicationByMonth() {
     return this.statisticsService.foundPublicationByMonth();
   }
+
+  @Get('payment/month')
+  foundPaymentByMonth() {
+    return this.statisticsService.foundPaymentByMonth();
+  }
 }

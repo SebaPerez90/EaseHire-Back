@@ -4,6 +4,7 @@ import { User } from 'src/database/entities/user.entity';
 import { Between, Repository } from 'typeorm';
 import * as moment from 'moment';
 import { Publicaction } from 'src/database/entities/publication.entity';
+import { Payment } from 'src/database/entities/payment.entity';
 
 @Injectable()
 export class StatisticsService {
@@ -12,6 +13,8 @@ export class StatisticsService {
     private userRepository: Repository<User>,
     @InjectRepository(Publicaction)
     private publicationRepository: Repository<Publicaction>,
+    @InjectRepository(Payment)
+    private paymentRepository: Repository<Payment>,
   ) {}
 
   async foundUsersByDays() {
@@ -242,6 +245,50 @@ export class StatisticsService {
       return publicationByDay;
     } catch (error) {
       throw new Error('Failed to retrieve users by day in current week');
+    }
+  }
+  async foundPaymentByMonth() {
+    try {
+      const currentYear = moment().year();
+      const currentMonth = moment().month();
+      const paymentByMonth = [];
+
+      for (let month = 0; month <= currentMonth; month++) {
+        const startDate = moment({ year: currentYear, month })
+          .startOf('month')
+          .toDate();
+        const endDate = moment({ year: currentYear, month })
+          .endOf('month')
+          .toDate();
+
+        // Obtener todos los pagos
+        const payments = await this.paymentRepository.find();
+
+        // Filtrar pagos por fecha dentro del bucle
+        const filteredPayments = payments.filter((payment) => {
+          const paymentDate = moment(
+            payment.datePayment,
+            'YYYY-MM-DD',
+          ).toDate();
+          return paymentDate >= startDate && paymentDate <= endDate;
+        });
+
+        // Calcular el valor total de los pagos filtrados
+        const totalValue = filteredPayments.reduce(
+          (total, payment) => total + Number(payment.value),
+          0,
+        );
+
+        // Agregar al array resultado
+        paymentByMonth.push({
+          month: moment({ month }).format('MMM'),
+          totalValue,
+        });
+      }
+
+      return paymentByMonth;
+    } catch (error) {
+      throw new Error('No se pudieron obtener los pagos por mes');
     }
   }
 }
