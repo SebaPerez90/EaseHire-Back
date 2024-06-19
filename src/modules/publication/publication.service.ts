@@ -32,7 +32,7 @@ export class PublicationService {
     );
   }
 
-  findAllPremium(){
+  findAllPremium() {
     return this.publicationRepository.findAllPremium();
   }
 

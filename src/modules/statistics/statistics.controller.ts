@@ -6,9 +6,7 @@ import { Role } from 'src/enum/role.enum';
 @Controller('statistics')
 @Roles(Role.ADMIN)
 export class StatisticsController {
-  constructor(
-    private readonly statisticsService: StatisticsService
-  ) { }
+  constructor(private readonly statisticsService: StatisticsService) {}
 
   @Get('days')
   foundUsersByDays() {

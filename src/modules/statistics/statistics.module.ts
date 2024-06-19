@@ -7,7 +7,7 @@ import { Publicaction } from 'src/database/entities/publication.entity';
 import { Payment } from 'src/database/entities/payment.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Publicaction,Payment])],
+  imports: [TypeOrmModule.forFeature([User, Publicaction, Payment])],
   controllers: [StatisticsController],
   providers: [StatisticsService],
 })

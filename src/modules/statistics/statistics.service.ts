@@ -254,18 +254,32 @@ export class StatisticsService {
       const paymentByMonth = [];
 
       for (let month = 0; month <= currentMonth; month++) {
-        const startDate = moment({ year: currentYear, month }).startOf('month').toDate();
-        const endDate = moment({ year: currentYear, month }).endOf('month').toDate();
+        const startDate = moment({ year: currentYear, month })
+          .startOf('month')
+          .toDate();
+        const endDate = moment({ year: currentYear, month })
+          .endOf('month')
+          .toDate();
 
+        // Obtener todos los pagos
         const payments = await this.paymentRepository.find();
-        
-        const filteredPayments = payments.filter(payment => {
-          const paymentDate = moment(payment.datePayment, 'YYYY-MM-DD').toDate();
+
+        // Filtrar pagos por fecha dentro del bucle
+        const filteredPayments = payments.filter((payment) => {
+          const paymentDate = moment(
+            payment.datePayment,
+            'YYYY-MM-DD',
+          ).toDate();
           return paymentDate >= startDate && paymentDate <= endDate;
         });
 
-        const totalValue = filteredPayments.reduce((total, payment) => total + payment.value, 0);
+        // Calcular el valor total de los pagos filtrados
+        const totalValue = filteredPayments.reduce(
+          (total, payment) => total + Number(payment.value),
+          0,
+        );
 
+        // Agregar al array resultado
         paymentByMonth.push({
           month: moment({ month }).format('MMM'),
           totalValue,
