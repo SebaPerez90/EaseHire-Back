@@ -31,7 +31,7 @@ export class PublicationsRepository implements OnModuleInit {
   ) {}
 
   async createCategory(categoryId: createCategoryDto) {
-    console.log(categoryId);
+
 
     const newcategory = await this.publicationsRepository.create({});
     const category = await this.publicationsRepository.save(newcategory);
@@ -120,7 +120,7 @@ export class PublicationsRepository implements OnModuleInit {
     });
     const timelapsed = moment(date).fromNow();
     newPublication.timelapse = timelapsed;
-    console.log(newPublication);
+
 
     const publications = await this.publicationsRepository.save(newPublication);
     return publications;
@@ -132,7 +132,7 @@ export class PublicationsRepository implements OnModuleInit {
     publications.forEach((publication) => {
       const { date, time } = publication;
       const datetime = `${date} ${time}`;
-      const timelapsed = moment(datetime, 'YYYY-MM-DD HH:mm:ss').fromNow(true);
+      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow(true);
 
       const newPublication = new Publicaction();
       newPublication.id = publication.id;
@@ -144,7 +144,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.time = publication.time;
       newPublication.timelapse = timelapsed;
       this.publicationsRepository.save(newPublication);
-      console.log(timelapsed);
+
     });
 
     return await this.publicationsRepository.find();
@@ -178,9 +178,17 @@ export class PublicationsRepository implements OnModuleInit {
         skip: skip,
       });
 
-    if (publicationsFind.length === 0)
+    if (publicationsFind.length === 0) {
+      
       throw new NotFoundException(`No users were found whith those parameters`);
-
+    }
+    publicationsFind.forEach((publication) => {
+      const { date, time } = publication;
+      const datetime = `${date} ${time}`;
+      const datetimeMoment = moment(datetime, 'YYYY-MM-DD HH:mm:ss');
+      const timelapsed = datetimeMoment.fromNow();
+      publication.timelapse = timelapsed;
+    });
     return { publicationsFind, count };
   }
 
