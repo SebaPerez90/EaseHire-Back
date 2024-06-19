@@ -43,6 +43,9 @@ export class AuthService {
         relations: { credential: true },
       });
 
+      if (user.isBlocked === true)
+        return { message: 'Your account has been blocked' };
+
       if (!user) {
         const passwordTest = 'Asd_*1234';
         const newCredential = new Credential();
