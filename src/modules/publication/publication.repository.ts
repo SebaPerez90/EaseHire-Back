@@ -61,7 +61,6 @@ export class PublicationsRepository implements OnModuleInit {
       const date = new Date();
       const timelapsed = moment(date).fromNow();
       const newPublication = new Publicaction();
-      const formatDate = date.toLocaleDateString();
       const formatTime = date.toLocaleTimeString();
 
       newPublication.title = element.title;
@@ -70,7 +69,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.location = element.location;
       newPublication.remoteWork = element.remoteWork;
       newPublication.imgUrl = element.imgUrl;
-      newPublication.date = new Date(element.date);
+      newPublication.date = element.date;
       newPublication.time = formatTime;
       newPublication.timelapse = timelapsed;
       newPublication.profesion = professions[Math.round(Math.random() * 16)];
@@ -222,6 +221,12 @@ export class PublicationsRepository implements OnModuleInit {
     const locationReturn = [...new Set(location)];
 
     return { categoryReturn, locationReturn };
+  }
+
+  async findAllPremium() {
+    const publications = await this.publicationsRepository.find();
+    const premium = publications.filter(publications => publications.premium === true);
+    return premium
   }
 
   async listMe(id: string, userid: string) {

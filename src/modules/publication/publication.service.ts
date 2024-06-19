@@ -32,6 +32,10 @@ export class PublicationService {
     );
   }
 
+  findAllPremium(){
+    return this.publicationRepository.findAllPremium();
+  }
+
   findAllCategories() {
     return this.publicationRepository.findAllCategories();
   }
