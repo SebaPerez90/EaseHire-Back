@@ -20,6 +20,8 @@ export class PaymentsController {
   @Post('webhook')
   @Public()
   webhook(@Req() req: Request) {
+    console.log(`estamos en controller pauments los dato que entran son ${req.body}`);
+    
     return this.paymentService.webhook(req);
   }
 }

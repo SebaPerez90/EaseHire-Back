@@ -61,7 +61,9 @@ export class PaymentsService {
 
   async webhook(req) {
     const paidState = req.body;
-
+    console.log(JSON.stringify(paidState));
+    
+    console.log(JSON.stringify(`estamos en webhook service y los datos ${req}`));
     if (paidState.type == 'payment') {
       const data = await payment.capture({ id: paidState.data.id });
 
@@ -70,9 +72,13 @@ export class PaymentsService {
         const publication = await this.publicactionRepository.findOne({
           where: { id: item.id },
         });
-
+        
         const payment = new Payment();
         payment.value = data.transaction_details.net_received_amount;
+        console.log(`estamos en payment service y el valor es `);
+        console.log(JSON.stringify(payment.value));
+        
+        
         payment.description = data.description;
         payment.datePayment = data.date_approved.split('T')[0];
         await this.paymentRepository.save(payment);

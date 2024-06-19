@@ -100,4 +100,7 @@ export class User {
 
   @ManyToOne(() => Publicaction, (Publicaction) => Publicaction.usersList)
   publication: Publicaction;
+
+  @OneToMany(() => Feedback, (feedback) => feedback.user)
+  feedbacks: Feedback[];
 }

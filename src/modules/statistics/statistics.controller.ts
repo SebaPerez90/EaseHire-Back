@@ -6,7 +6,9 @@ import { Role } from 'src/enum/role.enum';
 @Controller('statistics')
 @Roles(Role.ADMIN)
 export class StatisticsController {
-  constructor(private readonly statisticsService: StatisticsService) {}
+  constructor(
+    private readonly statisticsService: StatisticsService
+  ) { }
 
   @Get('days')
   foundUsersByDays() {
@@ -32,5 +34,10 @@ export class StatisticsController {
   @Get('publication/month')
   foundPublicationByMonth() {
     return this.statisticsService.foundPublicationByMonth();
+  }
+
+  @Get('payment/month')
+  foundPaymentByMonth() {
+    return this.statisticsService.foundPaymentByMonth();
   }
 }
