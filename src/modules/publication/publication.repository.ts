@@ -132,7 +132,7 @@ export class PublicationsRepository implements OnModuleInit {
     publications.forEach((publication) => {
       const { date, time } = publication;
       const datetime = `${date} ${time}`;
-      const timelapsed = moment().startOf('hour').fromNow(); 
+      const timelapsed = moment(datetime, 'DD/MM/YYYY HH:mm:ss').fromNow(true);
 
       const newPublication = new Publicaction();
       newPublication.id = publication.id;
