@@ -44,11 +44,13 @@ export class UsersController {
   ) {
     return this.usersService.findUsers(category, city, page, limit);
   }
+
   @Get('blocks')
   @Public()
   getAllBlocks() {
     return this.usersService.getAllBlocks();
   }
+
   @Get('all')
   @Public()
   findAll() {
@@ -56,7 +58,6 @@ export class UsersController {
   }
 
   @Get('me')
-  @Public()
   findOne(@Headers() header) {
     const secret = process.env.JWT_SECRET;
     const { userid } = this.jwtService.verify(header.authorization, { secret });
