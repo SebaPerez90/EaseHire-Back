@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -20,8 +20,10 @@ export class AuthService {
 
   retunSingIn(user: any) {
     console.log('estamos en el retun sing in');
-    if (user.isBlocked === true)
-      return { message: 'Your account has been blocked' };
+    if (user.isBlocked === true) {
+      console.log("userBlocked: ", user);
+      
+      throw new HttpException('Your account has been blocked', 200);}
 
     const userid = user.id;
     const role = user.role[0];
@@ -45,7 +47,6 @@ export class AuthService {
         where: { email: email },
         relations: { credential: true },
       });
-
 
       if (!user) {
         const passwordTest = 'Asd_*1234';
@@ -123,3 +124,5 @@ export class AuthService {
     return this.retunSingIn(userFind);
   }
 }
+
+
