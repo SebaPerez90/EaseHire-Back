@@ -6,7 +6,8 @@
     "category": "Doctor",
     "remoteWork": false,
     "location": "Argentina",
-    "date": "2024-01-01"
+    "date": "2024-01-01",
+    "premium": false
   },
   {
     "title": "Evento 2",
@@ -15,7 +16,8 @@
     "category": "Ingeniero",
     "remoteWork": false,
     "location": "Brasil",
-    "date": "2024-01-06"
+    "date": "2024-01-06",
+    "premium": false
   },
   {
     "title": "Publicación 3",
@@ -24,7 +26,8 @@
     "category": "Profesor",
     "remoteWork": true,
     "location": "Chile",
-    "date": "2024-01-11"
+    "date": "2024-01-11",
+    "premium": false
   },
   {
     "title": "Noticia 4",
@@ -33,7 +36,8 @@
     "category": "Enfermera",
     "remoteWork": false,
     "location": "Uruguay",
-    "date": "2024-01-16"
+    "date": "2024-01-16",
+    "premium": true
   },
   {
     "title": "Evento 5",
@@ -42,7 +46,8 @@
     "category": "Abogado",
     "remoteWork": false,
     "location": "Paraguay",
-    "date": "2024-01-21"
+    "date": "2024-01-21",
+    "premium": true
   },
   {
     "title": "Publicación 6",
@@ -51,7 +56,8 @@
     "category": "Arquitecto",
     "remoteWork": false,
     "location": "Perú",
-    "date": "2024-01-26"
+    "date": "2024-01-26",
+    "premium": true
   },
   {
     "title": "Noticia 7",
@@ -60,7 +66,8 @@
     "category": "Contador",
     "remoteWork": true,
     "location": "Colombia",
-    "date": "2024-02-01"
+    "date": "2024-02-01",
+    "premium": true
   },
   {
     "title": "Evento 8",
@@ -69,7 +76,8 @@
     "category": "Chef",
     "remoteWork": false,
     "location": "Venezuela",
-    "date": "2024-02-05"
+    "date": "2024-02-05",
+    "premium": true
   },
   {
     "title": "Publicación 9",
@@ -78,7 +86,8 @@
     "category": "Dentista",
     "remoteWork": true,
     "location": "Ecuador",
-    "date": "2024-02-09"
+    "date": "2024-02-09",
+    "premium": true
   },
   {
     "title": "Noticia 10",
@@ -87,7 +96,8 @@
     "category": "Farmacéutico",
     "remoteWork": false,
     "location": "Bolivia",
-    "date": "2024-02-13"
+    "date": "2024-02-13",
+    "premium": true
   },
   {
     "title": "Evento 11",
@@ -96,7 +106,8 @@
     "category": "Periodista",
     "remoteWork": true,
     "location": "México",
-    "date": "2024-02-17"
+    "date": "2024-02-17",
+    "premium": true
   },
   {
     "title": "Publicación 12",
@@ -105,7 +116,8 @@
     "category": "Psicólogo",
     "remoteWork": true,
     "location": "Costa Rica",
-    "date": "2024-02-21"
+    "date": "2024-02-21",
+    "premium": true
   },
   {
     "title": "Noticia 13",
@@ -114,7 +126,8 @@
     "category": "Electricista",
     "remoteWork": false,
     "location": "Panamá",
-    "date": "2024-02-25"
+    "date": "2024-02-25",
+    "premium": true
   },
   {
     "title": "Evento 14",
@@ -123,7 +136,8 @@
     "category": "Fontanero",
     "remoteWork": false,
     "location": "Guatemala",
-    "date": "2024-02-28"
+    "date": "2024-02-28",
+    "premium": true
   },
   {
     "title": "Publicación 15",
@@ -132,7 +146,8 @@
     "category": "Maestro",
     "remoteWork": true,
     "location": "Honduras",
-    "date": "2024-03-01"
+    "date": "2024-03-01",
+    "premium": false
   },
   {
     "title": "Noticia 16",
@@ -141,7 +156,8 @@
     "category": "Mecánico",
     "remoteWork": false,
     "location": "Nicaragua",
-    "date": "2024-03-05"
+    "date": "2024-03-05",
+    "premium": false
   },
   {
     "title": "Evento 17",
@@ -150,7 +166,8 @@
     "category": "Piloto",
     "remoteWork": false,
     "location": "El Salvador",
-    "date": "2024-03-09"
+    "date": "2024-03-09",
+    "premium": false
   },
   {
     "title": "Publicación 18",
@@ -159,7 +176,8 @@
     "category": "Programador",
     "remoteWork": true,
     "location": "Puerto Rico",
-    "date": "2024-03-13"
+    "date": "2024-03-13",
+    "premium": false
   },
   {
     "title": "Noticia 19",
@@ -168,7 +186,8 @@
     "category": "Veterinario",
     "remoteWork": false,
     "location": "Cuba",
-    "date": "2024-03-17"
+    "date": "2024-03-17",
+    "premium": false
   },
   {
     "title": "Evento 20",
@@ -177,7 +196,8 @@
     "category": "Bombero",
     "remoteWork": false,
     "location": "República Dominicana",
-    "date": "2024-03-21"
+    "date": "2024-03-21",
+    "premium": false
   },
   {
     "title": "Publicación 21",
@@ -186,7 +206,8 @@
     "category": "Policía",
     "remoteWork": false,
     "location": "Haití",
-    "date": "2024-03-25"
+    "date": "2024-03-25",
+    "premium": false
   },
   {
     "title": "Noticia 22",
@@ -195,7 +216,8 @@
     "category": "Paramédico",
     "remoteWork": false,
     "location": "Jamaica",
-    "date": "2024-03-29"
+    "date": "2024-03-29",
+    "premium": false
   },
   {
     "title": "Evento 23",
@@ -204,7 +226,8 @@
     "category": "Fotógrafo",
     "remoteWork": false,
     "location": "Trinidad y Tobago",
-    "date": "2024-04-01"
+    "date": "2024-04-01",
+    "premium": false
   },
   {
     "title": "Publicación 24",
@@ -213,7 +236,8 @@
     "category": "Artista",
     "remoteWork": true,
     "location": "Belice",
-    "date": "2024-04-07"
+    "date": "2024-04-07",
+    "premium": false
   },
   {
     "title": "Noticia 25",
@@ -222,7 +246,8 @@
     "category": "Economista",
     "remoteWork": true,
     "location": "Guyana",
-    "date": "2024-04-13"
+    "date": "2024-04-13",
+    "premium": false
   },
   {
     "title": "Evento 26",
@@ -231,7 +256,8 @@
     "category": "Científico",
     "remoteWork": true,
     "location": "Surinam",
-    "date": "2024-04-19"
+    "date": "2024-04-19",
+    "premium": false
   },
   {
     "title": "Publicación 27",
@@ -240,7 +266,8 @@
     "category": "Astronauta",
     "remoteWork": false,
     "location": "Canadá",
-    "date": "2024-04-25"
+    "date": "2024-04-25",
+    "premium": false
   },
   {
     "title": "Noticia 28",
@@ -249,7 +276,8 @@
     "category": "Chef",
     "remoteWork": false,
     "location": "Estados Unidos",
-    "date": "2024-05-01"
+    "date": "2024-05-01",
+    "premium": false
   },
   {
     "title": "Evento 29",
@@ -258,7 +286,8 @@
     "category": "Electricista",
     "remoteWork": true,
     "location": "Argentina",
-    "date": "2024-05-05"
+    "date": "2024-05-05",
+    "premium": false
   },
   {
     "title": "Publicación 30",
@@ -267,7 +296,8 @@
     "category": "Construcción",
     "remoteWork": false,
     "location": "Brasil",
-    "date": "2024-05-09"
+    "date": "2024-05-09",
+    "premium": false
   },
   {
     "title": "Noticia 31",
@@ -276,7 +306,8 @@
     "category": "Pintor",
     "remoteWork": false,
     "location": "Chile",
-    "date": "2024-05-13"
+    "date": "2024-05-13",
+    "premium": false
   },
   {
     "title": "Evento 32",
@@ -285,7 +316,8 @@
     "category": "Call Center",
     "remoteWork": true,
     "location": "Uruguay",
-    "date": "2024-05-17"
+    "date": "2024-05-17",
+    "premium": false
   },
   {
     "title": "Publicación 33",
@@ -294,7 +326,8 @@
     "category": "Maestro de Manejo",
     "remoteWork": false,
     "location": "Paraguay",
-    "date": "2024-05-21"
+    "date": "2024-05-21",
+    "premium": false
   },
   {
     "title": "Noticia 34",
@@ -303,7 +336,8 @@
     "category": "Odontólogo",
     "remoteWork": false,
     "location": "Perú",
-    "date": "2024-05-25"
+    "date": "2024-05-25",
+    "premium": false
   },
   {
     "title": "Evento 35",
@@ -312,7 +346,8 @@
     "category": "Mozo",
     "remoteWork": false,
     "location": "Colombia",
-    "date": "2024-05-29"
+    "date": "2024-05-29",
+    "premium": false
   },
   {
     "title": "Publicación 36",
@@ -321,7 +356,8 @@
     "category": "Kinesiólogo",
     "remoteWork": false,
     "location": "Venezuela",
-    "date": "2024-06-01"
+    "date": "2024-06-01",
+    "premium": false
   },
   {
     "title": "Noticia 37",
@@ -330,7 +366,8 @@
     "category": "Broker",
     "remoteWork": true,
     "location": "Ecuador",
-    "date": "2024-06-05"
+    "date": "2024-06-05",
+    "premium": false
   },
   {
     "title": "Evento 38",
@@ -339,7 +376,8 @@
     "category": "Nutricionista",
     "remoteWork": true,
     "location": "Bolivia",
-    "date": "2024-06-09"
+    "date": "2024-06-09",
+    "premium": false
   },
   {
     "title": "Publicación 39",
@@ -348,7 +386,8 @@
     "category": "Personal Trainer",
     "remoteWork": true,
     "location": "México",
-    "date": "2024-06-13"
+    "date": "2024-06-13",
+    "premium": false
   },
   {
     "title": "Noticia 40",
@@ -357,6 +396,7 @@
     "category": "Niñera",
     "remoteWork": true,
     "location": "Costa Rica",
-    "date": "2024-06-17"
+    "date": "2024-06-17",
+    "premium": false
   }
 ]

@@ -97,6 +97,8 @@ export class PaymentsService implements OnModuleInit {
         payment.description = data.description;
         payment.datePayment = data.date_approved.split('T')[0];
         await this.paymentRepository.save(payment);
+
+        
         if (item.description == '7 días') {
           publication.premium = true;
           const date = new Date();
