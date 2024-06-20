@@ -98,32 +98,33 @@ export class PaymentsService implements OnModuleInit {
         payment.datePayment = data.date_approved.split('T')[0];
         await this.paymentRepository.save(payment);
 
+        publication.premium = true;
+        const publicationTrue =await this.publicactionRepository.save(publication);
+        
         
         if (item.description == '7 días') {
-          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 7);
           const dateString = date.toISOString().split('T')[0];
-          publication.endDate = dateString;
-          await this.publicactionRepository.save(publication);
+          publicationTrue.endDate = dateString;
+          await this.publicactionRepository.save(publicationTrue);
+          console.log("despues del pago:",publicationTrue);
         }
 
         if (item.description == '15 días') {
-          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 15);
           const dateString = date.toISOString().split('T')[0];
-          publication.endDate = dateString;
-          await this.publicactionRepository.save(publication);
+          publicationTrue.endDate = dateString;
+          await this.publicactionRepository.save(publicationTrue);
         }
 
         if (item.description == '30 días') {
-          publication.premium = true;
           const date = new Date();
           date.setDate(date.getDate() + 30);
           const dateString = date.toISOString().split('T')[0];
-          publication.endDate = dateString;
-          await this.publicactionRepository.save(publication);
+          publicationTrue.endDate = dateString;
+          await this.publicactionRepository.save(publicationTrue);
         }
       }
     }
