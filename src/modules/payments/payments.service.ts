@@ -91,6 +91,8 @@ export class PaymentsService implements OnModuleInit {
         const publication = await this.publicactionRepository.findOne({
           where: { id: item.id },
         });
+        console.log("itemm:",item);
+        console.log("apenas lo agarro:",publication);
 
         const payment = new Payment();
         payment.value = data.transaction_details.net_received_amount;
@@ -104,6 +106,7 @@ export class PaymentsService implements OnModuleInit {
           const dateString = date.toISOString().split('T')[0];
           publication.endDate = dateString;
           await this.publicactionRepository.save(publication);
+          console.log("despues del pago:",publication);
         }
 
         if (item.description == '15 días') {
