@@ -21,9 +21,15 @@ export class AuthService {
   retunSingIn(user: any) {
     console.log('estamos en el retun sing in');
     if (user.isBlocked === true) {
-      console.log("userBlocked: ", user);
-      
-      throw new HttpException('Your account has been blocked', 200);}
+      const playload = {role: user.role };
+      const token = this.jwtService.sign(playload, {
+        secret: "pepe",
+      });
+      return {
+        message: 'User login',
+        token,
+      };
+      }
 
     const userid = user.id;
     const role = user.role[0];
@@ -102,6 +108,11 @@ export class AuthService {
       await this.credentialsRepository.save(newCredential);
       return newCredential;
     }
+  }
+
+  async logOut() {
+
+    return { message: 'User logout' };
   }
 
   async signInTest(credentials) {
