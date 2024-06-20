@@ -73,7 +73,7 @@ export class PublicationsRepository implements OnModuleInit {
       newPublication.time = formatTime;
       newPublication.timelapse = timelapsed;
       newPublication.profesion = professions[Math.round(Math.random() * 16)];
-      newPublication.user = users[Math.round(Math.random() * 30)];
+      newPublication.user = users[Math.round(Math.random() * 18)];
 
       await this.publicationsRepository
         .createQueryBuilder()
