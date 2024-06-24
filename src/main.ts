@@ -10,7 +10,7 @@ const port = process.env.PORT || 3001;
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: 'https://pf-g5-front.vercel.app', // Origen del front
+    origin: 'https://easehire.vercel.app/', // Origen del front
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
