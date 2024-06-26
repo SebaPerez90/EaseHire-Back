@@ -6,14 +6,12 @@ import { Invitation } from 'src/database/entities/invitation.entity';
 import { User } from 'src/database/entities/user.entity';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { AuthService } from '../auth/auth.service';
-import { UserRepository } from '../users/users.repository';
 import { UsersService } from '../users/users.service';
 import { ExperienceService } from '../experience/experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
 import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { Profesion } from 'src/database/entities/profesion.entity';
-import { ProfesionsRepository } from '../profesions/profesions.repository';
 import { Notification } from 'src/database/entities/notification.entity';
 import { NotificationsService } from '../notifications/notifications.service';
 
@@ -33,11 +31,9 @@ import { NotificationsService } from '../notifications/notifications.service';
   providers: [
     InvitationService,
     AuthService,
-    UserRepository,
     UsersService,
     ExperienceService,
     FeedbackService,
-    ProfesionsRepository,
     NotificationsService,
   ],
 })
