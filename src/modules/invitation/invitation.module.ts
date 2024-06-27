@@ -11,7 +11,7 @@ import { ExperienceService } from '../experience/experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
 import { FeedbackService } from '../feedback/feedback.service';
 import { Feedback } from 'src/database/entities/feedback.entity';
-import { Profesion } from 'src/database/entities/profesion.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 import { Notification } from 'src/database/entities/notification.entity';
 import { NotificationsService } from '../notifications/notifications.service';
 

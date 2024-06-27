@@ -1,42 +1,61 @@
 import {
-  // BadRequestException,
+  HttpException,
+  HttpStatus,
   Injectable,
   NotFoundException,
   OnModuleInit,
 } from '@nestjs/common';
-import { ExperienceService } from '../experience/experience.service';
-import { FeedbackService } from '../feedback/feedback.service';
-import { Profesion } from 'src/database/entities/profesion.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/database/entities/user.entity';
 import * as data from '../../utils/mock-professions.json';
+import { PostCategory } from './dto/post-category.dto';
 
 @Injectable()
 export class ProfesionsService implements OnModuleInit {
   constructor(
     @InjectRepository(Profesion)
-    private profesionsRepository: Repository<Profesion>,
+    private professionsRepository: Repository<Profesion>,
     @InjectRepository(User) private userRepository: Repository<User>,
-    private experienceService: ExperienceService,
-    private feedbackService: FeedbackService,
   ) {}
 
   async onModuleInit() {
-    await this.feedbackService.seederFeedbacks();
-    await this.seederProfesions();
-    await this.experienceService.seedExperiences();
-    // await this.userRepository.filterNewMembers();
+    data?.map(async (element) => {
+      const users = await this.userRepository.find();
+      const profession = new Profesion();
+      profession.category = element.category;
+      profession.user = users[Math.round(Math.random() * 20)];
+      await this.professionsRepository.save(profession);
+    });
   }
 
-  async findProfesions() {
-    const ProfesionsFind = await this.profesionsRepository.find();
-    return ProfesionsFind;
+  async getAllProfessions() {
+    const professions = await this.professionsRepository.find();
+    if (professions.length === 0)
+      throw new NotFoundException('the list of professions is still empty');
+
+    return professions;
   }
 
+  async addProfession(professionData: PostCategory) {
+    const allProfessions = await this.professionsRepository.find();
+    const profession = new Profesion();
+    profession.category = professionData.category;
+
+    for (let i = 0; i < allProfessions.length; i++) {
+      if (allProfessions[i].category === professionData.category)
+        throw new HttpException(
+          'The category you are trying to add already exists.',
+          HttpStatus.NOT_ACCEPTABLE,
+        );
+    }
+    const newProfession = await this.professionsRepository.save(profession);
+    return newProfession;
+  }
   // async meProfesion(userid, body) {
   //   const userFind = await this.userRepository.findOne(userid);
-  //   const newProfesion = await this.profesionsRepository.findOneBy({
+  //   const newProfesion = await this.professionsRepository.findOneBy({
   //     category: body.category,
   //   });
 
@@ -57,34 +76,23 @@ export class ProfesionsService implements OnModuleInit {
   //   return userFinal;
   // }
 
-  async removeProfesion(req, categoryName) {
-    const userFind = await this.userRepository.findOne({
-      where: { id: req.currentUser.id },
-      relations: { profesions: true },
-    });
-    const profesionFind = await this.profesionsRepository.findOneBy({
-      category: categoryName,
-    });
+  // async removeProfesion(req, categoryName) {
+  //   const userFind = await this.userRepository.findOne({
+  //     where: { id: req.currentUser.id },
+  //     relations: { profesions: true },
+  //   });
+  //   const profesionFind = await this.professionsRepository.findOneBy({
+  //     category: categoryName,
+  //   });
 
-    if (!profesionFind) throw new NotFoundException(`Profesion not found`);
+  //   if (!profesionFind) throw new NotFoundException(`Profesion not found`);
 
-    for (let i = 0; i < userFind.profesions.length; i++) {
-      if (userFind.profesions[i].category === profesionFind.category) {
-        userFind.profesions.splice(i, 1);
-      }
-    }
-    const userFinal = await this.userRepository.save(userFind);
-    return userFinal;
-  }
-
-  async seederProfesions() {
-    const users = await this.userRepository.find();
-    data?.map(async (element) => {
-      const profession = new Profesion();
-      profession.category = element.category;
-      profession.user = users[Math.round(Math.random() * 30)];
-
-      await this.profesionsRepository.save(profession);
-    });
-  }
+  //   for (let i = 0; i < userFind.profesions.length; i++) {
+  //     if (userFind.profesions[i].category === profesionFind.category) {
+  //       userFind.profesions.splice(i, 1);
+  //     }
+  //   }
+  //   const userFinal = await this.userRepository.save(userFind);
+  //   return userFinal;
+  // }
 }

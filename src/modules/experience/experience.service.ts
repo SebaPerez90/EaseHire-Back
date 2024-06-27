@@ -6,7 +6,7 @@ import * as data from '../../utils/mock-experiences.json';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { PostExperienceDto } from './dto/post-exp.dto';
 import { User } from 'src/database/entities/user.entity';
-import { Profesion } from 'src/database/entities/profesion.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 
 @Injectable()
 export class ExperienceService {

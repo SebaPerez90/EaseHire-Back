@@ -7,7 +7,7 @@ import { User } from 'src/database/entities/user.entity';
 import { ExperienceService } from '../experience/experience.service';
 import { Experience } from 'src/database/entities/experience.entity';
 import { Credential } from 'src/database/entities/credentials.entity';
-import { Profesion } from 'src/database/entities/profesion.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 import { AuthService } from '../auth/auth.service';
 
 @Module({

@@ -1,170 +1,71 @@
 [
   {
-    "category": "animator"
+    "category": "albañil"
   },
   {
-    "category": "animator"
+    "category": "plomero"
   },
   {
     "category": "personal trainer"
   },
   {
-    "category": "grandparents' companion"
+    "category": "gasista"
   },
   {
-    "category": "personal driver"
+    "category": "electricista"
   },
   {
-    "category": "private teacher"
+    "category": "mecanico de auto"
   },
   {
-    "category": "fronted developer"
+    "category": "mecanico de moto"
   },
   {
-    "category": "librarian"
+    "category": "electricista automotor"
   },
   {
-    "category": "nurse"
+    "category": "yesero/durlquero"
   },
   {
-    "category": "construction worker"
+    "category": "fletero"
   },
   {
-    "category": "carpenter"
+    "category": "reparador de pc"
   },
   {
-    "category": "bakend developer"
+    "category": "reparador de celulares"
   },
   {
-    "category": "fullstack developer"
+    "category": "jardinero"
   },
   {
-    "category": "air conditioning technician"
+    "category": "tecnico de aires acondicionados"
   },
   {
-    "category": "electrician"
+    "category": "cadete moto/auto"
   },
   {
-    "category": "auto mechanic"
+    "category": "profesora particular"
   },
   {
-    "category": "locksmith"
+    "category": "profesor de ingles"
   },
   {
-    "category": "Doctor"
+    "category": "fotografo profesional"
   },
   {
-    "category": "Ingeniero"
+    "category": "oficial pintor"
   },
   {
-    "category": "Profesor"
+    "category": "mozo eventual"
   },
   {
-    "category": "Enfermera"
+    "category": "nutricionista"
   },
   {
-    "category": "Abogado"
+    "category": "niñera"
   },
   {
-    "category": "Arquitecto"
-  },
-  {
-    "category": "Contador"
-  },
-  {
-    "category": "Chef"
-  },
-  {
-    "category": "Dentista"
-  },
-  {
-    "category": "Farmacéutico"
-  },
-  {
-    "category": "Periodista"
-  },
-  {
-    "category": "Electricista"
-  },
-  {
-    "category": "Fontanero"
-  },
-  {
-    "category": "Maestro"
-  },
-  {
-    "category": "Mecánico"
-  },
-  {
-    "category": "Piloto"
-  },
-  {
-    "category": "Programador"
-  },
-  {
-    "category": "Veterinario"
-  },
-  {
-    "category": "Bombero"
-  },
-  {
-    "category": "Policía"
-  },
-  {
-    "category": "Paramédico"
-  },
-  {
-    "category": "Fotógrafo"
-  },
-  {
-    "category": "Artista"
-  },
-  {
-    "category": "Economista"
-  },
-  {
-    "category": "Científico"
-  },
-  {
-    "category": "Astronauta"
-  },
-  {
-    "category": "Chef"
-  },
-  {
-    "category": "Electricista"
-  },
-  {
-    "category": "Construcción"
-  },
-  {
-    "category": "Pintor"
-  },
-  {
-    "category": "Call Center"
-  },
-  {
-    "category": "Maestro de Manejo"
-  },
-  {
-    "category": "Odontólogo"
-  },
-  {
-    "category": "Mozo"
-  },
-  {
-    "category": "Kinesiólogo"
-  },
-  {
-    "category": "Broker"
-  },
-  {
-    "category": "Nutricionista"
-  },
-  {
-    "category": "Personal Trainer"
-  },
-  {
-    "category": "Niñera"
+    "category": "herrero"
   }
 ]

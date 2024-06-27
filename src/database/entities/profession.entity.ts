@@ -8,9 +8,9 @@ import {
 } from 'typeorm';
 import { Experience } from './experience.entity';
 import { User } from './user.entity';
-import { Publicaction } from './publication.entity';
+// import { Publicaction } from './publication.entity';
 
-@Entity({ name: 'profesions' })
+@Entity({ name: 'professions' })
 export class Profesion {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -25,6 +25,6 @@ export class Profesion {
   @JoinColumn({ name: 'user_ID' })
   user: User;
 
-  @OneToMany(() => Publicaction, (publicaction) => publicaction.profesion)
-  publicactions: Publicaction[];
+  // @OneToMany(() => Publicaction, (publicaction) => publicaction.profesion)
+  // publicactions: Publicaction[];
 }

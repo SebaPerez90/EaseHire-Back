@@ -5,7 +5,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
-import { Profesion } from 'src/database/entities/profesion.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 
 export class PostExperienceDto {
   @IsString()
