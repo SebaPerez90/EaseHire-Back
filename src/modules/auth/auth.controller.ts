@@ -8,9 +8,9 @@ import { Public } from 'src/decorators/is-public.decorator';
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Public()
-  @Post('signIn')
-  async signIn(@Body() credentials: any) {
-    return await this.authService.signIn(credentials);
-  }
+  // @Public()
+  // @Post('signIn')
+  // async signIn(@Body() credentials: any) {
+  //   return await this.authService.signIn(credentials);
+  // }
 }

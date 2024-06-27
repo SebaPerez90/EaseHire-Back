@@ -1,15 +1,18 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { User } from 'src/database/entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
-// import * as data from '../../utils/mock-users.json';
+import * as data from '../../utils/mock-users.json';
 
 @Injectable()
-export class UsersService {
+export class UsersService implements OnModuleInit {
   constructor(
     @InjectRepository(User) private usersRepository: Repository<User>,
   ) {}
 
+  onModuleInit() {
+    this.seederUser();
+  }
   async getAllusers(
     category: string,
     city: string,
@@ -41,46 +44,63 @@ export class UsersService {
     return { usersFind, count };
   }
 
-  async getUser(id: string) {
-    const user = await this.usersRepository.findOne({
-      where: { id },
+  async getMyProfile(req) {
+    return await this.usersRepository.findOneBy({
+      id: req.currentUser.id,
     });
-
-    if (!user) throw new NotFoundException(`No found user con id ${id}`);
-    return user;
   }
 
-  async findAll() {
-    const users = await this.usersRepository.find({
-      relations: { experiences: true, educations: true, profesions: true },
-    });
+  async seederUser() {
+    const promises = data?.map(async (element) => {
+      const user = new User();
+      user.name = element.name;
+      user.lastName = element.lastName;
+      user.dni = element.dni;
+      user.country = element.country;
+      user.city = element.city;
+      user.birthdate = element.birthdate;
+      user.bio = element.bio;
+      user.email = element.email;
 
-    const filteredUsers: User[] = [];
-    users.map((element) => {
-      if (element.isBlocked === false) {
-        filteredUsers.push(element);
-      }
+      await this.usersRepository
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values(user)
+        .orUpdate(
+          [
+            'name',
+            'lastName',
+            'dni',
+            'country',
+            'city',
+            'birthdate',
+            'bio',
+            'email',
+          ],
+          ['dni'],
+        )
+        .execute();
     });
-    return filteredUsers;
+    await Promise.all(promises);
+    return {
+      message: 'users was seeder successfully!',
+    };
   }
 
-  async getAllBlocks() {
-    const users = await this.usersRepository.find({
-      where: { isBlocked: true },
-    });
-    return users;
-  }
+  // async findAll() {
+  //   const users = await this.usersRepository.find({
+  //     relations: { experiences: true, educations: true, profesions: true },
+  //   });
 
-  async blockUser(id) {
-    const userFounded = await this.usersRepository.findOneBy({ id: id });
-
-    if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
-    const updates = this.usersRepository.merge(userFounded, {
-      isBlocked: !userFounded.isBlocked,
-    });
-    await this.usersRepository.save(updates);
-    return userFounded;
-  }
+  //   const filteredUsers: User[] = [];
+  //   users.map((element) => {
+  //     if (element.isBlocked === false) {
+  //       filteredUsers.push(element);
+  //     }
+  //   });
+  //   return filteredUsers;
+  // }
 
   // async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
   //   const userFounded = await this.usersRepository.findOneBy({ id: id });
@@ -97,46 +117,6 @@ export class UsersService {
   //   const updates = this.usersRepository.merge(userFounded, UpdateUserDto);
   //   await this.usersRepository.save(updates);
   //   return userFounded;
-  // }
-
-  // async seederUser() {
-  //   const promises = data?.map(async (element) => {
-  //     const user = new User();
-  //     user.name = element.name;
-  //     user.lastName = element.lastName;
-  //     user.dni = element.dni;
-  //     user.country = element.country;
-  //     user.city = element.city;
-  //     user.birthdate = element.birthdate;
-  //     user.bio = element.bio;
-  //     user.email = element.email;
-  //     user.datecreateUser = new Date(element.datecreateUser);
-  //     user.credential = await this.authService.simulateAuthFlow(element);
-
-  //     await this.usersRepository
-  //       .createQueryBuilder()
-  //       .insert()
-  //       .into(User)
-  //       .values(user)
-  //       .orUpdate(
-  //         [
-  //           'name',
-  //           'lastName',
-  //           'dni',
-  //           'country',
-  //           'city',
-  //           'birthdate',
-  //           'bio',
-  //           'email',
-  //         ],
-  //         ['dni'],
-  //       )
-  //       .execute();
-  //   });
-  //   await Promise.all(promises);
-  //   return {
-  //     message: 'users was seeder successfully!',
-  //   };
   // }
 
   // async filterNewMembers() {

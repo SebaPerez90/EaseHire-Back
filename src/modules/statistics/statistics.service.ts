@@ -34,9 +34,9 @@ export class StatisticsService {
           .endOf('day')
           .toDate();
         const users = await this.userRepository.find({
-          where: {
-            datecreateUser: Between(startDate, endDate),
-          },
+          // where: {
+          //   datecreateUser: Between(startDate, endDate),
+          // },
         });
         const countUsers = users.length;
         usersByDay.push({
@@ -81,9 +81,9 @@ export class StatisticsService {
           break;
         }
         const users = await this.userRepository.find({
-          where: {
-            datecreateUser: Between(startDate, endDate),
-          },
+          // where: {
+          //   datecreateUser: Between(startDate, endDate),
+          // },
         });
         const countUsers = users.length;
         usersByWeek.push({
@@ -115,9 +115,9 @@ export class StatisticsService {
           .toDate();
 
         const users = await this.userRepository.find({
-          where: {
-            datecreateUser: Between(startDate, endDate),
-          },
+          // where: {
+          //   datecreateUser: Between(startDate, endDate),
+          // },
         });
 
         const countUsers = users.length;

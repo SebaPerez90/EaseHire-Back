@@ -1,14 +1,14 @@
 import {
   Controller,
   Get,
-  Param,
-  Delete,
   Query,
   DefaultValuePipe,
   ParseIntPipe,
+  Req,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Public } from 'src/decorators/is-public.decorator';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -25,27 +25,8 @@ export class UsersController {
     return this.usersService.getAllusers(category, city, page, limit);
   }
 
-  @Get('blocks')
-  @Public()
-  getAllBlocks() {
-    return this.usersService.getAllBlocks();
-  }
-
-  @Get('all')
-  @Public()
-  findAll() {
-    return this.usersService.findAll();
-  }
-
-  @Get(':id')
-  @Public()
-  getUser(@Param('id') id: string) {
-    return this.usersService.getUser(id);
-  }
-
-  @Delete(':id')
-  @Public()
-  blockUser(@Param('id') id: string) {
-    return this.usersService.blockUser(id);
+  @Get('/me')
+  getMyProfile(@Req() req: Request) {
+    return this.usersService.getMyProfile(req);
   }
 }

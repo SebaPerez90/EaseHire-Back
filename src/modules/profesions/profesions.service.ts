@@ -23,7 +23,6 @@ export class ProfesionsService implements OnModuleInit {
   ) {}
 
   async onModuleInit() {
-    // await this.userRepository.seederUser();
     await this.feedbackService.seederFeedbacks();
     await this.seederProfesions();
     await this.experienceService.seedExperiences();
