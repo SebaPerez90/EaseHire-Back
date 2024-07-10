@@ -2,24 +2,25 @@ import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Education } from 'src/database/entities/education.entity';
 import { Repository } from 'typeorm';
-import { UserRepository } from '../users/users.repository';
 import * as data from '../../utils/mock-educations.json';
 import { PostEducationDto } from './dto/post-education.dto';
 import { UpdateEducationDto } from './dto/update-education-dto';
+import { User } from 'src/database/entities/user.entity';
 
 @Injectable()
 export class EducationService implements OnModuleInit {
   constructor(
     @InjectRepository(Education)
     private educationsRepository: Repository<Education>,
-    private userRepository: UserRepository,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   onModuleInit() {
     this.seederEducation();
   }
   async seederEducation() {
-    const users = await this.userRepository.findAll();
+    const users = await this.userRepository.find();
 
     data?.map(async (element) => {
       const education = new Education();

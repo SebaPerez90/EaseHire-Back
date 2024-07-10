@@ -6,7 +6,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Profesion } from './profesion.entity';
+import { Profesion } from './profession.entity';
 import { User } from './user.entity';
 import { Feedback } from './feedback.entity';
 
