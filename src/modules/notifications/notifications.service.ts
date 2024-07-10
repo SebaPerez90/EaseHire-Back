@@ -21,8 +21,8 @@ export class NotificationsService {
       const date = new Date();
       const timelapsed = moment(date).fromNow();
       notifications.timelapse = timelapsed;
-      this.notificationsRepository.save(notifications)
-    })
+      this.notificationsRepository.save(notifications);
+    });
     const filteredNotifications: Notification[] = [];
 
     for (let i = 0; i < notifications.length; i++) {
@@ -37,9 +37,7 @@ export class NotificationsService {
     const now = new Date();
     const date = moment();
 
-
-    
-    const timelapsed = moment().startOf('hour').fromNow();  
+    const timelapsed = moment().startOf('hour').fromNow();
     const title = this.checkNotificationType(notificationData);
 
     notification.title = title;

@@ -1,51 +1,98 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
-import { CreateProfesionDto } from './dto/create-profesion.dto';
-import { UpdateProfesionDto } from './dto/update-profesion.dto';
-import { ProfesionsRepository } from './profesions.repository';
-import { UserRepository } from 'src/modules/users/users.repository';
-import { ExperienceService } from '../experience/experience.service';
-import { FeedbackService } from '../feedback/feedback.service';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+  OnModuleInit,
+} from '@nestjs/common';
+import { Profesion } from 'src/database/entities/profession.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/database/entities/user.entity';
+import * as data from '../../utils/mock-professions.json';
+import { PostCategory } from './dto/post-category.dto';
 
 @Injectable()
 export class ProfesionsService implements OnModuleInit {
   constructor(
-    private readonly profesionsRepository: ProfesionsRepository,
-    private userRepository: UserRepository,
-    private experienceService: ExperienceService,
-    private feedbackService: FeedbackService,
+    @InjectRepository(Profesion)
+    private professionsRepository: Repository<Profesion>,
+    @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
   async onModuleInit() {
-    await this.userRepository.seederUser();
-    await this.feedbackService.seederFeedbacks();
-    await this.profesionsRepository.seederProfesions();
-    await this.experienceService.seedExperiences();
-    await this.userRepository.filterNewMembers();
-  }
-  async findMe(userid: any) {
-    return await this.profesionsRepository.findMe(userid);
-  }
-
-  async meProfesion(userid: string, body) {
-    return await this.profesionsRepository.meProfesion(userid, body);
+    data?.map(async (element) => {
+      const users = await this.userRepository.find();
+      const profession = new Profesion();
+      profession.category = element.category;
+      profession.user = users[Math.round(Math.random() * 20)];
+      await this.professionsRepository.save(profession);
+    });
   }
 
-  removeProfesion(req, categoryName) {
-    return this.profesionsRepository.removeProfesion(req, categoryName);
-  }
-  create(createProfesionDto: CreateProfesionDto, userid: string) {
-    return this.profesionsRepository.create(createProfesionDto, userid);
+  async getAllProfessions() {
+    const professions = await this.professionsRepository.find();
+    if (professions.length === 0)
+      throw new NotFoundException('the list of professions is still empty');
+
+    return professions;
   }
 
-  findProfesions() {
-    return this.profesionsRepository.findProfesions();
-  }
+  async addProfession(professionData: PostCategory) {
+    const allProfessions = await this.professionsRepository.find();
+    const profession = new Profesion();
+    profession.category = professionData.category;
 
-  update(id: string, updateProfesionDto: UpdateProfesionDto) {
-    return this.profesionsRepository.update(id, updateProfesionDto);
+    for (let i = 0; i < allProfessions.length; i++) {
+      if (allProfessions[i].category === professionData.category)
+        throw new HttpException(
+          'The category you are trying to add already exists.',
+          HttpStatus.NOT_ACCEPTABLE,
+        );
+    }
+    const newProfession = await this.professionsRepository.save(profession);
+    return newProfession;
   }
+  // async meProfesion(userid, body) {
+  //   const userFind = await this.userRepository.findOne(userid);
+  //   const newProfesion = await this.professionsRepository.findOneBy({
+  //     category: body.category,
+  //   });
 
-  remove(id: string) {
-    return this.profesionsRepository.remove(id);
-  }
+  //   if (!newProfesion) throw new NotFoundException(`Profesion not found`);
+
+  //   userFind.profesions.find((element) => {
+  //     if (element.category === newProfesion.category) {
+  //       throw new BadRequestException(`Profesion already exist`);
+  //     }
+  //   });
+
+  //   let userUpdate = new User();
+  //   userUpdate = userFind;
+  //   userUpdate.profesions = [...userFind.profesions, newProfesion];
+
+  //   const userFinal = await this.userRepository.save(userUpdate);
+
+  //   return userFinal;
+  // }
+
+  // async removeProfesion(req, categoryName) {
+  //   const userFind = await this.userRepository.findOne({
+  //     where: { id: req.currentUser.id },
+  //     relations: { profesions: true },
+  //   });
+  //   const profesionFind = await this.professionsRepository.findOneBy({
+  //     category: categoryName,
+  //   });
+
+  //   if (!profesionFind) throw new NotFoundException(`Profesion not found`);
+
+  //   for (let i = 0; i < userFind.profesions.length; i++) {
+  //     if (userFind.profesions[i].category === profesionFind.category) {
+  //       userFind.profesions.splice(i, 1);
+  //     }
+  //   }
+  //   const userFinal = await this.userRepository.save(userFind);
+  //   return userFinal;
+  // }
 }

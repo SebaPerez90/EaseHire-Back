@@ -1,49 +1,169 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UserRepository } from './users.repository';
+import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
+import { User } from 'src/database/entities/user.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import * as data from '../../utils/mock-users.json';
 
 @Injectable()
-export class UsersService {
-  constructor(private usersRepository: UserRepository) {}
+export class UsersService implements OnModuleInit {
+  constructor(
+    @InjectRepository(User) private usersRepository: Repository<User>,
+  ) {}
 
-  findUsers(category: string, city: string, page: number, limit: number) {
-    this.usersRepository.calculateProfesionalRate();
-    setTimeout(async () => {
-      await this.usersRepository.averageRate();
-    }, 1000);
-
-    return this.usersRepository.findUsers(category, city, page, limit);
+  onModuleInit() {
+    this.seederUser();
   }
-
-  getAllBlocks() {
-    return this.usersRepository.getAllBlocks();
-  }
-  findAll() {
-    return this.usersRepository.findAll();
-  }
-
-  async create(createUserDto: CreateUserDto) {
-    return this.usersRepository.createUsers(createUserDto);
-  }
-
-  findOne(id: string) {
-    return this.usersRepository.findOne(id);
-  }
-
-  async update(
-    id: string,
-    updateUserDto: UpdateUserDto,
-    file?: Express.Multer.File,
+  async getAllusers(
+    category: string,
+    city: string,
+    page: number,
+    limit: number,
   ) {
-    let res = null;
-    if (file) {
-      res = await this.usersRepository.uploadImageUser(file);
+    const skip = (page - 1) * limit;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const where: any = {};
+    if (category && city) {
+      where.profesions = { category: category };
+      where.city = city;
+    } else if (category) {
+      where.profesions = { category: category };
+    } else if (city) {
+      where.city = city;
     }
-    return this.usersRepository.updateUser(id, updateUserDto, res);
+
+    const [usersFind, count] = await this.usersRepository.findAndCount({
+      relations: { profesions: true, experiences: true, educations: true },
+      where,
+      take: limit,
+      skip: skip,
+    });
+
+    if (usersFind.length === 0)
+      throw new NotFoundException(`No users were found whith those parameters`);
+    return { usersFind, count };
   }
 
-  blockUser(id: string) {
-    return this.usersRepository.blockUser(id);
+  async getMyProfile(req) {
+    return await this.usersRepository.findOneBy({
+      id: req.currentUser.id,
+    });
   }
+
+  async seederUser() {
+    const promises = data?.map(async (element) => {
+      const user = new User();
+      user.name = element.name;
+      user.lastName = element.lastName;
+      user.dni = element.dni;
+      user.country = element.country;
+      user.city = element.city;
+      user.birthdate = element.birthdate;
+      user.bio = element.bio;
+      user.email = element.email;
+
+      await this.usersRepository
+        .createQueryBuilder()
+        .insert()
+        .into(User)
+        .values(user)
+        .orUpdate(
+          [
+            'name',
+            'lastName',
+            'dni',
+            'country',
+            'city',
+            'birthdate',
+            'bio',
+            'email',
+          ],
+          ['dni'],
+        )
+        .execute();
+    });
+    await Promise.all(promises);
+    return {
+      message: 'users was seeder successfully!',
+    };
+  }
+
+  // async findAll() {
+  //   const users = await this.usersRepository.find({
+  //     relations: { experiences: true, educations: true, profesions: true },
+  //   });
+
+  //   const filteredUsers: User[] = [];
+  //   users.map((element) => {
+  //     if (element.isBlocked === false) {
+  //       filteredUsers.push(element);
+  //     }
+  //   });
+  //   return filteredUsers;
+  // }
+
+  // async updateUser(id: string, UpdateUserDto: UpdateUserDto) {
+  //   const userFounded = await this.usersRepository.findOneBy({ id: id });
+  //   if (!userFounded) throw new NotFoundException(`No found user con id ${id}`);
+
+  //   const user = await this.usersRepository.find();
+  //   for (let i = 0; i < user.length; i++) {
+  //     const dni = user[i].dni;
+  //     if (UpdateUserDto.dni === dni)
+  //       throw new BadRequestException(
+  //         'Plis check dni entry. The "dni" must be unique',
+  //       );
+  //   }
+  //   const updates = this.usersRepository.merge(userFounded, UpdateUserDto);
+  //   await this.usersRepository.save(updates);
+  //   return userFounded;
+  // }
+
+  // async filterNewMembers() {
+  //   const users = await this.usersRepository.find({
+  //     relations: { experiences: true },
+  //   });
+
+  //   for (let i = 0; i < users.length; i++) {
+  //     if (!(users[i].experiences.length === 0)) {
+  //       await this.usersRepository.update(
+  //         { id: users[i].id },
+  //         { newMember: false },
+  //       );
+  //     }
+  //   }
+  // }
+
+  // async averageRate() {
+  //   const users = await this.usersRepository.find();
+
+  //   for (let i = 0; i < users.length; i++) {
+  //     const rates = users[i].professionalRate;
+
+  //     const totalRate = rates.reduce(
+  //       (accumulator, currentRate) => Number(accumulator) + Number(currentRate),
+  //     );
+
+  //     const average = totalRate / rates.length;
+  //     users[i].professionalRate = [average];
+  //     await this.usersRepository.save(users[i]);
+  //   }
+  // }
+
+  // async calculateProfesionalRate() {
+  //   const users = await this.usersRepository.find({
+  //     relations: { experiences: { feedback: true } },
+  //   });
+
+  //   for (let i = 0; i < users.length; i++) {
+  //     for (let j = 0; j < users[i].experiences.length; j++) {
+  //       const experience = users[i].experiences[j];
+
+  //       if (experience.feedback) {
+  //         users[i].professionalRate.push(experience.feedback.rate);
+  //         await this.usersRepository.save(users[i]);
+  //       }
+  //     }
+  //   }
+  // }
 }

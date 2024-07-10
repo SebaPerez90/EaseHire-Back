@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Profesion } from './profesion.entity';
+import { Profesion } from './profession.entity';
 
 @Entity({ name: 'publications' })
 export class Publicaction {

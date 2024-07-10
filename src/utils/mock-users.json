@@ -9,21 +9,7 @@
     "availableToWork": false,
     "email": "juan.perez@example.com",
     "password": "Asd_*1234",
-    "bio": "Juan Perez, nacido el 1 de enero de 1990 en Buenos Aires, Argentina, es un profesional con una sólida formación y experiencia. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-01-10"
-  },
-  {
-    "name": "JOSE MARIA",
-    "lastName": "MARQUEZ",
-    "dni": 12345678,
-    "country": "Argentina",
-    "city": "Buenos Aires",
-    "birthdate": "1990-01-01",
-    "availableToWork": false,
-    "email": "josemaria@example.com",
-    "password": "Asd_*1234",
-    "bio": "Juan Perez, nacido el 1 de enero de 1990 en Buenos Aires, Argentina, es un profesional con una sólida formación y experiencia. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-01-10"
+    "bio": "Juan Perez, nacido el 1 de enero de 1990 en Buenos Aires, Argentina, es un profesional con una sólida formación y experiencia. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Maria",
@@ -35,8 +21,7 @@
     "availableToWork": false,
     "email": "maria.gomez@example.com",
     "password": "Asd_*1234",
-    "bio": "Maria Gomez, nacida el 15 de mayo de 1985 en Sao Paulo, Brasil, es una talentosa profesional con una carrera destacada. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-02-15"
+    "bio": "Maria Gomez, nacida el 15 de mayo de 1985 en Sao Paulo, Brasil, es una talentosa profesional con una carrera destacada. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Carlos",
@@ -48,8 +33,7 @@
     "availableToWork": false,
     "email": "carlos.lopez@example.com",
     "password": "Asd_*1234",
-    "bio": "Carlos Lopez, nacido el 20 de noviembre de 1978 en Santiago, Chile, es un profesional experimentado y respetado en su campo. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-02-20"
+    "bio": "Carlos Lopez, nacido el 20 de noviembre de 1978 en Santiago, Chile, es un profesional experimentado y respetado en su campo. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Ana",
@@ -61,8 +45,7 @@
     "availableToWork": false,
     "email": "ana.martinez@example.com",
     "password": "Asd_*1234",
-    "bio": "Ana Martinez, nacida el 30 de julio de 1992 en Montevideo, Uruguay, es una joven profesional con un gran potencial. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-03-05"
+    "bio": "Ana Martinez, nacida el 30 de julio de 1992 en Montevideo, Uruguay, es una joven profesional con un gran potencial. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Pedro",
@@ -74,8 +57,7 @@
     "availableToWork": false,
     "email": "pedro.fernandez@example.com",
     "password": "Asd_*1234",
-    "bio": "Pedro Fernandez, nacido el 22 de abril de 1980 en Asuncion, Paraguay, es un profesional con amplia experiencia y conocimientos. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-03-10"
+    "bio": "Pedro Fernandez, nacido el 22 de abril de 1980 en Asuncion, Paraguay, es un profesional con amplia experiencia y conocimientos. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Lucia",
@@ -87,8 +69,7 @@
     "availableToWork": false,
     "email": "lucia.rodriguez@example.com",
     "password": "Asd_*1234",
-    "bio": "Lucia Rodriguez, nacida el 18 de marzo de 1995 en Rosario, Argentina, es una profesional joven y prometedora. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-03-15"
+    "bio": "Lucia Rodriguez, nacida el 18 de marzo de 1995 en Rosario, Argentina, es una profesional joven y prometedora. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Jorge",
@@ -100,8 +81,7 @@
     "availableToWork": false,
     "email": "jorge.gonzalez@example.com",
     "password": "Asd_*1234",
-    "bio": "Jorge Gonzalez, nacido el 12 de septiembre de 1975 en Rio de Janeiro, Brasil, es un profesional con una larga y distinguida carrera. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-03-20"
+    "bio": "Jorge Gonzalez, nacido el 12 de septiembre de 1975 en Rio de Janeiro, Brasil, es un profesional con una larga y distinguida carrera. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Sofia",
@@ -113,8 +93,7 @@
     "availableToWork": false,
     "email": "sofia.diaz@example.com",
     "password": "Asd_*1234",
-    "bio": "Sofia Diaz, nacida el 5 de diciembre de 1988 en Valparaiso, Chile, es una profesional dedicada y talentosa. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-04-05"
+    "bio": "Sofia Diaz, nacida el 5 de diciembre de 1988 en Valparaiso, Chile, es una profesional dedicada y talentosa. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Roberto",
@@ -126,8 +105,7 @@
     "availableToWork": false,
     "email": "roberto.torres@example.com",
     "password": "Asd_*1234",
-    "bio": "Roberto Torres, nacido el 17 de junio de 1983 en Punta del Este, Uruguay, es un profesional con una sólida carrera y experiencia. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-04-10"
+    "bio": "Roberto Torres, nacido el 17 de junio de 1983 en Punta del Este, Uruguay, es un profesional con una sólida carrera y experiencia. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Valentina",
@@ -139,8 +117,7 @@
     "availableToWork": false,
     "email": "valentina.silva@example.com",
     "password": "Asd_*1234",
-    "bio": "Valentina Silva, nacida el 24 de octubre de 1991 en Encarnacion, Paraguay, es una joven profesional con un futuro prometedor. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-05-05"
+    "bio": "Valentina Silva, nacida el 24 de octubre de 1991 en Encarnacion, Paraguay, es una joven profesional con un futuro prometedor. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Martin",
@@ -152,8 +129,7 @@
     "availableToWork": false,
     "email": "martin.mendez@example.com",
     "password": "Asd_*1234",
-    "bio": "Martin Mendez, nacido el 14 de marzo de 1987 en Mendoza, Argentina, es un profesional experimentado y confiable. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-05-10"
+    "bio": "Martin Mendez, nacido el 14 de marzo de 1987 en Mendoza, Argentina, es un profesional experimentado y confiable. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Laura",
@@ -165,8 +141,7 @@
     "availableToWork": false,
     "email": "laura.morales@example.com",
     "password": "Asd_*1234",
-    "bio": "Laura Morales, nacida el 9 de agosto de 1993 en Salvador, Brasil, es una joven profesional con una carrera en ascenso. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-05-15"
+    "bio": "Laura Morales, nacida el 9 de agosto de 1993 en Salvador, Brasil, es una joven profesional con una carrera en ascenso. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Ricardo",
@@ -178,8 +153,7 @@
     "availableToWork": false,
     "email": "ricardo.romero@example.com",
     "password": "Asd_*1234",
-    "bio": "Ricardo Romero, nacido el 1 de noviembre de 1982 en Concepcion, Chile, es un profesional con una vasta experiencia y conocimientos. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-06-01"
+    "bio": "Ricardo Romero, nacido el 1 de noviembre de 1982 en Concepcion, Chile, es un profesional con una vasta experiencia y conocimientos. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Natalia",
@@ -191,8 +165,7 @@
     "availableToWork": false,
     "email": "natalia.suarez@example.com",
     "password": "Asd_*1234",
-    "bio": "Natalia Suarez, nacida el 25 de febrero de 1976 en Colonia del Sacramento, Uruguay, es una profesional experimentada y respetada. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-06-05"
+    "bio": "Natalia Suarez, nacida el 25 de febrero de 1976 en Colonia del Sacramento, Uruguay, es una profesional experimentada y respetada. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Diego",
@@ -204,8 +177,7 @@
     "availableToWork": false,
     "email": "diego.sosa@example.com",
     "password": "Asd_*1234",
-    "bio": "Diego Sosa, nacido el 7 de julio de 1989 en Ciudad del Este, Paraguay, es un profesional joven y talentoso. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-06-10"
+    "bio": "Diego Sosa, nacido el 7 de julio de 1989 en Ciudad del Este, Paraguay, es un profesional joven y talentoso. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Isabel",
@@ -217,8 +189,7 @@
     "availableToWork": false,
     "email": "isabel.ramos@example.com",
     "password": "Asd_*1234",
-    "bio": "Isabel Ramos, nacida el 29 de mayo de 1996 en Cordoba, Argentina, es una joven profesional con un futuro brillante. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-06-15"
+    "bio": "Isabel Ramos, nacida el 29 de mayo de 1996 en Cordoba, Argentina, es una joven profesional con un futuro brillante. Actualmente no está disponible para trabajar."
   },
   {
     "name": "Francisco",
@@ -230,7 +201,162 @@
     "availableToWork": false,
     "email": "francisco.rojas@example.com",
     "password": "Asd_*1234",
-    "bio": "Francisco Rojas, nacido el 19 de octubre de 1981 en Fortaleza, Brasil, es un profesional con amplia experiencia y conocimientos. Actualmente no está disponible para trabajar.",
-    "datecreateUser": "2024-06-20"
+    "bio": "Francisco Rojas, nacido el 19 de octubre de 1981 en Fortaleza, Brasil, es un profesional con amplia experiencia y conocimientos. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Gabriela",
+    "lastName": "Molina",
+    "dni": 18234567,
+    "country": "Chile",
+    "city": "La Serena",
+    "birthdate": "1994-04-12",
+    "availableToWork": false,
+    "email": "gabriela.molina@example.com",
+    "password": "Asd_*1234",
+    "bio": "Gabriela Molina, nacida el 12 de abril de 1994 en La Serena, Chile, es una profesional joven y con gran potencial. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Fernando",
+    "lastName": "Cruz",
+    "dni": 19234567,
+    "country": "Uruguay",
+    "city": "Salto",
+    "birthdate": "1984-06-21",
+    "availableToWork": false,
+    "email": "fernando.cruz@example.com",
+    "password": "Asd_*1234",
+    "bio": "Fernando Cruz, nacido el 21 de junio de 1984 en Salto, Uruguay, es un profesional con una sólida carrera. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Elena",
+    "lastName": "Pereira",
+    "dni": 20234567,
+    "country": "Paraguay",
+    "city": "Villarrica",
+    "birthdate": "1979-11-10",
+    "availableToWork": false,
+    "email": "elena.pereira@example.com",
+    "password": "Asd_*1234",
+    "bio": "Elena Pereira, nacida el 10 de noviembre de 1979 en Villarrica, Paraguay, es una profesional con amplia experiencia. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Alberto",
+    "lastName": "Ortega",
+    "dni": 21234567,
+    "country": "Argentina",
+    "city": "San Juan",
+    "birthdate": "1986-08-03",
+    "availableToWork": false,
+    "email": "alberto.ortega@example.com",
+    "password": "Asd_*1234",
+    "bio": "Alberto Ortega, nacido el 3 de agosto de 1986 en San Juan, Argentina, es un profesional confiable y experimentado. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Patricia",
+    "lastName": "Vega",
+    "dni": 22234567,
+    "country": "Brasil",
+    "city": "Curitiba",
+    "birthdate": "1990-02-14",
+    "availableToWork": false,
+    "email": "patricia.vega@example.com",
+    "password": "Asd_*1234",
+    "bio": "Patricia Vega, nacida el 14 de febrero de 1990 en Curitiba, Brasil, es una profesional joven y prometedora. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Guillermo",
+    "lastName": "Nunez",
+    "dni": 23234567,
+    "country": "Chile",
+    "city": "Antofagasta",
+    "birthdate": "1983-12-29",
+    "availableToWork": false,
+    "email": "guillermo.nunez@example.com",
+    "password": "Asd_*1234",
+    "bio": "Guillermo Nunez, nacido el 29 de diciembre de 1983 en Antofagasta, Chile, es un profesional con una carrera sólida. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Angela",
+    "lastName": "Herrera",
+    "dni": 24234567,
+    "country": "Uruguay",
+    "city": "Maldonado",
+    "birthdate": "1988-05-05",
+    "availableToWork": false,
+    "email": "angela.herrera@example.com",
+    "password": "Asd_*1234",
+    "bio": "Angela Herrera, nacida el 5 de mayo de 1988 en Maldonado, Uruguay, es una profesional dedicada y talentosa. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Luis",
+    "lastName": "Castro",
+    "dni": 25234567,
+    "country": "Paraguay",
+    "city": "San Lorenzo",
+    "birthdate": "1977-03-30",
+    "availableToWork": false,
+    "email": "luis.castro@example.com",
+    "password": "Asd_*1234",
+    "bio": "Luis Castro, nacido el 30 de marzo de 1977 en San Lorenzo, Paraguay, es un profesional con una vasta experiencia y conocimientos. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Monica",
+    "lastName": "Ibanez",
+    "dni": 26234567,
+    "country": "Argentina",
+    "city": "San Luis",
+    "birthdate": "1993-09-25",
+    "availableToWork": false,
+    "email": "monica.ibanez@example.com",
+    "password": "Asd_*1234",
+    "bio": "Monica Ibanez, nacida el 25 de septiembre de 1993 en San Luis, Argentina, es una joven profesional con un futuro prometedor. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Pablo",
+    "lastName": "Mendoza",
+    "dni": 27234567,
+    "country": "Brasil",
+    "city": "Belo Horizonte",
+    "birthdate": "1982-12-01",
+    "availableToWork": false,
+    "email": "pablo.mendoza@example.com",
+    "password": "Asd_*1234",
+    "bio": "Pablo Mendoza, nacido el 1 de diciembre de 1982 en Belo Horizonte, Brasil, es un profesional con una carrera distinguida. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Carolina",
+    "lastName": "Aguirre",
+    "dni": 28234567,
+    "country": "Chile",
+    "city": "Temuco",
+    "birthdate": "1991-04-07",
+    "availableToWork": false,
+    "email": "carolina.aguirre@example.com",
+    "password": "Asd_*1234",
+    "bio": "Carolina Aguirre, nacida el 7 de abril de 1991 en Temuco, Chile, es una profesional joven y talentosa. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Eduardo",
+    "lastName": "Salazar",
+    "dni": 29234567,
+    "country": "Uruguay",
+    "city": "Durazno",
+    "birthdate": "1985-01-11",
+    "availableToWork": false,
+    "email": "eduardo.salazar@example.com",
+    "password": "Asd_*1234",
+    "bio": "Eduardo Salazar, nacido el 11 de enero de 1985 en Durazno, Uruguay, es un profesional experimentado y confiable. Actualmente no está disponible para trabajar."
+  },
+  {
+    "name": "Daniela",
+    "lastName": "Flores",
+    "dni": 30234567,
+    "country": "Paraguay",
+    "city": "Luque",
+    "birthdate": "1994-06-17",
+    "availableToWork": false,
+    "email": "daniela.flores@example.com",
+    "password": "Asd_*1234",
+    "bio": "Daniela Flores, nacida el 17 de junio de 1994 en Luque, Paraguay, es una profesional joven con un gran futuro. Actualmente no está disponible para trabajar."
   }
 ]

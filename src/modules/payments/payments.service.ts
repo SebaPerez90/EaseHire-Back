@@ -99,16 +99,16 @@ export class PaymentsService implements OnModuleInit {
         await this.paymentRepository.save(payment);
 
         publication.premium = true;
-        const publicationTrue =await this.publicactionRepository.save(publication);
-        
-        
+        const publicationTrue =
+          await this.publicactionRepository.save(publication);
+
         if (item.description == '7 días') {
           const date = new Date();
           date.setDate(date.getDate() + 7);
           const dateString = date.toISOString().split('T')[0];
           publicationTrue.endDate = dateString;
           await this.publicactionRepository.save(publicationTrue);
-          console.log("despues del pago:",publicationTrue);
+          console.log('despues del pago:', publicationTrue);
         }
 
         if (item.description == '15 días') {

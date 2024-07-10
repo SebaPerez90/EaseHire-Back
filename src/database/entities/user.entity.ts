@@ -1,16 +1,14 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
-  // ManyToMany,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Publicaction } from './publication.entity';
-import { Profesion } from './profesion.entity';
+import { Profesion } from './profession.entity';
 import { Credential } from './credentials.entity';
 import { Notification } from './notification.entity';
 import { Education } from './education.entity';
@@ -31,9 +29,6 @@ export class User {
 
   @Column({ type: 'int', unique: true, nullable: true })
   dni: number;
-
-  @Column({ type: 'int', nullable: true })
-  dni2: number;
 
   @Column({ type: 'varchar', length: 20, nullable: true })
   country: string;
@@ -64,9 +59,6 @@ export class User {
 
   @Column({ type: 'boolean', nullable: true, default: true })
   newMember: boolean;
-
-  @CreateDateColumn({ type: 'date' })
-  datecreateUser: Date;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role[];

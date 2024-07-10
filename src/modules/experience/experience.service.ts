@@ -3,11 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Experience } from 'src/database/entities/experience.entity';
 import { Repository } from 'typeorm';
 import * as data from '../../utils/mock-experiences.json';
-import { UserRepository } from 'src/modules/users/users.repository';
-import { ProfesionsRepository } from 'src/modules/profesions/profesions.repository';
 import { Feedback } from 'src/database/entities/feedback.entity';
 import { PostExperienceDto } from './dto/post-exp.dto';
 import { User } from 'src/database/entities/user.entity';
+import { Profesion } from 'src/database/entities/profession.entity';
 
 @Injectable()
 export class ExperienceService {
@@ -16,13 +15,15 @@ export class ExperienceService {
     private feedbackRepository: Repository<Feedback>,
     @InjectRepository(Experience)
     private experienceRepository: Repository<Experience>,
-    private userRepository: UserRepository,
-    private profesionRepository: ProfesionsRepository,
+    @InjectRepository(Profesion)
+    private profesionRepository: Repository<Experience>,
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
   ) {}
 
   async seedExperiences() {
-    const users = await this.userRepository.findAll();
-    const professions = await this.profesionRepository.getAllProfessions();
+    const users = await this.userRepository.find();
+    // const professions = await this.profesionRepository.find();
     const feedbacks = await this.feedbackRepository.find();
 
     data?.map(async (element, index) => {
@@ -33,7 +34,7 @@ export class ExperienceService {
       experience.description = element.description;
       experience.startDate = element.startDate;
       experience.endDate = element.endDate;
-      experience.profesion = professions[Math.round(Math.random() * 16)];
+      // experience.profesion = professions[Math.round(Math.random() * 16)];
       experience.user = users[Math.round(Math.random() * 30)];
       experience.client = users[Math.round(Math.random() * 30)];
       experience.feedback = feedbacks[index];
@@ -55,9 +56,9 @@ export class ExperienceService {
   }
 
   async postExperience(experienceData: PostExperienceDto, req) {
-    const client: User = await this.userRepository.findOne(
-      experienceData.clientID,
-    );
+    const client: User = await this.userRepository.findOneBy({
+      id: experienceData.clientID,
+    });
     console.log(req.user);
     if (!client)
       throw new NotFoundException('The referenced client does not exist');
