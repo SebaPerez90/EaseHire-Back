@@ -88,6 +88,9 @@ export class UsersService implements OnModuleInit {
     };
   }
 
+  async createUser (email: string , password: string) {
+
+  }
   // async findAll() {
   //   const users = await this.usersRepository.find({
   //     relations: { experiences: true, educations: true, profesions: true },
