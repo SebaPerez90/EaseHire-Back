@@ -17,20 +17,29 @@ export class AuthService {
     private credentialsRepository: Repository<Credential>,
   ) {}
 
-  async signIn(credentials) {
-    const userFind = await this.credentialsRepository.findOne({
-      where: { email: credentials.email },
+  async signIn(email: string, password: string) {
+    const userFind = await this.userRepository.findOne({
+      where: { email: email },
+      relations: { credential: true },
     });
-    if (userFind) throw new BadRequestException('Credenciales incorrectas');
+    if (!userFind) throw new BadRequestException('Credenciales incorrectas');
 
     const passwordHash = await bcrypt.compare(
-      credentials.password,
-      userFind.password,
+      password,
+      userFind.credential.password,
     );
     if (!passwordHash)
       throw new BadRequestException('Credenciales incorrectas');
 
-    const payload = {};
+    const playload = {
+      id: userFind.id,
+      email: userFind.email,
+      Role: userFind.role,
+    };
+    const token = this.jwtService.sign(playload, {
+      secret: process.env.JWT_SECRET,
+    });
+    return { token };
   }
 
   async signUp(user: CreateUserDto) {
@@ -50,7 +59,7 @@ export class AuthService {
     const createUser = await this.userRepository.save({
       name: user.name,
       email: user.email,
-      credentials: newCredemtials,
+      credential: newCredemtials,
     });
 
     return { massage: 'Usuario Creado', createUser };

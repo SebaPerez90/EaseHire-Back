@@ -13,7 +13,8 @@ export class AuthController {
   @Public()
   @Post('signIn')
   async signIn(@Body() credentials: RegisterDto) {
-    return await this.authService.signIn(credentials);
+    const { email, password } = credentials;
+    return await this.authService.signIn(email, password);
   }
 
   @Public()
