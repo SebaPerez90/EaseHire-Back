@@ -17,6 +17,30 @@ export class AuthService {
     @InjectRepository(Credential)
     private credentialsRepository: Repository<Credential>,
   ) {}
+  
+  async signUp(user: CreateUserDto) { 
+    const userFind = await this.userRepository.findOne({
+      where: { email: user.email },
+    });
+    if (userFind) throw new BadRequestException('User already exists');
+
+    const passwordHash = await bcrypt.hash(user.password, 10);
+    if (!passwordHash) throw new BadRequestException('Invalid password');
+
+    const newCredemtials = await this.credentialsRepository.save({
+      email: user.email,
+      password: passwordHash,
+    });
+
+    const createUser = await this.userRepository.save({
+      name: user.name,
+      email: user.email,
+      credential: newCredemtials,
+    });
+
+    const { credential, ...userCreate } = createUser;
+    return { massage: 'Usuario Creado', userCreate };
+  }
 
   async signIn(email: string, password: string, res: Response) {
     const userFind = await this.userRepository.findOne({
@@ -48,28 +72,9 @@ export class AuthService {
     })
     .send({ message: 'Sesión iniciada correctamente' });
   }
-// cookie-parser
-  async signUp(user: CreateUserDto) { 
-    const userFind = await this.userRepository.findOne({
-      where: { email: user.email },
-    });
-    if (userFind) throw new BadRequestException('User already exists');
-
-    const passwordHash = await bcrypt.hash(user.password, 10);
-    if (!passwordHash) throw new BadRequestException('Invalid password');
-
-    const newCredemtials = await this.credentialsRepository.save({
-      email: user.email,
-      password: passwordHash,
-    });
-
-    const createUser = await this.userRepository.save({
-      name: user.name,
-      email: user.email,
-      credential: newCredemtials,
-    });
-
-    const { credential, ...userCreate } = createUser;
-    return { massage: 'Usuario Creado', userCreate };
+  
+  async signOut(res: Response) {
+    res.clearCookie('token')
+    .send({ message: 'Sesión finalizada correctamente' });
   }
 }

@@ -26,9 +26,8 @@ export class AuthController {
 
   @Public()
   @Post('signOut')
-  async signOut(@Body() credentials: RegisterDto, @Res() res: Response) {
-    const { email, password } = credentials;
-    return await this.authService.signIn(email, password, res);
+  async signOut(@Res() res: Response) {
+    return await this.authService.signOut(res);
   }
 
 
