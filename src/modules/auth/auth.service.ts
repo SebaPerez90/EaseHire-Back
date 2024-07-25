@@ -6,6 +6,7 @@ import { User } from 'src/database/entities/user.entity';
 import { Credential } from 'src/database/entities/credentials.entity';
 import { CreateUserDto } from './dto/createUser.dto';
 import * as bcrypt from 'bcrypt';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +18,7 @@ export class AuthService {
     private credentialsRepository: Repository<Credential>,
   ) {}
 
-  async signIn(email: string, password: string) {
+  async signIn(email: string, password: string, res: Response) {
     const userFind = await this.userRepository.findOne({
       where: { email: email },
       relations: { credential: true },
@@ -39,10 +40,15 @@ export class AuthService {
     const token = this.jwtService.sign(playload, {
       secret: process.env.JWT_SECRET,
     });
-    return { token };
+    res.cookie('token', token, {
+      httpOnly: true,
+      maxAge: 2 * 60 * 60 * 1000,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    })
   }
-
-  async signUp(user: CreateUserDto) {
+// cookie-parser
+  async signUp(user: CreateUserDto) { 
     const userFind = await this.userRepository.findOne({
       where: { email: user.email },
     });

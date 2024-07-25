@@ -48,7 +48,7 @@ import { InvitationModule } from './modules/invitation/invitation.module';
       global: true,
       secret: process.env.JWT_SECRET,
       signOptions: {
-        expiresIn: '6000m',
+        expiresIn: '2h',
       },
     }),
     ChatModule,
