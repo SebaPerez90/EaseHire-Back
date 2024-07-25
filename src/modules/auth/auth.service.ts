@@ -46,6 +46,7 @@ export class AuthService {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
     })
+    .send({ message: 'Sesión iniciada correctamente' });
   }
 // cookie-parser
   async signUp(user: CreateUserDto) { 
@@ -68,6 +69,7 @@ export class AuthService {
       credential: newCredemtials,
     });
 
-    return { massage: 'Usuario Creado', createUser };
+    const { credential, ...userCreate } = createUser;
+    return { massage: 'Usuario Creado', userCreate };
   }
 }
