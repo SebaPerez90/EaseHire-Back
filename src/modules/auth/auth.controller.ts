@@ -5,6 +5,7 @@ import { Public } from 'src/decorators/is-public.decorator';
 import { RegisterDto } from './dto/register.dto';
 import { CreateUserDto } from './dto/createUser.dto';
 import { Response } from 'express';
+import { CreateUserGoogleDto } from './dto/CreateUserGoogle.dto';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -25,10 +26,14 @@ export class AuthController {
   }
 
   @Public()
+  @Post('signInGoogle')
+  async signInGoogle(@Body() user: CreateUserGoogleDto, @Res() res: Response) {
+    return await this.authService.signInGoogle(user, res);
+  }
+
+  @Public()
   @Post('signOut')
   async signOut(@Res() res: Response) {
     return await this.authService.signOut(res);
   }
-
-
 }
