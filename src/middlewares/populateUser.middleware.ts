@@ -24,9 +24,9 @@ export class PopulateUserMiddleware implements NestMiddleware {
     if (userToken) {
       try {
         const decoded = jwt.verify(userToken, process.env.JWT_SECRET) as any;
-        const email = decoded.email;
+        const dni = decoded.dni;
         const user = await this.userRepository.findOne({
-          where: { email: email },
+          where: { dni: dni },
         });
         if (user) {
           req.currentUser = user;

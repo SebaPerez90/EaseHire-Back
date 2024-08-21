@@ -1,12 +1,10 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/database/entities/user.entity';
-import { v4 as uuidv4 } from 'uuid';
 import { Credential } from 'src/database/entities/credentials.entity';
-import * as moment from 'moment';
-import { Role } from 'src/enum/role.enum';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -18,23 +16,43 @@ export class AuthService {
     private credentialsRepository: Repository<Credential>,
   ) {}
 
-  retunSingIn(user: any) {
-    console.log('estamos en el retun sing in');
-    const userid = user.id;
-    const role = user.role[0];
-    const email = user.email;
-
-    const playload = { userid, email, role: user.role };
-    const token = this.jwtService.sign(playload, {
-      secret: process.env.JWT_SECRET,
-    });
-    return {
-      message: 'User login',
-      token,
-      role,
-    };
+  async register(userData) {
+    // const checkUser: User[] = await this.userRepository.find({
+    //   where: { email: userData.email },
+    // });
+    // if (checkUser.length) throw new NotFoundException('user already exist');
+    // const newUser = this.userRepository.create(userData);
+    // // const { password, email } = newUser;
+    // if (!password || !email)
+    //   throw new BadRequestException('valid email and password are required');
+    // const hashedPassword = await bcrypt.hash(password, 10);
+    // newUser.password = hashedPassword;
+    // await this.userRepository.save(newUser);
+    // const user: UserWithoutPassword = await this.userService.getUser(
+    //   newUser.id,
+    // );
+    // const { orders, ...userFiltered } = user;
+    // return userFiltered;
   }
+  //!!----------------------------------------------
+  // retunSingIn(user: any) {
+  //   console.log('estamos en el retun sing in');
+  //   const userid = user.id;
+  //   const role = user.role[0];
+  //   const email = user.email;
 
+  //   const playload = { userid, email, role: user.role };
+  //   const token = this.jwtService.sign(playload, {
+  //     secret: process.env.JWT_SECRET,
+  //   });
+  //   return {
+  //     message: 'User login',
+  //     token,
+  //     role,
+  //   };
+  // }
+
+  //!!----------------------------------------------
   // async signIn(credentials) {
   //   try {
   //     const { email, name, family_name, picture, email_verified } = credentials;
@@ -79,20 +97,4 @@ export class AuthService {
   //     throw new BadRequestException('failed to login');
   //   }
   // }
-
-  async simulateAuthFlow({ email, password }) {
-    const foundAccount = await this.credentialsRepository.findOne({
-      where: { email: email },
-    });
-
-    if (foundAccount) throw new BadRequestException('user already exists');
-
-    if (password && email) {
-      const newCredential = new Credential();
-      newCredential.email = email;
-      newCredential.password = password;
-      await this.credentialsRepository.save(newCredential);
-      return newCredential;
-    }
-  }
 }

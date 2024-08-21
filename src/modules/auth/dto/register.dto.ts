@@ -8,6 +8,12 @@ import {
 } from 'class-validator';
 
 export class RegisterDto {
+  name: string;
+  lastName: string;
+  country: string;
+  dni: number;
+  city: string;
+  birthdate: string;
   @IsNotEmpty()
   @IsString()
   @MinLength(8)
@@ -19,3 +25,17 @@ export class RegisterDto {
   @IsNotEmpty()
   email: string;
 }
+/*
+name: string;
+
+  @Column({ type: 'varchar', length: 30 })
+  lastName: string;
+  @Column({ type: 'int', unique: true })
+  dni: number;
+  @Column({ type: 'varchar', length: 50 })
+  country: string;
+  @Column({ type: 'varchar', length: 30 })
+  city: string;
+  @Column({ type: 'varchar', length: 30 })
+  birthdate: string;
+*/

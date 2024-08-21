@@ -60,7 +60,7 @@ export class UsersService implements OnModuleInit {
       user.city = element.city;
       user.birthdate = element.birthdate;
       user.bio = element.bio;
-      user.email = element.email;
+      // user.email = element.email;
 
       await this.usersRepository
         .createQueryBuilder()
@@ -68,16 +68,7 @@ export class UsersService implements OnModuleInit {
         .into(User)
         .values(user)
         .orUpdate(
-          [
-            'name',
-            'lastName',
-            'dni',
-            'country',
-            'city',
-            'birthdate',
-            'bio',
-            'email',
-          ],
+          ['name', 'lastName', 'dni', 'country', 'city', 'birthdate', 'bio'],
           ['dni'],
         )
         .execute();

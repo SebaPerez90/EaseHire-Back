@@ -13,4 +13,9 @@ export class AuthController {
   // async signIn(@Body() credentials: any) {
   //   return await this.authService.signIn(credentials);
   // }
+  @Public()
+  @Post('register')
+  async register(@Body() userData) {
+    return await this.authService.register(userData);
+  }
 }

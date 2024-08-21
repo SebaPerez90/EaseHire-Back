@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ProfesionsService } from './profesions.service';
-import { JwtService } from '@nestjs/jwt';
+// import { JwtService } from '@nestjs/jwt';
 import { Public } from 'src/decorators/is-public.decorator';
 import { PostCategory } from './dto/post-category.dto';
 // import { Request } from 'express';
@@ -9,7 +9,7 @@ import { PostCategory } from './dto/post-category.dto';
 export class ProfesionsController {
   constructor(
     private readonly profesionsService: ProfesionsService,
-    private jwtService: JwtService,
+    // private jwtService: JwtService,
   ) {}
 
   @Get()
@@ -20,6 +20,7 @@ export class ProfesionsController {
 
   @Post()
   @Public()
+  //!!!ESTA DEBERIA SER UNA RUTA PROTEGIDA PARA ADMIN
   addProfession(@Body() professionData: PostCategory) {
     return this.profesionsService.addProfession(professionData);
   }

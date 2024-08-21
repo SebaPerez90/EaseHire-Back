@@ -24,32 +24,23 @@ export class User {
   @Column({ type: 'varchar', length: 30, nullable: false })
   name: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
+  @Column({ type: 'varchar', length: 30 })
   lastName: string;
 
-  @Column({ type: 'int', unique: true, nullable: true })
+  @Column({ type: 'int', unique: true })
   dni: number;
 
-  @Column({ type: 'varchar', length: 20, nullable: true })
+  @Column({ type: 'varchar', length: 50 })
   country: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
+  @Column({ type: 'varchar', length: 30 })
   city: string;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
+  @Column({ type: 'varchar', length: 30 })
   birthdate: string;
 
-  @Column({ type: 'varchar', length: 200, nullable: true })
+  @Column({ type: 'varchar', length: 300, nullable: true })
   bio: string;
-
-  @Column({ type: 'varchar', length: 150, nullable: true })
-  email: string;
-
-  @Column({ type: 'varchar', length: 150, nullable: true })
-  email_verified: string;
-
-  @Column({ type: 'varchar', length: 500, nullable: true })
-  imgPictureUrl: string;
 
   @Column({ default: false })
   availableToWork: string;
@@ -61,7 +52,7 @@ export class User {
   newMember: boolean;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
-  role: Role[];
+  role: Role;
 
   @Column({ type: 'int', nullable: true, default: 0 })
   strikes: number;
