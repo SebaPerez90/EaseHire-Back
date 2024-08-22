@@ -48,8 +48,7 @@ export class PaymentsService implements OnModuleInit {
           pending: 'https://pf-g5-front.vercel.app/',
           failure: 'https://pf-g5-front.vercel.app/',
         },
-        notification_url:
-          'https://pf-henry-cc4j.onrender.com/payments/webhook',
+        notification_url: 'https://pf-henry-cc4j.onrender.com/payments/webhook',
         auto_return: 'approved',
       };
 

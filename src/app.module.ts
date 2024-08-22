@@ -11,7 +11,6 @@ import { ExperienceModule } from './modules/experience/experience.module';
 import typeorm from './database/config/typeorm';
 import { FeedbackModule } from './modules/feedback/feedback.module';
 import { NotificationsModule } from './modules/notifications/notifications.module';
-import { EducationModule } from './modules/education/education.module';
 import { JwtModule } from '@nestjs/jwt';
 import { MorganMiddleware } from './middlewares/morgan.middleware';
 import { PaymentsModule } from './modules/payments/payments.module';
@@ -20,7 +19,6 @@ import { RolesGuard } from './guards/roles.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { ChatModule } from './chat/chat.module';
 import { InvitationModule } from './modules/invitation/invitation.module';
-// import { StatisticsModule } from './modules/statistics/statistics.module';
 
 @Module({
   imports: [
@@ -37,7 +35,6 @@ import { InvitationModule } from './modules/invitation/invitation.module';
     ProfesionsModule,
     PublicationModule,
     FeedbackModule,
-    EducationModule,
     AuthModule,
     PaymentsModule,
     ExperienceModule,

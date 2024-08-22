@@ -18,7 +18,7 @@ export class PopulateUserMiddleware implements NestMiddleware {
     private userRepository: Repository<User>,
   ) {}
 
-  async use(@NestRequest() req: any, res: Response, next: NextFunction) {
+  async use(@NestRequest() req, res: Response, next: NextFunction) {
     const userToken = req.headers.authorization?.split(' ')[0];
 
     if (userToken) {

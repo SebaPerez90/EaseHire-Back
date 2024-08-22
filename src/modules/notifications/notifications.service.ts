@@ -35,7 +35,7 @@ export class NotificationsService {
   async postNotification(notificationData: NotificationType, user: User) {
     const notification = new Notification();
     const now = new Date();
-    const date = moment();
+    // const date = moment();
 
     const timelapsed = moment().startOf('hour').fromNow();
     const title = this.checkNotificationType(notificationData);
